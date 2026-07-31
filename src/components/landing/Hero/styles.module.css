@@ -17,6 +17,25 @@
   text-shadow: 0 0 #8c99ab;
 }
 
+.yiyan {
+  @apply mb-6 inline-flex max-w-full items-center gap-2 text-sm text-[#6e7b8c];
+  letter-spacing: -0.02em;
+}
+
+.yiyanText {
+  @apply truncate;
+  max-width: min(24rem, 70vw);
+  font-style: italic;
+}
+
+.yiyanRefresh {
+  @apply inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-[#9aa7b8] transition-colors duration-200;
+}
+
+.yiyanRefresh:hover {
+  @apply text-[var(--ifm-color-primary)];
+}
+
 .hero_text {
   font-size: calc(1.5em + 1.2vw);
 }

@@ -62,6 +62,12 @@ function Yiyan() {
     const script = document.createElement('script');
     script.src = YIYAN_API;
     script.onload = () => {
+      try {
+        // 该 API 的脚本只定义 hiyi() 函数，需手动调用才会执行 document.write
+        (window as unknown as {hiyi?: () => void}).hiyi?.();
+      } catch {
+        setYiyan(FALLBACK);
+      }
       document.write = originalWrite;
       script.remove();
     };

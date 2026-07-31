@@ -125,11 +125,6 @@ export default function Footer(): JSX.Element {
                     : `${siteInfo.copyrightStartYear}-${currentYear}`
                 } ${siteInfo.name}`}
               </span>
-              <br />
-              <span>
-                Powered by{' '}
-                <Link href="https://docusaurus.io">Docusaurus</Link>
-              </span>
             </p>
           </section>
 

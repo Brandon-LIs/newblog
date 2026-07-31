@@ -1,0 +1,41 @@
+@reference "../../../css/custom.css";
+
+.blogPostFooterDetailsFull {
+  flex-direction: column;
+}
+
+.blogPostInfo {
+  margin-bottom: var(--ifm-spacing-m);
+  @apply mt-[0.5em] flex flex-wrap items-center gap-1 text-sm text-secondary;
+}
+
+.blogPostInfoTags {
+  display: flex;
+  gap: 4px;
+
+  a {
+    color: var(--ifm-secondary-text-color);
+  }
+
+  a:hover {
+    color: var(--ifm-link-color);
+  }
+}
+
+.blogPostInfoTags > a {
+  padding: 1px 4px;
+}
+
+.blogPostAuthor {
+  display: inline-block;
+  margin: 0 2px;
+  color: inherit;
+}
+
+.blogPostAuthor:hover {
+  text-decoration: none;
+}
+
+.blogPostDetailsFull {
+  flex-direction: column;
+}

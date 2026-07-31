@@ -1,0 +1,26 @@
+@reference "../../css/custom.css";
+
+.socialLinks {
+  @apply flex w-full flex-wrap items-center gap-1 py-2 md:flex-wrap md:gap-3 relative z-50;
+}
+
+.socialLinks a {
+  @apply inline-flex box-content size-7 items-center justify-center rounded-full p-1 transition-colors duration-300 hover:bg-[var(--color)] hover:text-white;
+}
+
+.socialLinks .dropdown {
+  @apply flex items-center;
+}
+
+.socialLinks .dropdown span {
+  @apply ml-1.5 text-sm;
+}
+
+.socialLinks .dropdown__menu {
+  @apply right-0;
+}
+
+.socialLinks svg,
+.socialLinks svg path {
+  @apply size-6;
+}

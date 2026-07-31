@@ -44,6 +44,7 @@ const config: Config = {
 
   // 传递给前端组件的自定义配置（构建时从环境变量读取，默认值已内置 Gitalk 凭据）
   customFields: {
+    description: '我们都有光明的未来',
     gitalk: {
       clientID: process.env.GITALK_CLIENT_ID || 'Ov23liwhSndMxSW8t1Ef',
       clientSecret:
@@ -65,23 +66,7 @@ const config: Config = {
           // Remove this to remove the "edit this page" links.
           editUrl: `https://github.com/${GITHUB_USER}/newblog/tree/main/`,
         },
-        blog: {
-          showReadingTime: true,
-          postsPerPage: 10,
-          blogSidebarCount: 10,
-          feedOptions: {
-            type: ['rss', 'atom'],
-            xslt: true,
-            copyright: `Copyright © ${new Date().getFullYear()} Brandon`,
-          },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
-          editUrl: `https://github.com/${GITHUB_USER}/newblog/tree/main/`,
-          // Useful options to enforce blogging best practices
-          onInlineTags: 'warn',
-          onInlineAuthors: 'warn',
-          onUntruncatedBlogPosts: 'warn',
-        },
+        blog: false,
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -92,6 +77,42 @@ const config: Config = {
         },
       } satisfies Preset.Options,
     ],
+  ],
+
+  plugins: [
+    [
+      './src/plugin/plugin-content-blog', // 为了实现全局 blog 数据（首页展示近期博客）
+      {
+        path: 'blog',
+        editUrl: `https://github.com/${GITHUB_USER}/newblog/edit/main/`,
+        editLocalizedFiles: false,
+        blogDescription: '我们都有光明的未来',
+        blogSidebarCount: 10,
+        blogSidebarTitle: '历史博文',
+        postsPerPage: 10,
+        showReadingTime: true,
+        readingTime: ({content, frontMatter, defaultReadingTime}) =>
+          defaultReadingTime({content, options: {wordsPerMinute: 300}}),
+        feedOptions: {
+          type: ['rss', 'atom'],
+          xslt: true,
+          title: 'Brandon | 个人博客',
+          copyright: `Copyright © ${new Date().getFullYear()} Brandon`,
+        },
+        onInlineTags: 'warn',
+        onInlineAuthors: 'warn',
+        onUntruncatedBlogPosts: 'warn',
+      },
+    ],
+    async function tailwindcssPlugin() {
+      return {
+        name: 'docusaurus-tailwindcss',
+        configurePostCss(postcssOptions) {
+          postcssOptions.plugins.push(require('@tailwindcss/postcss'))
+          return postcssOptions
+        },
+      }
+    },
   ],
 
   themes: [
@@ -122,6 +143,8 @@ const config: Config = {
       items: [
         {to: '/blog', label: '博客', position: 'left'},
         {to: '/docs/intro', label: '笔记', position: 'left'},
+        {to: '/friends', label: '友链', position: 'left'},
+        {to: '/about', label: '关于', position: 'left'},
         {
           href: `https://github.com/${GITHUB_USER}`,
           className: 'header-github-link',

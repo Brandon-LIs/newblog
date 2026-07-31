@@ -1,0 +1,17 @@
+@reference "../../../../css/custom.css";
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.titleLink {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.2s;
+}
+
+.titleLink:hover {
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}

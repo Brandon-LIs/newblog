@@ -1,16 +1,29 @@
-import React from 'react';
-import BlogPostItem from '@theme-original/BlogPostItem';
-import type BlogPostItemType from '@theme/BlogPostItem';
-import type {WrapperProps} from '@docusaurus/types';
-import Comment from '@site/src/components/Comment';
+import {useBlogPost} from '@docusaurus/plugin-content-blog/client';
+import {cn} from '@site/src/lib/utils';
+import type {Props} from '@theme/BlogPostItem';
+import BlogPostItemContainer from '@theme/BlogPostItem/Container';
+import BlogPostItemContent from '@theme/BlogPostItem/Content';
+import BlogPostItemFooter from '@theme/BlogPostItem/Footer';
+import BlogPostItemHeader from '@theme/BlogPostItem/Header';
+import BlogPostItemSummary from '../BlogPostItem/Summary';
 
-type Props = WrapperProps<typeof BlogPostItemType>;
+// apply a bottom margin in list view
+function useContainerClassName() {
+  const {isBlogPostPage} = useBlogPost();
+  return !isBlogPostPage ? 'group/blog rounded-md mt-0 bg-blog mb-8 shadow-blog' : '';
+}
 
-export default function BlogPostItemWrapper(props: Props): JSX.Element {
+export default function BlogPostItem({
+  children,
+  className,
+}: Props): JSX.Element {
+  const containerClassName = useContainerClassName();
   return (
-    <>
-      <BlogPostItem {...props} />
-      {props.isBlogPostPage && <Comment />}
-    </>
+    <BlogPostItemContainer className={cn(containerClassName, className)}>
+      <BlogPostItemHeader />
+      <BlogPostItemSummary />
+      <BlogPostItemContent>{children}</BlogPostItemContent>
+      <BlogPostItemFooter />
+    </BlogPostItemContainer>
   );
 }

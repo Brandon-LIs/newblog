@@ -1,0 +1,117 @@
+.hero {
+  padding: 6rem 0 4rem;
+  text-align: center;
+  background: linear-gradient(
+    180deg,
+    var(--ifm-color-primary-darker) 0%,
+    var(--ifm-color-primary) 100%
+  );
+  color: var(--ifm-color-white);
+}
+
+.heroAvatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid rgba(255, 255, 255, 0.6);
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+.heroTitle {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  opacity: 0.95;
+  margin-bottom: 0.75rem;
+}
+
+.heroDesc {
+  max-width: 560px;
+  margin: 0 auto 2rem;
+  opacity: 0.9;
+}
+
+.buttons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.socials {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.socialLink {
+  color: var(--ifm-color-white);
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.socialLink:hover {
+  color: var(--ifm-color-white);
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.projectsSection {
+  padding: 3rem 0;
+}
+
+.sectionTitle {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.projectCard {
+  display: block;
+  padding: 1.5rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-card-border-radius);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  color: var(--ifm-font-color-base);
+}
+
+.projectCard:hover {
+  color: var(--ifm-font-color-base);
+  text-decoration: none;
+  box-shadow: var(--ifm-global-shadow-md);
+  transform: translateY(-2px);
+}
+
+.projectCard h3 {
+  margin-bottom: 0.5rem;
+}
+
+.projectCard p {
+  font-size: 0.95rem;
+  color: var(--ifm-color-emphasis-700);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.tag {
+  font-size: 0.75rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  background: var(--ifm-color-primary-contrast-background);
+  color: var(--ifm-color-primary);
+}

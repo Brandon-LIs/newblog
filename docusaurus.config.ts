@@ -153,6 +153,7 @@ const config: Config = {
       items: [
         {to: '/blog', label: '博客', position: 'left'},
         {to: '/docs/intro', label: '笔记', position: 'left'},
+        {href: 'https://www.oopss.top', label: '个人主页', position: 'left'},
         {to: '/friends', label: '友链', position: 'left'},
         {to: '/about', label: '关于', position: 'left'},
         {

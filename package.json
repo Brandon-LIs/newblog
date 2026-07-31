@@ -27,7 +27,6 @@
     "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.43.0",
-    "gitalk": "^1.8.0",
     "mini-svg-data-uri": "^1.4.4",
     "prism-react-renderer": "^2.3.0",
     "react": "^19.0.0",

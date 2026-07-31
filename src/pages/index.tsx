@@ -7,12 +7,12 @@ import Particles from '../components/magicui/particles';
 
 export default function Home() {
   const {
-    siteConfig: {customFields, tagline},
+    siteConfig: {customFields, title},
   } = useDocusaurusContext();
   const {description} = customFields as {description: string};
 
   return (
-    <Layout title={tagline} description={description}>
+    <Layout title={title} description={description}>
       <main>
         <Hero />
         <Particles

@@ -9,7 +9,7 @@ const GITALK_REPO = process.env.GITALK_REPO || 'newblog';
 const GITALK_OWNER = process.env.GITALK_OWNER || GITHUB_USER;
 
 const config: Config = {
-  title: 'Brandon | 个人博客',
+  title: "Brandon's Blog",
   tagline: '我们都有光明的未来',
   favicon: 'https://cdn.oopss.top/favicon.ico',
 
@@ -105,7 +105,7 @@ const config: Config = {
         feedOptions: {
           type: ['rss', 'atom'],
           xslt: true,
-          title: 'Brandon | 个人博客',
+          title: "Brandon's Blog",
           copyright: `Copyright © ${new Date().getFullYear()} Brandon`,
         },
         onInlineTags: 'warn',

@@ -80,7 +80,8 @@ const config: Config = {
           customCss: './src/css/custom.css',
         },
         sitemap: {
-          lastmod: 'date',
+          // lastmod 依赖 git 信息，Vercel 云端构建无 .git 目录会失败，故关闭
+          lastmod: null,
           priority: null,
           changefreq: null,
         },

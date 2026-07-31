@@ -1,5 +1,6 @@
 import Link from '@docusaurus/Link';
 import IconExternalLink from '@theme/Icon/ExternalLink';
+import {Icon} from '@iconify/react';
 import social from '@site/data/social';
 import {siteInfo} from '@site/data/site';
 import styles from './styles.module.css';
@@ -54,6 +55,13 @@ const utilityLinks: FooterLink[] = [
   },
 ];
 
+const stats: Array<{id: string; label: string; icon: string; unit: string}> = [
+  {id: 'busuanzi_site_uv', label: '本站访客', icon: 'ri:user-line', unit: '人'},
+  {id: 'busuanzi_site_pv', label: '本站访问', icon: 'ri:eye-line', unit: '次'},
+  {id: 'busuanzi_page_uv', label: '本页访客', icon: 'ri:user-smile-line', unit: '人'},
+  {id: 'busuanzi_page_pv', label: '本页阅读', icon: 'ri:eye-2-line', unit: '次'},
+];
+
 function FooterAnchor({link}: {link: FooterLink}) {
   const showExternalIcon =
     link.showExternalIcon ?? Boolean(link.href?.startsWith('http'));
@@ -62,10 +70,37 @@ function FooterAnchor({link}: {link: FooterLink}) {
   return (
     <Link {...linkProps} className={styles.link}>
       {link.label}
-      {showExternalIcon && (
-        <IconExternalLink className={styles.externalIcon} />
-      )}
+      {showExternalIcon && <IconExternalLink className={styles.externalIcon} />}
     </Link>
+  );
+}
+
+function Stats() {
+  return (
+    <div className={styles.stats} aria-label="不蒜子访问统计">
+      {stats.map(({id, label, icon, unit}) => (
+        <span key={id} className={styles.statItem}>
+          <Icon icon={icon} width="14" height="14" />
+          {label}
+          <span id={id} className={styles.statValue}>
+            加载中...
+          </span>
+          {unit}
+        </span>
+      ))}
+      <a
+        href={`https://ac.oopss.top/count?search=${siteInfo.url.replace('https://', '')}`}
+        title="不蒜子统计"
+        target="_blank"
+        rel="noreferrer"
+        className={styles.statBadge}>
+        <img
+          src="https://ac.oopss.top/badge"
+          alt="不蒜子统计"
+          style={{width: 85, height: 20, border: 0}}
+        />
+      </a>
+    </div>
   );
 }
 
@@ -75,16 +110,24 @@ export default function Footer(): JSX.Element {
       <div className={styles.inner}>
         <div className={styles.top}>
           <section className={styles.brand} aria-label="站点信息">
+            <img
+              className={styles.avatar}
+              src="https://q.qlogo.cn/headimg_dl?dst_uin=3970588157&spec=640&img_type=jpg"
+              alt={siteInfo.name}
+            />
             <h2 className={styles.title}>{siteInfo.name}</h2>
             <p className={styles.description}>{siteInfo.description}</p>
             <p className={styles.copyright}>
               <span>
-                {`© ${siteInfo.copyrightStartYear}-${currentYear} ${siteInfo.name}`}
+                {`© ${
+                  siteInfo.copyrightStartYear === currentYear
+                    ? currentYear
+                    : `${siteInfo.copyrightStartYear}-${currentYear}`
+                } ${siteInfo.name}`}
               </span>
               <br />
               <span>
-                Powered by
-                {' '}
+                Powered by{' '}
                 <Link href="https://docusaurus.io">Docusaurus</Link>
               </span>
             </p>
@@ -112,40 +155,7 @@ export default function Footer(): JSX.Element {
               <FooterAnchor key={link.label} link={link} />
             ))}
           </nav>
-
-          <div className={styles.stats} aria-label="不蒜子访问统计">
-            <span>
-              本站总访客数
-              <span id="busuanzi_site_uv">加载中...</span>
-              人
-            </span>
-            <span>
-              本站访问量
-              <span id="busuanzi_site_pv">加载中...</span>
-              次
-            </span>
-            <span>
-              本页访客数
-              <span id="busuanzi_page_uv">加载中...</span>
-              人
-            </span>
-            <span>
-              本页访问量
-              <span id="busuanzi_page_pv">加载中...</span>
-              次
-            </span>
-            <a
-              href={`https://ac.oopss.top/count?search=${siteInfo.url.replace('https://', '')}`}
-              title="不蒜子统计"
-              target="_blank"
-              rel="noreferrer">
-              <img
-                src="https://ac.oopss.top/badge"
-                alt="不蒜子统计"
-                style={{width: 85, height: 20, border: 0, verticalAlign: 'middle'}}
-              />
-            </a>
-          </div>
+          <Stats />
         </div>
       </div>
     </footer>

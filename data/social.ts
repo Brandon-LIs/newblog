@@ -19,6 +19,7 @@ const social: Social = {
   github: 'https://github.com/Brandon-LIs',
   bilibili: 'https://space.bilibili.com/3546657819986597',
   qq: 'https://qm.qq.com/q/xseGAqvn22',
+  email: 'mailto:bcihal@qq.com',
 }
 
 const socialSet: Record<keyof Social | 'rss', SocialValue> = {

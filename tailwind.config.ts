@@ -15,7 +15,7 @@ const twConfig = {
         border: 'var(--ifm-border-color)',
       },
       fontFamily: {
-        misans: ['misans'],
+        lxgw: ['LXGW WenKai'],
       },
       borderRadius: {
         card: 'var(--ifm-card-border-radius)',

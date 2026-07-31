@@ -139,6 +139,32 @@
   justify-content: flex-start;
 }
 
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--footer-muted);
+  font-size: 0.85rem;
+}
+
+.stats span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  white-space: nowrap;
+}
+
+.stats span span {
+  color: var(--footer-text);
+}
+
+.stats a {
+  display: inline-flex;
+  align-items: center;
+}
+
 @media (max-width: 996px) {
   .top {
     grid-template-columns: 1fr;

@@ -36,6 +36,7 @@ const linkGroups: Array<{title: string; links: FooterLink[]}> = [
       {label: 'GitHub', href: social.github.href},
       {label: 'Bilibili', href: social.bilibili.href},
       {label: 'QQ', href: social.qq.href},
+      {label: '邮箱 bcihal@qq.com', href: social.email.href},
     ],
   },
 ];
@@ -111,6 +112,40 @@ export default function Footer(): JSX.Element {
               <FooterAnchor key={link.label} link={link} />
             ))}
           </nav>
+
+          <div className={styles.stats} aria-label="不蒜子访问统计">
+            <span>
+              本站总访客数
+              <span id="busuanzi_site_uv">加载中...</span>
+              人
+            </span>
+            <span>
+              本站访问量
+              <span id="busuanzi_site_pv">加载中...</span>
+              次
+            </span>
+            <span>
+              本页访客数
+              <span id="busuanzi_page_uv">加载中...</span>
+              人
+            </span>
+            <span>
+              本页访问量
+              <span id="busuanzi_page_pv">加载中...</span>
+              次
+            </span>
+            <a
+              href={`https://ac.oopss.top/count?search=${siteInfo.url.replace('https://', '')}`}
+              title="不蒜子统计"
+              target="_blank"
+              rel="noreferrer">
+              <img
+                src="https://ac.oopss.top/badge"
+                alt="不蒜子统计"
+                style={{width: 85, height: 20, border: 0, verticalAlign: 'middle'}}
+              />
+            </a>
+          </div>
         </div>
       </div>
     </footer>

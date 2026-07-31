@@ -1,3 +1,8 @@
+/* ================================================================
+   霞鹜文楷（LXGW WenKai，ZeoSeven Fonts item 292）
+   ================================================================ */
+@import url('https://fontsapi.zeoseven.com/292/main/result.css');
+
 @layer theme, base, components, utilities;
 
 @import "tailwindcss/theme.css" layer(theme);
@@ -6,13 +11,6 @@
 @config "../../tailwind.config.ts";
 
 @custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
-
-/* ================================================================
-   MiSans 字体（参考愧怍的主题，CDN 加载失败时回退系统字体）
-   ================================================================ */
-@import url('https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Regular.min.css');
-@import url('https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Medium.min.css');
-@import url('https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Bold.min.css');
 
 @layer base {
   :root {
@@ -25,11 +23,11 @@
     --ifm-color-primary-lighter: #b0e6ff;
     --ifm-color-primary-lightest: #d5f1fd;
     --ifm-code-font-size: 95%;
-    --ifm-font-family-base: misans, ui-sans-serif, system-ui, -apple-system,
-      'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --ifm-font-family-base: 'LXGW WenKai', ui-sans-serif, system-ui,
+      -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 
-    --ifm-heading-font-family: ui-sans-serif, system-ui, -apple-system,
-      'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --ifm-heading-font-family: 'LXGW WenKai', ui-sans-serif, system-ui,
+      -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 
     --ifm-navbar-background-color: white;
     --ifm-navbar-shadow: 0 4px 28px rgb(0 0 0 / 10%);
@@ -116,7 +114,7 @@ body {
 }
 
 body {
-  font-family: misans, ui-sans-serif, system-ui, -apple-system,
+  font-family: 'LXGW WenKai', ui-sans-serif, system-ui, -apple-system,
     'PingFang SC', 'Microsoft YaHei', sans-serif;
 }
 

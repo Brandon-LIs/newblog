@@ -42,6 +42,15 @@ const config: Config = {
 
   clientModules: [require.resolve('./src/vercelAnalytics.ts')],
 
+  // 不蒜子访问统计（自建 ac.oopss.top）
+  scripts: [
+    {
+      src: 'https://ac.oopss.top/busuanzi.min.js',
+      defer: true,
+      async: false,
+    },
+  ],
+
   // 传递给前端组件的自定义配置（构建时从环境变量读取，默认值已内置 Gitalk 凭据）
   customFields: {
     description: '我们都有光明的未来',

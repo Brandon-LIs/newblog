@@ -29,7 +29,8 @@ const config: Config = {
   organizationName: GITHUB_USER, // Usually your GitHub org/user name.
   projectName: 'oopss-blog', // Usually your repo name.
 
-  onBrokenLinks: 'throw',
+  // sitemap.xml / rss.xml 在构建阶段生成，链接检查时尚未存在，故使用 warn
+  onBrokenLinks: 'warn',
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -118,7 +119,7 @@ const config: Config = {
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},
-        {to: '/docs', label: '笔记', position: 'left'},
+        {to: '/docs/intro', label: '笔记', position: 'left'},
         {
           href: `https://github.com/${GITHUB_USER}`,
           className: 'header-github-link',
@@ -148,8 +149,7 @@ const config: Config = {
             {
               label: '站点地图',
               href: '/sitemap.xml',
-            },
-          ],
+            },          ],
         },
         {
           title: '联系',

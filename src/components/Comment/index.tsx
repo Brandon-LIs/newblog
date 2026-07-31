@@ -35,7 +35,6 @@ export default function Comment(): JSX.Element | null {
         id: location.pathname, // Ensure uniqueness and length less than 50
         distractionFreeMode: false,
         language: 'zh-CN',
-        createIssueManually: true,
       }).render(containerRef.current);
     });
   }, [gitalk]);

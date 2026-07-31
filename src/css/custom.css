@@ -1,50 +1,249 @@
 /**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
+ * 样式参考 https://kuizuo.me/docs/docusaurus-guides（主题色 #12affa / MiSans 字体 / 博客卡片）
  */
 
-/* You can override the default Infima variables here. */
+/* MiSans 字体（参考愧怍的主题，CDN 加载失败时回退系统字体） */
+@import url('https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Regular.min.css');
+@import url('https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Medium.min.css');
+@import url('https://cdn.jsdelivr.net/npm/misans@4.1.0/lib/Normal/MiSans-Bold.min.css');
+
 :root {
-  --ifm-color-primary: #1f6feb;
-  --ifm-color-primary-dark: #1a62d4;
-  --ifm-color-primary-darker: #195dc8;
-  --ifm-color-primary-darkest: #144da4;
-  --ifm-color-primary-light: #357ded;
-  --ifm-color-primary-lighter: #4185ef;
-  --ifm-color-primary-lightest: #669df2;
+  --content-background: #fefefe;
+  --ifm-color-primary: #12affa;
+  --ifm-color-primary-dark: #05a1ec;
+  --ifm-color-primary-darker: #0598df;
+  --ifm-color-primary-darkest: #047eb8;
+  --ifm-color-primary-light: #2cb8fb;
+  --ifm-color-primary-lighter: #b0e6ff;
+  --ifm-color-primary-lightest: #d5f1fd;
   --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: misans, ui-sans-serif, system-ui, -apple-system,
+    'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+  --ifm-heading-font-family: ui-sans-serif, system-ui, -apple-system,
+    'PingFang SC', 'Microsoft YaHei', sans-serif;
+
+  --ifm-navbar-background-color: white;
+  --ifm-navbar-shadow: 0 4px 28px rgb(0 0 0 / 10%);
+
+  --ifm-menu-color: #0d203a;
+
+  /* 代码块 */
+  --prism-background-color: #f6f8fa;
+  --ifm-code-padding-horizontal: 0.2rem;
+  --ifm-code-padding-vertical: 0.2rem;
+
+  /* 文本 */
+  --ifm-text-color: #333;
+  --ifm-secondary-text-color: #555;
+
+  --ifm-container-width: 1024px;
+
+  --ifm-heading-color: hsl(214deg 78% 17%);
+  --ifm-heading-font-weight: 500;
+  --ifm-font-weight-bold: 520;
+  --ifm-border-color: #e5e7eb;
+  --ifm-toc-border-color: var(--ifm-border-color);
+
+  --blog-item-background-color: linear-gradient(
+    180deg,
+    #f8fafc 0%,
+    #ffffff 100%
+  );
+  --blog-item-shadow: 0 10px 18px #f1f5f9dd, 0 0 10px 0 #e4e4e7dd;
+  --blog-item-shade: #f4f4f5;
+
+  -webkit-font-smoothing: unset;
+
+  --docusaurus-highlighted-code-line-bg: #d1d5db;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-color-primary: #4d9fff;
-  --ifm-color-primary-dark: #3d92ff;
-  --ifm-color-primary-darker: #358cff;
-  --ifm-color-primary-darkest: #2d7ef1;
-  --ifm-color-primary-light: #63adff;
-  --ifm-color-primary-lighter: #6fb3ff;
-  --ifm-color-primary-lightest: #92c6ff;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+html[data-theme='dark'] {
+  --content-background: #18181b;
+  --ifm-color-primary: hsl(214deg 100% 60%);
+  --ifm-color-primary-light: hsl(214deg 100% 75%);
+  --ifm-heading-color: hsl(0deg 0% 100%);
+  --ifm-menu-color: #eceef1;
+  --ifm-text-color: var(--ifm-menu-color);
+  --ifm-secondary-text-color: #eee;
+  --ifm-border-color: #313131;
+
+  --ifm-navbar-background-color: var(--content-background);
+  --ifm-toc-border-color: var(--ifm-border-color);
+
+  --blog-item-background-color: linear-gradient(
+    180deg,
+    #1f1f22 0%,
+    #18181b 100%
+  );
+  --blog-item-shadow: 0 10px 18px #25374833, 0 0 8px #25374866;
+  --blog-item-shade: #27272a;
+
+  --docusaurus-highlighted-code-line-bg: #4b5563;
 }
 
-/* GitHub 图标 */
-.header-github-link::before {
-  content: '';
-  width: 24px;
-  height: 24px;
+a:hover {
+  text-decoration: none;
+}
+
+html,
+body {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: misans, ui-sans-serif, system-ui, -apple-system,
+    'PingFang SC', 'Microsoft YaHei', sans-serif;
+}
+
+/* 导航栏 */
+.navbar {
+  box-shadow: none;
+}
+
+.navbar__item {
+  display: inline-flex;
+}
+
+/* 代码块 */
+.theme-code-block {
+  --prism-background-color: #f6f8fa !important;
+}
+
+html[data-theme='dark'] .theme-code-block {
+  --prism-background-color: #1e1e1e !important;
+}
+
+/* 文章内容 */
+article .markdown a.link {
+  text-decoration: none;
+  font-weight: inherit;
+  border-bottom: 1px solid rgba(125, 125, 125, 0.3);
+  transition: border 0.3s ease-in-out;
+}
+
+article .markdown a.link:hover,
+article .markdown a.link:focus {
+  border-bottom: 1px solid var(--ifm-color-primary-light);
+}
+
+article .markdown code {
+  border: 0.1rem solid transparent;
+}
+
+article .markdown .alert {
+  border: 2px solid var(--ifm-alert-border-color);
+}
+
+article .markdown img {
+  border-radius: 10px;
   display: flex;
-  background: currentColor;
-  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
-    no-repeat;
-  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12'/%3E%3C/svg%3E")
-    no-repeat;
+  margin: 0 auto;
 }
 
-/* 评论区样式 */
-.blog-comment {
-  margin-top: 2rem;
-  padding-top: 1.5rem;
-  border-top: 1px solid var(--ifm-color-emphasis-200);
+article .markdown video {
+  border-radius: 10px;
+  display: flex;
+  margin: 0 auto;
+}
+
+article .markdown > h2 {
+  font-size: 1.6em;
+}
+
+article .markdown > h3 {
+  font-size: 1.4em;
+}
+
+article .markdown > h4 {
+  font-size: 1.2em;
+}
+
+:where(html[data-theme='dark']) article .markdown strong {
+  color: #fff;
+}
+
+/* 博客列表卡片（参考愧怍的博客卡片样式） */
+.blog-list-page article.card {
+  background: var(--blog-item-background-color);
+  box-shadow: var(--blog-item-shadow);
+  border: none;
+  border-radius: 12px;
+  padding: 0.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-list-page article.card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 24px #f1f5f9dd, 0 0 12px 0 #e4e4e7dd;
+}
+
+/* 标签页 hover 下划线动画 */
+.tag {
+  position: relative;
+}
+
+.tag::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  transform: scaleX(0);
+  height: 2px;
+  background: var(--ifm-color-primary);
+  visibility: hidden;
+  transition: all 0.3s linear;
+}
+
+.tag:hover::after {
+  visibility: visible;
+  transform: scaleX(1);
+}
+
+code {
+  color: var(--ifm-code-color);
+}
+
+@media (max-width: 570px) {
+  h1 {
+    font-size: 1.6em;
+  }
+
+  article > .markdown > h2 {
+    font-size: 1.4em;
+  }
+
+  article > .markdown > h3 {
+    font-size: 1.2em;
+  }
+}
+
+@media (max-width: 1100px) {
+  .navbar > .container,
+  .navbar > .container-fluid {
+    padding: 0;
+  }
+
+  .navbar__toggle {
+    display: inherit;
+  }
+
+  .navbar__item {
+    display: none;
+  }
+
+  .navbar__search-input {
+    width: 9rem;
+  }
+
+  .navbar-sidebar {
+    display: block;
+  }
+}
+
+/* 评论区 */
+.gt-comments textarea,
+.gt-container .gt-comment-admin textarea {
+  background: var(--content-background);
 }

@@ -23,21 +23,22 @@ npm run start
 
 | 变量 | 说明 |
 | ---- | ---- |
-| `GITALK_CLIENT_ID` | GitHub OAuth App Client ID |
-| `GITALK_CLIENT_SECRET` | GitHub OAuth App Client Secret |
-| `GITALK_REPO` | 评论仓库（默认 `oopss-blog`，需公开并开启 Issues） |
+| `GITALK_CLIENT_ID` | GitHub OAuth App Client ID（默认已内置） |
+| `GITALK_CLIENT_SECRET` | GitHub OAuth App Client Secret（默认已内置） |
+| `GITALK_REPO` | 评论仓库（默认 `newblog`，需公开并开启 Issues） |
 | `GITALK_OWNER` | 仓库 owner（默认 `Brandon-LIs`） |
 
 GitHub OAuth App 的 **Authorization callback URL** 填 `https://blog.oopss.top/`（详见 `.env.example`）。
 
 ## 部署到 Vercel
 
-1. 创建 GitHub 仓库（如 `oopss-blog`）并推送代码
+1. 推送代码到 GitHub 仓库（`Brandon-LIs/newblog`）
 2. 打开 https://vercel.com → New Project → Import 该仓库
 3. Framework Preset 选择 **Docusaurus**（Vercel 会自动识别），无需改动构建配置
-4. 在 Project → Settings → Environment Variables 中添加 `GITALK_CLIENT_ID`、`GITALK_CLIENT_SECRET`
-5. 部署后在 Settings → Domains 添加 `blog.oopss.top`（需先从旧的 NotionNext 项目中移除该域名）
-6. 推送代码到 GitHub 后 Vercel 自动构建部署
+4. 部署后在 Settings → Domains 添加 `blog.oopss.top`（需先从旧的 NotionNext 项目中移除该域名）
+5. 推送代码到 GitHub 后 Vercel 自动构建部署
+
+> Gitalk 凭据已内置默认值，如需覆盖可在 Vercel 环境变量中设置 `GITALK_CLIENT_ID` / `GITALK_CLIENT_SECRET`。
 
 ## 写文章
 

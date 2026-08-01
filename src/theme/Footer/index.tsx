@@ -56,10 +56,10 @@ const utilityLinks: FooterLink[] = [
 ];
 
 const stats: Array<{id: string; label: string; icon: string; unit: string}> = [
-  {id: 'busuanzi_site_uv', label: '本站访客', icon: 'ri:user-line', unit: '人'},
-  {id: 'busuanzi_site_pv', label: '本站访问', icon: 'ri:eye-line', unit: '次'},
-  {id: 'busuanzi_page_uv', label: '本页访客', icon: 'ri:user-smile-line', unit: '人'},
-  {id: 'busuanzi_page_pv', label: '本页阅读', icon: 'ri:eye-2-line', unit: '次'},
+  {id: 'busuanzi_site_uv', label: '本站总访客数', icon: 'ri:user-line', unit: '人'},
+  {id: 'busuanzi_site_pv', label: '本站总访问量', icon: 'ri:eye-line', unit: '次'},
+  {id: 'busuanzi_page_uv', label: '本文总访客量', icon: 'ri:user-smile-line', unit: '人'},
+  {id: 'busuanzi_page_pv', label: '本文总阅读量', icon: 'ri:eye-2-line', unit: '次'},
 ];
 
 function FooterAnchor({link}: {link: FooterLink}) {
@@ -80,7 +80,9 @@ function Stats() {
     <div className={styles.stats} aria-label="不蒜子访问统计">
       {stats.map(({id, label, icon, unit}) => (
         <span key={id} className={styles.statItem}>
-          <Icon icon={icon} width="14" height="14" />
+          <span className={styles.statIcon}>
+            <Icon icon={icon} width="14" height="14" />
+          </span>
           {label}
           <span id={id} className={styles.statValue}>
             加载中...

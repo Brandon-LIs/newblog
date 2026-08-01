@@ -42,10 +42,10 @@ const config: Config = {
 
   clientModules: [require.resolve('./src/vercelAnalytics.ts')],
 
-  // 不蒜子访问统计（自建 ac.oopss.top）
+  // 不蒜子访问统计（penndu 源）
   scripts: [
     {
-      src: 'https://ac.oopss.top/busuanzi.min.js',
+      src: 'https://jsd.dusays.com/npm/penndu@17.0.0/bsz.js',
       defer: true,
       async: false,
     },

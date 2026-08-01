@@ -132,6 +132,11 @@ html.blog-post-page #__docusaurus {
   box-shadow: none;
 }
 
+.navbar__logo img {
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 .navbar__item {
   display: inline-flex;
 }

@@ -186,7 +186,15 @@
   justify-content: flex-end;
 }
 
-.statItem {
+.statsInner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.statsInner :global(.bsz-stat) {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
@@ -204,19 +212,19 @@
     transform 0.25s ease;
 }
 
-.statItem:hover {
+.statsInner :global(.bsz-stat):hover {
   background: rgb(18 175 250 / 12%);
   border-color: rgb(18 175 250 / 35%);
   color: var(--footer-text);
   transform: translateY(-1px);
 }
 
-.statItem .statIcon {
+.statsInner :global(.bsz-stat-icon) {
   display: inline-flex;
   opacity: 0.8;
 }
 
-.statItem .statValue {
+.statsInner :global(.bsz-stat-value) {
   color: var(--ifm-color-primary-light);
   font-weight: 600;
   font-variant-numeric: tabular-nums;

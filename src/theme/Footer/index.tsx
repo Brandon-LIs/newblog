@@ -1,8 +1,8 @@
 import Link from '@docusaurus/Link';
 import IconExternalLink from '@theme/Icon/ExternalLink';
-import {Icon} from '@iconify/react';
 import social from '@site/data/social';
 import {siteInfo} from '@site/data/site';
+import Busuanzi from '@site/src/components/Busuanzi';
 import styles from './styles.module.css';
 
 type FooterLink = {
@@ -78,18 +78,7 @@ function FooterAnchor({link}: {link: FooterLink}) {
 function Stats() {
   return (
     <div className={styles.stats} aria-label="不蒜子访问统计">
-      {stats.map(({id, label, icon, unit}) => (
-        <span key={id} className={styles.statItem}>
-          <span className={styles.statIcon}>
-            <Icon icon={icon} width="14" height="14" />
-          </span>
-          {label}
-          <span id={id} className={styles.statValue}>
-            加载中...
-          </span>
-          {unit}
-        </span>
-      ))}
+      <Busuanzi className={styles.statsInner} />
       <a
         href={`https://ac.oopss.top/count?search=${siteInfo.url.replace('https://', '')}`}
         title="不蒜子统计"

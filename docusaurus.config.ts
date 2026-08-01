@@ -42,14 +42,8 @@ const config: Config = {
 
   clientModules: [require.resolve('./src/vercelAnalytics.ts')],
 
-  // 不蒜子访问统计（penndu，本地 vendor 避免 CDN 截断）
-  scripts: [
-    {
-      src: '/js/bsz.js',
-      defer: true,
-      async: false,
-    },
-  ],
+  // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
+  scripts: [],
 
   // 传递给前端组件的自定义配置（构建时从环境变量读取，默认值已内置 Gitalk 凭据）
   customFields: {

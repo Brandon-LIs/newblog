@@ -12,10 +12,10 @@ const TITLE = '友链';
 const DESCRIPTION = '有很多良友，胜于有很多财富。';
 const ADD_FRIEND_URL =
   'https://github.com/Brandon-LIs/newblog/edit/main/data/friends.tsx';
-const SITE_INFO = `title: 'Brandon'
-bio: '我们都有光明的未来'
+const SITE_INFO = `title: 'Brandon's Blog'
+bio: '一个高中生的个人博客'
 website: 'https://blog.oopss.top'
-avatar: 'https://q.qlogo.cn/headimg_dl?dst_uin=3970588157&spec=640&img_type=jpg'
+avatar: 'https://cdn.oopss.top/icon.jpg'
 `;
 const friends = Friends;
 

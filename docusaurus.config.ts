@@ -84,6 +84,7 @@ const config: Config = {
   ],
 
   plugins: [
+    'docusaurus-plugin-image-zoom',
     [
       './src/plugin/plugin-content-blog', // 为了实现全局 blog 数据（首页展示近期博客）
       {
@@ -134,6 +135,13 @@ const config: Config = {
   ],
 
   themeConfig: {
+    zoom: {
+      selector: '.markdown :not(em) > img',
+      background: {
+        light: 'rgb(255, 255, 255)',
+        dark: 'rgb(50, 50, 50)',
+      },
+    },
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,

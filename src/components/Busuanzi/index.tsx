@@ -15,7 +15,8 @@ function fetchBsz(): Promise<BszData> {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.open('POST', BSZ_API, true);
-    xhr.setRequestHeader('Content-Type', 'application/json');
+    // 注意：不要设置 Content-Type: application/json，
+    // 否则触发 CORS 预检，而服务端 allow-headers 不含 content-type，请求会被浏览器拦截
     xhr.setRequestHeader('x-bsz-referer', window.location.href);
     xhr.onreadystatechange = () => {
       if (xhr.readyState === 4) {

@@ -58,6 +58,12 @@ const FriendCard = memo(({friend}: {friend: Friend}) => (
       src={friend.avatar}
       alt={friend.title}
       className="size-16 min-w-16 rounded-full object-contain"
+      onError={(e) => {
+        // 头像加载失败时回退到该站 favicon 服务
+        const host = friend.website.replace(/^https?:\/\//, '').split('/')[0];
+        e.currentTarget.onerror = null;
+        e.currentTarget.src = `https://favicon.im/${host}`;
+      }}
     />
     <div className="pl-4">
       <div className="mb-1 flex items-center">

@@ -148,7 +148,7 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'Brandon',
+      title: "Brandon's Blog",
       logo: {
         alt: 'Brandon',
         src: 'https://q.qlogo.cn/headimg_dl?dst_uin=3970588157&spec=640&img_type=jpg',
@@ -156,7 +156,7 @@ const config: Config = {
       items: [
         {to: '/blog', label: '博客', position: 'left'},
         {to: '/docs/intro', label: '笔记', position: 'left'},
-        {href: 'https://www.oopss.top', label: '个人主页', position: 'left'},
+        {href: 'https://www.oopss.top', label: '主页', position: 'left'},
         {to: '/friends', label: '友链', position: 'left'},
         {to: '/about', label: '关于', position: 'left'},
         {

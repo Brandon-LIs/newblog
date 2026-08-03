@@ -1,8 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 
-import styles from './styles.module.css';
-
-// Twikoo 评论（envId 为自建 Twikoo 后端）
+// Twikoo 评论（envId 为自建 Twikoo 后端），使用 Twikoo 默认样式
 const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
 const TWIKOO_ENV = 'https://co.oopss.top';
 
@@ -72,11 +70,7 @@ export default function Comment(): JSX.Element | null {
   }, []);
 
   return (
-    <div className={styles.commentWrap}>
-      <div className={styles.header}>
-        <span className={styles.headerBar} />
-        评论区
-      </div>
+    <div className="blog-comment" style={{margin: '2.5rem 0 1rem'}}>
       <div ref={containerRef} />
     </div>
   );

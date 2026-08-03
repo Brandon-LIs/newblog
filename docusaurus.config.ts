@@ -41,7 +41,13 @@ const config: Config = {
   clientModules: [require.resolve('./src/vercelAnalytics.ts')],
 
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
-  scripts: [],
+  scripts: [
+    {
+      src: 'https://jsd.oopss.top/tracker.min.js',
+      defer: true,
+      'data-website-id': 'homepage',
+    },
+  ],
 
   // 传递给前端组件的自定义配置
   customFields: {

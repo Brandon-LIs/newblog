@@ -1,30 +1,20 @@
 import React, {useEffect, useRef} from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import '@site/src/vendor/gitalk/gitalk.css';
 
-// 反代域名：自建 Cloudflare Worker（~/Downloads/gh-proxy），加速国内访问 api.github.com
-const GITHUB_PROXY = 'https://gh.oopss.top/oauth/token';
+import styles from './styles.module.css';
+
+// Twikoo 评论（envId 为自建 Twikoo 后端）
+const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
+const TWIKOO_ENV = 'https://co.oopss.top';
+
+declare global {
+  interface Window {
+    twikoo?: {
+      init: (options: {envId: string; el: HTMLElement | string}) => Promise<void>;
+    };
+  }
+}
 
 export default function Comment(): JSX.Element | null {
-  const {siteConfig} = useDocusaurusContext();
-  const gitalk =
-    (
-      siteConfig.customFields as {
-        gitalk?: {
-          clientID: string;
-          clientSecret: string;
-          repo: string;
-          owner: string;
-          admin: string[];
-        };
-      }
-    ).gitalk ?? {
-      clientID: '',
-      clientSecret: '',
-      repo: '',
-      owner: '',
-      admin: [],
-    };
   const containerRef = useRef<HTMLDivElement>(null);
   const renderedRef = useRef(false);
 
@@ -32,32 +22,40 @@ export default function Comment(): JSX.Element | null {
     if (renderedRef.current || !containerRef.current) {
       return;
     }
-    if (!gitalk.clientID || !gitalk.clientSecret) {
-      console.warn(
-        '[Gitalk] 未配置 GITALK_CLIENT_ID / GITALK_CLIENT_SECRET 环境变量，评论已隐藏',
-      );
-      return;
-    }
 
     const init = () => {
+      if (renderedRef.current) {
+        return;
+      }
       renderedRef.current = true;
-      import('@site/src/vendor/gitalk/gitalk.min.js').then(({default: Gitalk}) => {
-        new Gitalk({
-          clientID: gitalk.clientID,
-          clientSecret: gitalk.clientSecret,
-          repo: gitalk.repo,
-          owner: gitalk.owner,
-          admin: gitalk.admin,
-          id: location.pathname, // Ensure uniqueness and length less than 50
-          distractionFreeMode: false,
-          language: 'zh-CN',
-          proxy: GITHUB_PROXY, // 自建 OAuth 反代，替代慢速公共代理
-        }).render(containerRef.current!);
-      });
+
+      const run = () => {
+        if (!window.twikoo) {
+          console.warn('[Twikoo] 评论脚本未加载');
+          return;
+        }
+        window.twikoo
+          .init({envId: TWIKOO_ENV, el: containerRef.current!})
+          .catch((err) => console.warn('[Twikoo] 初始化失败', err));
+      };
+
+      if (window.twikoo) {
+        run();
+        return;
+      }
+
+      const script = document.createElement('script');
+      script.src = TWIKOO_SCRIPT;
+      script.async = true;
+      script.onload = run;
+      script.onerror = () => {
+        console.warn('[Twikoo] 评论脚本加载失败，请检查网络');
+      };
+      document.head.appendChild(script);
     };
 
-    // 滚动到评论区附近才加载 gitalk，避免拖慢首屏
-    if ('IntersectionObserver' in window) {
+    // 滚动到评论区附近才加载，避免拖慢首屏
+    if ('IntersectionObserver' in window && containerRef.current) {
       const observer = new IntersectionObserver(
         (entries) => {
           if (entries[0]?.isIntersecting) {
@@ -71,10 +69,14 @@ export default function Comment(): JSX.Element | null {
       return () => observer.disconnect();
     }
     init();
-  }, [gitalk]);
+  }, []);
 
   return (
-    <div className="blog-comment">
+    <div className={styles.commentWrap}>
+      <div className={styles.header}>
+        <span className={styles.headerBar} />
+        评论区
+      </div>
       <div ref={containerRef} />
     </div>
   );

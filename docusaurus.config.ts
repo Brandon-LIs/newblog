@@ -5,8 +5,6 @@ import type * as Preset from '@docusaurus/preset-classic';
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const GITHUB_USER = 'Brandon-LIs';
-const GITALK_REPO = process.env.GITALK_REPO || 'newblog';
-const GITALK_OWNER = process.env.GITALK_OWNER || GITHUB_USER;
 
 const config: Config = {
   title: "Brandon's Blog",
@@ -45,19 +43,10 @@ const config: Config = {
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
   scripts: [],
 
-  // 传递给前端组件的自定义配置（构建时从环境变量读取，默认值已内置 Gitalk 凭据）
+  // 传递给前端组件的自定义配置
   customFields: {
     description: '我们都有光明的未来',
     bio: '一个高中生的个人博客',
-    gitalk: {
-      clientID: process.env.GITALK_CLIENT_ID || 'Ov23liwhSndMxSW8t1Ef',
-      clientSecret:
-        process.env.GITALK_CLIENT_SECRET ||
-        'bf6a8d31549f9bc1f2d167532ce14528c078f1cf',
-      repo: GITALK_REPO,
-      owner: GITALK_OWNER,
-      admin: [GITALK_OWNER],
-    },
   },
 
   presets: [

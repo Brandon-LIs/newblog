@@ -172,9 +172,11 @@ article .markdown .alert {
 }
 
 article .markdown img {
-  border-radius: 10px;
-  display: flex;
-  margin: 0 auto;
+  border-radius: 12px;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 12px auto;
 }
 
 article .markdown video {

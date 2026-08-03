@@ -1,8 +1,15 @@
 @reference "../../../../css/custom.css";
 
 .title {
-  font-size: 2rem;
+  font-size: 1.4rem;
+  font-weight: 500;
   margin-bottom: 0.5rem;
+}
+
+/* 文章详情页大标题保持醒目 */
+.title:is(h1) {
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .titleLink {

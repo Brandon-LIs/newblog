@@ -5,8 +5,7 @@ import {useEffect, useRef, useState} from 'react';
 import styles from './shuoshuo.module.css';
 
 // Memos 配置
-const MEMOS_HOST = 'https://memos.oopss.top';
-const CREATOR_ID = '1'; // 说说的作者用户 ID
+const MEMOS_PROXY = 'https://admin.oopss.top/api/memos'; // blog-admin worker 代理（token 在服务端）
 const LIMIT = 20;
 
 type MemoResource = {
@@ -34,7 +33,7 @@ type Memo = {
 };
 
 function buildFilter() {
-  return `creator=='users/${CREATOR_ID}'&&visibilities==['PUBLIC','PROTECTED']`;
+  return `creator=='users/1'`;
 }
 
 function relativeTime(ts?: number): string {
@@ -51,8 +50,8 @@ function relativeTime(ts?: number): string {
 
 function resourceUrl(res: MemoResource): string | null {
   if (res.externalLink) return res.externalLink;
-  if (res.name) return `${MEMOS_HOST}/file/${res.name}`;
-  if (res.filename && res.name) return `${MEMOS_HOST}/file/${res.name}`;
+  if (res.name) return `https://memos.oopss.top/file/${res.name}`;
+  if (res.filename && res.name) return `https://memos.oopss.top/file/${res.name}`;
   return null;
 }
 
@@ -121,15 +120,11 @@ export default function Shuoshuo(): JSX.Element {
     setError('');
     try {
       const filter = encodeURIComponent(buildFilter());
-      let url = `${MEMOS_HOST}/api/v1/memos?limit=${LIMIT}&filter=${filter}`;
+      let url = `${MEMOS_PROXY}?limit=${LIMIT}&filter=${filter}`;
       if (token) url += `&pageToken=${encodeURIComponent(token)}`;
       const res = await fetch(url);
       if (!res.ok) {
-        if (res.status === 401 || res.status === 403) {
-          setError('无法读取说说：请在 Memos 设置中开启「允许未登录用户查看公开 Memos」。');
-        } else {
-          setError(`加载失败（${res.status}）`);
-        }
+        setError(`加载失败（${res.status}）`);
         return;
       }
       const data = await res.json();

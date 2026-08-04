@@ -4,21 +4,14 @@ import {useEffect, useRef, useState} from 'react';
 
 import styles from './shuoshuo.module.css';
 
-// Memos 配置
-const MEMOS_PROXY = 'https://admin.oopss.top/api/memos'; // blog-admin worker 代理（token 在服务端）
-const LIMIT = 20; // 每次从代理拉取的条数
-
-type MemoResource = {
-  name?: string;
-  filename?: string;
-  type?: string;
-  size?: number;
-  externalLink?: string;
-};
+// 说说 API（经 blog-admin worker 代理，token 在服务端）
+const MEMOS_PROXY = 'https://admin.oopss.top/api/memos';
+const LIMIT = 20;
 
 type MemoCreator = {
-  name?: string;
-  displayName?: string;
+  id?: number;
+  nickname?: string;
+  username?: string;
   avatarUrl?: string;
 };
 
@@ -28,13 +21,10 @@ type Memo = {
   createdTs?: number;
   pinned?: boolean;
   visibility?: string;
-  resources?: MemoResource[];
+  tags?: string[];
   creator?: MemoCreator;
+  link?: string;
 };
-
-function buildFilter() {
-  return `creator=='users/1'`;
-}
 
 function relativeTime(ts?: number): string {
   if (!ts) return '';
@@ -48,20 +38,13 @@ function relativeTime(ts?: number): string {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 
-function resourceUrl(res: MemoResource): string | null {
-  if (res.externalLink) return res.externalLink;
-  if (res.name) return `https://memos.oopss.top/file/${res.name}`;
-  return null;
-}
-
 function MemoRow({memo, index}: {memo: Memo; index: number}) {
   const html = marked.parse(memo.content || '', {gfm: true, breaks: true}) as string;
-  const images = (memo.resources || []).filter((r) =>
-    /^image\//.test(r.type || ''),
-  );
   const avatar =
     memo.creator?.avatarUrl ||
     'https://q.qlogo.cn/headimg_dl?dst_uin=3970588157&spec=640&img_type=jpg';
+  const name = memo.creator?.nickname || memo.creator?.username || 'Brandon';
+  const link = memo.link || `https://memos.oopss.top/m/${memo.id}`;
   const first = index === 0;
 
   return (
@@ -72,7 +55,7 @@ function MemoRow({memo, index}: {memo: Memo; index: number}) {
       </div>
       <div className={styles.bubbleArea}>
         <div className={styles.meta}>
-          <span className={styles.name}>{memo.creator?.displayName || 'Brandon'}</span>
+          <span className={styles.name}>{name}</span>
           <span className={styles.time}>
             {memo.pinned && '📌 '}
             {relativeTime(memo.createdTs)}
@@ -83,27 +66,7 @@ function MemoRow({memo, index}: {memo: Memo; index: number}) {
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{__html: html}}
         />
-        {images.length > 0 && (
-          <div className={styles.images}>
-            {images.map((img, i) => {
-              const url = resourceUrl(img);
-              return url ? (
-                <img
-                  key={i}
-                  className={styles.image}
-                  src={url}
-                  alt={img.filename || 'image'}
-                  loading="lazy"
-                />
-              ) : null;
-            })}
-          </div>
-        )}
-        <a
-          href={`https://memos.oopss.top/m/${memo.id}`}
-          target="_blank"
-          rel="noreferrer"
-          className={styles.link}>
+        <a href={link} target="_blank" rel="noreferrer" className={styles.link}>
           前往评论 →
         </a>
       </div>
@@ -111,28 +74,33 @@ function MemoRow({memo, index}: {memo: Memo; index: number}) {
   );
 }
 
+type MemosResp = {
+  memos?: Memo[];
+  total?: number;
+  page?: number;
+  size?: number;
+  hasMore?: boolean;
+};
+
 export default function Shuoshuo(): JSX.Element {
   const [memos, setMemos] = useState<Memo[]>([]);
   const [visibleCount, setVisibleCount] = useState(0);
-  const [pageToken, setPageToken] = useState<string>('');
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>('');
   const initialized = useRef(false);
 
-  async function fetchBatch(): Promise<{list: Memo[]; next: string} | null> {
+  async function fetchPage(nextPage: number): Promise<MemosResp | null> {
     setLoading(true);
     setError('');
     try {
-      const filter = encodeURIComponent(buildFilter());
-      let url = `${MEMOS_PROXY}?limit=${LIMIT}&filter=${filter}`;
-      if (pageToken) url += `&pageToken=${encodeURIComponent(pageToken)}`;
-      const res = await fetch(url);
+      const res = await fetch(`${MEMOS_PROXY}?limit=${LIMIT}&page=${nextPage}`);
       if (!res.ok) {
         setError(`加载失败（${res.status}）`);
         return null;
       }
-      const data = await res.json();
-      return {list: data.memos || [], next: data.nextPageToken || ''};
+      return (await res.json()) as MemosResp;
     } catch {
       setError('网络错误，请稍后重试');
       return null;
@@ -145,26 +113,28 @@ export default function Shuoshuo(): JSX.Element {
     if (initialized.current) return;
     initialized.current = true;
     (async () => {
-      const batch = await fetchBatch();
-      if (batch) {
-        setMemos(batch.list);
-        setPageToken(batch.next);
-        setVisibleCount(Math.min(1, batch.list.length));
+      const data = await fetchPage(1);
+      if (data) {
+        setMemos(data.memos || []);
+        setPage(1);
+        setHasMore(Boolean(data.hasMore));
+        setVisibleCount(Math.min(1, (data.memos || []).length));
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function loadMore() {
-    // 若已展示完当前批次，且还有下一页，则先拉取下一批
+    // 已展示完当前页数据，且还有下一页 → 拉取下一页
     if (visibleCount >= memos.length) {
-      if (!pageToken) return;
-      const batch = await fetchBatch();
-      if (batch && batch.list.length) {
-        setMemos((prev) => [...prev, ...batch.list]);
-        setPageToken(batch.next);
+      if (!hasMore) return;
+      const nextPage = page + 1;
+      const data = await fetchPage(nextPage);
+      if (data && data.memos && data.memos.length) {
+        setMemos((prev) => [...prev, ...(data.memos || [])]);
+        setPage(nextPage);
+        setHasMore(Boolean(data.hasMore));
         setVisibleCount((prev) => prev + 1);
-        return;
       }
       return;
     }
@@ -172,7 +142,7 @@ export default function Shuoshuo(): JSX.Element {
   }
 
   const shown = memos.slice(0, visibleCount);
-  const hasMore = visibleCount < memos.length || Boolean(pageToken);
+  const canMore = visibleCount < memos.length || hasMore;
 
   return (
     <Layout title="说说" description="Brandon 的说说广场">
@@ -199,7 +169,7 @@ export default function Shuoshuo(): JSX.Element {
           <div className={styles.empty}>暂无说说</div>
         )}
 
-        {hasMore && (
+        {canMore && (
           <div className={styles.loadMoreWrap}>
             <button
               className={styles.loadMore}
@@ -208,7 +178,7 @@ export default function Shuoshuo(): JSX.Element {
               {loading ? '加载中…' : '加载更多'}
             </button>
             <div className={styles.hint}>
-              第 {visibleCount} 条{hasMore ? ' · 下一条 ↓' : ''}
+              第 {visibleCount} 条{canMore ? ' · 下一条 ↓' : ''}
             </div>
           </div>
         )}

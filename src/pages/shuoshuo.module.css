@@ -182,20 +182,6 @@
   margin: 0.3rem 0;
 }
 
-.images {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
-}
-
-.image {
-  max-width: 100%;
-  max-height: 320px;
-  border-radius: 8px;
-  object-fit: cover;
-}
-
 .link {
   display: inline-block;
   margin-top: 0.4rem;

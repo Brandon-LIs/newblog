@@ -36,7 +36,8 @@
     "react-popper": "^2.3.0",
     "tailwind-merge": "^3.6.0",
     "tailwindcss": "^4.3.3",
-    "image-size": "^2.0.2"
+    "image-size": "^2.0.2",
+    "marked": "^15.0.0"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",

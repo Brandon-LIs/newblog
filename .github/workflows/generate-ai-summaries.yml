@@ -1,0 +1,41 @@
+name: Generate AI Summaries
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/**'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate AI Summaries
+        env:
+          GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
+        run: node scripts/gen-ai-summaries.mjs
+
+      - name: Commit changes
+        run: |
+          if [ -n "$(git status --porcelain static/ai-summaries.json)" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add static/ai-summaries.json
+            git commit -m "chore: 自动更新 AI 摘要"
+            git push
+            echo "✅ 已提交更新"
+          else
+            echo "摘要无变化"
+          fi

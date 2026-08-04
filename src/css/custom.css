@@ -177,6 +177,18 @@ article .markdown img {
   max-width: 100%;
   height: auto;
   margin: 12px auto;
+  /* 加载中占位底色：配合 width/height 预留空间，避免布局抖动 */
+  background-color: var(--ifm-color-emphasis-100);
+}
+
+/* 图片加载完成后的淡入动画（由 imgFade 客户端脚本添加 .img-fade/.loaded） */
+article .markdown img.img-fade {
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+article .markdown img.img-fade.loaded {
+  opacity: 1;
 }
 
 article .markdown video {

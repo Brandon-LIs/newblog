@@ -38,7 +38,10 @@ const config: Config = {
     locales: ['zh-Hans'],
   },
 
-  clientModules: [require.resolve('./src/vercelAnalytics.ts')],
+  clientModules: [
+    require.resolve('./src/vercelAnalytics.ts'),
+    require.resolve('./src/imgFade.ts'),
+  ],
 
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
   scripts: [
@@ -103,6 +106,7 @@ const config: Config = {
         onInlineTags: 'warn',
         onInlineAuthors: 'warn',
         onUntruncatedBlogPosts: 'warn',
+        rehypePlugins: [require('./src/plugin/rehype-img-dim')],
       },
     ],
     async function tailwindcssPlugin() {

@@ -22,11 +22,12 @@ async function blogPluginEnhanced(context, options) {
           (b.metadata.frontMatter.sticky || 0) - (a.metadata.frontMatter.sticky || 0),
       )
 
-      // 构建封面映射：每篇文章的封面 = 手动 image 或正文第一张图（无图则无封面）
+      // 封面映射：每篇文章的封面 = 手动 image 或正文第一张图（无图则无封面）
       const covers = {}
       for (const post of content.blogPosts) {
         const explicit = post.metadata.frontMatter.image
-        covers[post.metadata.permalink] = explicit || extractFirstImage(post.content) || undefined
+        covers[post.metadata.permalink] =
+          explicit || extractFirstImage(post.content) || undefined
       }
 
       // Create default plugin pages

@@ -7,17 +7,18 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 
-const API_KEY = process.env.GLM_API_KEY
-const MODEL = 'glm-4.7-flash'
-const API_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
+const GLM_API_KEY = process.env.GLM_API_KEY
+const XUNFEI_API_KEY = process.env.XUNFEI_API_KEY || process.env.SPARK_API_KEY
+const GLM_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
+const XUNFEI_URL = 'https://spark-api-open.xf-yun.com/x2/chat/completions'
 const MAX_CHARS = 10000
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const blogDir = join(root, 'blog')
 const outFile = join(root, 'static', 'ai-summaries.json')
 
-if (!API_KEY) {
-  console.log('跳过：缺少环境变量 GLM_API_KEY')
+if (!GLM_API_KEY && !XUNFEI_API_KEY) {
+  console.log('跳过：缺少 GLM_API_KEY / XUNFEI_API_KEY')
   process.exit(0)
 }
 
@@ -50,34 +51,81 @@ function computePermalink(fileName, slug) {
   return `/blog/${base}`
 }
 
-async function summarize(title, content) {
-  const text =
+function buildPrompt(title, content) {
+  return (
     '你是博客文章摘要助手。请用简洁、通顺、自然的中文，用一段话（3~5 句）概括这篇文章的核心内容、要点与结论。\n' +
     '要求：不要使用列表或序号，写成连贯段落；直接输出摘要本身，不要任何前缀或解释。\n\n' +
     '文章标题：' + title + '\n\n文章内容：\n' + content.slice(0, MAX_CHARS)
+  )
+}
 
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      messages: [{ role: 'user', content: text }],
-      max_tokens: 1500,
-      temperature: 0.6,
-      thinking: { type: 'disabled' },
-    }),
-  })
-  if (!res.ok) {
-    const errText = await res.text()
-    throw new Error(`GLM ${res.status}: ${errText.slice(0, 200)}`)
+// 智谱 GLM-4.7-Flash；失败返回 null
+async function summarizeGLM(title, content) {
+  if (!GLM_API_KEY) return null
+  try {
+    const res = await fetch(GLM_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${GLM_API_KEY}` },
+      body: JSON.stringify({
+        model: 'glm-4.7-flash',
+        messages: [{ role: 'user', content: buildPrompt(title, content) }],
+        max_tokens: 1500,
+        temperature: 0.6,
+        thinking: { type: 'disabled' },
+      }),
+    })
+    if (!res.ok) {
+      console.warn(`  [GLM] ${res.status}，尝试讯飞回退`)
+      return null
+    }
+    const data = await res.json()
+    const c = data.choices?.[0]?.message?.content
+    return c ? c.trim() : null
+  } catch (e) {
+    console.warn(`  [GLM] ${e.message}，尝试讯飞回退`)
+    return null
   }
-  const data = await res.json()
-  const c = data.choices?.[0]?.message?.content
-  if (!c) throw new Error('GLM 返回为空')
-  return c.trim()
+}
+
+// 讯飞星火 X2（spark-x）；失败返回 null
+async function summarizeXunfei(title, content) {
+  if (!XUNFEI_API_KEY) return null
+  try {
+    const res = await fetch(XUNFEI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${XUNFEI_API_KEY}` },
+      body: JSON.stringify({
+        model: 'spark-x',
+        messages: [{ role: 'user', content: buildPrompt(title, content) }],
+        max_tokens: 2000,
+        temperature: 0.6,
+        stream: false,
+        thinking: { type: 'disabled' },
+      }),
+    })
+    if (!res.ok) {
+      console.warn(`  [讯飞] ${res.status}`)
+      return null
+    }
+    const data = await res.json()
+    if (data.code !== 0) {
+      console.warn(`  [讯飞] code=${data.code} ${data.message || ''}`)
+      return null
+    }
+    const c = data.choices?.[0]?.message?.content
+    return c ? c.trim() : null
+  } catch (e) {
+    console.warn(`  [讯飞] ${e.message}`)
+    return null
+  }
+}
+
+async function summarize(title, content) {
+  const fromGlm = await summarizeGLM(title, content)
+  if (fromGlm) return fromGlm
+  const fromXunfei = await summarizeXunfei(title, content)
+  if (fromXunfei) return fromXunfei
+  throw new Error('GLM 与讯飞均不可用')
 }
 
 async function main() {

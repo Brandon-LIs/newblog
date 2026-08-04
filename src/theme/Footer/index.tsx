@@ -54,6 +54,18 @@ const utilityLinks: FooterLink[] = [
   },
 ];
 
+const bszScript = {
+  src: 'https://jsd.dusays.com/npm/penndu@17.0.0/bsz.js',
+  defer: true,
+};
+
+const bszStats: Array<{id: string; label: string; icon: string}> = [
+  {id: 'busuanzi_site_uv', label: '本站总访客数', icon: 'ri:user-line'},
+  {id: 'busuanzi_site_pv', label: '本站总访问量', icon: 'ri:eye-line'},
+  {id: 'busuanzi_page_uv', label: '本文总访客量', icon: 'ri:user-smile-line'},
+  {id: 'busuanzi_page_pv', label: '本文总阅读量', icon: 'ri:eye-2-line'},
+];
+
 function FooterAnchor({link}: {link: FooterLink}) {
   const showExternalIcon =
     link.showExternalIcon ?? Boolean(link.href?.startsWith('http'));
@@ -64,6 +76,64 @@ function FooterAnchor({link}: {link: FooterLink}) {
       {link.label}
       {showExternalIcon && <IconExternalLink className={styles.externalIcon} />}
     </Link>
+  );
+}
+
+function BszStats() {
+  return (
+    <div className={styles.bsz} aria-label="访问统计">
+      <span className={styles.bszHeading}>📊 访问统计</span>
+      <span className={styles.bszGroup}>
+        {bszStats.map((stat) => (
+          <span key={stat.id} className={styles.bszItem}>
+            <svg
+              className={styles.bszIcon}
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round">
+              {stat.icon === 'ri:user-line' && (
+                <>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                </>
+              )}
+              {stat.icon === 'ri:eye-line' && (
+                <>
+                  <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                  <circle cx="12" cy="12" r="3" />
+                </>
+              )}
+              {stat.icon === 'ri:user-smile-line' && (
+                <>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
+                  <path d="M8 14h8" />
+                </>
+              )}
+              {stat.icon === 'ri:eye-2-line' && (
+                <>
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+                  <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
+                  <line x1="1" y1="1" x2="23" y2="23" />
+                </>
+              )}
+            </svg>
+            <span className={styles.bszLabel}>{stat.label}</span>
+            <span className={styles.bszValue} id={stat.id} />
+            <span className={styles.bszUnit}>
+              {stat.id.includes('pv') ? '次' : '人'}
+            </span>
+          </span>
+        ))}
+      </span>
+      <script defer src={bszScript.src} />
+    </div>
   );
 }
 
@@ -108,6 +178,7 @@ export default function Footer(): JSX.Element {
         </div>
 
         <div className={styles.bottom}>
+          <BszStats />
           <nav className={styles.utility} aria-label="订阅和站点地图">
             {utilityLinks.map((link) => (
               <FooterAnchor key={link.label} link={link} />

@@ -1,6 +1,7 @@
 import {useBlogPost} from '@docusaurus/plugin-content-blog/client';
 import {cn} from '@site/src/lib/utils';
 import type {Props} from '@theme/BlogPostItem';
+import AiSummary from '@theme/BlogPostItem/AiSummary';
 import BlogPostItemContainer from '@theme/BlogPostItem/Container';
 import BlogPostItemContent from '@theme/BlogPostItem/Content';
 import BlogPostItemFooter from '@theme/BlogPostItem/Footer';
@@ -21,6 +22,7 @@ export default function BlogPostItem({
   return (
     <BlogPostItemContainer className={cn(containerClassName, className)}>
       <BlogPostItemHeader />
+      <AiSummary />
       <BlogPostItemSummary />
       <BlogPostItemContent>{children}</BlogPostItemContent>
       <BlogPostItemFooter />

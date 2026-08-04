@@ -1,0 +1,64 @@
+@reference "../../../css/custom.css";
+
+.box {
+  position: relative;
+  margin: 1rem 0 1.25rem;
+  padding: 0.9rem 1.1rem 1rem;
+  border-radius: 14px;
+  border: 1px solid rgb(18 175 250 / 22%);
+  background:
+    linear-gradient(135deg, rgb(18 175 250 / 9%), transparent 60%),
+    var(--ifm-card-background-color);
+  box-shadow: var(--blog-item-shadow);
+  overflow: hidden;
+}
+
+/* 左上角装饰条 */
+.box::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-bottom: 0.5rem;
+}
+
+.icon {
+  color: var(--ifm-color-primary);
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ifm-text-color);
+  letter-spacing: 0.02em;
+}
+
+.model {
+  margin-left: auto;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--ifm-color-primary);
+  background: rgb(18 175 250 / 12%);
+  border: 1px solid rgb(18 175 250 / 25%);
+  border-radius: 999px;
+  padding: 0.15rem 0.6rem;
+  white-space: nowrap;
+}
+
+.content {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--ifm-text-color);
+  opacity: 0.92;
+}

@@ -7,16 +7,9 @@ const SUMMARY_URL = '/ai-summaries.json';
 
 type SummaryMap = Record<string, string | undefined>;
 
-let cachePromise: Promise<SummaryMap> | null = null;
-
 function loadSummaries(): Promise<SummaryMap> {
-  if (!cachePromise) {
-    cachePromise = fetch(SUMMARY_URL)
-      .then((r) => (r.ok ? r.json() : {}))
-      .then((d) => (d && d.summaries ? d.summaries : {}))
-      .catch(() => ({}));
-  }
-  return cachePromise;
+  // 加时间戳防止 CDN 缓存旧版
+  return fetch(SUMMARY_URL + '?t=' + Date.now())
 }
 
 export default function AiSummary(): JSX.Element | null {

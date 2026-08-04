@@ -6,7 +6,8 @@ import styles from './shuoshuo.module.css';
 
 // 说说 API（经 blog-admin worker 代理，token 在服务端）
 const MEMOS_PROXY = 'https://admin.oopss.top/api/memos';
-const LIMIT = 20;
+const LIMIT = 10; // 每次从代理拉取条数
+const STEP = 5; // 每次显示条数
 
 type MemoCreator = {
   id?: number;
@@ -118,7 +119,7 @@ export default function Shuoshuo(): JSX.Element {
         setMemos(data.memos || []);
         setPage(1);
         setHasMore(Boolean(data.hasMore));
-        setVisibleCount(Math.min(1, (data.memos || []).length));
+        setVisibleCount(Math.min(STEP, (data.memos || []).length));
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -134,11 +135,11 @@ export default function Shuoshuo(): JSX.Element {
         setMemos((prev) => [...prev, ...(data.memos || [])]);
         setPage(nextPage);
         setHasMore(Boolean(data.hasMore));
-        setVisibleCount((prev) => prev + 1);
+        setVisibleCount((prev) => prev + STEP);
       }
       return;
     }
-    setVisibleCount((prev) => prev + 1);
+    setVisibleCount((prev) => prev + STEP);
   }
 
   const shown = memos.slice(0, visibleCount);

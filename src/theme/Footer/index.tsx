@@ -120,6 +120,22 @@ export default function Footer(): JSX.Element {
               萌ICP备20262621号
             </a>
           </nav>
+          <a
+            className={styles.statusBadge}
+            href="https://status.oopss.top"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="服务状态">
+            <iframe
+              src="https://status.oopss.top/badge?theme=light"
+              width="250"
+              height="30"
+              frameborder="0"
+              scrolling="no"
+              style={{'color-scheme': 'normal'}}
+              title="Uptime Status"
+            />
+          </a>
         </div>
       </div>
     </footer>

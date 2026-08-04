@@ -62,7 +62,6 @@ export default function AiSummary(): JSX.Element | null {
           <path d="M8 13l2 2 4-4" />
         </svg>
         <span className={styles.title}>AI 摘要</span>
-        <span className={styles.model}>GLM-4.7-Flash</span>
       </div>
       <p className={styles.content}>{summary}</p>
     </div>

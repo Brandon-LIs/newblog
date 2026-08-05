@@ -1,0 +1,26 @@
+[
+  {
+    "title": "博客大联盟",
+    "description": "一个属于写作者的博客联盟。慢一点，写长一点，读认真一点。",
+    "website": "https://bo.ke/",
+    "avatar": "https://bo.ke/assets/favicon-32x32.png"
+  },
+  {
+    "title": "宜昌市第一中学",
+    "description": "文脉千年，学在一中。欢迎来到宜昌一中。",
+    "website": "https://www.ycyz.com/",
+    "avatar": "/img/friends/ycyz.ico"
+  },
+  {
+    "title": "西陵金初",
+    "description": "宜昌市西陵区金东方初中官网。",
+    "website": "https://xlcz.jdfschool.com/",
+    "avatar": "/img/friends/jdfschool.svg"
+  },
+  {
+    "title": "Kazuki's Blog",
+    "description": "一名热爱计算机科学与科技创新的高中生。",
+    "website": "https://www.ycxhl.top/",
+    "avatar": "/img/friends/ycxhl.svg"
+  }
+]

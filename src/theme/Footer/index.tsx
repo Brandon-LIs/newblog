@@ -1,4 +1,5 @@
 import Link from '@docusaurus/Link';
+import {useEffect, useState} from 'react';
 import IconExternalLink from '@theme/Icon/ExternalLink';
 import social from '@site/data/social';
 import {siteInfo} from '@site/data/site';
@@ -54,11 +55,6 @@ const utilityLinks: FooterLink[] = [
   },
 ];
 
-const bszScript = {
-  src: 'https://jsd.dusays.com/npm/penndu@17.0.0/bsz.js',
-  defer: true,
-};
-
 const bszStats: Array<{id: string; label: string; icon: string}> = [
   {id: 'busuanzi_site_uv', label: '本站总访客数', icon: 'ri:user-line'},
   {id: 'busuanzi_site_pv', label: '本站总访问量', icon: 'ri:eye-line'},
@@ -80,6 +76,35 @@ function FooterAnchor({link}: {link: FooterLink}) {
 }
 
 function BszStats() {
+  const [counts, setCounts] = useState<Record<string, string>>({});
+
+  useEffect(() => {
+    let cancelled = false;
+    (async () => {
+      try {
+        // 自建不蒜子：POST 到 bsz API，referer 区分站点与文章
+        const res = await fetch('https://bsz.dusays.com:9001/api', {
+          method: 'POST',
+          headers: {'x-bsz-referer': window.location.origin},
+        });
+        const data = await res.json();
+        if (!cancelled && data) {
+          setCounts({
+            busuanzi_site_uv: String(data.site_uv ?? ''),
+            busuanzi_site_pv: String(data.site_pv ?? ''),
+            busuanzi_page_uv: String(data.page_uv ?? ''),
+            busuanzi_page_pv: String(data.page_pv ?? ''),
+          });
+        }
+      } catch {
+        // 统计失败不影响页面
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <div className={styles.bsz} aria-label="访问统计">
       <span className={styles.bszHeading}>📊 访问统计</span>
@@ -125,14 +150,15 @@ function BszStats() {
               )}
             </svg>
             <span className={styles.bszLabel}>{stat.label}</span>
-            <span className={styles.bszValue} id={stat.id} />
+            <span className={styles.bszValue} id={stat.id}>
+              {counts[stat.id]}
+            </span>
             <span className={styles.bszUnit}>
               {stat.id.includes('pv') ? '次' : '人'}
             </span>
           </span>
         ))}
       </span>
-      <script defer src={bszScript.src} />
     </div>
   );
 }

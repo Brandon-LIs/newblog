@@ -5,7 +5,7 @@ import {useEffect, useRef, useState} from 'react';
 import styles from './shuoshuo.module.css';
 
 // 说说 API（经 blog-api worker 代理，token 在服务端）
-const MEMOS_PROXY = 'https://api.oopss.top/api/memos';
+const MEMOS_PROXY = 'https://apis.oopss.top/api/memos';
 const LIMIT = 10; // 每次从代理拉取条数
 const STEP = 5; // 每次显示条数
 

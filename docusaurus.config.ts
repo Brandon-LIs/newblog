@@ -160,6 +160,7 @@ const config: Config = {
         {to: '/docs/intro', label: '笔记', position: 'left'},
         {href: 'https://www.oopss.top', label: '主页', position: 'left'},
         {to: '/friends', label: '友链', position: 'left'},
+        {href: 'https://github.com/Brandon-LIs/newblog/issues/4', label: '订阅', position: 'left'},
         {to: '/about', label: '关于', position: 'left'},
         {
           href: `https://github.com/${GITHUB_USER}`,

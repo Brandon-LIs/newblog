@@ -1,0 +1,60 @@
+name: Notify Blog Update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'blog/**'
+  workflow_dispatch:
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Post comment to issue
+        env:
+          GH_TOKEN: ${{ secrets.SUBSCRIBE_TOKEN }}
+        run: |
+          # 获取变更的博客文件
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'blog/*.md' 'blog/*.mdx' || echo "")
+          if [ -z "$CHANGED" ]; then
+            echo "无博客文件变更，跳过"
+            exit 0
+          fi
+          
+          ISSUE_NUMBER=4
+          
+          echo "$CHANGED" | while read -r FILE; do
+            [ -z "$FILE" ] && continue
+            echo "处理: $FILE"
+            
+            # 提取 front matter
+            TITLE=$(sed -n 's/^title: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            DATE=$(sed -n 's/^date: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            DESC=$(sed -n 's/^description: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            SLUG=$(sed -n 's/^slug: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            [ -z "$SLUG" ] && SLUG=$(basename "$FILE" .md | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//' | sed 's/\.mdx$//')
+            
+            PERMALINK="https://blog.oopss.top/blog/$SLUG"
+            
+            COMMENT="## 🎉 Brandon's Blog 更新啦！\n\n### [$TITLE]($PERMALINK)\n\n> $DESC\n\n📅 $DATE\n\n感谢你的关注 💙\n\n---\n*此通知由 GitHub Actions 自动发布*"
+            
+            # 发布评论
+            curl -s -X POST \
+              -H "Authorization: token $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments" \
+              -d "{\"body\":\"$COMMENT\"}"
+            
+            echo "✅ 已发布评论: $TITLE"
+          done

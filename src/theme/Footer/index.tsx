@@ -87,13 +87,15 @@ function BszStats() {
           method: 'POST',
           headers: {'x-bsz-referer': window.location.origin},
         });
-        const data = await res.json();
-        if (!cancelled && data) {
+        const json = await res.json();
+        // bsz API 返回 {data: {site_uv, site_pv, page_uv, page_pv}, success}
+        const d = json?.data || {};
+        if (!cancelled && d) {
           setCounts({
-            busuanzi_site_uv: String(data.site_uv ?? ''),
-            busuanzi_site_pv: String(data.site_pv ?? ''),
-            busuanzi_page_uv: String(data.page_uv ?? ''),
-            busuanzi_page_pv: String(data.page_pv ?? ''),
+            busuanzi_site_uv: String(d.site_uv ?? ''),
+            busuanzi_site_pv: String(d.site_pv ?? ''),
+            busuanzi_page_uv: String(d.page_uv ?? ''),
+            busuanzi_page_pv: String(d.page_pv ?? ''),
           });
         }
       } catch {

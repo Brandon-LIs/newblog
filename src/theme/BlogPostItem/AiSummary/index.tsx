@@ -3,13 +3,15 @@ import {useEffect, useState} from 'react';
 
 import styles from './styles.module.css';
 
-const SUMMARY_URL = '/ai-summaries.json';
+const SUMMARY_URL = 'https://admin.oopss.top/api/ai-summaries';
 
 type SummaryMap = Record<string, string | undefined>;
 
 function loadSummaries(): Promise<SummaryMap> {
-  // 加时间戳防止 CDN 缓存旧版
-  return fetch(SUMMARY_URL + '?t=' + Date.now())
+  return fetch(SUMMARY_URL)
+    .then((r) => (r.ok ? r.json() : {}))
+    .then((d) => (d && d.summaries ? d.summaries : {}))
+    .catch(() => ({}));
 }
 
 export default function AiSummary(): JSX.Element | null {

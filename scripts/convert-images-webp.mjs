@@ -2,8 +2,8 @@
 // - 下载原图 → cwebp 转换 → 上传 webp 到 blogimg 图床 → 删除原图
 // - 更新博客 markdown 里的图片 URL（jsd.oopss.top/xxx.png|jpg → .webp）
 // 依赖：系统需安装 cwebp（workflow 里 apt-get install -y webp）
-import { readdirSync, readFileSync, writeFileSync, execFileSync } from 'node:fs'
-import { execFileSync as exec } from 'node:child_process'
+import { readdirSync, readFileSync, writeFileSync } from 'node:fs'
+import { execFileSync } from 'node:child_process'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -48,7 +48,7 @@ async function convertImage(url, path) {
   const tmpIn = '/tmp/img_src', tmpOut = '/tmp/img_out.webp'
   writeFileSync(tmpIn, buf)
   try {
-    exec('cwebp', ['-quiet', '-q', '85', tmpIn, '-o', tmpOut])
+    execFileSync('cwebp', ['-quiet', '-q', '85', tmpIn, '-o', tmpOut])
   } catch (e) { console.warn('cwebp 失败', path); return false }
   const webpBuf = readFileSync(tmpOut)
   // 上传 webp

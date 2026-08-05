@@ -226,7 +226,7 @@ export default function Footer(): JSX.Element {
             rel="noopener noreferrer"
             title="服务状态">
             <iframe
-              src="https://status.oopss.top/badge?theme=dark"
+              src="https://status.oopss.top/badge?theme=dark&lang=zh"
               width="250"
               height="30"
               frameborder="0"

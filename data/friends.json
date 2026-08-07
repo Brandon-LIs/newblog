@@ -34,5 +34,11 @@
     "description": "小黄的博客，记录生活中的美好",
     "website": "https://blog.weasel6.cn",
     "avatar": "https://files.seeusercontent.com/2026/06/26/Fo0x/LOGO.webp"
+  },
+  {
+    "title": "xf_blog",
+    "description": "立志用 cloudflare workers，GitHub pages 和 vercel 做出整个互联网的 up（虽然不会成功",
+    "website": "https://husd.cc.cd/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
   }
 ]

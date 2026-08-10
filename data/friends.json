@@ -1,11 +1,5 @@
 [
   {
-    "title": "宜昌市第一中学",
-    "description": "文脉千年，学在一中。欢迎来到宜昌一中。",
-    "website": "https://www.ycyz.com/",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08060002.webp"
-  },
-  {
     "title": "博客大联盟",
     "description": "一个属于写作者的博客联盟。慢一点，写长一点，读认真一点。",
     "website": "https://bo.ke/",
@@ -64,5 +58,11 @@
     "description": "天哲地理，共公卿好",
     "website": "https://iluc.cn",
     "avatar": "https://jsd.oopss.top/uploads/2026/08100002.webp"
+  },
+  {
+    "title": "星河hmの小窝",
+    "description": "人生是開發，不是預設",
+    "website": "https://www.xhehm.com",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100003.webp"
   }
 ]

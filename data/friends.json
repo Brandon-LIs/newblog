@@ -3,13 +3,15 @@
     "title": "UpXuu's blog",
     "description": "逐光而上",
     "website": "https://upxuu.com",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg",
+    "rss": "https://upxuu.com/rss.xml"
   },
   {
     "title": "Liseezn'blog",
     "description": "分享学习，项目，及教程",
     "website": "https://blog.liseezn.top",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp",
+    "rss": "https://blog.liseezn.top/feed/"
   },
   {
     "title": "睿朗的小窝",
@@ -21,37 +23,43 @@
     "title": "黄鼠狼的树洞",
     "description": "小黄的博客，记录生活中的美好",
     "website": "https://blog.weasel6.cn",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp",
+    "rss": "https://blog.weasel6.cn/rss.xml"
   },
   {
     "title": "xf_blog",
     "description": "立志用 cloudflare workers，GitHub pages 和 vercel 做出整个互联网的 up（虽然不会成功",
     "website": "https://husd.cc.cd/",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp",
+    "rss": "https://husd.cc.cd/feed.xml"
   },
   {
     "title": "灵的梦境",
     "description": "愿美梦成真",
     "website": "https://lemonadorable.github.io/",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif",
+    "rss": "https://lemonadorable.github.io/rss.xml"
   },
   {
     "title": "MingBlog",
     "description": "记录日常生活、城市影像、旅行与观察，以及认真看过、读过和听过的作品。",
     "website": "https://mingblog.site/",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp",
+    "rss": "https://mingblog.site/rss.xml"
   },
   {
     "title": "彬红茶日记",
     "description": "我的个人笔记📒",
     "website": "https://note.redcha.cn",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp",
+    "rss": "https://note.redcha.cn/rss.xml"
   },
   {
     "title": "涵哲子居",
     "description": "天哲地理，共公卿好",
     "website": "https://iluc.cn",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08100002.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100002.webp",
+    "rss": "https://iluc.cn/rss.xml"
   },
   {
     "title": "星河hmの小窝",
@@ -63,7 +71,8 @@
     "title": "TT清沫uk",
     "description": "TT清沫ukの博客",
     "website": "https://ttquk.netlify.app",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08100007.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100007.webp",
+    "rss": "https://ttquk.netlify.app/atom.xml"
   },
   {
     "title": "高新炀的小站",

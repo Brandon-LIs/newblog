@@ -53,6 +53,11 @@ const utilityLinks: FooterLink[] = [
     href: `${siteInfo.url}/sitemap.xml`,
     showExternalIcon: false,
   },
+  {
+    label: '隐私政策',
+    to: '/privacy',
+    showExternalIcon: false,
+  },
 ];
 
 const bszStats: Array<{id: string; label: string; icon: string}> = [

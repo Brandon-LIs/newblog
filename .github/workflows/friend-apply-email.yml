@@ -8,6 +8,14 @@ jobs:
   send:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install nodemailer
+        run: npm install nodemailer
+
       - name: Send emails
         env:
           SMTP_USER: liboning2011@vip.qq.com
@@ -15,8 +23,7 @@ jobs:
           ADMIN_EMAIL: bcihal@qq.com
         run: |
           echo '${{ toJson(github.event.client_payload) }}' > /tmp/emails.json
-          npm install -g nodemailer 2>/dev/null
-          node --input-type=commonjs -e '
+          node -e '
           const nodemailer = require("nodemailer");
           const emails = require("/tmp/emails.json");
           (async () => {

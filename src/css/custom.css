@@ -219,10 +219,6 @@ article[itemProp="blogPost"]:hover h3 a {
   border-top: 1px solid var(--ifm-border-color);
 }
 
-.tk-comments .tk-submit {
-  margin-bottom: 1.5rem;
-}
-
 .tk-comments .tk-input {
   border-radius: 0.75rem;
   border: 1px solid var(--ifm-border-color);
@@ -365,9 +361,27 @@ article[itemProp="blogPost"]:hover h3 a {
   border-bottom-color: var(--ifm-color-primary);
 }
 
-.tk-comments .tk-owo-emotion {
-  border-radius: 0.5rem;
-  border: 1px solid var(--ifm-border-color);
+/* 字数统计位置修正 */
+.tk-comments .tk-row.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tk-comments .tk-row.actions .tk-col:last-child {
+  text-align: right;
+  font-size: 0.8rem;
+  color: var(--ifm-secondary-text-color);
+  white-space: nowrap;
+}
+
+/* 工具栏按钮恢复原始样式 */
+.tk-comments .tk-row.actions .tk-col:first-child {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /* 评论暗色模式适配 */

@@ -23,6 +23,12 @@ image: https://jsd.oopss.top/twikoo/08110001.webp
 
 ![友链申请系统](https://jsd.oopss.top/twikoo/08110001.webp)
 
+三个渠道的通知效果：
+
+![邮件通知](https://jsd.oopss.top/uploads/2026/08110004.webp)
+![飞书通知](https://jsd.oopss.top/uploads/2026/08110006.webp)
+![微信公众号通知](https://jsd.oopss.top/uploads/2026/08110005.webp)
+
 如果 24 小时内我没有操作，系统会自动同意。对访客来说，全程无需等待，体验很顺滑。
 
 ## 友链文章聚合
@@ -59,6 +65,6 @@ image: https://jsd.oopss.top/twikoo/08110001.webp
 
 ---
 
-这波更新主要围绕「自动化」和「联动」：让换友链、发说说、看数据这些事都尽量省心。如果你也在折腾博客，欢迎来 [申请友链](https://blog.oopss.top/friends/apply)，或者加个 RSS 订阅，一起把内容串起来。
+这波更新主要围绕「自动化」和「联动」：让换友链、发说说、看数据这些事都尽量省心。如果你也在折腾博客，欢迎来 [申请友链](https://blog.oopss.top/friends/apply)，或者加个 [RSS 订阅](https://blog.oopss.top/rss.xml)，一起把内容串起来。
 
 ![Brandon's Blog](https://cdn.oopss.top/icon.jpg)

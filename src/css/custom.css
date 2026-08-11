@@ -212,6 +212,182 @@ article[itemProp="blogPost"]:hover h3 a {
   margin: 1.5rem 0;
 }
 
+/* ===== Twikoo 评论 - astro-pure 融合 ===== */
+.tk-comments {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ifm-border-color);
+}
+
+.tk-comments .tk-submit {
+  margin-bottom: 1.5rem;
+}
+
+.tk-comments .tk-input {
+  border-radius: 0.75rem;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--blog-item-background-color);
+  color: var(--ifm-text-color);
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  resize: vertical;
+  transition: border-color 0.2s;
+}
+
+.tk-comments .tk-input:focus {
+  border-color: var(--ifm-color-primary);
+  outline: none;
+  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+}
+
+.tk-comments .tk-meta-input {
+  border-radius: 0.5rem;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--blog-item-background-color);
+  color: var(--ifm-text-color);
+  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  transition: border-color 0.2s;
+}
+
+.tk-comments .tk-meta-input:focus {
+  border-color: var(--ifm-color-primary);
+  outline: none;
+}
+
+.tk-comments .tk-submit-action-icon {
+  background: var(--ifm-color-primary) !important;
+  border-radius: 0.75rem !important;
+  font-size: 0.85rem;
+  padding: 0.5rem 1.25rem;
+  transition: all 0.2s;
+}
+
+.tk-comments .tk-submit-action-icon:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.tk-comments .tk-avatar-img {
+  border-radius: 50%;
+  border: 2px solid var(--ifm-border-color);
+}
+
+.tk-comments .tk-nick-link {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.tk-comments .tk-tag {
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.4rem;
+}
+
+.tk-comments .tk-tag-green {
+  background: hsl(142 76% 90%);
+  color: hsl(142 70% 30%);
+}
+
+.tk-comments .tk-tag-blue {
+  background: hsl(200 80% 90%);
+  color: hsl(200 70% 35%);
+}
+
+.tk-comments .tk-action-link {
+  color: var(--ifm-secondary-text-color);
+  font-size: 0.8rem;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.tk-comments .tk-action-link:hover {
+  color: var(--ifm-color-primary);
+}
+
+.tk-comments .tk-time {
+  color: var(--ifm-secondary-text-color);
+  font-size: 0.8rem;
+}
+
+.tk-comments .tk-comment {
+  border-bottom: 1px solid var(--ifm-border-color);
+  padding: 1rem 0;
+}
+
+.tk-comments .tk-content {
+  color: var(--ifm-text-color);
+  font-size: 0.9rem;
+  line-height: 1.7;
+}
+
+.tk-comments .tk-liked {
+  color: #f43f5e;
+}
+
+.tk-comments .tk-pagination-pager {
+  border-radius: 0.5rem;
+  border: 1px solid var(--ifm-border-color);
+  color: var(--ifm-text-color);
+  font-size: 0.85rem;
+  padding: 0.3rem 0.8rem;
+  transition: all 0.2s;
+}
+
+.tk-comments .tk-pagination-pager:hover {
+  border-color: var(--ifm-color-primary);
+  color: var(--ifm-color-primary);
+}
+
+.tk-comments .tk-pagination-pager.active {
+  background: var(--ifm-color-primary);
+  border-color: var(--ifm-color-primary);
+  color: #fff;
+}
+
+.tk-comments .tk-tabs {
+  border-bottom: 1px solid var(--ifm-border-color);
+  margin-bottom: 1rem;
+}
+
+.tk-comments .tk-tab {
+  font-size: 0.85rem;
+  color: var(--ifm-secondary-text-color);
+  padding: 0.5rem 0;
+  margin-right: 1rem;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s;
+}
+
+.tk-comments .tk-tab.active {
+  color: var(--ifm-color-primary);
+  border-bottom-color: var(--ifm-color-primary);
+}
+
+.tk-comments .tk-owo-emotion {
+  border-radius: 0.5rem;
+  border: 1px solid var(--ifm-border-color);
+}
+
+/* 评论暗色模式适配 */
+html[data-theme='dark'] .tk-comments .tk-input,
+html[data-theme='dark'] .tk-comments .tk-meta-input {
+  background: hsl(240 5.9% 13%);
+  border-color: hsl(240 3.7% 22.9%);
+  color: hsl(0 0% 98%);
+}
+
+html[data-theme='dark'] .tk-comments .tk-tag-green {
+  background: hsl(142 50% 20%);
+  color: hsl(142 70% 80%);
+}
+
+html[data-theme='dark'] .tk-comments .tk-tag-blue {
+  background: hsl(200 50% 20%);
+  color: hsl(200 80% 80%);
+}
+
 /* 代码块 */
 .theme-code-block {
   --prism-background-color: #f6f8fa !important;

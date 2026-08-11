@@ -15,17 +15,14 @@ jobs:
 
       - name: Process and send emails
         env:
-          SMTP_USER: liboning2011@vip.qq.com
-          SMTP_PASSWORD: ftmhbcncfbjtcehj
-          ADMIN_EMAIL: bcihal@qq.com
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          ADMIN_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
         run: |
-          # Write payload
           cat > /tmp/payload.json << 'EOFPAYLOAD'
           ${{ toJson(github.event.client_payload) }}
           EOFPAYLOAD
-          # Install nodemailer
           cd /tmp && mkdir -p mailer && cd mailer && npm init -y > /dev/null 2>&1 && npm install nodemailer > /dev/null 2>&1
-          # Write and run script
           cat > /tmp/send.js << 'EOFSCRIPT'
           const nm = require("/tmp/mailer/node_modules/nodemailer");
           const p = JSON.parse(require("fs").readFileSync("/tmp/payload.json","utf8"));

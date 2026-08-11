@@ -12,14 +12,6 @@ authors: [brandon]
 date: 2026-08-11
 image: https://jsd.oopss.top/twikoo/08110001.webp
 ---
----
-slug: blog-updates-2026
-title: 博客最近的那些更新
-authors: [brandon]
-tags: [博客]
-date: 2026-08-11
-image: https://jsd.oopss.top/twikoo/08110001.webp
----
 
 这段时间给博客折腾了不少新东西，从友链申请到自动化通知再到微信联动，越玩越上头。挑几个有意思的分享一下。
 

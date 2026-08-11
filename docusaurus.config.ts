@@ -46,7 +46,7 @@ const config: Config = {
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
   scripts: [
     {
-      src: 'https://apis.oopss.top/script.js',
+      src: 'https://api.oopss.top/script.js',
       async: true,
       defer: true,
       'data-website-id': '1eb5f40d-b5f6-4dbc-8406-9135f77e1368',

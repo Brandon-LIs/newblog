@@ -3,7 +3,7 @@ import {useEffect, useState} from 'react';
 
 import styles from './styles.module.css';
 
-const SUMMARY_URL = 'https://apis.oopss.top/api/ai-summaries';
+const SUMMARY_URL = 'https://api.oopss.top/api/ai-summaries';
 
 type SummaryMap = Record<string, string | undefined>;
 

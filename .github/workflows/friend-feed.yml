@@ -23,14 +23,29 @@ jobs:
       - name: Fetch friend articles
         run: node scripts/fetch-friend-feed.js
 
-      - name: Commit and push
+      - name: Commit and push to newblog
         run: |
           git config user.name "friend-feed-bot"
           git config user.email "friend-feed-bot@users.noreply.github.com"
           git add data/friend-articles.json
           if git diff --cached --quiet; then
-            echo "No changes to commit"
+            echo "No changes to newblog"
           else
+            git commit -m "chore: 更新友链文章"
+            git push
+          fi
+
+      - name: Push to friend-data repo
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Brandon-LIs/friend-data.git /tmp/friend-data
+          cp data/friend-articles.json /tmp/friend-data/
+          cd /tmp/friend-data
+          git config user.name "friend-feed-bot"
+          git config user.email "friend-feed-bot@users.noreply.github.com"
+          if git diff --quiet; then
+            echo "No changes to friend-data"
+          else
+            git add friend-articles.json
             git commit -m "chore: 更新友链文章"
             git push
           fi

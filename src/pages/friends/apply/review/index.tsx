@@ -1,7 +1,7 @@
 import Layout from '@theme/Layout';
 import {useEffect, useState} from 'react';
 
-const QUICKFORM_ALL = 'https://quickform.cn/api/fxchofgbap/all';
+const GET_URL = 'https://api.oopss.top/api/friend-apply/get';
 const APPROVE_URL = 'https://api.oopss.top/api/friend-apply/approve';
 const REJECT_URL = 'https://api.oopss.top/api/friend-apply/reject';
 
@@ -36,12 +36,10 @@ export default function Review(): JSX.Element {
     if (!id) { setLoading(false); setError('缺少申请 ID'); return; }
     (async () => {
       try {
-        const res = await fetch(QUICKFORM_ALL);
+        const res = await fetch(`${GET_URL}?id=${encodeURIComponent(id)}`);
         const data = await res.json();
-        const list = Array.isArray(data) ? data : (data.data || []);
-        const found = list.find((x: App) => x.id === id);
-        if (found) setApp(found);
-        else setError('未找到该申请');
+        if (data.ok && data.app) setApp(data.app);
+        else setError(data.error || '未找到该申请');
       } catch { setError('加载失败'); }
       finally { setLoading(false); }
     })();

@@ -1,0 +1,49 @@
+name: 友链文章抓取
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch friend articles
+        run: node scripts/fetch-friend-feed.js
+
+      - name: Commit and push
+        id: commit
+        run: |
+          git config user.name "friend-feed-bot"
+          git config user.email "friend-feed-bot@users.noreply.github.com"
+          git add data/friend-articles.json
+          if git diff --cached --quiet; then echo "no changes"; echo "has_changes=false" >> $GITHUB_OUTPUT; exit 0; fi
+          git commit -m "chore: 更新友链文章"
+          git pull --rebase origin main || true
+          git push
+          echo "has_changes=true" >> $GITHUB_OUTPUT
+
+      - name: Push to friend-data
+        if: steps.commit.outputs.has_changes == 'true'
+        run: |
+          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Brandon-LIs/friend-data.git /tmp/fd
+          cp data/friend-articles.json /tmp/fd/
+          cd /tmp/fd && git config user.name "bot" && git config user.email "bot@noreply"
+          git add friend-articles.json && git commit -m "update" || true
+          git pull --rebase origin main || true && git push
+
+      - name: Purge jsdelivr
+        if: steps.commit.outputs.has_changes == 'true'
+        run: curl -s "https://purge.jsdelivr.net/gh/Brandon-LIs/friend-data@main/friend-articles.json"

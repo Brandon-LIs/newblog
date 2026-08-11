@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-11T00:50:25.886Z",
-  "count": 45,
+  "updated_at": "2026-08-11T01:32:25.057Z",
+  "count": 50,
   "list": [
     {
       "title": "【投稿?】那些事",
@@ -13,8 +13,8 @@
     },
     {
       "title": "我鬼脑发力是如何找到 BA BWiki 是如何找到如何修改首页内容的",
-      "link": "https://xfcnl.github.io/tech/2026-08-07-post/",
-      "date": "2026-08-09T15:16:14.397Z",
+      "link": "https://xfcnl.github.io/tech/2026-08-08-post/",
+      "date": "2026-08-09T15:16:16.940Z",
       "description": "我在之前和现 BA BWiKi（一下简称Wiki） 的版主 K252 要了管理员权限，成了 Wiki 的管理员 但碍于当时上学，就隔一段时间更新一下情报板块的内容<",
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
@@ -22,8 +22,8 @@
     },
     {
       "title": "博客大更新",
-      "link": "https://xfcnl.github.io/note/2026-08-05-%E5%8D%9A%E5%AE%A2%E5%A4%A7%E6%9B%B4%E6%96%B0/",
-      "date": "2026-08-09T15:16:14.397Z",
+      "link": "https://xfcnl.github.io/note/2026-08-06-%E5%8D%9A%E5%AE%A2%E5%A4%A7%E6%9B%B4%E6%96%B0/",
+      "date": "2026-08-09T15:16:16.940Z",
       "description": "如题",
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
@@ -31,8 +31,8 @@
     },
     {
       "title": "啊？",
-      "link": "https://xfcnl.github.io/note/2026-07-31-%E5%95%8A%EF%BC%9F/",
-      "date": "2026-08-09T15:16:14.397Z",
+      "link": "https://xfcnl.github.io/note/2026-08-01-%E5%95%8A%EF%BC%9F/",
+      "date": "2026-08-09T15:16:16.940Z",
       "description": "xiaofen@xiaofen-desktop:~/Documents/repo/xfcnl.github.io$ n",
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
@@ -40,8 +40,8 @@
     },
     {
       "title": "EdgeOne-Pages-ImgBed，一个网页图床应用",
-      "link": "https://xfcnl.github.io/tech/2026-07-31-EdgeOne-Pages-ImgBed%EF%BC%8C%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5%E5%9B%BE%E5%BA%8A%E5%BA%94%E7%94%A8/",
-      "date": "2026-08-09T15:16:14.397Z",
+      "link": "https://xfcnl.github.io/tech/2026-08-01-EdgeOne-Pages-ImgBed%EF%BC%8C%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5%E5%9B%BE%E5%BA%8A%E5%BA%94%E7%94%A8/",
+      "date": "2026-08-09T15:16:16.940Z",
       "description": "EdgeOne-Pages-ImgBed，一个基于 edgeone pages（现makers）（前端）、edgeone pages edge function（后端）、supabase sql（存储）和 supabase auth（多用户认证）的网页图床应用 <p",
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
@@ -49,8 +49,8 @@
     },
     {
       "title": "让cf worker代理你的GitHub静态资源",
-      "link": "https://xfcnl.github.io/tech/2026-07-27-%E8%AE%A9cf%20worker%E4%BB%A3%E7%90%86%E4%BD%A0%E7%9A%84github%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/",
-      "date": "2026-08-09T15:16:14.397Z",
+      "link": "https://xfcnl.github.io/tech/2026-07-28-%E8%AE%A9cf%20worker%E4%BB%A3%E7%90%86%E4%BD%A0%E7%9A%84github%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/",
+      "date": "2026-08-09T15:16:16.939Z",
       "description": "我在某天做了个适用于 cf worker 的用于代理 GitHub 静态资源的应用 项目地址 <a href=\"#使用",
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
@@ -64,6 +64,15 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
+      "link": "https://blog.liseezn.top/896.html/",
+      "date": "Fri, 07 Aug 2026 13:56:10 +0000",
+      "description": "这是一份面向普通用户的全流程实践指南。不论你是刚接触 Obsidian 的新手，还是想将 AI 能力彻底融入笔 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "8个月的钢笔使用感想",
@@ -102,6 +111,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
+      "title": "烧几亿Token搭完AI工作台SaaS平台，在上线前止损",
+      "link": "https://blog.liseezn.top/883.html/",
+      "date": "Thu, 06 Aug 2026 09:00:12 +0000",
+      "description": "从空仓库到全链路跑通。全程AI辅助开发，前前后后烧掉几亿Token，把一套多职业AI工作台SaaS的核心骨架全 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "把场景拆开，再重新相遇",
       "link": "https://mingblog.site/posts/scene-notes-2026/",
       "date": "Thu, 06 Aug 2026 00:00:00 GMT",
@@ -109,6 +127,24 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "全栈开发Skill矩阵：从前端审美到后端运维，打造完整AI开发流水线",
+      "link": "https://blog.liseezn.top/877.html/",
+      "date": "Wed, 05 Aug 2026 22:00:00 +0000",
+      "description": "上一篇我们聊了前端开发的Skill组合，解决了AI写页面“模板化、审美差”的痛点。但对全栈开发者来说，前端只是 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
+      "title": "全链路AI前端开发Skill指南：从审美到工程，打造无模板感的生产级代码",
+      "link": "https://blog.liseezn.top/872.html/",
+      "date": "Wed, 05 Aug 2026 14:06:37 +0000",
+      "description": "随着 Cursor、Claude Code、Codex、Trae 等AI编码工具成为日常开发的标配，一个越来越 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【公告】关于本站文章更新频率调整的相关说明",
@@ -226,6 +262,15 @@
       "site": "黄鼠狼的树洞",
       "siteUrl": "https://blog.weasel6.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
+    },
+    {
+      "title": "Windows 装机必备软件清单",
+      "link": "https://blog.liseezn.top/812.html/",
+      "date": "Thu, 23 Jul 2026 15:13:29 +0000",
+      "description": "刚给电脑重装完系统，看着干干净净一片空白的桌面，是不是瞬间犯愁，完全不知道该先装什么软件？ 之前每次换电脑、重 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【原创】关于AI的一些思考",

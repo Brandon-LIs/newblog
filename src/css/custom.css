@@ -14,14 +14,14 @@
 
 @layer base {
   :root {
-    --content-background: #fefefe;
-    --ifm-color-primary: #12affa;
-    --ifm-color-primary-dark: #05a1ec;
-    --ifm-color-primary-darker: #0598df;
-    --ifm-color-primary-darkest: #047eb8;
-    --ifm-color-primary-light: #2cb8fb;
-    --ifm-color-primary-lighter: #b0e6ff;
-    --ifm-color-primary-lightest: #d5f1fd;
+    --content-background: #fafafa;
+    --ifm-color-primary: hsl(199deg 80% 55%);
+    --ifm-color-primary-dark: hsl(199deg 78% 48%);
+    --ifm-color-primary-darker: hsl(199deg 76% 44%);
+    --ifm-color-primary-darkest: hsl(199deg 74% 38%);
+    --ifm-color-primary-light: hsl(199deg 82% 62%);
+    --ifm-color-primary-lighter: hsl(199deg 84% 80%);
+    --ifm-color-primary-lightest: hsl(199deg 86% 90%);
     --ifm-code-font-size: 95%;
     --ifm-font-family-base: 'LXGW WenKai', ui-sans-serif, system-ui,
       -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
@@ -29,10 +29,11 @@
     --ifm-heading-font-family: 'LXGW WenKai', ui-sans-serif, system-ui,
       -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 
-    --ifm-navbar-background-color: white;
-    --ifm-navbar-shadow: 0 4px 28px rgb(0 0 0 / 10%);
+    --ifm-navbar-background-color: rgba(250, 250, 250, 0.85);
+    --ifm-navbar-shadow: none;
+    --ifm-navbar-padding-vertical: 0.5rem;
 
-    --ifm-menu-color: #0d203a;
+    --ifm-menu-color: #374151;
 
     /* 代码块 */
     --prism-background-color: #f6f8fa;
@@ -40,26 +41,25 @@
     --ifm-code-padding-vertical: 0.2rem;
 
     /* 文本 */
-    --ifm-text-color: #333;
-    --ifm-secondary-text-color: #555;
+    --ifm-text-color: #1f2937;
+    --ifm-secondary-text-color: #6b7280;
 
     --ifm-container-width: 1024px;
 
-    --ifm-heading-color: hsl(214deg 78% 17%);
-    --ifm-heading-font-weight: 500;
-    --ifm-font-weight-bold: 520;
-    --ifm-border-color: #e5e7eb;
+    --ifm-heading-color: #111827;
+    --ifm-heading-font-weight: 600;
+    --ifm-font-weight-bold: 600;
+    --ifm-border-color: rgba(0, 0, 0, 0.08);
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: linear-gradient(
-      180deg,
-      #f8fafc 0%,
-      #ffffff 100%
-    );
-    --blog-item-shadow: 0 10px 18px #f1f5f9dd, 0 0 10px 0 #e4e4e7dd;
+    --blog-item-background-color: #ffffff;
+    --blog-item-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
+      0 4px 16px rgba(0, 0, 0, 0.04);
     --blog-item-shade: #f4f4f5;
     --blog-post-page-surface: #fbfdff;
     --blog-post-page-background: var(--blog-post-page-surface);
+
+    --ifm-card-border-radius: 1rem;
 
     --site-color-tooltip: #fff;
     --site-color-tooltip-background: #353738;
@@ -70,26 +70,23 @@
   }
 
   html[data-theme='dark'] {
-    --content-background: #18181b;
-    --ifm-color-primary: hsl(214deg 100% 60%);
-    --ifm-color-primary-light: hsl(214deg 100% 75%);
-    --ifm-heading-color: hsl(0deg 0% 100%);
-    --ifm-menu-color: #eceef1;
-    --ifm-text-color: var(--ifm-menu-color);
-    --ifm-secondary-text-color: #eee;
-    --ifm-border-color: #313131;
+    --content-background: #0f1115;
+    --ifm-color-primary: hsl(199deg 80% 60%);
+    --ifm-color-primary-light: hsl(199deg 80% 75%);
+    --ifm-heading-color: hsl(0deg 0% 96%);
+    --ifm-menu-color: #d1d5db;
+    --ifm-text-color: #e5e7eb;
+    --ifm-secondary-text-color: #9ca3af;
+    --ifm-border-color: rgba(255, 255, 255, 0.1);
 
-    --ifm-navbar-background-color: var(--content-background);
+    --ifm-navbar-background-color: rgba(15, 17, 21, 0.85);
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: linear-gradient(
-      180deg,
-      #1f1f22 0%,
-      #18181b 100%
-    );
-    --blog-item-shadow: 0 10px 18px #25374833, 0 0 8px #25374866;
-    --blog-item-shade: #27272a;
-    --blog-post-page-surface: #161719;
+    --blog-item-background-color: #16181d;
+    --blog-item-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
+      0 4px 16px rgba(0, 0, 0, 0.2);
+    --blog-item-shade: #1f2127;
+    --blog-post-page-surface: #121418;
 
     --docusaurus-highlighted-code-line-bg: #4b5563;
   }
@@ -130,6 +127,9 @@ html.blog-post-page #__docusaurus {
 
 .navbar {
   box-shadow: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--ifm-border-color);
 }
 
 .navbar__logo img {
@@ -139,6 +139,82 @@ html.blog-post-page #__docusaurus {
 
 .navbar__item {
   display: inline-flex;
+}
+
+/* 导航栏链接悬停 */
+.navbar__link:hover {
+  color: var(--ifm-color-primary);
+}
+
+/* 文章卡片 - astro-pure 风格 */
+.card-wrapper {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--blog-item-background-color);
+  box-shadow: var(--blog-item-shadow);
+}
+
+.card-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--ifm-color-primary);
+}
+
+/* 博客文章列表项 */
+.blog-list-item {
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  border: 1px solid var(--ifm-border-color);
+  background: var(--blog-item-background-color);
+  box-shadow: var(--blog-item-shadow);
+}
+
+.blog-list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border-color: var(--ifm-color-primary);
+}
+
+/* 博客文章卡片内的标题 */
+.blog-list-item h2,
+.blog-list-item h3 {
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.blog-list-item .title {
+  color: var(--ifm-heading-color);
+  transition: color 0.2s;
+}
+
+.blog-list-item:hover .title {
+  color: var(--ifm-color-primary);
+}
+
+/* 卡片阴影覆盖 */
+.card {
+  border-radius: 1rem;
+  border: 1px solid var(--ifm-border-color);
+  box-shadow: var(--blog-item-shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* 博客详情页 */
+.blog-post-page .markdown {
+  line-height: 1.8;
+}
+
+.blog-post-page .markdown img {
+  border-radius: 0.75rem;
+  margin: 1.5rem 0;
 }
 
 /* 代码块 */

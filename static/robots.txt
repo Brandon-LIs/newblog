@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Sitemap: https://blog.oopss.top/sitemap.xml
+
+# Disallow admin and private paths
+Disallow: /admin/
+Disallow: /api/

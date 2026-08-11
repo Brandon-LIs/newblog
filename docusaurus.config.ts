@@ -9,6 +9,48 @@ const GITHUB_USER = 'Brandon-LIs';
 const config: Config = {
   title: "Brandon's Blog",
   tagline: '我们都有光明的未来',
+
+  headTags: [
+    // 百度站点验证
+    { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-xxx' } },
+    // Google 站点验证
+    { tagName: 'meta', attributes: { name: 'google-site-verification', content: 'xxx' } },
+    // 微软 Bing 站点验证
+    { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'xxx' } },
+    // JSON-LD 结构化数据 - 网站
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'WebSite',
+        name: "Brandon's Blog",
+        url: 'https://blog.oopss.top',
+        description: '一个高中生的个人博客，分享技术与生活',
+        author: {
+          '@type': 'Person',
+          name: 'Brandon',
+          url: 'https://blog.oopss.top/about',
+        },
+      }),
+    },
+    // JSON-LD 结构化数据 - 个人
+    {
+      tagName: 'script',
+      attributes: { type: 'application/ld+json' },
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'Person',
+        name: 'Brandon',
+        alternateName: 'Brandon Li',
+        url: 'https://blog.oopss.top',
+        sameAs: [
+          'https://github.com/Brandon-LIs',
+          'https://space.bilibili.com/3546657819986597',
+        ],
+      }),
+    },
+  ],
   favicon: 'https://cdn.oopss.top/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future

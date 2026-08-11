@@ -52,6 +52,12 @@ const config: Config = {
       'data-website-id': '1eb5f40d-b5f6-4dbc-8406-9135f77e1368',
       'data-host-url': 'https://umami.oopss.top',
     },
+    '/js/view-image.min.js',
+    {
+      src: '/js/view-image-init.js',
+      async: false,
+      defer: false,
+    },
   ],
 
   // 传递给前端组件的自定义配置

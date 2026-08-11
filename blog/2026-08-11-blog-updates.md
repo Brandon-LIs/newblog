@@ -1,5 +1,12 @@
 ---
 slug: blog-updates-2026
+title: 博客近期更新
+authors: [brandon]
+date: 2026-08-11
+image: https://jsd.oopss.top/twikoo/08110001.webp
+---
+---
+slug: blog-updates-2026
 title: 博客最近的那些更新
 authors: [brandon]
 tags: [博客]

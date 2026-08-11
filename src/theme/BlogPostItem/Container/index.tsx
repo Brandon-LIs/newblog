@@ -23,26 +23,21 @@ export default function BlogPostItemContainer({
   const image = hideImage ? undefined : assets.image ?? frontMatter.image ?? autoCover;
   return (
     <article
-      className={cn('relative px-4 pt-4 pb-3 lg:px-4', className)}
+      className={cn('relative px-5 py-6', className)}
       itemProp="blogPost"
       itemScope
       itemType="http://schema.org/BlogPosting">
       {image && (
         <>
           <meta itemProp="image" content={withBaseUrl(image, {absolute: true})} />
-          <div className="absolute inset-0 z-1 h-[224px]">
-            <div
-              className="size-full rounded-[var(--ifm-pagination-nav-border-radius)] bg-cover bg-center bg-no-repeat"
-              style={{
-                WebkitMaskImage:
-                  'linear-gradient(180deg, #fff -17.19%, #00000000 92.43%)',
-                maskImage:
-                  'linear-gradient(180deg, #fff -17.19%, #00000000 92.43%)',
-                backgroundImage: `url("${image}")`,
-              }}
-            />
-          </div>
-          <div style={{height: '120px'}} />
+          <div
+            className="mb-4 h-40 w-full overflow-hidden rounded-xl"
+            style={{
+              backgroundImage: `url("${image}")`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+            }}
+          />
         </>
       )}
       {children}

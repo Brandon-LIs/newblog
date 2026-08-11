@@ -164,50 +164,28 @@ html.blog-post-page #__docusaurus {
 }
 
 /* 文章卡片 - astro-pure 风格 */
-.card-wrapper {
+.card-wrapper,
+article[itemProp="blogPost"] {
   border-radius: 1rem;
-  overflow: hidden;
   transition: all 0.3s ease;
   border: 1px solid var(--ifm-border-color);
   background: var(--blog-item-background-color);
-  box-shadow: var(--blog-item-shadow);
+  box-shadow: none;
 }
 
-.card-wrapper:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  border-color: var(--ifm-color-primary);
+article[itemProp="blogPost"]:hover {
+  border-color: hsl(var(--primary) / 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 }
 
-/* 博客文章列表项 */
-.blog-list-item {
-  border-radius: 1rem;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  border: 1px solid var(--ifm-border-color);
-  background: var(--blog-item-background-color);
-  box-shadow: var(--blog-item-shadow);
-}
-
-.blog-list-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  border-color: var(--ifm-color-primary);
-}
-
-/* 博客文章卡片内的标题 */
-.blog-list-item h2,
-.blog-list-item h3 {
-  font-weight: 600;
-  line-height: 1.4;
-}
-
-.blog-list-item .title {
-  color: var(--ifm-heading-color);
+/* 文章标题悬停变色 */
+article[itemProp="blogPost"] h2 a,
+article[itemProp="blogPost"] h3 a {
   transition: color 0.2s;
 }
 
-.blog-list-item:hover .title {
+article[itemProp="blogPost"]:hover h2 a,
+article[itemProp="blogPost"]:hover h3 a {
   color: var(--ifm-color-primary);
 }
 

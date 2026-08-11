@@ -30,10 +30,11 @@ jobs:
           git add data/friend-articles.json
           if git diff --cached --quiet; then
             echo "No changes to newblog"
-          else
-            git commit -m "chore: 更新友链文章"
-            git push
+            exit 0
           fi
+          git commit -m "chore: 更新友链文章"
+          git pull --rebase origin main || true
+          git push
 
       - name: Push to friend-data repo
         run: |
@@ -44,15 +45,16 @@ jobs:
           git config user.email "friend-feed-bot@users.noreply.github.com"
           if git diff --quiet; then
             echo "No changes to friend-data"
-          else
-            git add friend-articles.json
-            git commit -m "chore: 更新友链文章"
-            git push
+            exit 0
           fi
+          git add friend-articles.json
+          git commit -m "chore: 更新友链文章"
+          git pull --rebase origin main || true
+          git push
 
   health-check:
     runs-on: ubuntu-latest
-    if: github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch'
+    if: false
     steps:
       - name: Checkout
         uses: actions/checkout@v4

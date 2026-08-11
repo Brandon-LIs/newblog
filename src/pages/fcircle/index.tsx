@@ -6,9 +6,8 @@ import {Icon} from '@iconify/react';
 
 const TITLE = '友链文章';
 const DESCRIPTION = '来自好友们的最新博文，持续更新中。';
-const API_URL = 'https://cdn.jsdelivr.net/gh/Brandon-LIs/newblog@main/data/friend-articles.json';
-const API_FALLBACK = 'https://blog-admin.cloud-drive-zc.workers.dev/api/public/friends-feed';
-const REFRESH_URL = 'https://blog-admin.cloud-drive-zc.workers.dev/api/friends-refresh';
+const API_URL = 'https://api.oopss.top/api/friends-feed';
+const REFRESH_URL = 'https://api.oopss.top/api/friends-refresh';
 const PAGE_SIZE = 5;
 
 type Article = {
@@ -56,23 +55,21 @@ export default function FriendCircle(): JSX.Element {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('');
 
-  const loadArticles = useCallback(async () => {
+  const loadArticles = useCallback(async (forceRefresh = false) => {
     setLoading(true);
     setError('');
-    for (const url of [API_URL, API_FALLBACK]) {
-      try {
-        const r = await fetch(url);
-        if (!r.ok) continue;
-        const data = await r.json();
-        setArticles(data.list || []);
-        setCount(data.list?.length || 0);
-        setPage(1);
-        return;
-      } catch {
-        continue;
-      }
+    try {
+      const r = await fetch(API_URL + (forceRefresh ? '?refresh=1' : ''));
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const data = await r.json();
+      setArticles(data.list || []);
+      setCount(data.list?.length || 0);
+      setPage(1);
+    } catch {
+      setError('文章加载失败，请稍后重试');
+    } finally {
+      setLoading(false);
     }
-    setError('文章加载失败，请稍后重试');
   }, []);
 
   useEffect(() => {
@@ -83,17 +80,8 @@ export default function FriendCircle(): JSX.Element {
     setRefreshing(true);
     try {
       await fetch(REFRESH_URL, {method: 'POST'});
-      // 等待片刻后重新加载，改用 fallback 实时接口拿最新数据
       setTimeout(async () => {
-        try {
-          const r = await fetch(API_FALLBACK + '?refresh=1');
-          if (r.ok) {
-            const data = await r.json();
-            setArticles(data.list || []);
-            setCount(data.list?.length || 0);
-            setPage(1);
-          }
-        } catch {}
+        await loadArticles(true);
         setRefreshing(false);
       }, 3000);
     } catch {

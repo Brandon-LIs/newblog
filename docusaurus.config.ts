@@ -11,8 +11,7 @@ const config: Config = {
   tagline: '我们都有光明的未来',
 
   headTags: [
-    // 字体预加载
-    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/22/plus/result.css', rel: 'preload', as: 'style', crossorigin: 'anonymous' } },
+    // 字体加载
     { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/22/plus/result.css', rel: 'stylesheet', crossorigin: 'anonymous' } },
     // DNS 预解析 + 预连接外部资源
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },

@@ -202,9 +202,19 @@ article[itemProp="blogPost"]:hover h3 a {
   transform: translateY(-2px);
 }
 
-/* 博客详情页 */
+/* 博客详情页正文使用 Zhuque Fangsong */
+.blog-post-page .markdown,
+.blog-post-page .markdown p,
+.blog-post-page .markdown li,
+.blog-post-page .markdown blockquote,
+.blog-post-page .markdown td,
+.blog-post-page .markdown th {
+  font-family: 'Zhuque Fangsong (technical preview)', 'LXGW WenKai', serif;
+}
+
 .blog-post-page .markdown {
-  line-height: 1.8;
+  line-height: 2;
+  font-size: 1.05rem;
 }
 
 .blog-post-page .markdown img {

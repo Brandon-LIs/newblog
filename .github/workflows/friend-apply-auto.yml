@@ -1,0 +1,15 @@
+name: 友链申请自动处理
+
+on:
+  schedule:
+    - cron: '*/15 * * * *'
+  workflow_dispatch:
+
+jobs:
+  auto-approve:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto-approve expired applications
+        run: |
+          curl -s "https://api.oopss.top/api/friend-apply/auto" \
+            -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" || true

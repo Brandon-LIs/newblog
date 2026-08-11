@@ -37,3 +37,63 @@ jobs:
             git commit -m "chore: 更新友链文章"
             git push origin main
           fi
+
+  health-check:
+    runs-on: ubuntu-latest
+    if: github.event.schedule == '0 0 * * *' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Health check
+        id: health
+        run: |
+          ERRORS=$(node -e "
+            const fs = require('fs');
+            const friends = JSON.parse(fs.readFileSync('data/friends.json','utf8'));
+            let failed = [];
+            (async () => {
+              for (const f of friends) {
+                try {
+                  const ctrl = new AbortController();
+                  const t = setTimeout(() => ctrl.abort(), 10000);
+                  const r = await fetch(f.website, { signal: ctrl.signal, method: 'HEAD' });
+                  clearTimeout(t);
+                  if (!r.ok && r.status !== 403) failed.push(f.title + ' (' + f.website + ') - HTTP ' + r.status);
+                } catch(e) {
+                  failed.push(f.title + ' (' + f.website + ') - ' + e.message);
+                }
+              }
+              if (failed.length) {
+                console.log('FAILED=' + failed.join(' | '));
+                fs.writeFileSync('/tmp/health-errors.txt', failed.join('\n'));
+                process.exit(1);
+              } else {
+                console.log('All friends healthy');
+              }
+            })();
+          ")
+          echo "errors=$ERRORS" >> $GITHUB_OUTPUT
+
+      - name: Send email on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v4
+        with:
+          server_address: ${{ secrets.SMTP_SERVER }}
+          server_port: ${{ secrets.SMTP_PORT }}
+          username: ${{ secrets.SMTP_USER }}
+          password: ${{ secrets.SMTP_PASSWORD }}
+          subject: '友链健康检查异常'
+          to: ${{ secrets.NOTIFY_EMAIL }}
+          from: ${{ secrets.SMTP_USER }}
+          body: |
+            以下友链无法正常访问：
+            $(cat /tmp/health-errors.txt 2>/dev/null || echo '获取失败详情失败')

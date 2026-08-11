@@ -51,11 +51,21 @@ jobs:
           git commit -m "chore: 更新友链文章" || true
           git pull --rebase origin main || true
           git push
+          echo "pushed=true" >> $GITHUB_OUTPUT
+
+      - name: Purge jsdelivr cache
+        if: steps.commit.outputs.has_changes == 'true'
+        run: |
+          echo "Purge jsdelivr cache..."
+          curl -s -X POST "https://purge.jsdelivr.net/gh/Brandon-LIs/friend-data@main/friend-articles.json" | head -c 200
+          echo ""
 
       - name: Feishu notification on failure
         if: failure()
         env:
           FEISHU_URL: ${{ secrets.FEISHU_WEBHOOK }}
         run: |
-          MSG='{"msg_type":"interactive","card":{"header":{"title":{"tag":"plain_text","content":"⚠️ 友链抓取失败"},"template":"red"},"elements":[{"tag":"markdown","content":"友链文章定时抓取任务执行失败，请检查 GitHub Actions 日志。\n\n[查看详情](https://github.com/Brandon-LIs/newblog/actions)"}]}}'
+          MSG='{"msg_type":"interactive","card":{"header":{"title":{"tag":"plain_text","content":"⚠️ 友链抓取失败"},"template":"red"},"elements":[{"tag":"markdown","content":"友链文章定时抓取任务执行失败，请检查 GitHub Actions 日志。
+
+[查看详情](https://github.com/Brandon-LIs/newblog/actions)"}]}}'
           curl -s -X POST "$FEISHU_URL" -H "Content-Type: application/json" -d "$MSG"

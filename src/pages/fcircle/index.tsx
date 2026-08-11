@@ -1,14 +1,15 @@
 import Layout from '@theme/Layout';
-import {useEffect, useState} from 'react';
+import {useEffect, useCallback, useState} from 'react';
 
 import Link from '@docusaurus/Link';
 import {Icon} from '@iconify/react';
-import {motion} from 'framer-motion';
 
 const TITLE = '友链文章';
 const DESCRIPTION = '来自好友们的最新博文，持续更新中。';
 const API_URL = 'https://cdn.jsdelivr.net/gh/Brandon-LIs/newblog@main/data/friend-articles.json';
 const API_FALLBACK = 'https://blog-admin.cloud-drive-zc.workers.dev/api/public/friends-feed';
+const REFRESH_URL = 'https://blog-admin.cloud-drive-zc.workers.dev/api/friends-refresh';
+const PAGE_SIZE = 5;
 
 type Article = {
   title: string;
@@ -23,7 +24,7 @@ type Article = {
 function formatDate(dateStr: string): string {
   if (!dateStr) return '';
   const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return '';
+  if (isNaN(d.getTime())) return dateStr.slice(0, 10);
   const now = new Date();
   const diff = now.getTime() - d.getTime();
   const days = Math.floor(diff / 86400000);
@@ -47,51 +48,91 @@ function ArticleHeader() {
   );
 }
 
-const ArticleCard = motion.div;
-
 export default function FriendCircle(): JSX.Element {
-  const [articles, setArticles] = useState<Article[] | null>(null);
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [count, setCount] = useState(0);
+  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('');
 
-  useEffect(() => {
-    let cancelled = false;
-    const load = async () => {
-      for (const url of [API_URL, API_FALLBACK]) {
-        try {
-          const r = await fetch(url);
-          if (!r.ok) continue;
-          const data = await r.json();
-          if (cancelled) return;
-          setArticles(data.list || []);
-          return;
-        } catch {
-          // 尝试下一个源
-        }
+  const loadArticles = useCallback(async () => {
+    setLoading(true);
+    setError('');
+    for (const url of [API_URL, API_FALLBACK]) {
+      try {
+        const r = await fetch(url);
+        if (!r.ok) continue;
+        const data = await r.json();
+        setArticles(data.list || []);
+        setCount(data.list?.length || 0);
+        setPage(1);
+        return;
+      } catch {
+        continue;
       }
-      if (!cancelled) setError('文章加载失败，请稍后重试');
-    };
-    load();
-    return () => {
-      cancelled = true;
-    };
+    }
+    setError('文章加载失败，请稍后重试');
   }, []);
+
+  useEffect(() => {
+    loadArticles();
+  }, [loadArticles]);
+
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    try {
+      await fetch(REFRESH_URL, {method: 'POST'});
+      // 等待片刻后重新加载，改用 fallback 实时接口拿最新数据
+      setTimeout(async () => {
+        try {
+          const r = await fetch(API_FALLBACK + '?refresh=1');
+          if (r.ok) {
+            const data = await r.json();
+            setArticles(data.list || []);
+            setCount(data.list?.length || 0);
+            setPage(1);
+          }
+        } catch {}
+        setRefreshing(false);
+      }, 3000);
+    } catch {
+      setRefreshing(false);
+    }
+  };
+
+  const shown = articles.slice(0, page * PAGE_SIZE);
+  const hasMore = shown.length < articles.length;
 
   return (
     <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
       <main className="my-4">
         <ArticleHeader />
 
+        <div className="mx-auto mb-6 flex max-w-5xl items-center justify-between px-4">
+          <span className="text-sm text-[var(--ifm-secondary-text-color)]">
+            {count > 0 ? `共 ${count} 篇文章` : ''}
+          </span>
+          <button
+            onClick={handleRefresh}
+            disabled={refreshing}
+            className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-4 py-2 text-sm font-medium text-[var(--ifm-color-emphasis-700)] no-underline transition-all duration-300 hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
+            <Icon icon={refreshing ? 'ri:loader-4-line' : 'ri:refresh-line'} width="16" height="16" className={refreshing ? 'animate-spin' : ''} />
+            {refreshing ? '刷新中…' : '刷新'}
+          </button>
+        </div>
+
         {error && (
           <p className="text-center text-sm text-[var(--ifm-color-danger)]">{error}</p>
         )}
 
-        {articles === null && !error && (
+        {loading && !error && (
           <div className="mx-auto max-w-3xl px-4 text-center text-sm text-[var(--ifm-secondary-text-color)]">
             加载中…
           </div>
         )}
 
-        {articles && articles.length === 0 && (
+        {!loading && articles.length === 0 && !error && (
           <div className="mx-auto max-w-3xl px-4 py-16 text-center">
             <Icon icon="ri:rss-line" width="48" height="48" className="mx-auto mb-4 text-[var(--ifm-color-emphasis-300)]" />
             <p className="m-0 text-sm text-[var(--ifm-secondary-text-color)]">
@@ -100,25 +141,19 @@ export default function FriendCircle(): JSX.Element {
           </div>
         )}
 
-        {articles && articles.length > 0 && (
-          <div className="mx-auto my-8 max-w-5xl px-4 py-2">
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-              {articles.map((a, i) => (
-                <ArticleCard
+        {!loading && articles.length > 0 && (
+          <div className="mx-auto mb-8 max-w-5xl px-4 py-2">
+            <div className="flex flex-col gap-5">
+              {shown.map((a, i) => (
+                <div
                   key={a.link + i}
-                  initial={{opacity: 0, y: 16}}
-                  animate={{opacity: 1, y: 0}}
-                  transition={{delay: Math.min(i * 0.03, 0.4)}}
-                  className="group relative flex flex-col overflow-hidden rounded-card border border-solid border-[var(--ifm-color-emphasis-200)] bg-card p-5 shadow-[var(--blog-item-shadow)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--ifm-color-primary)]">
-                  <div className="mb-3 flex items-center gap-2.5">
+                  className="group flex flex-col overflow-hidden rounded-card border border-solid border-[var(--ifm-color-emphasis-200)] bg-card p-5 shadow-[var(--blog-item-shadow)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--ifm-color-primary)]">
+                  <div className="mb-2 flex items-center gap-2.5">
                     <img
                       src={a.avatar}
                       alt={a.site}
                       className="size-9 min-w-9 rounded-full object-contain"
-                      onError={(e) => {
-                        const el = e.currentTarget;
-                        el.style.display = 'none';
-                      }}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     />
                     <Link
                       to={a.siteUrl}
@@ -134,7 +169,6 @@ export default function FriendCircle(): JSX.Element {
                   </div>
                   <Link
                     to={a.link}
-                    rel=""
                     target="_blank"
                     className="line-clamp-2 font-semibold text-[var(--ifm-color-emphasis-900)] no-underline transition-colors hover:text-[var(--ifm-color-primary)]">
                     {a.title}
@@ -144,15 +178,25 @@ export default function FriendCircle(): JSX.Element {
                       {a.description}
                     </p>
                   )}
-                  <div className="mt-auto pt-3">
+                  <div className="mt-auto pt-2">
                     <span className="inline-flex items-center gap-1 text-xs text-[var(--ifm-color-primary)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
                       阅读原文
                       <Icon icon="ri:arrow-right-up-line" width="14" height="14" />
                     </span>
                   </div>
-                </ArticleCard>
+                </div>
               ))}
             </div>
+
+            {hasMore && (
+              <div className="mt-8 text-center">
+                <button
+                  onClick={() => setPage((p) => p + 1)}
+                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-6 py-2.5 text-sm font-medium text-[var(--ifm-color-emphasis-700)] no-underline transition-all duration-300 hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
+                  加载更多
+                </button>
+              </div>
+            )}
           </div>
         )}
       </main>

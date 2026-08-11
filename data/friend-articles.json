@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-11T22:32:10.988Z",
-  "count": 50,
+  "updated_at": "2026-08-11T23:30:29.329Z",
+  "count": 45,
   "list": [
     {
       "title": "来自BlogsClub的惊喜：“穿梭”与“拾光”主题鼠标垫开箱",
@@ -84,15 +84,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
     },
     {
-      "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
-      "link": "https://blog.liseezn.top/896.html/",
-      "date": "Fri, 07 Aug 2026 13:56:10 +0000",
-      "description": "这是一份面向普通用户的全流程实践指南。不论你是刚接触 Obsidian 的新手，还是想将 AI 能力彻底融入笔 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
-    },
-    {
       "title": "8个月的钢笔使用感想",
       "link": "https://iluc.cn/posts/2026-08-07-00/",
       "date": "Fri, 07 Aug 2026 00:00:00 GMT",
@@ -129,15 +120,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
-      "title": "烧几亿Token搭完AI工作台SaaS平台，在上线前止损",
-      "link": "https://blog.liseezn.top/883.html/",
-      "date": "Thu, 06 Aug 2026 09:00:12 +0000",
-      "description": "从空仓库到全链路跑通。全程AI辅助开发，前前后后烧掉几亿Token，把一套多职业AI工作台SaaS的核心骨架全 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
-    },
-    {
       "title": "把场景拆开，再重新相遇",
       "link": "https://mingblog.site/posts/scene-notes-2026/",
       "date": "Thu, 06 Aug 2026 00:00:00 GMT",
@@ -145,24 +127,6 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
-    },
-    {
-      "title": "全栈开发Skill矩阵：从前端审美到后端运维，打造完整AI开发流水线",
-      "link": "https://blog.liseezn.top/877.html/",
-      "date": "Wed, 05 Aug 2026 22:00:00 +0000",
-      "description": "上一篇我们聊了前端开发的Skill组合，解决了AI写页面“模板化、审美差”的痛点。但对全栈开发者来说，前端只是 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
-    },
-    {
-      "title": "全链路AI前端开发Skill指南：从审美到工程，打造无模板感的生产级代码",
-      "link": "https://blog.liseezn.top/872.html/",
-      "date": "Wed, 05 Aug 2026 14:06:37 +0000",
-      "description": "随着 Cursor、Claude Code、Codex、Trae 等AI编码工具成为日常开发的标配，一个越来越 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【公告】关于本站文章更新频率调整的相关说明",
@@ -280,15 +244,6 @@
       "site": "黄鼠狼的树洞",
       "siteUrl": "https://blog.weasel6.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
-    },
-    {
-      "title": "Windows 装机必备软件清单",
-      "link": "https://blog.liseezn.top/812.html/",
-      "date": "Thu, 23 Jul 2026 15:13:29 +0000",
-      "description": "刚给电脑重装完系统，看着干干净净一片空白的桌面，是不是瞬间犯愁，完全不知道该先装什么软件？ 之前每次换电脑、重 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【原创】关于AI的一些思考",

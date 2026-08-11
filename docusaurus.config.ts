@@ -152,14 +152,17 @@ const config: Config = {
       title: "Brandon's Blog",
       logo: {
         alt: 'Brandon',
-        src: 'https://q.qlogo.cn/headimg_dl?dst_uin=3970588157&spec=640&img_type=jpg',
+        src: 'https://cdn.oopss.top/icon.jpg',
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},
         {to: '/shuoshuo', label: '说说', position: 'left'},
         {to: '/docs/intro', label: '笔记', position: 'left'},
-        {href: 'https://www.oopss.top', label: '主页', position: 'left'},
-        {to: '/friends', label: '友链', position: 'left'},
+{href: 'https://www.oopss.top', label: '主页', position: 'left'},
+        {type: 'dropdown', label: '友链', position: 'left', items: [
+          {to: '/friends', label: '友情链接'},
+          {to: '/fcircle', label: '友链文章'},
+        ]},
         {href: 'https://github.com/Brandon-LIs/newblog/issues/4', label: '订阅', position: 'left'},
         {to: '/about', label: '关于', position: 'left'},
         {

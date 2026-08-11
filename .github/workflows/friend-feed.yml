@@ -1,0 +1,39 @@
+name: 友链文章定时抓取
+
+on:
+  schedule:
+    - cron: '0 */4 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          token: ${{ secrets.GH_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch friend articles
+        run: node scripts/fetch-friend-feed.js
+
+      - name: Commit and push
+        run: |
+          git config user.name "friend-feed-bot"
+          git config user.email "friend-feed-bot@users.noreply.github.com"
+          git add data/friend-articles.json
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: 更新友链文章 $(date +'%Y-%m-%d %H:%M')"
+            git push origin main
+          fi

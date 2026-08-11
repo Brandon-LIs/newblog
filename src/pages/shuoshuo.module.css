@@ -294,6 +294,8 @@
 
 .shareImg {
   width: 100%;
+  height: auto;
+  display: block;
   border-radius: 12px;
   border: 1px solid var(--ifm-color-emphasis-200);
 }

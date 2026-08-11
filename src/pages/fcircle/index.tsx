@@ -104,6 +104,7 @@ export default function FriendCircle(): JSX.Element {
                       src={a.avatar}
                       alt={a.site}
                       className="size-8 rounded-full object-contain"
+                      loading="lazy"
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     />
                     <div className="min-w-0 flex-1">

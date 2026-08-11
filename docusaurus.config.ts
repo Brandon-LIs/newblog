@@ -11,6 +11,12 @@ const config: Config = {
   tagline: '我们都有光明的未来',
 
   headTags: [
+    // DNS 预解析 + 预连接外部资源
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://api.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://memos.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://cdn.oopss.top' } },
     // 百度站点验证
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-xxx' } },
     // Google 站点验证

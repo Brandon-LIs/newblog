@@ -52,6 +52,9 @@ module.exports = function rehypeImgDim() {
         node.properties.width = d.width
         node.properties.height = d.height
       }
+      // 图片懒加载 + 异步解码
+      node.properties.loading = 'lazy'
+      node.properties.decoding = 'async'
     }
   }
 }

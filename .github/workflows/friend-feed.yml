@@ -24,89 +24,38 @@ jobs:
         run: node scripts/fetch-friend-feed.js
 
       - name: Commit and push to newblog
+        id: commit
         run: |
           git config user.name "friend-feed-bot"
           git config user.email "friend-feed-bot@users.noreply.github.com"
           git add data/friend-articles.json
           if git diff --cached --quiet; then
             echo "No changes to newblog"
+            echo "has_changes=false" >> $GITHUB_OUTPUT
             exit 0
           fi
           git commit -m "chore: 更新友链文章"
           git pull --rebase origin main || true
           git push
+          echo "has_changes=true" >> $GITHUB_OUTPUT
 
       - name: Push to friend-data repo
+        if: steps.commit.outputs.has_changes == 'true'
         run: |
           git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Brandon-LIs/friend-data.git /tmp/friend-data
           cp data/friend-articles.json /tmp/friend-data/
           cd /tmp/friend-data
           git config user.name "friend-feed-bot"
           git config user.email "friend-feed-bot@users.noreply.github.com"
-          if git diff --quiet; then
-            echo "No changes to friend-data"
-            exit 0
-          fi
           git add friend-articles.json
-          git commit -m "chore: 更新友链文章"
+          git commit -m "chore: 更新友链文章" || true
           git pull --rebase origin main || true
           git push
 
-  health-check:
-    runs-on: ubuntu-latest
-    if: false
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - name: Health check
-        id: health
-        continue-on-error: true
+      - name: Feishu notification on failure
+        if: failure()
+        env:
+          FEISHU_URL: ${{ secrets.FEISHU_WEBHOOK }}
         run: |
-          node -e "
-            const fs = require('fs');
-            const friends = JSON.parse(fs.readFileSync('data/friends.json','utf8'));
-            let failed = [];
-            (async () => {
-              for (const f of friends) {
-                try {
-                  const ctrl = new AbortController();
-                  const t = setTimeout(() => ctrl.abort(), 10000);
-                  const r = await fetch(f.website, { signal: ctrl.signal, method: 'HEAD' });
-                  clearTimeout(t);
-                  if (!r.ok && r.status !== 403) failed.push(f.title + ' (' + f.website + ') - HTTP ' + r.status);
-                } catch(e) {
-                  failed.push(f.title + ' (' + f.website + ') - ' + e.message);
-                }
-              }
-              if (failed.length) {
-                const msg = failed.join('\n');
-                require('fs').writeFileSync('/tmp/health-errors.txt', msg);
-                console.log('FAILED:', msg);
-                process.exit(1);
-              } else {
-                console.log('All friends healthy');
-              }
-            })();
-          "
-
-      - name: Send email on failure
-        if: failure() && steps.health.outcome == 'failure'
-        uses: dawidd6/action-send-mail@v4
-        with:
-          server_address: smtp.qq.com
-          server_port: 465
-          username: ${{ secrets.SMTP_USER }}
-          password: ${{ secrets.SMTP_PASSWORD }}
-          subject: '友链健康检查异常'
-          to: ${{ secrets.NOTIFY_EMAIL }}
-          from: ${{ secrets.SMTP_USER }}
-          body: |
-            以下友链无法正常访问：
-
-            $(cat /tmp/health-errors.txt 2>/dev/null || echo '获取失败详情失败')
+          MSG='{"msg_type":"interactive","card":{"header":{"title":{"tag":"plain_text","content":"⚠️ 友链抓取失败"},"template":"red"},"elements":[{"tag":"markdown","content":"友链文章定时抓取任务执行失败，请检查 GitHub Actions 日志。\n\n[查看详情](https://github.com/Brandon-LIs/newblog/actions)"}]}}'
+          curl -s -X POST "$FEISHU_URL" -H "Content-Type: application/json" -d "$MSG"

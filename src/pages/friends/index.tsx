@@ -11,8 +11,7 @@ import styles from './styles.module.css';
 
 const TITLE = '友链';
 const DESCRIPTION = '有很多良友，胜于有很多财富。';
-const APPLY_FORM_URL =
-  'https://ncnc2vf2h0qg.feishu.cn/share/base/form/shrcn01DipwJdAB3ewBokB1aTBh';
+const APPLY_FORM_URL = 'https://blog.oopss.top/friends/apply';
 const APPLY_EMAIL = 'bcihal@qq.com';
 const SITE_INFO = `title: 'Brandon's Blog'
 bio: '一个高中生的个人博客'
@@ -60,7 +59,7 @@ function ApplyNotice() {
         </div>
         <h3 className="mb-2 m-0 text-lg font-medium">申请友链</h3>
         <p className="mb-5 m-0 text-sm leading-6 text-[var(--ifm-secondary-text-color)]">
-          欢迎交换友链！请先填写申请表单，并发送邮件告知，看到后我会尽快添加。
+          欢迎交换友链！请点击下方按钮直接提交申请，系统会自动审核。如有问题可邮件联系。
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
@@ -75,7 +74,7 @@ function ApplyNotice() {
             className="inline-flex items-center gap-1.5 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-5 py-2.5 text-sm font-medium text-[var(--ifm-color-emphasis-700)] no-underline transition-all duration-300 hover:-translate-y-0.5 hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)] hover:no-underline"
             href={'mailto:' + APPLY_EMAIL}>
             <Icon icon="ri:mail-line" width="16" height="16" />
-            邮件联系：{APPLY_EMAIL}
+            有问题发邮件：{APPLY_EMAIL}
           </a>
         </div>
       </div>

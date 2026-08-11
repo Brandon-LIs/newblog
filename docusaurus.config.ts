@@ -12,7 +12,7 @@ const config: Config = {
 
   headTags: [
     // 字体加载
-    { tagName: 'style', innerHTML: '@import url("https://fontsapi.zeoseven.com/79/main/result.css");' },
+    { tagName: 'style', attributes: {}, innerHTML: '@import url("https://fontsapi.zeoseven.com/79/main/result.css");' },
     // DNS 预解析 + 预连接外部资源
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://apis.oopss.top' } },

@@ -36,7 +36,7 @@ function stripHtml(h: string): string {
 // 生成推特风格分享图
 function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
   const W = 800;
-  const H = 560;
+  const H = 720;
   const canvas = document.createElement('canvas');
   canvas.width = W;
   canvas.height = H;
@@ -44,7 +44,11 @@ function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
 
   const avatar = memo.creator?.avatarUrl || 'https://cdn.oopss.top/icon.jpg';
   const name = memo.creator?.nickname || memo.creator?.username || 'Brandon';
-  const text = stripHtml(marked.parse(memo.content || '', {gfm: true, breaks: true}) as string);
+  const html = marked.parse(memo.content || '', {gfm: true, breaks: true}) as string;
+  const text = stripHtml(html);
+  const firstImg = extractFirstImage(html);
+  const memoId = memo.id;
+  const link = memo.link || `https://memos.oopss.top/m/${memoId}`;
   const time = memo.createdTs ? new Date(memo.createdTs * 1000) : new Date();
   const timeStr = `${time.getFullYear()}年${time.getMonth() + 1}月${time.getDate()}日`;
 
@@ -59,30 +63,27 @@ function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
   ctx.fillStyle = '#12affa';
   ctx.fillRect(0, 0, W, 4);
 
-  // 头像
-  return new Promise((resolve) => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.onload = () => {
-      // 圆形头像
+  // 加载头像 + 正文图片 + 二维码
+  return Promise.all([
+    loadImage(avatar),
+    firstImg ? loadImage(firstImg).catch(() => null) : Promise.resolve(null),
+    loadImage(`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(link)}&margin=0`).catch(() => null),
+  ]).then(([avatarImg, contentImg, qrImg]) => {
+    // 圆形头像
+    if (avatarImg) {
       ctx.save();
       ctx.beginPath();
       ctx.arc(64, 110, 40, 0, Math.PI * 2);
       ctx.closePath();
       ctx.clip();
-      ctx.drawImage(img, 24, 70, 80, 80);
+      ctx.drawImage(avatarImg, 24, 70, 80, 80);
       ctx.restore();
       ctx.strokeStyle = '#12affa';
       ctx.lineWidth = 3;
       ctx.beginPath();
       ctx.arc(64, 110, 40, 0, Math.PI * 2);
       ctx.stroke();
-
-      drawContent(ctx, W);
-      resolve(canvas);
-    };
-    img.onerror = () => {
-      // 头像加载失败，画占位圆
+    } else {
       ctx.fillStyle = '#12affa';
       ctx.beginPath();
       ctx.arc(64, 110, 40, 0, Math.PI * 2);
@@ -91,42 +92,62 @@ function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
       ctx.font = 'bold 28px sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('B', 64, 122);
-      drawContent(ctx, W);
-      resolve(canvas);
-    };
-    img.src = avatar;
-  });
+    }
 
-  function drawContent(ctx: CanvasRenderingContext2D, W: number) {
     // 名称
     ctx.fillStyle = '#0f1419';
-    ctx.font = 'bold 24px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
     ctx.textAlign = 'left';
+    ctx.font = 'bold 24px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
     ctx.fillText(name, 120, 100);
 
     // 认证徽章
+    const nameW = ctx.measureText(name).width;
     ctx.fillStyle = '#12affa';
     ctx.beginPath();
-    ctx.arc(120 + ctx.measureText(name).width + 16, 93, 10, 0, Math.PI * 2);
+    ctx.arc(120 + nameW + 16, 93, 10, 0, Math.PI * 2);
     ctx.fill();
     ctx.fillStyle = '#fff';
     ctx.font = 'bold 12px sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText('✓', 120 + ctx.measureText(name).width + 16, 98);
+    ctx.fillText('✓', 120 + nameW + 16, 98);
 
-    // @brandon
+    // @brandon + 时间
     ctx.fillStyle = '#536471';
     ctx.font = '17px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
     ctx.textAlign = 'left';
     ctx.fillText('@brandon', 120, 128);
-
-    // 时间
     ctx.fillText(timeStr, 120, 152);
 
-    // 内容（自动换行）
+    // 正文
+    let textY = 200;
     ctx.fillStyle = '#0f1419';
-    ctx.font = '22px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
-    wrapText(ctx, text, 60, 200, W - 120, 40);
+    ctx.font = '20px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+    textY = wrapText(ctx, text, 60, textY, W - 120, 36);
+
+    // 正文图片
+    if (contentImg) {
+      const imgW = W - 120;
+      const imgH = Math.min(300, (imgW * contentImg.height) / contentImg.width);
+      const imgX = 60;
+      const imgY = textY + 12;
+      ctx.save();
+      ctx.shadowColor = 'rgba(0,0,0,0.08)';
+      ctx.shadowBlur = 12;
+      ctx.shadowOffsetY = 4;
+      ctx.fillStyle = '#fff';
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      roundRect(ctx, imgX, imgY, imgW, imgH, 12);
+      ctx.fill();
+      ctx.stroke();
+      ctx.restore();
+      ctx.save();
+      roundRect(ctx, imgX, imgY, imgW, imgH, 12);
+      ctx.clip();
+      ctx.drawImage(contentImg, imgX, imgY, imgW, imgH);
+      ctx.restore();
+      textY = imgY + imgH;
+    }
 
     // 底部品牌
     ctx.fillStyle = '#12affa';
@@ -135,10 +156,51 @@ function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
     ctx.fillStyle = '#536471';
     ctx.font = '15px sans-serif';
     ctx.fillText('blog.oopss.top', 60, H - 16);
-  }
+
+    // 二维码
+    if (qrImg) {
+      const qrSize = 108;
+      const qrX = W - qrSize - 40;
+      const qrY = H - qrSize - 36;
+      ctx.fillStyle = '#fff';
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      roundRect(ctx, qrX - 6, qrY - 6, qrSize + 12, qrSize + 12, 8);
+      ctx.fill();
+      ctx.stroke();
+      ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+    }
+
+    return canvas;
+  });
 }
 
-function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
+function extractFirstImage(html: string): string | null {
+  const m = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+  return m ? m[1] : null;
+}
+
+function loadImage(src: string): Promise<HTMLImageElement> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('load failed'));
+    img.src = src;
+  });
+}
+
+function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number): number {
   const chars = Array.from(text);
   let line = '';
   let yy = y;
@@ -148,12 +210,16 @@ function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: num
       ctx.fillText(line, x, yy);
       line = ch;
       yy += lineHeight;
-      if (yy > 480) break;
+      if (yy > 360) break;
     } else {
       line = test;
     }
   }
-  if (line && yy <= 480) ctx.fillText(line, x, yy);
+  if (line && yy <= 360) {
+    ctx.fillText(line, x, yy);
+    yy += lineHeight;
+  }
+  return yy;
 }
 
 function MemoPost({memo, onShare}: {memo: Memo; onShare: (memo: Memo) => void}) {

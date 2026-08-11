@@ -219,51 +219,6 @@ article[itemProp="blogPost"]:hover h3 a {
   border-top: 1px solid var(--ifm-border-color);
 }
 
-.tk-comments .tk-input {
-  border-radius: 0.75rem;
-  border: 1px solid var(--ifm-border-color);
-  background: var(--blog-item-background-color);
-  color: var(--ifm-text-color);
-  font-size: 0.9rem;
-  padding: 0.75rem;
-  resize: vertical;
-  transition: border-color 0.2s;
-}
-
-.tk-comments .tk-input:focus {
-  border-color: var(--ifm-color-primary);
-  outline: none;
-  box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
-}
-
-.tk-comments .tk-meta-input {
-  border-radius: 0.5rem;
-  border: 1px solid var(--ifm-border-color);
-  background: var(--blog-item-background-color);
-  color: var(--ifm-text-color);
-  font-size: 0.85rem;
-  padding: 0.5rem 0.75rem;
-  transition: border-color 0.2s;
-}
-
-.tk-comments .tk-meta-input:focus {
-  border-color: var(--ifm-color-primary);
-  outline: none;
-}
-
-.tk-comments .tk-submit-action-icon {
-  background: var(--ifm-color-primary) !important;
-  border-radius: 0.75rem !important;
-  font-size: 0.85rem;
-  padding: 0.5rem 1.25rem;
-  transition: all 0.2s;
-}
-
-.tk-comments .tk-submit-action-icon:hover {
-  opacity: 0.9;
-  transform: translateY(-1px);
-}
-
 .tk-comments .tk-avatar-img {
   border-radius: 50%;
   border: 2px solid var(--ifm-border-color);
@@ -359,37 +314,6 @@ article[itemProp="blogPost"]:hover h3 a {
 .tk-comments .tk-tab.active {
   color: var(--ifm-color-primary);
   border-bottom-color: var(--ifm-color-primary);
-}
-
-/* 字数统计位置修正 */
-.tk-comments .tk-row.actions {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.tk-comments .tk-row.actions .tk-col:last-child {
-  text-align: right;
-  font-size: 0.8rem;
-  color: var(--ifm-secondary-text-color);
-  white-space: nowrap;
-}
-
-/* 工具栏按钮恢复原始样式 */
-.tk-comments .tk-row.actions .tk-col:first-child {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-/* 评论暗色模式适配 */
-html[data-theme='dark'] .tk-comments .tk-input,
-html[data-theme='dark'] .tk-comments .tk-meta-input {
-  background: hsl(240 5.9% 13%);
-  border-color: hsl(240 3.7% 22.9%);
-  color: hsl(0 0% 98%);
 }
 
 html[data-theme='dark'] .tk-comments .tk-tag-green {

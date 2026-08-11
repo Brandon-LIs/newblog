@@ -8,43 +8,24 @@ const TITLE = '友链文章';
 const DESCRIPTION = '来自好友们的最新博文，持续更新中。';
 const API_URL = 'https://friendsdata.oopss.top/friend-articles.json';
 const REFRESH_URL = 'https://api.oopss.top/api/friends-refresh';
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 20;
 
 type Article = {
-  title: string;
-  link: string;
-  date: string;
-  description: string;
-  site: string;
-  siteUrl: string;
-  avatar: string;
+  title: string; link: string; date: string; description: string;
+  site: string; siteUrl: string; avatar: string;
 };
 
-function formatDate(dateStr: string): string {
-  if (!dateStr) return '';
-  const d = new Date(dateStr);
-  if (isNaN(d.getTime())) return dateStr.slice(0, 10);
-  const now = new Date();
-  const diff = now.getTime() - d.getTime();
-  const days = Math.floor(diff / 86400000);
-  if (days < 1) {
-    const hours = Math.floor(diff / 3600000);
-    if (hours < 1) return '刚刚';
-    return hours + ' 小时前';
-  }
-  if (days < 7) return days + ' 天前';
-  if (days < 30) return Math.floor(days / 7) + ' 周前';
-  if (days < 365) return Math.floor(days / 30) + ' 个月前';
-  return Math.floor(days / 365) + ' 年前';
-}
-
-function ArticleHeader() {
-  return (
-    <section className="margin-top--lg margin-bottom--lg text-center">
-      <h1>{TITLE}</h1>
-      <p>{DESCRIPTION}</p>
-    </section>
-  );
+function formatDate(d: string): string {
+  if (!d) return '';
+  const t = new Date(d);
+  if (isNaN(t.getTime())) return d.slice(0, 10);
+  const n = Date.now() - t.getTime();
+  const day = Math.floor(n / 864e5);
+  if (day < 1) { const h = Math.floor(n / 36e5); return h < 1 ? '刚刚' : h + '小时前'; }
+  if (day < 7) return day + '天前';
+  if (day < 30) return Math.floor(day / 7) + '周前';
+  if (day < 365) return Math.floor(day / 30) + '个月前';
+  return Math.floor(day / 365) + '年前';
 }
 
 export default function FriendCircle(): JSX.Element {
@@ -55,38 +36,25 @@ export default function FriendCircle(): JSX.Element {
   const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState('');
 
-  const loadArticles = useCallback(async (forceRefresh = false) => {
-    setLoading(true);
-    setError('');
+  const loadArticles = useCallback(async (f = false) => {
+    setLoading(true); setError('');
     try {
-      const r = await fetch(API_URL + (forceRefresh ? '?refresh=1' : ''));
-      if (!r.ok) throw new Error('HTTP ' + r.status);
+      const r = await fetch(API_URL + (f ? '?refresh=1' : ''));
+      if (!r.ok) throw Error('HTTP ' + r.status);
       const data = await r.json();
-      setArticles(data.list || []);
-      setCount(data.list?.length || 0);
-      setPage(1);
-    } catch {
-      setError('文章加载失败，请稍后重试');
-    } finally {
-      setLoading(false);
-    }
+      setArticles(data.list || []); setCount(data.list?.length || 0); setPage(1);
+    } catch { setError('加载失败，请稍后重试'); }
+    finally { setLoading(false); }
   }, []);
 
-  useEffect(() => {
-    loadArticles();
-  }, [loadArticles]);
+  useEffect(() => { loadArticles(); }, [loadArticles]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
     try {
       await fetch(REFRESH_URL, {method: 'POST'});
-      setTimeout(async () => {
-        await loadArticles(true);
-        setRefreshing(false);
-      }, 3000);
-    } catch {
-      setRefreshing(false);
-    }
+      setTimeout(async () => { await loadArticles(true); setRefreshing(false); }, 3000);
+    } catch { setRefreshing(false); }
   };
 
   const shown = articles.slice(0, page * PAGE_SIZE);
@@ -94,85 +62,64 @@ export default function FriendCircle(): JSX.Element {
 
   return (
     <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
-      <main className="my-4">
-        <ArticleHeader />
-
-        <div className="mx-auto mb-6 flex max-w-5xl items-center justify-between px-4">
-          <span className="text-sm text-[var(--ifm-secondary-text-color)]">
-            {count > 0 ? `共 ${count} 篇文章` : ''}
-          </span>
-          <button
-            onClick={handleRefresh}
-            disabled={refreshing}
-            className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-4 py-2 text-sm font-medium text-[var(--ifm-color-emphasis-700)] no-underline transition-all duration-300 hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
-            <Icon icon={refreshing ? 'ri:loader-4-line' : 'ri:refresh-line'} width="16" height="16" className={refreshing ? 'animate-spin' : ''} />
-            {refreshing ? '刷新中…' : '刷新'}
-          </button>
+      <div className="mx-auto max-w-6xl px-4 py-6">
+        <div className="mb-6 flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold m-0">{TITLE}</h1>
+            <p className="text-sm text-[var(--ifm-secondary-text-color)] m-0 mt-1">{DESCRIPTION}</p>
+          </div>
+          <div className="flex items-center gap-3">
+            {count > 0 && <span className="text-xs text-[var(--ifm-secondary-text-color)]">{count} 篇</span>}
+            <button
+              onClick={handleRefresh} disabled={refreshing}
+              className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-3 py-1.5 text-xs font-medium text-[var(--ifm-color-emphasis-700)] transition-all hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
+              <Icon icon={refreshing ? 'ri:loader-4-line' : 'ri:refresh-line'} width="14" height="14" className={refreshing ? 'animate-spin' : ''} />
+              {refreshing ? '刷新中' : '刷新'}
+            </button>
+          </div>
         </div>
 
-        {error && (
-          <p className="text-center text-sm text-[var(--ifm-color-danger)]">{error}</p>
-        )}
-
-        {loading && !error && (
-          <div className="mx-auto max-w-3xl px-4 text-center text-sm text-[var(--ifm-secondary-text-color)]">
-            加载中…
-          </div>
-        )}
+        {error && <p className="text-center text-sm text-[var(--ifm-color-danger)]">{error}</p>}
+        {loading && !error && <p className="text-center text-sm text-[var(--ifm-secondary-text-color)]">加载中…</p>}
 
         {!loading && articles.length === 0 && !error && (
-          <div className="mx-auto max-w-3xl px-4 py-16 text-center">
+          <div className="py-16 text-center">
             <Icon icon="ri:rss-line" width="48" height="48" className="mx-auto mb-4 text-[var(--ifm-color-emphasis-300)]" />
-            <p className="m-0 text-sm text-[var(--ifm-secondary-text-color)]">
-              暂无友链文章。请先在后台为友链配置 RSS 订阅地址。
-            </p>
+            <p className="m-0 text-sm text-[var(--ifm-secondary-text-color)]">暂无友链文章，请先在后台为友链配置 RSS 订阅地址。</p>
           </div>
         )}
 
         {!loading && articles.length > 0 && (
-          <div className="mx-auto mb-8 max-w-5xl px-4 py-2">
-            <div className="flex flex-col gap-5">
+          <>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
               {shown.map((a, i) => (
-                <div
+                <a
                   key={a.link + i}
-                  className="group flex flex-col overflow-hidden rounded-card border border-solid border-[var(--ifm-color-emphasis-200)] bg-card p-5 shadow-[var(--blog-item-shadow)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--ifm-color-primary)]">
-                  <div className="mb-2 flex items-center gap-2.5">
+                  href={a.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex flex-col rounded-lg border border-solid border-[var(--ifm-color-emphasis-200)] bg-card p-4 no-underline transition-all duration-200 hover:-translate-y-1 hover:border-[var(--ifm-color-primary)] hover:shadow-md">
+                  <div className="flex items-center gap-2.5 mb-3">
                     <img
                       src={a.avatar}
                       alt={a.site}
-                      className="size-9 min-w-9 rounded-full object-contain"
+                      className="size-8 rounded-full object-contain"
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     />
-                    <Link
-                      to={a.siteUrl}
-                      rel=""
-                      className="flex items-center gap-1 text-sm font-medium text-[var(--ifm-color-emphasis-600)] no-underline transition-colors hover:text-[var(--ifm-color-primary)]">
-                      {a.site}
-                    </Link>
-                    {a.date && (
-                      <span className="ml-auto shrink-0 text-xs text-[var(--ifm-color-emphasis-400)]">
-                        {formatDate(a.date)}
-                      </span>
-                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="text-sm font-semibold text-[var(--ifm-color-emphasis-800)] truncate">{a.site}</div>
+                      <div className="text-xs text-[var(--ifm-secondary-text-color)]">{a.date ? formatDate(a.date) : ''}</div>
+                    </div>
                   </div>
-                  <Link
-                    to={a.link}
-                    target="_blank"
-                    className="line-clamp-2 font-semibold text-[var(--ifm-color-emphasis-900)] no-underline transition-colors hover:text-[var(--ifm-color-primary)]">
+                  <div className="text-sm font-semibold text-[var(--ifm-color-emphasis-900)] line-clamp-2 leading-snug group-hover:text-[var(--ifm-color-primary)]">
                     {a.title}
-                  </Link>
+                  </div>
                   {a.description && (
-                    <p className="mt-2 line-clamp-2 m-0 text-sm leading-6 text-[var(--ifm-secondary-text-color)]">
+                    <p className="mt-2 text-xs text-[var(--ifm-secondary-text-color)] line-clamp-2 leading-relaxed m-0">
                       {a.description}
                     </p>
                   )}
-                  <div className="mt-auto pt-2">
-                    <span className="inline-flex items-center gap-1 text-xs text-[var(--ifm-color-primary)] opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                      阅读原文
-                      <Icon icon="ri:arrow-right-up-line" width="14" height="14" />
-                    </span>
-                  </div>
-                </div>
+                </a>
               ))}
             </div>
 
@@ -180,14 +127,14 @@ export default function FriendCircle(): JSX.Element {
               <div className="mt-8 text-center">
                 <button
                   onClick={() => setPage((p) => p + 1)}
-                  className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-6 py-2.5 text-sm font-medium text-[var(--ifm-color-emphasis-700)] no-underline transition-all duration-300 hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
+                  className="cursor-pointer rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-6 py-2 text-sm font-medium text-[var(--ifm-color-emphasis-700)] transition-all hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
                   加载更多
                 </button>
               </div>
             )}
-          </div>
+          </>
         )}
-      </main>
+      </div>
     </Layout>
   );
 }

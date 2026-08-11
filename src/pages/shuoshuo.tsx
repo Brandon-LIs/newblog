@@ -4,7 +4,7 @@ import {useEffect, useRef, useState, useCallback} from 'react';
 
 import styles from './shuoshuo.module.css';
 
-const MEMOS_PROXY = 'https://api.oopss.top/api/memos';
+const MEMOS_PROXY = 'https://apis.oopss.top/api/memos';
 const LIMIT = 10;
 const STEP = 10;
 

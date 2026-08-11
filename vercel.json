@@ -1,4 +1,16 @@
 {
+  "redirects": [
+    {
+      "source": "/rss.xml",
+      "destination": "/blog/rss.xml",
+      "permanent": true
+    },
+    {
+      "source": "/feed.xml",
+      "destination": "/blog/rss.xml",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",

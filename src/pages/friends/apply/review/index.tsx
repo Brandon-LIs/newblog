@@ -1,9 +1,9 @@
 import Layout from '@theme/Layout';
 import {useEffect, useState} from 'react';
 
-const GET_URL = 'https://api.oopss.top/api/friend-apply/get';
-const APPROVE_URL = 'https://api.oopss.top/api/friend-apply/approve';
-const REJECT_URL = 'https://api.oopss.top/api/friend-apply/reject';
+const GET_URL = 'https://apis.oopss.top/api/friend-apply/get';
+const APPROVE_URL = 'https://apis.oopss.top/api/friend-apply/approve';
+const REJECT_URL = 'https://apis.oopss.top/api/friend-apply/reject';
 
 type App = {
   id?: string;

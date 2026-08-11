@@ -5,7 +5,7 @@ import {Icon} from '@iconify/react';
 
 const TITLE = '申请友链';
 const DESCRIPTION = '填写表单，提交后自动审核并通知您结果。';
-const SUBMIT_URL = 'https://api.oopss.top/api/friend-apply';
+const SUBMIT_URL = 'https://apis.oopss.top/api/friend-apply';
 const UPLOAD_URL = 'https://admin.oopss.top/upload';
 
 type FormState = {

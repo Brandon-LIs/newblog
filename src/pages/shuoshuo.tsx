@@ -1,6 +1,6 @@
 import Layout from '@theme/Layout';
 import {marked} from 'marked';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useRef, useState, useCallback} from 'react';
 
 import styles from './shuoshuo.module.css';
 
@@ -22,7 +22,141 @@ function relativeTime(ts?: number): string {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
 
-function MemoPost({memo}: {memo: Memo}) {
+function stripHtml(h: string): string {
+  return String(h || '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+// 生成推特风格分享图
+function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
+  const W = 800;
+  const H = 560;
+  const canvas = document.createElement('canvas');
+  canvas.width = W;
+  canvas.height = H;
+  const ctx = canvas.getContext('2d')!;
+
+  const avatar = memo.creator?.avatarUrl || 'https://cdn.oopss.top/icon.jpg';
+  const name = memo.creator?.nickname || memo.creator?.username || 'Brandon';
+  const text = stripHtml(marked.parse(memo.content || '', {gfm: true, breaks: true}) as string);
+  const time = memo.createdTs ? new Date(memo.createdTs * 1000) : new Date();
+  const timeStr = `${time.getFullYear()}年${time.getMonth() + 1}月${time.getDate()}日`;
+
+  // 背景
+  const bg = ctx.createLinearGradient(0, 0, W, H);
+  bg.addColorStop(0, '#ffffff');
+  bg.addColorStop(1, '#f0f7ff');
+  ctx.fillStyle = bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // 顶部装饰线
+  ctx.fillStyle = '#12affa';
+  ctx.fillRect(0, 0, W, 4);
+
+  // 头像
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => {
+      // 圆形头像
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(64, 110, 40, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(img, 24, 70, 80, 80);
+      ctx.restore();
+      ctx.strokeStyle = '#12affa';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.arc(64, 110, 40, 0, Math.PI * 2);
+      ctx.stroke();
+
+      drawContent(ctx, W);
+      resolve(canvas);
+    };
+    img.onerror = () => {
+      // 头像加载失败，画占位圆
+      ctx.fillStyle = '#12affa';
+      ctx.beginPath();
+      ctx.arc(64, 110, 40, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.fillStyle = '#fff';
+      ctx.font = 'bold 28px sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('B', 64, 122);
+      drawContent(ctx, W);
+      resolve(canvas);
+    };
+    img.src = avatar;
+  });
+
+  function drawContent(ctx: CanvasRenderingContext2D, W: number) {
+    // 名称
+    ctx.fillStyle = '#0f1419';
+    ctx.font = 'bold 24px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText(name, 120, 100);
+
+    // 认证徽章
+    ctx.fillStyle = '#12affa';
+    ctx.beginPath();
+    ctx.arc(120 + ctx.measureText(name).width + 16, 93, 10, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.fillStyle = '#fff';
+    ctx.font = 'bold 12px sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('✓', 120 + ctx.measureText(name).width + 16, 98);
+
+    // @brandon
+    ctx.fillStyle = '#536471';
+    ctx.font = '17px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.textAlign = 'left';
+    ctx.fillText('@brandon', 120, 128);
+
+    // 时间
+    ctx.fillText(timeStr, 120, 152);
+
+    // 内容（自动换行）
+    ctx.fillStyle = '#0f1419';
+    ctx.font = '22px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+    wrapText(ctx, text, 60, 200, W - 120, 40);
+
+    // 底部品牌
+    ctx.fillStyle = '#12affa';
+    ctx.font = 'bold 18px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+    ctx.fillText('Brandon\'s Blog', 60, H - 40);
+    ctx.fillStyle = '#536471';
+    ctx.font = '15px sans-serif';
+    ctx.fillText('blog.oopss.top', 60, H - 16);
+  }
+}
+
+function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: number, maxWidth: number, lineHeight: number) {
+  const chars = Array.from(text);
+  let line = '';
+  let yy = y;
+  for (const ch of chars) {
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      ctx.fillText(line, x, yy);
+      line = ch;
+      yy += lineHeight;
+      if (yy > 480) break;
+    } else {
+      line = test;
+    }
+  }
+  if (line && yy <= 480) ctx.fillText(line, x, yy);
+}
+
+function MemoPost({memo, onShare}: {memo: Memo; onShare: (memo: Memo) => void}) {
   const html = marked.parse(memo.content || '', {gfm: true, breaks: true}) as string;
   const avatar = memo.creator?.avatarUrl || 'https://cdn.oopss.top/icon.jpg';
   const name = memo.creator?.nickname || memo.creator?.username || 'Brandon';
@@ -51,6 +185,9 @@ function MemoPost({memo}: {memo: Memo}) {
           <a href={link} target="_blank" rel="noreferrer" className={styles.postAction}>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
           </a>
+          <button onClick={() => onShare(memo)} className={styles.postAction}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+          </button>
         </div>
       </div>
     </article>
@@ -66,7 +203,30 @@ export default function Shuoshuo(): JSX.Element {
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [shareMemo, setShareMemo] = useState<Memo | null>(null);
+  const [shareImg, setShareImg] = useState<string | null>(null);
+  const [shareLoading, setShareLoading] = useState(false);
   const initialized = useRef(false);
+
+  const handleShare = useCallback((memo: Memo) => {
+    setShareMemo(memo);
+    setShareImg(null);
+    setShareLoading(true);
+    generateShareImage(memo).then((canvas) => {
+      setShareImg(canvas.toDataURL('image/png'));
+      setShareLoading(false);
+    }).catch(() => {
+      setShareLoading(false);
+    });
+  }, []);
+
+  const downloadShare = useCallback(() => {
+    if (!shareImg || !shareMemo) return;
+    const a = document.createElement('a');
+    a.href = shareImg;
+    a.download = `brandon-shuoshuo-${shareMemo.id || Date.now()}.png`;
+    a.click();
+  }, [shareImg, shareMemo]);
 
   async function fetchPage(nextPage: number): Promise<MemosResp | null> {
     setLoading(true);
@@ -140,7 +300,7 @@ export default function Shuoshuo(): JSX.Element {
 
           <div className={styles.stream}>
             {shown.map((memo, i) => (
-              <MemoPost key={memo.id || i} memo={memo} />
+              <MemoPost key={memo.id || i} memo={memo} onShare={handleShare} />
             ))}
           </div>
 
@@ -153,6 +313,29 @@ export default function Shuoshuo(): JSX.Element {
           )}
         </div>
       </div>
+
+      {shareMemo && (
+        <div className={styles.shareModal} onClick={() => setShareMemo(null)}>
+          <div className={styles.shareModalInner} onClick={(e) => e.stopPropagation()}>
+            <div className={styles.shareModalHeader}>
+              <span>生成分享图</span>
+              <button className={styles.shareClose} onClick={() => setShareMemo(null)}>✕</button>
+            </div>
+            {shareLoading ? (
+              <div className={styles.shareLoading}>生成中…</div>
+            ) : shareImg ? (
+              <>
+                <img src={shareImg} alt="分享图" className={styles.shareImg} />
+                <div className={styles.shareActions}>
+                  <button className={styles.shareDownload} onClick={downloadShare}>💾 保存图片</button>
+                </div>
+              </>
+            ) : (
+              <div className={styles.shareLoading}>生成失败</div>
+            )}
+          </div>
+        </div>
+      )}
     </Layout>
   );
 }

@@ -11,8 +11,10 @@ const config: Config = {
   tagline: '我们都有光明的未来',
 
   headTags: [
-    // 字体加载
-    { tagName: 'style', attributes: {}, innerHTML: '@import url("https://fontsapi.zeoseven.com/79/main/result.css");@import url("https://fontsapi.zeoseven.com/7/main/result.css");' },
+    // 字体加载（非阻塞）
+    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/79/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
+    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/7/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
+    { tagName: 'style', attributes: {}, innerHTML: 'body,html{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}.wf-active body,.wf-active html{font-family:"Clear Han Serif",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}' },
     // 搜索引擎验证
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },

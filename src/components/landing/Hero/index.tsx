@@ -68,17 +68,21 @@ function Yiyan() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const switching = useRef(false);
 
-  // 加载 Twikoo 并获取最新 5 条评论
+  // 延迟加载 Twikoo（避免阻塞首屏）
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    if ((window as any).twikoo) {
-      fetchComments();
-      return;
-    }
-    const script = document.createElement('script');
-    script.src = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
-    script.onload = fetchComments;
-    document.head.appendChild(script);
+    const timer = setTimeout(() => {
+      if ((window as any).twikoo) {
+        fetchComments();
+        return;
+      }
+      const script = document.createElement('script');
+      script.src = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
+      script.async = true;
+      script.onload = fetchComments;
+      document.head.appendChild(script);
+    }, 3000);
+    return () => clearTimeout(timer);
   }, []);
 
   async function fetchComments() {

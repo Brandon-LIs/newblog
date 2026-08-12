@@ -30,6 +30,33 @@ jobs:
           XUNFEI_API_KEY: ${{ secrets.XUNFEI_API_KEY }}
         run: node scripts/gen-ai-summaries.mjs
 
+      - name: Submit new posts to Baidu
+        run: |
+          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'blog/*.md' 'blog/*.mdx' || echo "")
+          if [ -z "$CHANGED" ]; then
+            echo "无博客文件变更，跳过百度推送"
+            exit 0
+          fi
+
+          while read -r FILE; do
+            [ -z "$FILE" ] && continue
+            SLUG=$(sed -n 's/^slug: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            [ -z "$SLUG" ] && SLUG=$(basename "$FILE" .md | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//' | sed 's/\.mdx$//')
+            [ -z "$SLUG" ] && continue
+            echo "https://blog.oopss.top/blog/$SLUG" >> /tmp/baidu_urls.txt
+            echo "添加: https://blog.oopss.top/blog/$SLUG"
+          done <<< "$CHANGED"
+
+          if [ ! -s /tmp/baidu_urls.txt ]; then
+            echo "无有效 URL，跳过"
+            exit 0
+          fi
+
+          RESPONSE=$(curl -s -X POST "http://data.zz.baidu.com/urls?site=https://blog.oopss.top&token=nij74RncMLPVNRnq" \
+            -H "Content-Type: text/plain" \
+            --data-binary @/tmp/baidu_urls.txt)
+          echo "百度推送结果: $RESPONSE"
+
       - name: Commit changes
         run: |
           if [ -n "$(git status --porcelain static/ai-summaries.json)" ]; then

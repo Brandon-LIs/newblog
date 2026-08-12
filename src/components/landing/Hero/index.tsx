@@ -80,13 +80,9 @@ function Yiyan() {
       const res = await fetch('https://apis.oopss.top/api/recent-comments', {
         method: 'GET',
       });
-      if (!res.ok) return;
+      if (!res.ok) throw new Error();
       const data = await res.json();
-      if (data && data.length > 0) {
-        setComments(data);
-        setCurrent(Math.floor(Math.random() * data.length));
-        setLoaded(true);
-      }
+      applyComments(data);
     } catch {
       tryFallback();
     }
@@ -105,12 +101,16 @@ function Yiyan() {
         }),
       });
       const json = await res.json();
-      if (json && json.data && json.data.length > 0) {
-        setComments(json.data);
-        setCurrent(Math.floor(Math.random() * json.data.length));
-        setLoaded(true);
-      }
+      applyComments(json.data);
     } catch {}
+  }
+
+  function applyComments(data: any[]) {
+    if (data && data.length > 0) {
+      setComments(data);
+      setCurrent(Math.floor(Math.random() * data.length));
+      setLoaded(true);
+    }
   }
 
   // 检查是否需要滚动
@@ -152,14 +152,10 @@ function Yiyan() {
     };
   }, [loaded, comments.length, scrolling, scrollDur]);
 
-  const shuffle = () => {
-    if (comments.length > 0) {
-      let next = Math.floor(Math.random() * comments.length);
-      while (next === current && comments.length > 1) {
-        next = Math.floor(Math.random() * comments.length);
-      }
-      setCurrent(next);
-    }
+  const shuffle = async () => {
+    // 重新拉取最近评论，避免长期不更新
+    await fetchComments();
+    setLoaded(true);
   };
 
   const display = comments[current] || null;

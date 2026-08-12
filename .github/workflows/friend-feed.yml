@@ -14,6 +14,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -23,7 +25,7 @@ jobs:
       - name: Fetch friend articles
         run: node scripts/fetch-friend-feed.js
 
-      - name: Commit and push
+      - name: Commit and push to newblog
         id: commit
         run: |
           git config user.name "friend-feed-bot"
@@ -38,11 +40,13 @@ jobs:
       - name: Push to friend-data
         if: steps.commit.outputs.has_changes == 'true'
         run: |
-          git clone https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Brandon-LIs/friend-data.git /tmp/fd
+          git clone --depth 1 https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/Brandon-LIs/friend-data.git /tmp/fd
           cp data/friend-articles.json /tmp/fd/
           cd /tmp/fd && git config user.name "bot" && git config user.email "bot@noreply"
-          git add friend-articles.json && git commit -m "update" || true
-          git pull --rebase origin main || true && git push
+          git add friend-articles.json
+          git commit -m "update" || true
+          git pull --rebase origin main || true
+          git push || true
 
       - name: Purge jsdelivr
         if: steps.commit.outputs.has_changes == 'true'

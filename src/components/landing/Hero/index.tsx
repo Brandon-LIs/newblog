@@ -60,7 +60,13 @@ function Yiyan() {
   const [comments, setComments] = useState<Comment[]>([]);
   const [current, setCurrent] = useState(0);
   const [loaded, setLoaded] = useState(false);
+  const [scrolling, setScrolling] = useState(false);
+  const [scrollDist, setScrollDist] = useState('0px');
+  const [scrollDur, setScrollDur] = useState('0s');
+  const textRef = useRef<HTMLSpanElement>(null);
+  const innerRef = useRef<HTMLSpanElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const switching = useRef(false);
 
   // 加载 Twikoo 并获取最新 5 条评论
   useEffect(() => {
@@ -87,21 +93,47 @@ function Yiyan() {
         setCurrent(Math.floor(Math.random() * res.length));
         setLoaded(true);
       }
-    } catch {
-      // fallback
-    }
+    } catch {}
   }
 
-  // 每 5 秒切换
+  // 检查是否需要滚动
+  useEffect(() => {
+    if (!textRef.current || !innerRef.current) return;
+    const outer = textRef.current;
+    const inner = innerRef.current;
+    const over = inner.scrollWidth > outer.clientWidth;
+    if (over && inner.scrollWidth > 0) {
+      const dist = outer.clientWidth - inner.scrollWidth - 20;
+      const speed = 50;
+      const duration = Math.abs(dist) / speed;
+      setScrollDist(dist + 'px');
+      setScrollDur(duration + 's');
+      setScrolling(true);
+    } else {
+      setScrolling(false);
+    }
+  }, [current, comments]);
+
+  // 切换逻辑
   useEffect(() => {
     if (!loaded || comments.length < 2) return;
     timerRef.current = setInterval(() => {
+      if (scrolling) {
+        const dur = parseFloat(scrollDur);
+        if (dur > 5) {
+          // 等滚动完再切换（滚动时间 + 0.5s 缓冲）
+          setTimeout(() => {
+            setCurrent((prev) => (prev + 1) % comments.length);
+          }, dur * 1000 + 500);
+          return;
+        }
+      }
       setCurrent((prev) => (prev + 1) % comments.length);
     }, 5000);
     return () => {
       if (timerRef.current) clearInterval(timerRef.current);
     };
-  }, [loaded, comments.length]);
+  }, [loaded, comments.length, scrolling, scrollDur]);
 
   const shuffle = () => {
     if (comments.length > 0) {
@@ -129,12 +161,15 @@ function Yiyan() {
           href={display.url}
           target="_blank"
           rel="noreferrer"
-          className={styles.yiyanText}
-          style={{textDecoration: 'none', color: 'inherit'}}>
-          {text}
+          className={styles.yiyanText + ' ' + (scrolling ? styles.scrolling : '')}
+          style={scrolling ? {animationDuration: scrollDur, '--scroll-distance': scrollDist} as any : {}}
+          ref={textRef}>
+          <span className={styles.yiyanTextInner} ref={innerRef}>{text}</span>
         </a>
       ) : (
-        <span className={styles.yiyanText}>{text}</span>
+        <span className={styles.yiyanText} ref={textRef}>
+          <span className={styles.yiyanTextInner} ref={innerRef}>{text}</span>
+        </span>
       )}
       <button
         type="button"

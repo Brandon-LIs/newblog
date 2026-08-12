@@ -23,9 +23,25 @@
 }
 
 .yiyanText {
-  @apply truncate;
   max-width: min(24rem, 70vw);
   font-style: italic;
+  white-space: nowrap;
+  overflow: hidden;
+  position: relative;
+}
+
+.yiyanText.scrolling {
+  animation: marquee-scroll linear forwards;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(var(--scroll-distance)); }
+}
+
+.yiyanTextInner {
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .yiyanRefresh {

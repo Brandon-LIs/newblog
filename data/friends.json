@@ -98,14 +98,14 @@
     "title": "Mimosa的小屋",
     "description": "含羞草居住的地方",
     "website": "https://loneapex.cn/",
-    "avatar": "https://loneapex.cn/wp-content/maintain/icon.png",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120006.webp",
     "rss": "https://loneapex.cn/feed"
   },
   {
-    "title": "Sunrise.博客 | Sunrise's blog",
+    "title": "Sunrise.博客",
     "description": "心境自成天地，地狱可化作桃源，天堂也能沦为苦海。",
     "website": "https://wowtang.top",
-    "avatar": "https://wowtang.top/images/avatar.png",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120007.webp",
     "rss": "https://wowtang.top/feed.xml"
   },
   {
@@ -128,5 +128,12 @@
     "website": "https://hehuang.site/",
     "avatar": "https://jsd.oopss.top/uploads/2026/08120004.webp",
     "rss": "https://hehuang.site/index.xml"
+  },
+  {
+    "title": "worable's Blog",
+    "description": "≡ω≡ 嗯对，一名普通的职一牲~",
+    "website": "https://www.worable.top/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120005.webp",
+    "rss": "https://www.worable.top/feed/"
   }
 ]

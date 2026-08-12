@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-12T03:33:31.898Z",
-  "count": 70,
+  "updated_at": "2026-08-12T03:39:44.628Z",
+  "count": 85,
   "list": [
     {
       "title": "【原创】我的高二生活-完整版",
@@ -25,9 +25,9 @@
       "link": "https://wowtang.top/post/Twikoo-comment-management-1.0/",
       "date": "Wed, 12 Aug 2026 00:32:21 +0800",
       "description": "Twikoo 评论管理后台 · 开源版 一个开箱即用的 Twikoo 评论系统管理面板 ，原版UI较简陋，我们提供美观、响应式的后台界面，支持评论审核、配置管理、数据导入导出、深色主题等特性。 无需额外安装 ，仅需一个 HTML 文件即可部署。 Github仓库： https://github.com/wowtang/Twikoo-comment-management 📖 项目简介 本项目是一个",
-      "site": "Sunrise.博客",
+      "site": "Sunrise.博客 | Sunrise's blog",
       "siteUrl": "https://wowtang.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120007.webp"
+      "avatar": "https://wowtang.top/images/avatar.png"
     },
     {
       "title": "来自BlogsClub的惊喜：“穿梭”与“拾光”主题鼠标垫开箱",
@@ -45,7 +45,7 @@
       "description": "去香港。。。是什么感觉。。。",
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120006.webp"
+      "avatar": "https://loneapex.cn/wp-content/maintain/icon.png"
     },
     {
       "title": "【投稿?】那些事",
@@ -120,6 +120,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
     },
     {
+      "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
+      "link": "https://blog.liseezn.top/896.html/",
+      "date": "Fri, 07 Aug 2026 13:56:10 +0000",
+      "description": "这是一份面向普通用户的全流程实践指南。不论你是刚接触 Obsidian 的新手，还是想将 AI 能力彻底融入笔 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "8个月的钢笔使用感想",
       "link": "https://iluc.cn/posts/2026-08-07-00/",
       "date": "Fri, 07 Aug 2026 00:00:00 GMT",
@@ -127,6 +136,15 @@
       "site": "涵哲子居",
       "siteUrl": "https://iluc.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100002.webp"
+    },
+    {
+      "title": "华为jkm-al00（畅享9Plus）线刷降级教程",
+      "link": "https://blog.wudarensheng.top/posts/jkmal00-demotion/",
+      "date": "Fri, 07 Aug 2026 00:00:00 GMT",
+      "description": "老华为手机理论上通用的降级教程",
+      "site": "无大人生",
+      "siteUrl": "https://blog.wudarensheng.top/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
     },
     {
       "title": "从2007到2026，QQ拼音陪伴我的19年",
@@ -156,6 +174,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
+      "title": "烧几亿Token搭完AI工作台SaaS平台，在上线前止损",
+      "link": "https://blog.liseezn.top/883.html/",
+      "date": "Thu, 06 Aug 2026 09:00:12 +0000",
+      "description": "从空仓库到全链路跑通。全程AI辅助开发，前前后后烧掉几亿Token，把一套多职业AI工作台SaaS的核心骨架全 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "把场景拆开，再重新相遇",
       "link": "https://mingblog.site/posts/scene-notes-2026/",
       "date": "Thu, 06 Aug 2026 00:00:00 GMT",
@@ -163,6 +190,24 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "全栈开发Skill矩阵：从前端审美到后端运维，打造完整AI开发流水线",
+      "link": "https://blog.liseezn.top/877.html/",
+      "date": "Wed, 05 Aug 2026 22:00:00 +0000",
+      "description": "上一篇我们聊了前端开发的Skill组合，解决了AI写页面“模板化、审美差”的痛点。但对全栈开发者来说，前端只是 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
+      "title": "全链路AI前端开发Skill指南：从审美到工程，打造无模板感的生产级代码",
+      "link": "https://blog.liseezn.top/872.html/",
+      "date": "Wed, 05 Aug 2026 14:06:37 +0000",
+      "description": "随着 Cursor、Claude Code、Codex、Trae 等AI编码工具成为日常开发的标配，一个越来越 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【公告】关于本站文章更新频率调整的相关说明",
@@ -210,6 +255,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
+      "title": "公式对决小工具",
+      "link": "https://xinyang-gao.github.io/works/公式对决小工具/",
+      "date": "Tue, 04 Aug 2026 00:00:00 GMT",
+      "description": "公式对决游戏的公式化打法？",
+      "site": "高新炀的小站",
+      "siteUrl": "https://gxy.cn.mt",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
+    },
+    {
       "title": "这么多人无证驾驶吗（",
       "link": "https://474029.xyz/posts/ets2-wu-zheng-jia-shi/",
       "date": "Mon, 03 Aug 2026 18:08:00 GMT",
@@ -253,6 +307,15 @@
       "site": "睿朗的小窝",
       "siteUrl": "https://iamcrl.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
+    },
+    {
+      "title": "亿不小心破解了清北道远学习机",
+      "link": "https://blog.wudarensheng.top/posts/fuck-xxdy/",
+      "date": "Thu, 30 Jul 2026 00:00:00 GMT",
+      "description": "这集神了",
+      "site": "无大人生",
+      "siteUrl": "https://blog.wudarensheng.top/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
     },
     {
       "title": "游玩日记·第一期",
@@ -336,13 +399,22 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
     },
     {
+      "title": "Windows 装机必备软件清单",
+      "link": "https://blog.liseezn.top/812.html/",
+      "date": "Thu, 23 Jul 2026 15:13:29 +0000",
+      "description": "刚给电脑重装完系统，看着干干净净一片空白的桌面，是不是瞬间犯愁，完全不知道该先装什么软件？ 之前每次换电脑、重 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "欢呼吧！新的博客",
       "link": "https://loneapex.cn/shuoshuo/%e6%96%b0%e7%9a%84%e5%8d%9a%e5%ae%a2%ef%bc%9f%ef%bc%81",
       "date": "Wed, 22 Jul 2026 11:29:36 +0000",
       "description": "花12小时尝试写了一个轻量化的博客主题。当然，说是“自建”，实际上 98% 的工作还是要归功于伟大的 ChatGPT 小姐和 Claude 先生…… 考虑到把过去四年的数据对接到一个全新的系统，工作量还是蛮大的（→token消耗蛮多的）……...",
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120006.webp"
+      "avatar": "https://loneapex.cn/wp-content/maintain/icon.png"
     },
     {
       "title": "【原创】关于AI的一些思考",
@@ -354,22 +426,13 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
     },
     {
-      "title": "Google Frp &#124; 手机被Google FRP 锁了，如何解锁？",
-      "link": "https://www.worable.top/archives/frp-unlock/",
-      "date": "Tue, 21 Jul 2026 12:44:46 +0000",
-      "description": "前言 Factory Reset Protection（FRP，恢复出厂设置保护）&#160;是安卓系统内置的 [&#8230;] Google Frp | 手机被Google FRP 锁了，如何解锁？ 最先出现在 worable&#039;s Blog 。",
-      "site": "worable's Blog",
-      "siteUrl": "https://www.worable.top/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120005.webp"
-    },
-    {
       "title": "「工具推荐」TRAE：字节跳动自研AI原生IDE编程软件（非广告）",
       "link": "https://wowtang.top/post/ToolRec_trae1/",
       "date": "Tue, 21 Jul 2026 20:32:51 +0800",
       "description": "絮絮叨叨 这个中考完的暑假，终于有时间来da&rsquo;li（搭理、打理、……）我的博客网站。 这个网站除了每年的“定时闹钟”「Good bye！YYYY」外，似乎已经“荒废”很久了，我一直以来的博客梦早已被学业、人际死死压在底下。如果不是雨云与西数多次发来域名续费提醒，我的域名早就过期失效，整个站点也会彻底从互联网里消失。 前两天静下心打理博客时才恍然发现，我一直使用的原版Gridea框架，已",
-      "site": "Sunrise.博客",
+      "site": "Sunrise.博客 | Sunrise's blog",
       "siteUrl": "https://wowtang.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120007.webp"
+      "avatar": "https://wowtang.top/images/avatar.png"
     },
     {
       "title": "解放@初三毕业后的闲杂日记",
@@ -412,36 +475,27 @@
       "link": "https://wowtang.top/post/talking_202607/",
       "date": "Sun, 19 Jul 2026 23:02:42 +0800",
       "description": "中考出分那天，我正躺在医院病房里，看着手机屏幕，我不知如何面对出分短信。 曾经的一模、二模、很长一段时间里，我稳居班级前列，大大小小的考试稳居上游，我自己也早早规划好了高一的学习节奏、选课方向，甚至畅想过重点班里浓厚的学习氛围。我把那所理想高中当成了必然的归宿，以为一路稳步往前走，就不会有意外。 可这次中考，我狠狠摔了一跤。发挥失常，各科分数都远低于日常模拟水准，特别是理科，排名断崖式下滑。最终收",
-      "site": "Sunrise.博客",
+      "site": "Sunrise.博客 | Sunrise's blog",
       "siteUrl": "https://wowtang.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120007.webp"
+      "avatar": "https://wowtang.top/images/avatar.png"
     },
     {
       "title": "浅谈：一些关于今年华语辩论世界杯的看法",
       "link": "https://wowtang.top/post/2026CDWC_talk1/",
       "date": "Sun, 19 Jul 2026 12:25:05 +0800",
       "description": "引言 看了今年的2026CDWC，心生一些想法，和大家谈谈 纯业外人士个人看法，如意见不同，敬请谅解！（求放过） 高校锐评 1. 清北 最典型“正确但无聊”。全程套理论、堆框架、堆学术名词，四平八稳不敢冒险。打青年情绪题完全脱离普通人生活，高高在上、悬浮感极强。优点稳，缺点毫无灵气、毫无共情、毫无记忆点，赢比赛靠资历分，不靠观点赢人。 2. 人大 模板化最严重的学校。任何辩题最后都强行扯社会结构、",
-      "site": "Sunrise.博客",
+      "site": "Sunrise.博客 | Sunrise's blog",
       "siteUrl": "https://wowtang.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120007.webp"
+      "avatar": "https://wowtang.top/images/avatar.png"
     },
     {
-      "title": "CSS &#124; 实现无缝渐变模糊效果（类似 macOS / HyperOS）",
-      "link": "https://www.worable.top/archives/css-gradient-blur-effect-with-backdrop-filter-and-mask-image/",
-      "date": "Fri, 10 Jul 2026 09:30:57 +0000",
-      "description": "我的想法 我想实现类似下面这两张图的无边界渐变模糊效果： 然而，今天在逛一个网站时偶然看到了这种完美的效果！ [&#8230;] CSS | 实现无缝渐变模糊效果（类似 macOS / HyperOS） 最先出现在 worable&#039;s Blog 。",
-      "site": "worable's Blog",
-      "siteUrl": "https://www.worable.top/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120005.webp"
-    },
-    {
-      "title": "Cloudflare &#124; IP优选踩坑记录",
-      "link": "https://www.worable.top/archives/cloudflare-ip-optimization-wordpress-tutorial/",
-      "date": "Thu, 09 Jul 2026 18:44:30 +0000",
-      "description": "本文参考：@二叉树树/试试Cloudflare IP优选！让Cloudflare在国内再也不是减速器！。 本文 [&#8230;] Cloudflare | IP优选踩坑记录 最先出现在 worable&#039;s Blog 。",
-      "site": "worable's Blog",
-      "siteUrl": "https://www.worable.top/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120005.webp"
+      "title": "白嫖DigitalPlat的免费域名x3！",
+      "link": "https://blog.wudarensheng.top/posts/digitalplat-free-domain/",
+      "date": "Fri, 10 Jul 2026 00:00:00 GMT",
+      "description": "白嫖qzz.io，dpdns.org，qd.je三个后缀的免费域名，支持Cloudflare",
+      "site": "无大人生",
+      "siteUrl": "https://blog.wudarensheng.top/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
     },
     {
       "title": "针对于Win用户与Linux用户的战争问题",
@@ -495,7 +549,7 @@
       "description": "不知道为何，用 YesPlayMusic 搭建的网易云第三方播放站 music.loneapex.cn，本来稳稳跑了两年，这几天遭遇了大规模的请求。 日均请求量超过 350 万，日流量近 60G。即便一直开着 CDN，服务器还是比较吃力。网...",
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120006.webp"
+      "avatar": "https://loneapex.cn/wp-content/maintain/icon.png"
     },
     {
       "title": "一些生活流水账——401厂、纪念品、蛙教练、美食",
@@ -516,31 +570,22 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
     },
     {
-      "title": "BewlyCat Safari &#124; 构建并安装 BewlyCat Safari 浏览器插件",
-      "link": "https://www.worable.top/archives/build-bewlycat-safari-extension-tutorial/",
-      "date": "Thu, 04 Jun 2026 16:17:37 +0000",
-      "description": "本教程详细介绍了如何手动构建并安装 BewlyCat（一款 Bilibili 美化浏览器扩展）的 Safari 版本。由于官方未提供 Safari 包，需使用第三方维护的 BewlyCat-Safari 仓库。步骤包括：克隆仓库、在 Safari 中开启“允许未签名扩展”、通过终端配置 Node.js 与 pnpm 环境、安装依赖、执行构建与转换命令生成 Xcode 项目，最后在 Xcode 中运",
-      "site": "worable's Blog",
-      "siteUrl": "https://www.worable.top/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120005.webp"
-    },
-    {
       "title": "『anemoi』初回限定版 开箱",
       "link": "https://loneapex.cn/archives/5656",
       "date": "Thu, 21 May 2026 16:04:00 +0000",
       "description": "我闻到了，风的味道（）",
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120006.webp"
+      "avatar": "https://loneapex.cn/wp-content/maintain/icon.png"
     },
     {
-      "title": "Claude Code &#124; DeepSeek 接入全攻略：从环境配置到缓存优化，一步不落",
-      "link": "https://www.worable.top/archives/claude-codewith-deepseek-api-setup/",
-      "date": "Wed, 20 May 2026 03:07:03 +0000",
-      "description": "Claude Code 是一个运行在终端内的 AI 编程助手，优势就是太好用了... DeepSeek 是性价 [&#8230;] Claude Code | DeepSeek 接入全攻略：从环境配置到缓存优化，一步不落 最先出现在 worable&#039;s Blog 。",
-      "site": "worable's Blog",
-      "siteUrl": "https://www.worable.top/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120005.webp"
+      "title": "WTF！小米MiMo送百万亿Token!",
+      "link": "https://blog.wudarensheng.top/posts/xiaomi-mimo-free-api/",
+      "date": "Sun, 03 May 2026 00:00:00 GMT",
+      "description": "小米送免费AI Api了！",
+      "site": "无大人生",
+      "siteUrl": "https://blog.wudarensheng.top/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
     },
     {
       "title": "「近步报告」#13：踏青、Nano以及“暑假的过法“",
@@ -549,7 +594,7 @@
       "description": "春天……不对，已经夏天了。",
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120006.webp"
+      "avatar": "https://loneapex.cn/wp-content/maintain/icon.png"
     },
     {
       "title": "TheRustBook笔记",
@@ -561,6 +606,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
     },
     {
+      "title": "教你让机顶盒用上三方软件并联网！",
+      "link": "https://blog.wudarensheng.top/posts/tv-box-bilibili/",
+      "date": "Fri, 01 May 2026 00:00:00 GMT",
+      "description": "耗时一年，从改包名到换端口，我让机顶盒完美运行云视听小电视",
+      "site": "无大人生",
+      "siteUrl": "https://blog.wudarensheng.top/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
+    },
+    {
       "title": "服务器“炸毁”😭😡无地自容",
       "link": "https://note.redcha.cn/archives/fu-wu-qi-zha-hui-wu-di-zi-rong",
       "date": "Sun, 22 Mar 2026 08:14:01 GMT",
@@ -570,6 +624,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
     },
     {
+      "title": "从一株小草开始",
+      "link": "https://xinyang-gao.github.io/articles/从一株小草开始.html",
+      "date": "Wed, 18 Mar 2026 00:00:00 GMT",
+      "description": "记叙体育课一千米测试时，一株从水泥与假草缝隙中钻出的真草，给了我坚持跑完全程的勇气。",
+      "site": "高新炀的小站",
+      "siteUrl": "https://gxy.cn.mt",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
+    },
+    {
       "title": "2026！新年快乐！",
       "link": "https://note.redcha.cn/archives/2026-xin-nian-kuai-le",
       "date": "Mon, 16 Feb 2026 16:00:00 GMT",
@@ -577,6 +640,42 @@
       "site": "彬红茶日记",
       "siteUrl": "https://note.redcha.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
+    },
+    {
+      "title": "就这样走过二〇二五",
+      "link": "https://xinyang-gao.github.io/articles/就这样走过2025.html",
+      "date": "Tue, 10 Feb 2026 00:00:00 GMT",
+      "description": "一次诗歌尝试",
+      "site": "高新炀的小站",
+      "siteUrl": "https://gxy.cn.mt",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
+    },
+    {
+      "title": "有端",
+      "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
+      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
+      "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "无端",
+      "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
+      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
+      "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "奇技淫巧之高中多选题拿分策略",
+      "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
+      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
+      "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
     },
     {
       "title": "初中首秋游：长隆妙妙屋&最后一次元旦晚会",
@@ -597,6 +696,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
     },
     {
+      "title": "怀念",
+      "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
+      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
+      "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
       "title": "Astro Theme Iris：打造个人知识管理系统",
       "link": "https://lemonadorable.github.io/blog/astro-theme-iris",
       "date": "Fri, 02 Jan 2026 00:00:00 GMT",
@@ -610,9 +718,36 @@
       "link": "https://wowtang.top/post/goodbye2025/",
       "date": "Thu, 01 Jan 2026 00:00:00 +0800",
       "description": "岁序更替，华章日新；凡是过往，皆为序章。愿今年所有的遗憾，都是明年惊喜的铺垫。2026，愿生活温暖顺遂，所求皆如愿，所行化坦途。",
-      "site": "Sunrise.博客",
+      "site": "Sunrise.博客 | Sunrise's blog",
       "siteUrl": "https://wowtang.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120007.webp"
+      "avatar": "https://wowtang.top/images/avatar.png"
+    },
+    {
+      "title": "年前",
+      "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
+      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
+      "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "马生复宋濂书",
+      "link": "https://xinyang-gao.github.io/articles/马生复宋濂书.html",
+      "date": "Tue, 09 Dec 2025 00:00:00 GMT",
+      "description": "模仿《送东阳马生序》中马生的口吻，以文言文回信宋濂。表达对先生勤学精神的敬佩，反省自身优越条件，承诺以圣贤之道为归，不负教诲。",
+      "site": "高新炀的小站",
+      "siteUrl": "https://gxy.cn.mt",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
+    },
+    {
+      "title": "朗诵音乐",
+      "link": "https://xinyang-gao.github.io/works/朗诵音乐/",
+      "date": "Wed, 22 Oct 2025 00:00:00 GMT",
+      "description": "一次语文朗诵比赛需要的朗诵背景，包含两个页面",
+      "site": "高新炀的小站",
+      "siteUrl": "https://gxy.cn.mt",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
       "title": "LaTeX使用中的一些坑",

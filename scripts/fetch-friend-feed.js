@@ -67,6 +67,8 @@ function parseRss(xml) {
   return items;
 }
 
+const PROXY_URL = 'https://apis.oopss.top/api/proxy-fetch?url=';
+
 async function fetchWithTimeout(url) {
   const ctrl = new AbortController();
   const t = setTimeout(() => ctrl.abort(), TIMEOUT_MS);
@@ -83,11 +85,34 @@ async function fetchWithTimeout(url) {
   }
 }
 
+async function fetchWithFallback(url) {
+  try {
+    return await fetchWithTimeout(url);
+  } catch (e) {
+    if (e.message && e.message.includes('HTTP 403')) {
+      console.log(`[proxy] ${url} 返回 403，尝试通过代理...`);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 15000);
+      try {
+        const r = await fetch(PROXY_URL + encodeURIComponent(url), {
+          signal: ctrl.signal,
+          headers: {'User-Agent': 'Mozilla/5.0'},
+        });
+        if (!r.ok) throw new Error('代理返回 ' + r.status);
+        return await r.text();
+      } finally {
+        clearTimeout(t);
+      }
+    }
+    throw e;
+  }
+}
+
 async function fetchFriendFeed(friend) {
   const rss = friend.rss;
   if (!rss) return [];
   try {
-    const xml = await fetchWithTimeout(rss);
+    const xml = await fetchWithFallback(rss);
     const items = parseRss(xml);
     return items.slice(0, MAX_PER_SITE).map((it) => ({
       ...it,

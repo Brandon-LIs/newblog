@@ -48,6 +48,13 @@ jobs:
           git pull --rebase origin main || true
           git push || true
 
+      - name: Deploy to Cloudflare Pages
+        if: steps.commit.outputs.has_changes == 'true'
+        run: |
+          mkdir -p /tmp/pages-deploy
+          cp data/friend-articles.json /tmp/pages-deploy/
+          npx wrangler pages deploy /tmp/pages-deploy --project-name friend-data --branch main || true
+
       - name: Purge jsdelivr
         if: steps.commit.outputs.has_changes == 'true'
         run: curl -s "https://purge.jsdelivr.net/gh/Brandon-LIs/friend-data@main/friend-articles.json"

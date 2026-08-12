@@ -16,6 +16,7 @@ const config: Config = {
     // 搜索引擎验证
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
+    { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
     // DNS 预解析 + 预连接外部资源
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://apis.oopss.top' } },

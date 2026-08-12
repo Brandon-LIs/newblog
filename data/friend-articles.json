@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-12T14:14:14.056Z",
-  "count": 80,
+  "updated_at": "2026-08-12T15:27:26.215Z",
+  "count": 85,
   "list": [
     {
       "title": "ESP32 / ESP8266 物联网开发环境配置指南",
@@ -534,6 +534,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100002.webp"
     },
     {
+      "title": "浅谈计算机教育中缺失的一课&学习笔记",
+      "link": "https://619.pp.ua/article/missing-semester-notes",
+      "date": "Mon, 06 Jul 2026 00:00:00 GMT",
+      "description": "觉得有必要的课一直没听，那就趁着这段时间好好听一听吧",
+      "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
+      "siteUrl": "https://66619.eu.org",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
+    },
+    {
       "title": "初中最后的地生",
       "link": "https://iluc.cn/posts/2026-06-26-00/",
       "date": "Fri, 26 Jun 2026 00:00:00 GMT",
@@ -651,6 +660,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
+      "title": "重生之我是蒟蒻打CTF-misc",
+      "link": "https://619.pp.ua/article/ctf-personal-writeups-misc",
+      "date": "Mon, 26 Jan 2026 00:00:00 GMT",
+      "description": "CTF-misc-writeup，或者说，随手记记",
+      "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
+      "siteUrl": "https://66619.eu.org",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
+    },
+    {
       "title": "初中首秋游：长隆妙妙屋&最后一次元旦晚会",
       "link": "https://note.redcha.cn/archives/chu-zhong-shou-qiu-you-chang-long-miao-miao-wu-zui-hou-yi-ci-yuan-dan-wan-hui",
       "date": "Sat, 10 Jan 2026 11:53:00 GMT",
@@ -696,6 +714,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
+      "title": "“Abord”的开发碎碎念",
+      "link": "https://619.pp.ua/article/aboard",
+      "date": "Sun, 16 Nov 2025 00:00:00 GMT",
+      "description": "有关Aboard的一切想说的……….",
+      "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
+      "siteUrl": "https://66619.eu.org",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
+    },
+    {
       "title": "朗诵音乐",
       "link": "https://xinyang-gao.github.io/works/朗诵音乐/",
       "date": "Wed, 22 Oct 2025 00:00:00 GMT",
@@ -703,6 +730,24 @@
       "site": "高新炀的小站",
       "siteUrl": "https://gxy.cn.mt",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
+    },
+    {
+      "title": "I want you never to forget me…",
+      "link": "https://619.pp.ua/article/heroes",
+      "date": "Wed, 27 Aug 2025 00:00:00 GMT",
+      "description": "只是当时已惘然",
+      "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
+      "siteUrl": "https://66619.eu.org",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
+    },
+    {
+      "title": "看旁门左道PPT的随手笔记",
+      "link": "https://619.pp.ua/article/ppt-works",
+      "date": "Wed, 27 Aug 2025 00:00:00 GMT",
+      "description": "看旁门左道PPT的各种奇技淫巧の记录，以后搞形式主义的时候用",
+      "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
+      "siteUrl": "https://66619.eu.org",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
     },
     {
       "title": "LaTeX使用中的一些坑",

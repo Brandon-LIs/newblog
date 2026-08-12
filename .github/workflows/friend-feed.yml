@@ -53,7 +53,7 @@ jobs:
         run: |
           mkdir -p /tmp/pages-deploy
           cp data/friend-articles.json /tmp/pages-deploy/
-          npx wrangler pages deploy /tmp/pages-deploy --project-name friend-data --branch main || true
+          CLOUDFLARE_API_TOKEN=${{ secrets.CLOUDFLARE_API_TOKEN }} npx wrangler pages deploy /tmp/pages-deploy --project-name friend-data --branch main || true
 
       - name: Purge jsdelivr
         if: steps.commit.outputs.has_changes == 'true'

@@ -26,7 +26,6 @@ jobs:
 
       - name: Generate AI Summaries
         env:
-          AI_API_KEY: ${{ secrets.AI_API_KEY }}
           GLM_API_KEY: ${{ secrets.GLM_API_KEY }}
           XUNFEI_API_KEY: ${{ secrets.XUNFEI_API_KEY }}
         run: node scripts/gen-ai-summaries.mjs

@@ -1,7 +1,25 @@
 {
-  "updated_at": "2026-08-12T12:44:39.575Z",
-  "count": 85,
+  "updated_at": "2026-08-12T14:14:14.056Z",
+  "count": 80,
   "list": [
+    {
+      "title": "ESP32 / ESP8266 物联网开发环境配置指南",
+      "link": "https://blog.liseezn.top/919.html/",
+      "date": "Wed, 12 Aug 2026 13:59:40 +0000",
+      "description": "前言 ESP32 与 ESP8266 是当前物联网开发领域普及率最高的两款芯片：ESP32 搭载双核处理器，支 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
+      "title": "Codex 接入 DeepSeek 保姆级教程｜ Codex++",
+      "link": "https://blog.liseezn.top/903.html/",
+      "date": "Wed, 12 Aug 2026 13:44:35 +0000",
+      "description": "用 Codex 写代码的朋友，大概率都遇到过这些糟心事：OpenAI 接口时不时抽风、网络不稳半天出不来结果、 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
     {
       "title": "你的vercel项目，还能更快",
       "link": "https://upxuu.com/posts/vercel666/",
@@ -219,15 +237,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
-      "title": "全链路AI前端开发Skill指南：从审美到工程，打造无模板感的生产级代码",
-      "link": "https://blog.liseezn.top/872.html/",
-      "date": "Wed, 05 Aug 2026 14:06:37 +0000",
-      "description": "随着 Cursor、Claude Code、Codex、Trae 等AI编码工具成为日常开发的标配，一个越来越 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
-    },
-    {
       "title": "【公告】关于本站文章更新频率调整的相关说明",
       "link": "https://blog.iamcrl.cn/important",
       "date": "Wed, 05 Aug 2026 17:49:12 +0800",
@@ -406,15 +415,6 @@
       "site": "黄鼠狼的树洞",
       "siteUrl": "https://blog.weasel6.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
-    },
-    {
-      "title": "Windows 装机必备软件清单",
-      "link": "https://blog.liseezn.top/812.html/",
-      "date": "Thu, 23 Jul 2026 15:13:29 +0000",
-      "description": "刚给电脑重装完系统，看着干干净净一片空白的桌面，是不是瞬间犯愁，完全不知道该先装什么软件？ 之前每次换电脑、重 [&#8230;]",
-      "site": "Liseezn'blog",
-      "siteUrl": "https://blog.liseezn.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "欢呼吧！新的博客",
@@ -651,33 +651,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
-      "title": "有端",
-      "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
-      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
-      "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
-      "title": "无端",
-      "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
-      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
-      "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
-      "title": "奇技淫巧之高中多选题拿分策略",
-      "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
-      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
-      "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
       "title": "初中首秋游：长隆妙妙屋&最后一次元旦晚会",
       "link": "https://note.redcha.cn/archives/chu-zhong-shou-qiu-you-chang-long-miao-miao-wu-zui-hou-yi-ci-yuan-dan-wan-hui",
       "date": "Sat, 10 Jan 2026 11:53:00 GMT",
@@ -696,15 +669,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
     },
     {
-      "title": "怀念",
-      "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
-      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
-      "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
       "title": "Astro Theme Iris：打造个人知识管理系统",
       "link": "https://lemonadorable.github.io/blog/astro-theme-iris",
       "date": "Fri, 02 Jan 2026 00:00:00 GMT",
@@ -721,15 +685,6 @@
       "site": "Sunrise.博客",
       "siteUrl": "https://wowtang.top",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120008.webp"
-    },
-    {
-      "title": "年前",
-      "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
-      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
-      "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
     },
     {
       "title": "马生复宋濂书",

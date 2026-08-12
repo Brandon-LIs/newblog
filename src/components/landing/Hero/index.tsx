@@ -1,5 +1,5 @@
 import {type Variants, motion} from 'framer-motion';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import HeroSvg from './img/hero.svg';
 
@@ -7,8 +7,8 @@ import {Icon} from '@iconify/react';
 import SocialLinks from '@site/src/components/SocialLinks';
 import styles from './styles.module.css';
 
-const YIYAN_API = 'https://api.yviii.com/yiyan/yi.php/?syz=js&charset=utf-8';
 const FALLBACK = '我们都有光明的未来';
+const TWIKOO_ENV = 'https://co.oopss.top';
 
 const variants: Variants = {
   visible: (i) => ({
@@ -48,41 +48,73 @@ function Name() {
   );
 }
 
-function Yiyan() {
-  const [yiyan, setYiyan] = useState<string>(FALLBACK);
+type Comment = {
+  nick: string;
+  commentText: string;
+  url: string;
+  avatar: string;
+  relativeTime: string;
+};
 
-  const fetchYiyan = () => {
-    const originalWrite = document.write.bind(document);
-    document.write = (html: string) => {
-      const text = html.replace(/<[^>]*>/g, '').trim();
-      if (text) {
-        setYiyan(text);
-      }
-    };
+function Yiyan() {
+  const [comments, setComments] = useState<Comment[]>([]);
+  const [current, setCurrent] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+
+  // 加载 Twikoo 并获取最新 5 条评论
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    if ((window as any).twikoo) {
+      fetchComments();
+      return;
+    }
     const script = document.createElement('script');
-    script.src = YIYAN_API;
-    script.onload = () => {
-      try {
-        // 该 API 的脚本只定义 hiyi() 函数，需手动调用才会执行 document.write
-        (window as unknown as {hiyi?: () => void}).hiyi?.();
-      } catch {
-        setYiyan(FALLBACK);
-      }
-      document.write = originalWrite;
-      script.remove();
-    };
-    script.onerror = () => {
-      document.write = originalWrite;
-      script.remove();
-      setYiyan(FALLBACK);
-    };
+    script.src = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
+    script.onload = fetchComments;
     document.head.appendChild(script);
+  }, []);
+
+  async function fetchComments() {
+    try {
+      const res = await (window as any).twikoo.getRecentComments({
+        envId: TWIKOO_ENV,
+        pageSize: 5,
+        includeReply: false,
+      });
+      if (res && res.length > 0) {
+        setComments(res);
+        setCurrent(Math.floor(Math.random() * res.length));
+        setLoaded(true);
+      }
+    } catch {
+      // fallback
+    }
+  }
+
+  // 每 5 秒切换
+  useEffect(() => {
+    if (!loaded || comments.length < 2) return;
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % comments.length);
+    }, 5000);
+    return () => {
+      if (timerRef.current) clearInterval(timerRef.current);
+    };
+  }, [loaded, comments.length]);
+
+  const shuffle = () => {
+    if (comments.length > 0) {
+      let next = Math.floor(Math.random() * comments.length);
+      while (next === current && comments.length > 1) {
+        next = Math.floor(Math.random() * comments.length);
+      }
+      setCurrent(next);
+    }
   };
 
-  useEffect(() => {
-    fetchYiyan();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const display = comments[current] || null;
+  const text = display ? `「${display.commentText}」—— ${display.nick}` : FALLBACK;
 
   return (
     <motion.div
@@ -92,13 +124,24 @@ function Yiyan() {
       variants={variants}
       className={styles.yiyan}>
       <Icon icon="ri:double-quotes-l" width="18" height="18" />
-      <span className={styles.yiyanText}>{yiyan}</span>
+      {display ? (
+        <a
+          href={display.url}
+          target="_blank"
+          rel="noreferrer"
+          className={styles.yiyanText}
+          style={{textDecoration: 'none', color: 'inherit'}}>
+          {text}
+        </a>
+      ) : (
+        <span className={styles.yiyanText}>{text}</span>
+      )}
       <button
         type="button"
         className={styles.yiyanRefresh}
-        onClick={fetchYiyan}
-        title="换一句"
-        aria-label="换一句">
+        onClick={shuffle}
+        title="换一条"
+        aria-label="换一条">
         <Icon icon="ri:refresh-line" width="16" height="16" />
       </button>
     </motion.div>

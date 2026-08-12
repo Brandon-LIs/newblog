@@ -95,8 +95,9 @@ function Yiyan() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           event: 'GET_RECENT_COMMENTS',
-          data: { pageSize: 5, includeReply: false },
           accessToken: '',
+          pageSize: 5,
+          includeReply: false,
           envId: TWIKOO_ENV,
         }),
       });

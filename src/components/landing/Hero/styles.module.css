@@ -19,10 +19,14 @@
 
 .yiyan {
   @apply mb-6 inline-flex max-w-full items-center gap-2 text-sm text-[#6e7b8c];
+  overflow: hidden;
   letter-spacing: -0.02em;
 }
 
 .yiyanText {
+  display: inline-block;
+  flex: 1;
+  min-width: 0;
   max-width: min(24rem, 70vw);
   font-style: italic;
   white-space: nowrap;

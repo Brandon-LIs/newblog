@@ -16,7 +16,7 @@ const APPLY_EMAIL = 'bcihal@qq.com';
 const SITE_INFO = `title: 'Brandon's Blog'
 bio: '一个高中生的个人博客'
 website: 'https://blog.oopss.top'
-avatar: 'https://cdn.oopss.top/icon.jpg'
+avatar: 'https://jsd.oopss.top/icon.jpg'
 `;
 const friends = Friends;
 

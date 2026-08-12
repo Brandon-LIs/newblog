@@ -160,7 +160,7 @@ export default function FriendApply(): JSX.Element {
             <div className="text-[var(--ifm-secondary-text-color)] leading-6">
               名称：Brandon's Blog<br />
               地址：https://blog.oopss.top<br />
-              头像：https://cdn.oopss.top/icon.jpg<br />
+              头像：https://jsd.oopss.top/icon.jpg<br />
               简介：一个高中生的个人博客，分享技术与生活
             </div>
           </div>

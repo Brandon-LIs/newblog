@@ -206,7 +206,7 @@ const config: Config = {
       title: "Brandon's Blog",
       logo: {
         alt: 'Brandon',
-        src: 'https://cdn.oopss.top/icon.jpg',
+        src: 'https://jsd.oopss.top/icon.jpg',
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},

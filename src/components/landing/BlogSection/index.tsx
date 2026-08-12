@@ -20,7 +20,7 @@ export function BlogItem({post}: {post: BlogPost}) {
   } = post;
 
   return (
-    <motion.li
+    <motion.div
       className={cn('card', 'margin-bottom--md flex w-full bg-blog shadow-blog')}
       key={permalink}
       initial={{y: 100, opacity: 0.001}}
@@ -31,18 +31,18 @@ export function BlogItem({post}: {post: BlogPost}) {
         <Link
           href={permalink}
           className="max-h-[240px] w-full cursor-pointer overflow-hidden object-cover">
-          <img src={frontMatter?.image} alt={title} />
+          <img src={frontMatter?.image} alt={title} loading="lazy" decoding="async" />
         </Link>
       )}
       <div className="card__body">
-        <h4 className="text-base">
+        <h3 className="text-base">
           <Link href={permalink} className="relative hover:no-underline">
             {title}
           </Link>
-        </h4>
+        </h3>
         <p className="text-sm">{description}</p>
       </div>
-    </motion.li>
+    </motion.div>
   );
 }
 

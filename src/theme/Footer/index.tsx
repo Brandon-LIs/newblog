@@ -178,7 +178,7 @@ export default function Footer(): JSX.Element {
           <section className={styles.brand} aria-label="站点信息">
             <img
               className={styles.avatar}
-              src="https://cdn.oopss.top/icon.jpg"
+              src="https://jsd.oopss.top/icon.jpg"
               alt={siteInfo.name}
             />
             <h2 className={styles.title}>{siteInfo.name}</h2>

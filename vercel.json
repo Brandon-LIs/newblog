@@ -29,6 +29,8 @@
       "source": "/blog/rss.xml",
       "headers": [
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate, proxy-revalidate" },
+        { "key": "CDN-Cache-Control", "value": "no-cache" },
+        { "key": "Cloudflare-CDN-Cache-Control", "value": "no-cache" },
         { "key": "Pragma", "value": "no-cache" },
         { "key": "Expires", "value": "0" }
       ]

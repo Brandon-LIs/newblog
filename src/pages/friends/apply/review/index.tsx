@@ -71,7 +71,7 @@ export default function Review(): JSX.Element {
           {app && (
             <div className="rounded-card border border-[var(--ifm-color-emphasis-200)] bg-card p-6 shadow-[var(--blog-item-shadow)]">
               <div className="flex items-center gap-3 mb-5">
-                {app.avatar && <img src={app.avatar} className="size-14 rounded-full object-cover" alt="头像" />}
+                {app.avatar && <img src={app.avatar} className="size-14 rounded-full object-cover" alt="头像" width={56} height={56} />}
                 <div>
                   <div className="text-lg font-bold">{app.name}</div>
                   <div className="text-sm text-[var(--ifm-secondary-text-color)]">{app.website}</div>

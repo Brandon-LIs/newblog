@@ -88,6 +88,8 @@ const FriendCard = memo(({friend}: {friend: Friend}) => (
       src={friend.avatar}
       alt={friend.title}
       className="size-16 min-w-16 rounded-full object-contain"
+      width={64}
+      height={64}
       onError={(e) => {
         // 头像加载失败：先回退到该站自己的 /favicon.ico，仍失败则用本地占位图
         const host = friend.website.replace(/^https?:\/\//, '').split('/')[0];

@@ -231,7 +231,7 @@ function MemoPost({memo, onShare}: {memo: Memo; onShare: (memo: Memo) => void}) 
   return (
     <article className={styles.post}>
       <div className={styles.postAvatar}>
-        <img className={styles.avatar} src={avatar} alt={name} loading="lazy" />
+        <img className={styles.avatar} src={avatar} alt={name} loading="lazy" width={40} height={40} />
       </div>
       <div className={styles.postBody}>
         <div className={styles.postMeta}>
@@ -344,7 +344,7 @@ export default function Shuoshuo(): JSX.Element {
         <div className={styles.sidebar}>
           <div className={styles.sidebarInner}>
             <div className={styles.sidebarAvatar}>
-              <img src="https://jsd.oopss.top/icon.jpg" alt="Brandon" />
+              <img src="https://jsd.oopss.top/icon.jpg" alt="Brandon" width={80} height={80} />
             </div>
             <h2 className={styles.sidebarName}>Brandon</h2>
             <p className={styles.sidebarBio}>我们都有光明的未来</p>

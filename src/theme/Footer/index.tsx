@@ -180,6 +180,8 @@ export default function Footer(): JSX.Element {
               className={styles.avatar}
               src="https://jsd.oopss.top/icon.jpg"
               alt={siteInfo.name}
+              width={64}
+              height={64}
             />
             <h2 className={styles.title}>{siteInfo.name}</h2>
             <p className={styles.description}>{siteInfo.description}</p>

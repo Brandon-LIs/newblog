@@ -31,7 +31,7 @@ export function BlogItem({post}: {post: BlogPost}) {
         <Link
           href={permalink}
           className="max-h-[240px] w-full cursor-pointer overflow-hidden object-cover">
-          <img src={frontMatter?.image} alt={title} loading="lazy" decoding="async" />
+          <img src={frontMatter?.image} alt={title} loading="lazy" decoding="async" className="aspect-[16/9] w-full object-cover" />
         </Link>
       )}
       <div className="card__body">

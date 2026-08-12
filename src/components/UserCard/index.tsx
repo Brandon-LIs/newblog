@@ -48,7 +48,7 @@ export default function UserCard({isNavbar = false}: {isNavbar?: boolean}) {
   return (
     <div className={cn(isNavbar ? styles.userCardNavbar : styles.userCard)}>
       <Link href="/about">
-        <img className={styles.cardImg} src={logoLink} alt="logo" />
+        <img className={styles.cardImg} src={logoLink} alt="logo" width={96} height={96} />
       </Link>
       <div>
         <Link className={styles.name} href="/about">

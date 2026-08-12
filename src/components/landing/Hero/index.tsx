@@ -68,33 +68,46 @@ function Yiyan() {
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const switching = useRef(false);
 
-  // 延迟加载 Twikoo（避免阻塞首屏）
+  // 延迟请求最近评论（通过后端 API，不加载完整 Twikoo JS）
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const timer = setTimeout(() => {
-      if ((window as any).twikoo) {
-        fetchComments();
-        return;
-      }
-      const script = document.createElement('script');
-      script.src = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
-      script.async = true;
-      script.onload = fetchComments;
-      document.head.appendChild(script);
-    }, 3000);
+    const timer = setTimeout(fetchComments, 3000);
     return () => clearTimeout(timer);
   }, []);
 
   async function fetchComments() {
     try {
-      const res = await (window as any).twikoo.getRecentComments({
-        envId: TWIKOO_ENV,
-        pageSize: 5,
-        includeReply: false,
+      const res = await fetch('https://apis.oopss.top/api/recent-comments', {
+        method: 'GET',
       });
-      if (res && res.length > 0) {
-        setComments(res);
-        setCurrent(Math.floor(Math.random() * res.length));
+      if (!res.ok) return;
+      const data = await res.json();
+      if (data && data.length > 0) {
+        setComments(data);
+        setCurrent(Math.floor(Math.random() * data.length));
+        setLoaded(true);
+      }
+    } catch {
+      tryFallback();
+    }
+  }
+
+  async function tryFallback() {
+    try {
+      const res = await fetch(`${TWIKOO_ENV}/api/comment`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          event: 'GET_RECENT_COMMENTS',
+          data: { pageSize: 5, includeReply: false },
+          accessToken: '',
+          envId: TWIKOO_ENV,
+        }),
+      });
+      const json = await res.json();
+      if (json && json.data && json.data.length > 0) {
+        setComments(json.data);
+        setCurrent(Math.floor(Math.random() * json.data.length));
         setLoaded(true);
       }
     } catch {}

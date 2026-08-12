@@ -132,7 +132,7 @@ export default function FriendApply(): JSX.Element {
               <div className="flex items-center gap-3">
                 <input type="file" accept="image/*" onChange={handleAvatarChange}
                   className="text-sm text-[var(--ifm-secondary-text-color)] file:mr-2 file:rounded-lg file:border-0 file:bg-[var(--ifm-color-primary)] file:px-3 file:py-2 file:text-sm file:text-white" />
-                {avatarPreview && <img src={avatarPreview} className="size-10 rounded-full object-cover" alt="预览" />}
+                {avatarPreview && <img src={avatarPreview} className="size-10 rounded-full object-cover" alt="预览" width={40} height={40} />}
               </div>
               <div className="mt-2 text-xs text-[var(--ifm-secondary-text-color)]">或填写头像链接：</div>
               <input value={form.avatarUrl} onChange={set('avatarUrl')} type="url" placeholder="https://example.com/avatar.png（二选一）"

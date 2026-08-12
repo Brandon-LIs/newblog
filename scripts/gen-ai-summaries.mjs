@@ -1,14 +1,17 @@
 // 为博客文章生成 AI 摘要，写入 static/ai-summaries.json
 // 无第三方依赖（仅使用 Node 内置模块 + fetch）。
-// 用法：GLM_API_KEY=xxx node scripts/gen-ai-summaries.mjs
+// 用法：AI_API_KEY=xxx node scripts/gen-ai-summaries.mjs
 // 会跳过内容未变化的文章（通过内容哈希缓存），避免重复调用 API。
 import { readFileSync, readdirSync, writeFileSync, existsSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createHash } from 'node:crypto'
 
+const AI_API_KEY = process.env.AI_API_KEY
 const GLM_API_KEY = process.env.GLM_API_KEY
 const XUNFEI_API_KEY = process.env.XUNFEI_API_KEY || process.env.SPARK_API_KEY
+const AI_URL = 'https://api.siliconflow.cn/v1/chat/completions'
+const AI_MODEL = 'Qwen/Qwen3.5-27B'
 const GLM_URL = 'https://open.bigmodel.cn/api/paas/v4/chat/completions'
 const XUNFEI_URL = 'https://spark-api-open.xf-yun.com/x2/chat/completions'
 const MAX_CHARS = 10000
@@ -17,8 +20,8 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const blogDir = join(root, 'blog')
 const outFile = join(root, 'static', 'ai-summaries.json')
 
-if (!GLM_API_KEY && !XUNFEI_API_KEY) {
-  console.log('跳过：缺少 GLM_API_KEY / XUNFEI_API_KEY')
+if (!AI_API_KEY && !GLM_API_KEY && !XUNFEI_API_KEY) {
+  console.log('跳过：缺少 AI_API_KEY / GLM_API_KEY / XUNFEI_API_KEY')
   process.exit(0)
 }
 
@@ -57,6 +60,33 @@ function buildPrompt(title, content) {
     '要求：不要使用列表或序号，写成连贯段落；直接输出摘要本身，不要任何前缀或解释。\n\n' +
     '文章标题：' + title + '\n\n文章内容：\n' + content.slice(0, MAX_CHARS)
   )
+}
+
+// 硅基流动 Qwen3.5-27B（优先）；失败返回 null
+async function summarizeAI(title, content) {
+  if (!AI_API_KEY) return null
+  try {
+    const res = await fetch(AI_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${AI_API_KEY}` },
+      body: JSON.stringify({
+        model: AI_MODEL,
+        messages: [{ role: 'user', content: buildPrompt(title, content) }],
+        max_tokens: 1500,
+        temperature: 0.6,
+      }),
+    })
+    if (!res.ok) {
+      console.warn(`  [AI] ${res.status}，尝试 GLM 回退`)
+      return null
+    }
+    const data = await res.json()
+    const c = data.choices?.[0]?.message?.content
+    return c ? c.trim() : null
+  } catch (e) {
+    console.warn(`  [AI] ${e.message}，尝试 GLM 回退`)
+    return null
+  }
 }
 
 // 智谱 GLM-4.7-Flash；失败返回 null
@@ -121,11 +151,13 @@ async function summarizeXunfei(title, content) {
 }
 
 async function summarize(title, content) {
+  const fromAi = await summarizeAI(title, content)
+  if (fromAi) return fromAi
   const fromGlm = await summarizeGLM(title, content)
   if (fromGlm) return fromGlm
   const fromXunfei = await summarizeXunfei(title, content)
   if (fromXunfei) return fromXunfei
-  throw new Error('GLM 与讯飞均不可用')
+  throw new Error('AI、GLM 与讯飞均不可用')
 }
 
 async function main() {

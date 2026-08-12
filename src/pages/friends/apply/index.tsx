@@ -7,6 +7,7 @@ const TITLE = '申请友链';
 const DESCRIPTION = '填写表单，提交后自动审核并通知您结果。';
 const SUBMIT_URL = 'https://apis.oopss.top/api/friend-apply';
 const UPLOAD_URL = 'https://admin.oopss.top/upload';
+const AI_GENERATE_URL = 'https://apis.oopss.top/api/ai-generate';
 
 type FormState = {
   name: string;
@@ -36,9 +37,42 @@ export default function FriendApply(): JSX.Element {
   const [avatarPreview, setAvatarPreview] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<{ok: boolean; message: string} | null>(null);
+  const [aiGenerating, setAiGenerating] = useState(false);
 
   const set = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({...f, [key]: e.target.value}));
+
+  // AI 生成友链申请简介
+  const handleAiGenerate = async () => {
+    if (!form.name && !form.website) {
+      setResult({ok: false, message: '请先填写博客名称或网站地址，再使用 AI 生成'});
+      return;
+    }
+    setAiGenerating(true);
+    setResult(null);
+    try {
+      const r = await fetch(AI_GENERATE_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          name: form.name,
+          website: form.website,
+          description: form.description,
+        }),
+      });
+      const data = await r.json();
+      if (r.ok && data.content) {
+        setForm((f) => ({...f, description: data.content}));
+        setResult({ok: true, message: 'AI 已生成简介，你可以在此基础上修改'});
+      } else {
+        setResult({ok: false, message: data.error || 'AI 生成失败'});
+      }
+    } catch {
+      setResult({ok: false, message: 'AI 生成失败，请稍后重试'});
+    } finally {
+      setAiGenerating(false);
+    }
+  };
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -141,8 +175,20 @@ export default function FriendApply(): JSX.Element {
 
             <div className="mb-6">
               <label className="mb-1.5 block text-sm font-medium">简介</label>
-              <textarea value={form.description} onChange={set('description')} rows={3} placeholder="一句话介绍你的博客"
-                className="w-full resize-none rounded-lg border border-[var(--ifm-color-emphasis-300)] px-3 py-2.5 text-sm outline-none focus:border-[var(--ifm-color-primary)]" />
+              <div className="flex gap-2">
+                <textarea value={form.description} onChange={set('description')} rows={3} placeholder="一句话介绍你的博客"
+                  className="min-h-[80px] flex-1 resize-none rounded-lg border border-[var(--ifm-color-emphasis-300)] px-3 py-2.5 text-sm outline-none focus:border-[var(--ifm-color-primary)]" />
+                <button type="button" onClick={handleAiGenerate} disabled={aiGenerating}
+                  className="flex shrink-0 items-center gap-1.5 self-start rounded-lg bg-gradient-to-br from-[#6366f1] to-[#8b5cf6] px-3 py-2.5 text-xs font-medium text-white transition-all hover:opacity-90 disabled:opacity-60">
+                  {aiGenerating ? (
+                    <Icon icon="ri:loader-4-line" className="animate-spin" width="14" height="14" />
+                  ) : (
+                    <Icon icon="ri:sparkles-2-line" width="14" height="14" />
+                  )}
+                  AI 生成
+                </button>
+              </div>
+              <p className="mt-1 text-xs text-[var(--ifm-secondary-text-color)]">填写名称和网址后，点击"AI 生成"自动生成简介</p>
             </div>
 
             <button type="submit" disabled={submitting}

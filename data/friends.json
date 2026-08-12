@@ -100,5 +100,12 @@
     "website": "https://loneapex.cn/",
     "avatar": "https://loneapex.cn/wp-content/maintain/icon.png",
     "rss": "https://loneapex.cn/feed"
+  },
+  {
+    "title": "Sunrise.博客 | Sunrise's blog",
+    "description": "心境自成天地，地狱可化作桃源，天堂也能沦为苦海。",
+    "website": "https://wowtang.top",
+    "avatar": "https://wowtang.top/images/avatar.png",
+    "rss": "https://wowtang.top/feed.xml"
   }
 ]

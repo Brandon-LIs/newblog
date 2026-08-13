@@ -25,9 +25,9 @@ A personal blog that records learning notes, project practice and life sharing (
 
 ## Design Principles
 
-- 留白即设计：大量负空间，黑色文本 + 纯白/纯黑底，克制的蓝色仅用于链接与强调。
+- 留白即设计：大量负空间，近白/近黑底 + 紫罗兰主色点缀，柔和细边框与阴影，克制的紫色光晕。
 - 干净无衬线：系统字体（PingFang SC / HarmonyOS Sans / Microsoft YaHei / Noto Sans），零字体下载，接近 Apple 观感。
-- hairline 与平面：用细分割线划分层次，不用卡片阴影与圆角堆叠。
+- hairline 与柔和层次：细分割线 + 浅阴影卡片划分层次。
 - 快是优雅的一部分：图标离线打包、静态资源本地化、无阻塞脚本、动效尊重 prefers-reduced-motion；大陆访问为目标场景。
 
 ## Accessibility & Inclusion

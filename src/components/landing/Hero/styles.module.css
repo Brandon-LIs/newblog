@@ -1,13 +1,23 @@
 @reference "../../../css/custom.css";
 
-/* Hero：Apple 式居中排版，大量留白 */
+/* Hero：居中排版 + 紫罗兰光晕，大量留白 */
 .hero {
-  @apply relative flex min-h-[calc(100vh-60px)] w-screen max-w-full items-center justify-center;
+  @apply relative flex min-h-[calc(100vh-60px)] w-screen max-w-full items-center justify-center overflow-hidden;
   padding: 3rem 1.5rem;
 }
 
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 50% 0%, color-mix(in srgb, var(--ifm-color-primary) 12%, transparent), transparent 55%),
+    radial-gradient(circle at 85% 15%, color-mix(in srgb, var(--ifm-color-primary) 7%, transparent), transparent 40%);
+}
+
 .inner {
-  @apply flex max-w-3xl flex-col items-center text-center;
+  @apply relative flex max-w-3xl flex-col items-center text-center;
   gap: 1.5rem;
 }
 
@@ -16,7 +26,7 @@
   font-size: clamp(2.5rem, 7vw, 4.5rem);
   font-weight: 700;
   line-height: 1.08;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   color: var(--ifm-text-color);
   text-wrap: balance;
 }

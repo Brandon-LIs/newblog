@@ -11,7 +11,7 @@
 
   position: relative;
   background:
-    radial-gradient(60rem 20rem at 85% -5rem, rgb(37 99 235 / 10%), transparent 60%),
+    radial-gradient(60rem 20rem at 85% -5rem, color-mix(in srgb, var(--ifm-color-primary) 12%, transparent), transparent 60%),
     var(--footer-bg);
   color: var(--footer-text);
   font-family: var(--ifm-font-family-base);

@@ -1,7 +1,5 @@
 /* ================================================================
-   字体：Clear Han Serif / Zhuque Fangsong / LXGW WenKai
-   已通过 docusaurus.config.ts headTags 非阻塞加载（media=print 技巧），
-   此处不再使用 @import（@import 会阻塞渲染）。
+   全局样式：优雅极简（紫罗兰主色 · 系统无衬线 · 柔和层次）
    ================================================================ */
 
 @layer theme, base, components, utilities;
@@ -15,15 +13,15 @@
 
 @layer base {
   :root {
-    /* 优雅极简：纯白底 · 墨黑文本 · 克制的蓝（Apple / DeepSeek 风格） */
-    --content-background: #ffffff;
-    --ifm-color-primary: #1d4ed8;
-    --ifm-color-primary-dark: #1e40af;
-    --ifm-color-primary-darker: #1e3a8a;
-    --ifm-color-primary-darkest: #172554;
-    --ifm-color-primary-light: #3b82f6;
-    --ifm-color-primary-lighter: #60a5fa;
-    --ifm-color-primary-lightest: #dbeafe;
+    /* 优雅极简 · 紫罗兰主色（shadcn 风格） */
+    --content-background: hsl(210 33% 99%);
+    --ifm-color-primary: hsl(267 42% 52%);
+    --ifm-color-primary-dark: hsl(267 40% 46%);
+    --ifm-color-primary-darker: hsl(267 40% 40%);
+    --ifm-color-primary-darkest: hsl(267 40% 33%);
+    --ifm-color-primary-light: hsl(267 42% 60%);
+    --ifm-color-primary-lighter: hsl(267 45% 72%);
+    --ifm-color-primary-lightest: hsl(267 50% 92%);
     --ifm-code-font-size: 95%;
     --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei',
@@ -33,75 +31,77 @@
       'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei',
       'Noto Sans SC', sans-serif;
 
-    --ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
+    --ifm-navbar-background-color: hsl(210 33% 99% / 0.8);
     --ifm-navbar-shadow: none;
     --ifm-navbar-padding-vertical: 0.75rem;
 
-    --ifm-menu-color: #1d1d1f;
+    --ifm-menu-color: #3f3f46;
 
     /* 代码块 */
-    --prism-background-color: #f5f5f7;
+    --prism-background-color: #f4f4f5;
     --ifm-code-padding-horizontal: 0.2rem;
     --ifm-code-padding-vertical: 0.2rem;
 
-    /* 文本（Apple 墨黑） */
-    --ifm-text-color: #1d1d1f;
-    --ifm-secondary-text-color: #6e6e73;
+    /* 文本 */
+    --ifm-text-color: #18181b;
+    --ifm-secondary-text-color: #52525b;
 
     --ifm-container-width: 1024px;
 
-    --ifm-heading-color: #1d1d1f;
+    --ifm-heading-color: #18181b;
     --ifm-heading-font-weight: 600;
     --ifm-font-weight-bold: 600;
-    --ifm-border-color: #e5e5e7;
+    --ifm-border-color: #e4e4e7;
     --ifm-toc-border-color: var(--ifm-border-color);
 
     --blog-item-background-color: #ffffff;
-    --blog-item-shadow: none;
-    --blog-item-shade: #f5f5f7;
+    --blog-item-shadow: 0 1px 2px rgba(0, 0, 0, 0.04),
+      0 4px 16px rgba(0, 0, 0, 0.05);
+    --blog-item-shade: #f4f4f5;
     --blog-post-page-surface: #ffffff;
     --blog-post-page-background: var(--blog-post-page-surface);
 
     /* Hero 副文本（≥4.5:1） */
-    --hero-sub-text: #6e6e73;
+    --hero-sub-text: #52525b;
 
-    --ifm-card-border-radius: 10px;
+    --ifm-card-border-radius: 12px;
 
     --site-color-tooltip: #fff;
-    --site-color-tooltip-background: #1d1d1f;
+    --site-color-tooltip-background: #18181b;
 
     -webkit-font-smoothing: antialiased;
 
-    --docusaurus-highlighted-code-line-bg: #e8e8ed;
+    --docusaurus-highlighted-code-line-bg: #e4e4e7;
   }
 
   html[data-theme='dark'] {
-    --content-background: #000000;
-    --ifm-color-primary: #7aa5ff;
-    --ifm-color-primary-dark: #60a5fa;
-    --ifm-color-primary-darker: #3b82f6;
-    --ifm-color-primary-darkest: #2563eb;
-    --ifm-color-primary-light: #a5c8ff;
-    --ifm-color-primary-lighter: #c3d9ff;
-    --ifm-color-primary-lightest: #1e3a8a;
-    --ifm-heading-color: #f5f5f7;
-    --ifm-menu-color: #a1a1a6;
-    --ifm-text-color: #f5f5f7;
-    --ifm-secondary-text-color: #a1a1a6;
-    --ifm-border-color: #333336;
+    --content-background: hsl(240 20% 5.5%);
+    --ifm-color-primary: hsl(267 68% 78%);
+    --ifm-color-primary-dark: hsl(267 55% 70%);
+    --ifm-color-primary-darker: hsl(267 50% 64%);
+    --ifm-color-primary-darkest: hsl(267 46% 58%);
+    --ifm-color-primary-light: hsl(267 70% 84%);
+    --ifm-color-primary-lighter: hsl(267 75% 90%);
+    --ifm-color-primary-lightest: hsl(267 40% 26%);
+    --ifm-heading-color: #f4f4f5;
+    --ifm-menu-color: #a1a1aa;
+    --ifm-text-color: #f4f4f5;
+    --ifm-secondary-text-color: #a1a1aa;
+    --ifm-border-color: #27272a;
 
-    --ifm-navbar-background-color: rgba(0, 0, 0, 0.8);
+    --ifm-navbar-background-color: hsl(240 20% 5.5% / 0.8);
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: #1d1d1f;
-    --blog-item-shadow: none;
-    --blog-item-shade: #1a1a1c;
-    --blog-post-page-surface: #000000;
+    --blog-item-background-color: #1d1d20;
+    --blog-item-shadow: 0 1px 2px rgba(0, 0, 0, 0.4),
+      0 4px 16px rgba(0, 0, 0, 0.3);
+    --blog-item-shade: #18181b;
+    --blog-post-page-surface: hsl(240 20% 5.5%);
 
     /* Hero 副文本（深色模式） */
-    --hero-sub-text: #a1a1a6;
+    --hero-sub-text: #a1a1aa;
 
-    --docusaurus-highlighted-code-line-bg: #3a3a3c;
+    --docusaurus-highlighted-code-line-bg: #3f3f46;
   }
 }
 
@@ -403,11 +403,11 @@ html[data-theme='dark'] .tk-comments .tk-tag-blue {
 
 /* 代码块 */
 .theme-code-block {
-  --prism-background-color: #f5f5f7 !important;
+  --prism-background-color: #f4f4f5 !important;
 }
 
 html[data-theme='dark'] .theme-code-block {
-  --prism-background-color: #1a1a1c !important;
+  --prism-background-color: #18181b !important;
 }
 
 /* 文章内容 */

@@ -1,7 +1,52 @@
 {
-  "updated_at": "2026-08-13T11:39:20.924Z",
-  "count": 90,
+  "updated_at": "2026-08-13T12:45:14.321Z",
+  "count": 85,
   "list": [
+    {
+      "title": "我鬼脑发力是如何找到 BA BWiki 是如何找到如何修改首页内容的",
+      "link": "https://xfcnl.github.io/tech/2026-08-08-%E6%88%91%E9%AC%BC%E8%84%91%E5%8F%91%E5%8A%9B%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%20BA%20BWiki%20%E6%98%AF%E5%A6%82%E4%BD%95%E6%89%BE%E5%88%B0%E5%A6%82%E4%BD%95%E4%BF%AE%E6%94%B9%E9%A6%96%E9%A1%B5%E5%86%85%E5%AE%B9%E7%9A%84/",
+      "date": "2026-08-13T11:54:47.408Z",
+      "description": "我在之前和现 BA BWiKi（一下简称Wiki） 的版主 K252 要了管理员权限，成了 Wiki 的管理员 但碍于当时上学，就隔一段时间更新一下情报板块的内容<",
+      "site": "xf_blog",
+      "siteUrl": "https://husd.cc.cd/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
+    {
+      "title": "博客大更新",
+      "link": "https://xfcnl.github.io/note/2026-08-06-%E5%8D%9A%E5%AE%A2%E5%A4%A7%E6%9B%B4%E6%96%B0/",
+      "date": "2026-08-13T11:54:47.408Z",
+      "description": "如题",
+      "site": "xf_blog",
+      "siteUrl": "https://husd.cc.cd/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
+    {
+      "title": "EdgeOne-Pages-ImgBed，一个网页图床应用",
+      "link": "https://xfcnl.github.io/tech/2026-08-01-EdgeOne-Pages-ImgBed%EF%BC%8C%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5%E5%9B%BE%E5%BA%8A%E5%BA%94%E7%94%A8/",
+      "date": "2026-08-13T11:54:47.408Z",
+      "description": "EdgeOne-Pages-ImgBed，一个基于 edgeone pages（现makers）（前端）、edgeone pages edge function（后端）、supabase sql（存储）和 supabase auth（多用户认证）的网页图床应用 <p",
+      "site": "xf_blog",
+      "siteUrl": "https://husd.cc.cd/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
+    {
+      "title": "啊？",
+      "link": "https://xfcnl.github.io/note/2026-08-01-%E5%95%8A%EF%BC%9F/",
+      "date": "2026-08-13T11:54:47.408Z",
+      "description": "xiaofen@xiaofen-desktop:~/Documents/repo/xfcnl.github.io$ n",
+      "site": "xf_blog",
+      "siteUrl": "https://husd.cc.cd/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
+    {
+      "title": "让cf worker代理你的GitHub静态资源",
+      "link": "https://xfcnl.github.io/tech/2026-07-28-%E8%AE%A9cf%20worker%E4%BB%A3%E7%90%86%E4%BD%A0%E7%9A%84github%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/",
+      "date": "2026-08-13T11:54:47.408Z",
+      "description": "我在某天做了个适用于 cf worker 的用于代理 GitHub 静态资源的应用 项目地址 <a href=\"#使用",
+      "site": "xf_blog",
+      "siteUrl": "https://husd.cc.cd/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
     {
       "title": "如果世界是假的",
       "link": "https://hehuang.site/p/the-fake-world/",
@@ -118,51 +163,6 @@
       "site": "睿朗的小窝",
       "siteUrl": "https://iamcrl.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
-    },
-    {
-      "title": "我鬼脑发力是如何找到 BA BWiki 是如何找到如何修改首页内容的",
-      "link": "https://xfcnl.github.io/tech/2026-08-08-post/",
-      "date": "2026-08-09T15:16:16.940Z",
-      "description": "我在之前和现 BA BWiKi（一下简称Wiki） 的版主 K252 要了管理员权限，成了 Wiki 的管理员 但碍于当时上学，就隔一段时间更新一下情报板块的内容<",
-      "site": "xf_blog",
-      "siteUrl": "https://husd.cc.cd/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
-    },
-    {
-      "title": "博客大更新",
-      "link": "https://xfcnl.github.io/note/2026-08-06-%E5%8D%9A%E5%AE%A2%E5%A4%A7%E6%9B%B4%E6%96%B0/",
-      "date": "2026-08-09T15:16:16.940Z",
-      "description": "如题",
-      "site": "xf_blog",
-      "siteUrl": "https://husd.cc.cd/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
-    },
-    {
-      "title": "啊？",
-      "link": "https://xfcnl.github.io/note/2026-08-01-%E5%95%8A%EF%BC%9F/",
-      "date": "2026-08-09T15:16:16.940Z",
-      "description": "xiaofen@xiaofen-desktop:~/Documents/repo/xfcnl.github.io$ n",
-      "site": "xf_blog",
-      "siteUrl": "https://husd.cc.cd/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
-    },
-    {
-      "title": "EdgeOne-Pages-ImgBed，一个网页图床应用",
-      "link": "https://xfcnl.github.io/tech/2026-08-01-EdgeOne-Pages-ImgBed%EF%BC%8C%E4%B8%80%E4%B8%AA%E7%BD%91%E9%A1%B5%E5%9B%BE%E5%BA%8A%E5%BA%94%E7%94%A8/",
-      "date": "2026-08-09T15:16:16.940Z",
-      "description": "EdgeOne-Pages-ImgBed，一个基于 edgeone pages（现makers）（前端）、edgeone pages edge function（后端）、supabase sql（存储）和 supabase auth（多用户认证）的网页图床应用 <p",
-      "site": "xf_blog",
-      "siteUrl": "https://husd.cc.cd/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
-    },
-    {
-      "title": "让cf worker代理你的GitHub静态资源",
-      "link": "https://xfcnl.github.io/tech/2026-07-28-%E8%AE%A9cf%20worker%E4%BB%A3%E7%90%86%E4%BD%A0%E7%9A%84github%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90/",
-      "date": "2026-08-09T15:16:16.939Z",
-      "description": "我在某天做了个适用于 cf worker 的用于代理 GitHub 静态资源的应用 项目地址 <a href=\"#使用",
-      "site": "xf_blog",
-      "siteUrl": "https://husd.cc.cd/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
     },
     {
       "title": "试玩神人游戏《完蛋！我被男同学包围了》",
@@ -660,33 +660,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
-      "title": "有端",
-      "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
-      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
-      "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
-      "title": "无端",
-      "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
-      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
-      "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
-      "title": "奇技淫巧之高中多选题拿分策略",
-      "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
-      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
-      "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
       "title": "重生之我是蒟蒻打CTF-misc",
       "link": "https://619.pp.ua/article/ctf-personal-writeups-misc",
       "date": "Mon, 26 Jan 2026 00:00:00 GMT",
@@ -714,15 +687,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
     },
     {
-      "title": "怀念",
-      "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
-      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
-      "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
-    },
-    {
       "title": "Astro Theme Iris：打造个人知识管理系统",
       "link": "https://lemonadorable.github.io/blog/astro-theme-iris",
       "date": "Fri, 02 Jan 2026 00:00:00 GMT",
@@ -739,15 +703,6 @@
       "site": "Sunrise.博客",
       "siteUrl": "https://wowtang.top",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120008.webp"
-    },
-    {
-      "title": "年前",
-      "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
-      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
-      "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
-      "site": "Tilawa Cesoil的小站",
-      "siteUrl": "https://www.tilawacesoil.top",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
     },
     {
       "title": "马生复宋濂书",

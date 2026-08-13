@@ -1,7 +1,16 @@
 {
-  "updated_at": "2026-08-13T03:36:36.880Z",
-  "count": 85,
+  "updated_at": "2026-08-13T05:27:22.349Z",
+  "count": 80,
   "list": [
+    {
+      "title": "什么？你的vercel还没深绿？一文研究透vercel优选|缓存配置",
+      "link": "https://upxuu.com/posts/vercel-youxuan-cache/",
+      "date": "Thu, 13 Aug 2026 03:00:00 GMT",
+      "description": "从地区优选、IP优选到边缘缓存配置与缓存预热，让你的 Vercel 站点在国内测速全绿、加载飞快",
+      "site": "UpXuu's blog",
+      "siteUrl": "https://upxuu.com",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
+    },
     {
       "title": "ESP32 / ESP8266 物联网开发环境配置指南",
       "link": "https://blog.liseezn.top/919.html/",
@@ -255,7 +264,7 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
     },
     {
-      "title": "他们拿走了仓库，也拿走了我们的往昔，却拿不走真正为自由而奋勇向前的开源社区——weflow遭下架有感",
+      "title": "weflow遭下架有感：他们拿走了仓库，也拿走了我们的往昔，却拿不走真正为自由而奋勇向前的开源社区",
       "link": "https://upxuu.com/posts/rip-weflow/",
       "date": "Wed, 05 Aug 2026 07:15:06 GMT",
       "description": "用了半年的 WeFlow，今天被 DMCA 下架了。它帮我导出了几百页聊天记录，也让我看清了一件事：你的数据，未必属于你。但封杀一个 WeFlow，还会有无数个 WeFlow，因为压迫从未停止。",
@@ -280,15 +289,6 @@
       "site": "逸树の小屋",
       "siteUrl": "https://474029.xyz",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120001.webp"
-    },
-    {
-      "title": "「说说」蹬上 opencode go 了",
-      "link": "https://upxuu.com/talk/2026-08-04-opencode-go/",
-      "date": "Tue, 04 Aug 2026 07:44:00 GMT",
-      "description": "opencode go 性价比是真的高 我用了 120m 今天月用量都像焊死了一样没咋动嘻嘻 !opencode go 1https://img.476543.xyz/img/2026/8/4/1785829515222.jpg !opencode go 2https://img.476543.xyz/img/2026/8/4/1785829555333.jpg",
-      "site": "UpXuu's blog",
-      "siteUrl": "https://upxuu.com",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
       "title": "这么多人无证驾驶吗（",
@@ -444,15 +444,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08120008.webp"
     },
     {
-      "title": "解放@初三毕业后的闲杂日记",
-      "link": "https://note.redcha.cn/archives/jie-fang-chu-san-bi-ye-hou-de-xian-za-ri-ji",
-      "date": "Tue, 21 Jul 2026 10:45:09 GMT",
-      "description": "考完力(7.2) 考完英语 上午考完英语的时候，大家无比开心 ↑因为我是走读的，所以就是收拾公寓，比在宿舍收拾好多了，宿舍简直是一堆烂摊子 中午收拾东西，下午就可以走了！然后下午进行了长达两个小时的散学典礼...... 然后全班一起来拍毕业照，但是我觉得这个逻辑非常不合常理，毕业照应该就是要拿出一整",
-      "site": "彬红茶日记",
-      "siteUrl": "https://note.redcha.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
-    },
-    {
       "title": "一节偏航的生涯规划课",
       "link": "https://hehuang.site/p/career-plan/",
       "date": "Tue, 21 Jul 2026 13:00:00 +0800",
@@ -570,15 +561,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08120009.webp"
     },
     {
-      "title": "中考加油！最后不到一个月",
-      "link": "https://note.redcha.cn/archives/zhong-kao-jia-you-zui-hou-bu-dao-yi-ge-yue",
-      "date": "Sat, 6 Jun 2026 15:17:41 GMT",
-      "description": "填报志愿 就在6.5日12:00，中考志愿已停止修改，16:00系统完全关闭 志愿系统的关闭，标志着离中考越来越近了。前几天还收拾了考场(高考)，全班搞卫生，忙作一团 倒计时 最后30天！加油！暑假在向我挥手🫣暑假将会补齐丢失的文章并恢复以往的更新频率🤤",
-      "site": "彬红茶日记",
-      "siteUrl": "https://note.redcha.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
-    },
-    {
       "title": "『anemoi』初回限定版 开箱",
       "link": "https://loneapex.cn/archives/5656",
       "date": "Thu, 21 May 2026 16:04:00 +0000",
@@ -624,15 +606,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
     },
     {
-      "title": "服务器“炸毁”😭😡无地自容",
-      "link": "https://note.redcha.cn/archives/fu-wu-qi-zha-hui-wu-di-zi-rong",
-      "date": "Sun, 22 Mar 2026 08:14:01 GMT",
-      "description": "起因 我一共有2台服务器，除了彬红茶日记和附属api接口，其余大部分站点部署在另一条服务器 然后在上周，我在上学期间，其中一台服务器的服务商突然公布，请在3天内联系客服人工迁移。因为服务器要硬件升级，IP转移 那我肯定是看不到的嘛，而且3天时间给🐶迁移呢？哪有3天时间这么短的，然后，我没有看到信息",
-      "site": "彬红茶日记",
-      "siteUrl": "https://note.redcha.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
-    },
-    {
       "title": "从一株小草开始",
       "link": "https://xinyang-gao.github.io/articles/从一株小草开始.html",
       "date": "Wed, 18 Mar 2026 00:00:00 GMT",
@@ -640,15 +613,6 @@
       "site": "高新炀的小站",
       "siteUrl": "https://gxy.cn.mt",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
-    },
-    {
-      "title": "2026！新年快乐！",
-      "link": "https://note.redcha.cn/archives/2026-xin-nian-kuai-le",
-      "date": "Mon, 16 Feb 2026 16:00:00 GMT",
-      "description": "2026春节正式到来，在这里祝大家新年快乐，新的一年心想事成，万事如意！ 马上过年了，祝你和气致祥 百花齐放，鸾凤和鸣 福星高照，喜气盈门 恭贺新春，招财进宝 福享新春，福星高照 迎春接福，福禄寿禧 春光骀荡，荣华富贵 国步龙腾，大展鸿图 门凝瑞霭，家庭幸福 户发春光，前途无量 风光胜旧，前程似锦",
-      "site": "彬红茶日记",
-      "siteUrl": "https://note.redcha.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
     },
     {
       "title": "就这样走过二〇二五",
@@ -667,15 +631,6 @@
       "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
       "siteUrl": "https://66619.eu.org",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
-    },
-    {
-      "title": "初中首秋游：长隆妙妙屋&最后一次元旦晚会",
-      "link": "https://note.redcha.cn/archives/chu-zhong-shou-qiu-you-chang-long-miao-miao-wu-zui-hou-yi-ci-yuan-dan-wan-hui",
-      "date": "Sat, 10 Jan 2026 11:53:00 GMT",
-      "description": "秋游前的曲折 经过了初中的三年磨练，我们也是成功来到了初三。按照级长的说法，身为初三就应该把精力更加投入到学习上(认同，但是我们一次都没有啊！🪰)，所以就根本不要想春秋游了。但是我们这一届初一初二的时候都是没有春秋游的。有一天我们学校的校长和级长在唠嗑，然后校长问，咱们初三年级没有秋游的吗？级长回",
-      "site": "彬红茶日记",
-      "siteUrl": "https://note.redcha.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp"
     },
     {
       "title": "🌌 最终测试：超弦虚空接口",

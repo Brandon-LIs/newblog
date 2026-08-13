@@ -11,18 +11,11 @@ const config: Config = {
   tagline: '我们都有光明的未来',
 
   headTags: [
-    // 字体加载（非阻塞：media=print 切换技巧，避免阻塞渲染）
-    // Clear Han Serif（界面/标题）、Zhuque Fangsong（正文）、LXGW WenKai（正文兜底）
-    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/79/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
-    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/7/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
-    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/292/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
-    { tagName: 'style', attributes: {}, innerHTML: 'body,html{font-family:"Songti SC","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif}.wf-active body,.wf-active html{font-family:"Clear Han Serif","Songti SC","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif}' },
     // 搜索引擎验证
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
     // DNS 预解析 + 预连接外部资源
-    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://fontsapi.zeoseven.com' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://apis.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://memos.oopss.top' } },

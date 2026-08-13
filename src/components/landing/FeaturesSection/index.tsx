@@ -1,26 +1,20 @@
 import Translate from '@docusaurus/Translate';
 import features from '@site/data/features';
-import {cn} from '@site/src/lib/utils';
-import {BentoGrid, BentoGridItem} from '../../magicui/bento-grid';
 import {Section} from '../Section';
 
 export default function FeaturesSection() {
   return (
-    <Section
-      title={<Translate id="homepage.feature.title">个人特点</Translate>}
-      icon="ri:map-pin-user-line">
-      <BentoGrid className="mx-auto w-full">
-        {features.map((item, i) => (
-          <BentoGridItem
-            key={i}
-            title={item.title}
-            description={item.description}
-            header={item.header}
-            icon={item.icon}
-            className={cn('p-2 md:p-4', i === 3 || i === 6 ? 'md:col-span-2' : '')}
-          />
+    <Section title={<Translate id="homepage.feature.title">个人特点</Translate>}>
+      <div className="grid grid-cols-1 gap-x-8 gap-y-6 md:grid-cols-3">
+        {features.map((item) => (
+          <div key={item.title as string} className="max-w-sm">
+            <h3 className="m-0 mb-2 text-base font-semibold text-text">
+              {item.title}
+            </h3>
+            <p className="m-0 text-sm leading-6 text-secondary">{item.description}</p>
+          </div>
         ))}
-      </BentoGrid>
+      </div>
     </Section>
   );
 }

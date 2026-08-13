@@ -14,22 +14,21 @@ A personal blog that records learning notes, project practice and life sharing (
 
 ## Brand Personality
 
-极简端庄 (minimal, dignified) · 中文文艺编辑风 (Chinese literary editorial). Three words: 安静 (quiet), 雅正 (refined-correct), 克制 (restrained). The site should feel like a well-set printed page — ink text on clean paper, generous whitespace, a serif voice for reading — not like a template with effects.
+优雅极简 (elegant, minimal) · Apple / DeepSeek 式 · 克制 (restrained). Three words: 干净 (clean), 优雅 (elegant), 自信 (confident). The site should feel like an Apple or DeepSeek page — generous whitespace, clean sans-serif, black on white with a restrained blue accent — not a decorated blog theme.
 
 ## Anti-references
 
-- 花哨的装饰特效：满屏粒子、强渐变光斑、鼠标聚光炫技、玻璃拟态。这些与"端庄"相悖。
-- 千篇一律的通用博客主题外观（卡片堆叠 + 大圆角 + 霓虹、冷蓝灰"工具感"配色）。
+- 花哨的装饰：印章、水墨插画、满屏粒子、渐变光斑、玻璃拟态、暖黄"文艺"色调。
+- 千篇一律的通用博客主题外观（卡片堆叠 + 大圆角 + 阴影 + 插画图标）。
 - 高饱和撞色、正文对比度不足的浅灰文字。
 - AI 味浓的模板感：每节一个英文小标签眉题、渐变文字、同尺寸图标卡片栅格。
 
 ## Design Principles
 
-- 白纸黑字：正文以衬线字体呈现，行高舒展，行宽限制在 65–75ch，让阅读成为中心。
-- 暖纸与青瓷：底色为偏暖的纸白（非米黄），主色为克制的青瓷绿，含蓄有书卷气；装饰元素必须服务于阅读，一个页面最多一个焦点特效。
-- 留白分级：用间距而非边框/阴影来划分层次，hairline 分隔线代替厚重卡片。
-- 字体国内源：Clear Han Serif（界面/标题）+ Zhuque Fangsong（正文仿宋）+ LXGW WenKai（兜底），均来自 zeoseven 国内字体服务，非阻塞加载；系统中文字体（宋体/思源宋体）作即时兜底。
-- 快是端庄的一部分：图标离线打包、静态资源本地化、无阻塞脚本、动效尊重 prefers-reduced-motion；大陆访问为目标场景。
+- 留白即设计：大量负空间，黑色文本 + 纯白/纯黑底，克制的蓝色仅用于链接与强调。
+- 干净无衬线：系统字体（PingFang SC / HarmonyOS Sans / Microsoft YaHei / Noto Sans），零字体下载，接近 Apple 观感。
+- hairline 与平面：用细分割线划分层次，不用卡片阴影与圆角堆叠。
+- 快是优雅的一部分：图标离线打包、静态资源本地化、无阻塞脚本、动效尊重 prefers-reduced-motion；大陆访问为目标场景。
 
 ## Accessibility & Inclusion
 

@@ -1,32 +1,23 @@
 import Link from '@docusaurus/Link';
 import Translate from '@docusaurus/Translate';
-import {Icon} from '@iconify/react';
 import type React from 'react';
 
 interface SectionProps {
   title: string | JSX.Element;
-  icon?: string;
   href?: string;
   children: React.ReactNode;
 }
 
-export function Section({title, icon, href, children}: SectionProps) {
+export function Section({title, href, children}: SectionProps) {
   return (
-    <section className="group/section py-2 max-lg:mx-4">
-      <div className="mt-8 mb-4 inline-flex w-full items-center justify-between md:mt-6">
-        <h2 className="m-0 inline-flex items-center justify-center gap-1 text-base">
-          {icon && <Icon icon={icon} />}
-          {title}
-        </h2>
+    <section className="py-4 max-lg:mx-4">
+      <div className="mb-6 flex w-full items-center justify-between">
+        <h2 className="m-0 text-xl font-semibold tracking-tight">{title}</h2>
         {href && (
           <Link
             href={href}
-            className="group/link inline-flex items-center justify-center text-base text-secondary opacity-60 transition duration-500 hover:opacity-100">
-            <Translate id="homepage.lookMore">查看更多</Translate>
-            <Icon
-              icon="ri:arrow-right-s-line"
-              className="transition group-hover/link:translate-x-1"
-            />
+            className="text-sm font-medium text-secondary no-underline transition-colors duration-200 hover:text-primary">
+            <Translate id="homepage.lookMore">查看更多</Translate> ›
           </Link>
         )}
       </div>

@@ -1,7 +1,5 @@
-import {type Variants, motion, useReducedMotion} from 'framer-motion';
+import {motion, useReducedMotion} from 'framer-motion';
 import {useEffect, useRef, useState} from 'react';
-
-import HeroInkSvg from './img/hero-ink.svg';
 
 import {Icon} from '@iconify/react';
 import SocialLinks from '@site/src/components/SocialLinks';
@@ -9,50 +7,6 @@ import styles from './styles.module.css';
 
 const FALLBACK = '我们都有光明的未来';
 const TWIKOO_ENV = 'https://co.oopss.top';
-
-const variants: Variants = {
-  visible: (i) => ({
-    opacity: 1,
-    y: 0,
-    transition: {
-      type: 'spring',
-      damping: 25,
-      stiffness: 100,
-      duration: 0.3,
-      delay: i * 0.15,
-    },
-  }),
-  hidden: {opacity: 0, y: 24},
-};
-
-function Seal() {
-  return (
-    <span className={styles.seal} aria-hidden="true">
-      光明
-    </span>
-  );
-}
-
-function Name() {
-  return (
-    <div className={styles.nameRow}>
-      <h1 className={styles.name}>Brandon</h1>
-      <svg
-        className={styles.underline}
-        viewBox="0 0 220 12"
-        aria-hidden="true"
-        preserveAspectRatio="none">
-        <path
-          d="M3 8 C 60 2, 150 3, 217 7"
-          fill="none"
-          stroke="var(--ifm-color-primary-lighter)"
-          strokeWidth="4"
-          strokeLinecap="round"
-        />
-      </svg>
-    </div>
-  );
-}
 
 type Comment = {
   nick: string;
@@ -72,7 +26,6 @@ function Yiyan() {
   const textRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
-  const switching = useRef(false);
 
   // 延迟请求最近评论（通过后端 API，不加载完整 Twikoo JS）
   useEffect(() => {
@@ -146,7 +99,6 @@ function Yiyan() {
       if (scrolling) {
         const dur = parseFloat(scrollDur);
         if (dur > 5) {
-          // 等滚动完再切换（滚动时间 + 0.5s 缓冲）
           setTimeout(() => {
             setCurrent((prev) => (prev + 1) % comments.length);
           }, dur * 1000 + 500);
@@ -161,7 +113,6 @@ function Yiyan() {
   }, [loaded, comments.length, scrolling, scrollDur]);
 
   const shuffle = async () => {
-    // 重新拉取最近评论，避免长期不更新
     await fetchComments();
     setLoaded(true);
   };
@@ -170,13 +121,7 @@ function Yiyan() {
   const text = display ? `「${display.commentText}」—— ${display.nick}` : FALLBACK;
 
   return (
-    <motion.div
-      custom={2.5}
-      initial="hidden"
-      animate="visible"
-      variants={variants}
-      className={styles.yiyan}>
-      <Icon icon="ri:double-quotes-l" width="18" height="18" />
+    <div className={styles.yiyan}>
       {display ? (
         <a
           href={display.url}
@@ -200,63 +145,34 @@ function Yiyan() {
         aria-label="换一条">
         <Icon icon="ri:refresh-line" width="16" height="16" />
       </button>
-    </motion.div>
+    </div>
   );
 }
 
 export default function Hero() {
   const reduceMotion = useReducedMotion();
+  const fade = (i: number) => ({
+    initial: {opacity: 0, y: reduceMotion ? 0 : 20},
+    animate: {opacity: 1, y: 0},
+    transition: {duration: 0.7, ease: 'easeOut' as const, delay: reduceMotion ? 0 : i * 0.1},
+  });
 
   return (
-    <motion.div className={styles.hero}>
-      <div className={styles.intro}>
-        <div className={styles.headline}>
-          <motion.div
-            custom={0}
-            initial={reduceMotion ? false : 'hidden'}
-            animate="visible"
-            variants={variants}
-            className={styles.greeting}>
-            <Seal />
-            <span>你好，我是</span>
-          </motion.div>
-          <motion.div
-            custom={1}
-            initial={reduceMotion ? false : 'hidden'}
-            animate="visible"
-            variants={variants}>
-            <Name />
-          </motion.div>
-          <motion.p
-            custom={1.6}
-            initial={reduceMotion ? false : 'hidden'}
-            animate="visible"
-            variants={variants}
-            className={styles.tagline}>
-            我们都有光明的未来
-          </motion.p>
-        </div>
-        <motion.p
-          custom={2}
-          initial={reduceMotion ? false : 'hidden'}
-          animate="visible"
-          variants={variants}
-          className="max-lg:px-4">
-          我是来自中国·宜昌的高中生，热爱前端与计算机科学，在持续学习 AI 与工程化相关内容。
-          这里记录我的学习笔记、项目实践与生活分享。
+    <div className={styles.hero}>
+      <div className={styles.inner}>
+        <motion.h1 {...fade(0)} className={styles.title}>
+          你好，我是 Brandon。
+        </motion.h1>
+        <motion.p {...fade(1)} className={styles.subtitle}>
+          一名热爱前端与计算机科学的高中生，在这里记录学习、项目与生活。
         </motion.p>
-        <Yiyan />
-        <motion.div custom={3} initial={reduceMotion ? false : 'hidden'} animate="visible" variants={variants}>
+        <motion.div {...fade(2)}>
+          <Yiyan />
+        </motion.div>
+        <motion.div {...fade(3)}>
           <SocialLinks />
         </motion.div>
       </div>
-      <motion.div
-        className={styles.background}
-        initial={reduceMotion ? false : {opacity: 0, y: 16}}
-        animate={{opacity: 1, y: 0}}
-        transition={{duration: 0.8, delay: 0.3}}>
-        <HeroInkSvg />
-      </motion.div>
-    </motion.div>
+    </div>
   );
 }

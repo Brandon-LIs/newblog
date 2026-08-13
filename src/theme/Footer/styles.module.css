@@ -1,18 +1,17 @@
 @reference "../../css/custom.css";
 
 .footer {
-  --footer-bg: #1c1a16;
-  --footer-bg-accent: #131210;
-  --footer-text: #e8e4da;
-  --footer-muted: #9d988d;
-  --footer-subtle: #716d64;
-  --footer-line: rgb(255 255 255 / 8%);
+  --footer-bg: #161617;
+  --footer-bg-accent: #000000;
+  --footer-text: #f5f5f7;
+  --footer-muted: #a1a1a6;
+  --footer-subtle: #6e6e73;
+  --footer-line: rgb(255 255 255 / 10%);
   --footer-hover: #ffffff;
 
   position: relative;
   background:
-    radial-gradient(60rem 20rem at 85% -5rem, rgb(18 175 250 / 8%), transparent 60%),
-    radial-gradient(40rem 16rem at -10% 110%, rgb(18 175 250 / 5%), transparent 60%),
+    radial-gradient(60rem 20rem at 85% -5rem, rgb(37 99 235 / 10%), transparent 60%),
     var(--footer-bg);
   color: var(--footer-text);
   font-family: var(--ifm-font-family-base);

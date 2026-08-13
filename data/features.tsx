@@ -1,14 +1,8 @@
-import Translate, {translate} from '@docusaurus/Translate';
-import {Icon} from '@iconify/react';
-import OpenSourceSvg from '@site/static/svg/undraw_open_source.svg';
-import SpiderSvg from '@site/static/svg/undraw_spider.svg';
-import WebDeveloperSvg from '@site/static/svg/undraw_web_developer.svg';
+import Translate from '@docusaurus/Translate';
 
 export type FeatureItem = {
-  title: string | React.ReactNode;
-  description: string | React.ReactNode;
-  header: React.ReactNode;
-  icon?: React.ReactNode;
+  title: string;
+  description: React.ReactNode;
 };
 
 const FEATURES: FeatureItem[] = [
@@ -20,8 +14,6 @@ const FEATURES: FeatureItem[] = [
         HTML/CSS/JS、Vue/React 与 Node.js 技术栈。
       </Translate>
     ),
-    header: <WebDeveloperSvg className="h-auto w-full" height={150} role="img" />,
-    icon: <Icon icon="logos:vue" className="size-4 text-neutral-500" />,
   },
   {
     title: 'AI 探索者',
@@ -30,7 +22,6 @@ const FEATURES: FeatureItem[] = [
         积极尝试将 AI 融入学习与工程实践，探索大模型、自动化与智能硬件结合的无限可能。
       </Translate>
     ),
-    header: <SpiderSvg className="h-auto w-full" height={150} role="img" />,
   },
   {
     title: '开源爱好者',
@@ -39,7 +30,6 @@ const FEATURES: FeatureItem[] = [
         乐于将想法落地为开源项目，如文件快传、Webdev 云盘、自建不蒜子等，并持续打磨完善。
       </Translate>
     ),
-    header: <OpenSourceSvg className="h-auto w-full" height={150} role="img" />,
   },
 ];
 

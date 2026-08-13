@@ -15,93 +15,93 @@
 
 @layer base {
   :root {
-    /* 暖纸底 · 墨色文本 · 青瓷主色（含蓄、有书卷气的文艺调校） */
-    --content-background: hsl(42 24% 97.2%);
-    --ifm-color-primary: hsl(168 30% 33%);
-    --ifm-color-primary-dark: hsl(168 30% 28%);
-    --ifm-color-primary-darker: hsl(168 32% 24%);
-    --ifm-color-primary-darkest: hsl(168 34% 20%);
-    --ifm-color-primary-light: hsl(168 26% 40%);
-    --ifm-color-primary-lighter: hsl(168 22% 58%);
-    --ifm-color-primary-lightest: hsl(168 30% 84%);
+    /* 优雅极简：纯白底 · 墨黑文本 · 克制的蓝（Apple / DeepSeek 风格） */
+    --content-background: #ffffff;
+    --ifm-color-primary: #1d4ed8;
+    --ifm-color-primary-dark: #1e40af;
+    --ifm-color-primary-darker: #1e3a8a;
+    --ifm-color-primary-darkest: #172554;
+    --ifm-color-primary-light: #3b82f6;
+    --ifm-color-primary-lighter: #60a5fa;
+    --ifm-color-primary-lightest: #dbeafe;
     --ifm-code-font-size: 95%;
-    --ifm-font-family-base: 'Clear Han Serif', ui-serif, 'Songti SC',
-      'Noto Serif CJK SC', 'Source Han Serif SC', 'SimSun', serif;
+    --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei',
+      'Noto Sans SC', sans-serif;
 
-    --ifm-heading-font-family: 'Clear Han Serif', ui-serif, 'Songti SC',
-      'Noto Serif CJK SC', 'Source Han Serif SC', 'SimSun', serif;
+    --ifm-heading-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei',
+      'Noto Sans SC', sans-serif;
 
-    --ifm-navbar-background-color: hsl(42 24% 97.2% / 0.82);
+    --ifm-navbar-background-color: rgba(255, 255, 255, 0.8);
     --ifm-navbar-shadow: none;
     --ifm-navbar-padding-vertical: 0.75rem;
 
-    --ifm-menu-color: hsl(32 10% 26%);
+    --ifm-menu-color: #1d1d1f;
 
     /* 代码块 */
-    --prism-background-color: #f8f7f3;
+    --prism-background-color: #f5f5f7;
     --ifm-code-padding-horizontal: 0.2rem;
     --ifm-code-padding-vertical: 0.2rem;
 
-    /* 文本（暖墨色） */
-    --ifm-text-color: hsl(28 14% 16%);
-    --ifm-secondary-text-color: hsl(30 8% 37%);
+    /* 文本（Apple 墨黑） */
+    --ifm-text-color: #1d1d1f;
+    --ifm-secondary-text-color: #6e6e73;
 
     --ifm-container-width: 1024px;
 
-    --ifm-heading-color: hsl(28 14% 16%);
+    --ifm-heading-color: #1d1d1f;
     --ifm-heading-font-weight: 600;
     --ifm-font-weight-bold: 600;
-    --ifm-border-color: hsl(40 16% 86%);
+    --ifm-border-color: #e5e5e7;
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: hsl(42 30% 99%);
-    --blog-item-shadow: 0 1px 2px rgba(70, 60, 40, 0.05),
-      0 2px 10px rgba(70, 60, 40, 0.05);
-    --blog-item-shade: hsl(40 16% 93%);
-    --blog-post-page-surface: hsl(42 24% 97.2%);
+    --blog-item-background-color: #ffffff;
+    --blog-item-shadow: none;
+    --blog-item-shade: #f5f5f7;
+    --blog-post-page-surface: #ffffff;
     --blog-post-page-background: var(--blog-post-page-surface);
 
-    /* Hero 副文本（保证浅色模式 ≥4.5:1） */
-    --hero-sub-text: hsl(32 8% 33%);
+    /* Hero 副文本（≥4.5:1） */
+    --hero-sub-text: #6e6e73;
 
-    --ifm-card-border-radius: 12px;
+    --ifm-card-border-radius: 10px;
 
     --site-color-tooltip: #fff;
-    --site-color-tooltip-background: #353738;
+    --site-color-tooltip-background: #1d1d1f;
 
     -webkit-font-smoothing: antialiased;
 
-    --docusaurus-highlighted-code-line-bg: #e7e4db;
+    --docusaurus-highlighted-code-line-bg: #e8e8ed;
   }
 
   html[data-theme='dark'] {
-    --content-background: hsl(32 12% 8.5%);
-    --ifm-color-primary: hsl(168 38% 64%);
-    --ifm-color-primary-dark: hsl(168 32% 54%);
-    --ifm-color-primary-darker: hsl(168 30% 48%);
-    --ifm-color-primary-darkest: hsl(168 28% 42%);
-    --ifm-color-primary-light: hsl(168 45% 74%);
-    --ifm-color-primary-lighter: hsl(168 52% 82%);
-    --ifm-color-primary-lightest: hsl(168 22% 28%);
-    --ifm-heading-color: hsl(40 14% 93%);
-    --ifm-menu-color: hsl(38 8% 70%);
-    --ifm-text-color: hsl(40 14% 93%);
-    --ifm-secondary-text-color: hsl(38 8% 70%);
-    --ifm-border-color: hsl(35 8% 19%);
+    --content-background: #000000;
+    --ifm-color-primary: #7aa5ff;
+    --ifm-color-primary-dark: #60a5fa;
+    --ifm-color-primary-darker: #3b82f6;
+    --ifm-color-primary-darkest: #2563eb;
+    --ifm-color-primary-light: #a5c8ff;
+    --ifm-color-primary-lighter: #c3d9ff;
+    --ifm-color-primary-lightest: #1e3a8a;
+    --ifm-heading-color: #f5f5f7;
+    --ifm-menu-color: #a1a1a6;
+    --ifm-text-color: #f5f5f7;
+    --ifm-secondary-text-color: #a1a1a6;
+    --ifm-border-color: #333336;
 
-    --ifm-navbar-background-color: hsl(32 12% 8.5% / 0.82);
+    --ifm-navbar-background-color: rgba(0, 0, 0, 0.8);
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: hsl(32 10% 12%);
-    --blog-item-shadow: 0 1px 2px rgba(0, 0, 0, 0.35),
-      0 3px 12px rgba(0, 0, 0, 0.25);
-    --blog-item-shade: hsl(32 10% 10.5%);
-    --blog-post-page-surface: hsl(32 12% 8.5%);
+    --blog-item-background-color: #1d1d1f;
+    --blog-item-shadow: none;
+    --blog-item-shade: #1a1a1c;
+    --blog-post-page-surface: #000000;
 
     /* Hero 副文本（深色模式） */
-    --hero-sub-text: hsl(40 10% 74%);
+    --hero-sub-text: #a1a1a6;
 
-    --docusaurus-highlighted-code-line-bg: #4b5563;
+    --docusaurus-highlighted-code-line-bg: #3a3a3c;
   }
 }
 
@@ -118,9 +118,9 @@ a:hover {
   }
 }
 
-/* 选中文字：青瓷淡染 */
+/* 选中文字：浅蓝 */
 ::selection {
-  background: color-mix(in srgb, var(--ifm-color-primary-lightest) 65%, transparent);
+  background: color-mix(in srgb, var(--ifm-color-primary-lightest) 70%, transparent);
 }
 
 html,
@@ -129,9 +129,10 @@ body {
 }
 
 body {
-  font-family: 'Clear Han Serif', ui-serif, 'Songti SC', 'Noto Serif CJK SC',
-    'Source Han Serif SC', 'SimSun', serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   text-rendering: optimizeLegibility;
+  letter-spacing: 0.01em;
 }
 
 /* 标题平衡换行，正文减少孤行 */
@@ -158,12 +159,12 @@ h3 {
   margin-top: 2em;
 }
 
-/* 引用块：纸面色调盒，替代厚重的左侧色条 */
+/* 引用块：浅灰底，极简 */
 .blog-post-page .markdown blockquote {
   margin: 1.75rem 0;
   padding: 1rem 1.25rem;
-  border: 1px solid var(--ifm-border-color);
-  border-radius: 10px;
+  border: none;
+  border-radius: 8px;
   background: var(--blog-item-shade);
   color: var(--ifm-secondary-text-color);
 }
@@ -234,8 +235,8 @@ article[itemProp="blogPost"] {
 }
 
 article[itemProp="blogPost"]:hover {
-  border-color: hsl(var(--primary) / 0.3);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border-color: var(--ifm-color-primary-lighter);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
 /* 文章标题悬停变色 */
@@ -258,27 +259,26 @@ article[itemProp="blogPost"]:hover h3 a {
 }
 
 .card:hover {
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  border-color: var(--ifm-color-primary-lighter);
 }
 
-/* 博客详情页正文使用 Zhuque Fangsong（仿宋），兜底到系统中文字体 */
+/* 博客详情页正文：清晰无衬线，舒适行距与行宽 */
 .blog-post-page .markdown,
 .blog-post-page .markdown p,
 .blog-post-page .markdown li,
 .blog-post-page .markdown blockquote,
 .blog-post-page .markdown td,
 .blog-post-page .markdown th {
-  font-family: 'Zhuque Fangsong (technical preview)', 'LXGW WenKai',
-    'FangSong', 'STFangsong', 'Noto Serif CJK SC', 'Source Han Serif SC',
-    'SimSun', serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+    'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
 }
 
 .blog-post-page .markdown {
-  line-height: 1.95;
-  font-size: 1.05rem;
+  line-height: 1.85;
+  font-size: 1.0625rem;
   /* 舒适的行宽：避免宽屏上整行过长 */
-  max-width: 72ch;
+  max-width: 70ch;
   margin-inline: auto;
 }
 
@@ -403,11 +403,11 @@ html[data-theme='dark'] .tk-comments .tk-tag-blue {
 
 /* 代码块 */
 .theme-code-block {
-  --prism-background-color: #f8f7f2 !important;
+  --prism-background-color: #f5f5f7 !important;
 }
 
 html[data-theme='dark'] .theme-code-block {
-  --prism-background-color: #1e1e1e !important;
+  --prism-background-color: #1a1a1c !important;
 }
 
 /* 文章内容 */

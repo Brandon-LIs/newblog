@@ -97,7 +97,7 @@ function Yiyan() {
           event: 'GET_RECENT_COMMENTS',
           accessToken: '',
           pageSize: 5,
-          includeReply: false,
+          includeReply: true,
           envId: TWIKOO_ENV,
         }),
       });

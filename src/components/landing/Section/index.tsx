@@ -21,7 +21,7 @@ export function Section({title, icon, href, children}: SectionProps) {
         {href && (
           <Link
             href={href}
-            className="group/link inline-flex items-center justify-center text-base opacity-0 transition duration-500 group-hover/section:opacity-100">
+            className="group/link inline-flex items-center justify-center text-base text-secondary opacity-60 transition duration-500 hover:opacity-100">
             <Translate id="homepage.lookMore">查看更多</Translate>
             <Icon
               icon="ri:arrow-right-s-line"

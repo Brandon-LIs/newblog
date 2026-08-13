@@ -310,7 +310,7 @@
   padding: 12px 28px;
   border: none;
   border-radius: 999px;
-  background: linear-gradient(135deg, #12affa, #0598df);
+  background: var(--ifm-color-primary);
   color: #fff;
   font-size: 15px;
   font-weight: 600;
@@ -320,7 +320,8 @@
 
 .shareDownload:hover {
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(18, 175, 250, 0.35);
+  background: var(--ifm-color-primary-dark);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--ifm-color-primary) 35%, transparent);
 }
 
 .error {

@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="620" viewBox="0 0 800 620" fill="none" role="img" aria-labelledby="title">
+  <title id="title">山水青绿 · 我们都有光明的未来</title>
+  <defs>
+    <radialGradient id="wash" cx="62%" cy="24%" r="65%">
+      <stop offset="0%" stop-color="#cfe0d9" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#dce8e2" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#dce8e2" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mountainBack" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#a9c4ba"/>
+      <stop offset="100%" stop-color="#8fb0a4"/>
+    </linearGradient>
+    <linearGradient id="mountainMid" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#7fa79a"/>
+      <stop offset="100%" stop-color="#60897b"/>
+    </linearGradient>
+    <linearGradient id="mountainFront" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#57503f"/>
+      <stop offset="100%" stop-color="#3d382c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 青绿晕染 -->
+  <rect width="800" height="620" fill="url(#wash)"/>
+
+  <!-- 青瓷月轮 -->
+  <circle cx="586" cy="168" r="96" fill="#8fb0a4" opacity="0.9"/>
+
+  <!-- 远山（淡青） -->
+  <path d="M0 372 C 110 288, 250 308, 402 352 C 548 394, 668 336, 800 374 L 800 620 L 0 620 Z" fill="url(#mountainBack)" opacity="0.9"/>
+
+  <!-- 中景（青瓷） -->
+  <path d="M0 436 C 170 372, 330 424, 512 402 C 640 386, 716 432, 800 420 L 800 620 L 0 620 Z" fill="url(#mountainMid)"/>
+
+  <!-- 山间雾带 -->
+  <ellipse cx="400" cy="470" rx="420" ry="26" fill="#f4f1ea" opacity="0.55"/>
+
+  <!-- 近山（墨色） -->
+  <path d="M0 508 C 140 458, 320 512, 480 484 C 610 462, 700 502, 800 490 L 800 620 L 0 620 Z" fill="url(#mountainFront)"/>
+
+  <!-- 前景墨岸 -->
+  <path d="M0 566 C 180 552, 420 574, 800 556 L 800 620 L 0 620 Z" fill="#33302a"/>
+
+  <!-- 松影 -->
+  <g fill="#2b2822" opacity="0.9">
+    <path d="M196 488 L 208 452 L 220 488 Z M196 478 L 220 478 L 208 462 Z"/>
+    <path d="M238 494 L 249 462 L 260 494 Z M238 486 L 260 486 L 249 470 Z"/>
+    <path d="M596 496 L 606 470 L 616 496 Z M596 490 L 616 490 L 606 476 Z"/>
+    <path d="M646 500 L 655 478 L 664 500 Z M646 495 L 664 495 L 655 483 Z"/>
+  </g>
+
+  <!-- 朱砂印章 -->
+  <g>
+    <rect x="668" y="512" width="58" height="58" rx="9" fill="#a63d2f"/>
+    <text x="697" y="530" text-anchor="middle" font-family="'Noto Serif CJK SC','Songti SC','STKaiti','KaiTi',serif" font-size="22" fill="#f6f1e8" letter-spacing="1">
+      <tspan x="697" dy="0">光明</tspan>
+    </text>
+  </g>
+
+  <!-- 竖排题跋 -->
+  <text x="752" y="120" writing-mode="vertical-rl" text-anchor="middle"
+        font-family="'Noto Serif CJK SC','Songti SC','STKaiti','KaiTi',serif"
+        font-size="30" fill="#4a443c" opacity="0.62" letter-spacing="8">我们都有光明的未来</text>
+</svg>

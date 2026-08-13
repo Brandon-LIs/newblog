@@ -1,18 +1,18 @@
 @reference "../../css/custom.css";
 
 .footer {
-  --footer-bg: #191a1f;
-  --footer-bg-accent: #121318;
-  --footer-text: #e5e3dc;
-  --footer-muted: #9b9a94;
-  --footer-subtle: #6f6e68;
+  --footer-bg: #1c1a16;
+  --footer-bg-accent: #131210;
+  --footer-text: #e8e4da;
+  --footer-muted: #9d988d;
+  --footer-subtle: #716d64;
   --footer-line: rgb(255 255 255 / 8%);
   --footer-hover: #ffffff;
 
   position: relative;
   background:
-    radial-gradient(60rem 20rem at 85% -5rem, rgb(18 175 250 / 14%), transparent 60%),
-    radial-gradient(40rem 16rem at -10% 110%, rgb(18 175 250 / 8%), transparent 60%),
+    radial-gradient(60rem 20rem at 85% -5rem, rgb(18 175 250 / 8%), transparent 60%),
+    radial-gradient(40rem 16rem at -10% 110%, rgb(18 175 250 / 5%), transparent 60%),
     var(--footer-bg);
   color: var(--footer-text);
   font-family: var(--ifm-font-family-base);
@@ -112,8 +112,8 @@
 }
 
 .icpLink:hover {
-  background: rgb(18 175 250 / 12%);
-  border-color: rgb(18 175 250 / 35%);
+  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
   color: var(--footer-text) !important;
   transform: translateY(-1px);
   text-decoration: none !important;
@@ -236,8 +236,8 @@
 }
 
 .bszItem:hover {
-  background: rgb(18 175 250 / 12%);
-  border-color: rgb(18 175 250 / 35%);
+  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
   color: var(--footer-text);
   transform: translateY(-1px);
 }
@@ -290,8 +290,8 @@
 }
 
 .statusBadge:hover {
-  background: rgb(18 175 250 / 14%);
-  border-color: rgb(18 175 250 / 40%);
+  background: color-mix(in srgb, var(--ifm-color-primary) 16%, transparent);
+  border-color: color-mix(in srgb, var(--ifm-color-primary) 45%, transparent);
   transform: translateY(-1px);
 }
 

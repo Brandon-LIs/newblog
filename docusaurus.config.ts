@@ -11,15 +11,18 @@ const config: Config = {
   tagline: '我们都有光明的未来',
 
   headTags: [
-    // 字体加载（非阻塞）
+    // 字体加载（非阻塞：media=print 切换技巧，避免阻塞渲染）
+    // Clear Han Serif（界面/标题）、Zhuque Fangsong（正文）、LXGW WenKai（正文兜底）
     { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/79/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
     { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/7/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
-    { tagName: 'style', attributes: {}, innerHTML: 'body,html{font-family:system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}.wf-active body,.wf-active html{font-family:"Clear Han Serif",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif}' },
+    { tagName: 'link', attributes: { href: 'https://fontsapi.zeoseven.com/292/main/result.css', rel: 'stylesheet', media: 'print', onload: 'this.media=\"all\"', crossorigin: 'anonymous' } },
+    { tagName: 'style', attributes: {}, innerHTML: 'body,html{font-family:"Songti SC","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif}.wf-active body,.wf-active html{font-family:"Clear Han Serif","Songti SC","Noto Serif CJK SC","Source Han Serif SC","SimSun",serif}' },
     // 搜索引擎验证
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
     // DNS 预解析 + 预连接外部资源
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://fontsapi.zeoseven.com' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://apis.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://memos.oopss.top' } },
@@ -65,7 +68,7 @@ const config: Config = {
       }),
     },
   ],
-  favicon: 'https://cdn.oopss.top/favicon.ico',
+  favicon: '/img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -97,6 +100,7 @@ const config: Config = {
   clientModules: [
     require.resolve('./src/vercelAnalytics.ts'),
     require.resolve('./src/imgFade.ts'),
+    require.resolve('./src/iconifyOffline.ts'),
   ],
 
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
@@ -108,11 +112,15 @@ const config: Config = {
       'data-website-id': '1eb5f40d-b5f6-4dbc-8406-9135f77e1368',
       'data-host-url': 'https://umami.oopss.top',
     },
-    '/js/view-image.min.js',
+    {
+      src: '/js/view-image.min.js',
+      async: false,
+      defer: true,
+    },
     {
       src: '/js/view-image-init.js',
       async: false,
-      defer: false,
+      defer: true,
     },
   ],
 
@@ -206,7 +214,7 @@ const config: Config = {
       title: "Brandon's Blog",
       logo: {
         alt: 'Brandon',
-        src: 'https://jsd.oopss.top/icon.jpg',
+        src: '/img/icon.jpg',
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},

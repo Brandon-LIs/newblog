@@ -1,7 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 
 // Twikoo 评论（envId 为自建 Twikoo 后端），使用 Twikoo 默认样式
-const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@1.7.15/dist/twikoo.min.js';
+// 脚本自托管于 blogimg 仓库（jsd.oopss.top 香港节点），避免依赖第三方 CDN
+const TWIKOO_SCRIPT = 'https://jsd.oopss.top/twikoo.min.js';
 const TWIKOO_ENV = 'https://co.oopss.top';
 
 declare global {

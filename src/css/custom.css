@@ -1,7 +1,8 @@
 /* ================================================================
-   霞鹜文楷（LXGW WenKai，ZeoSeven Fonts item 292）
+   字体：Clear Han Serif / Zhuque Fangsong / LXGW WenKai
+   已通过 docusaurus.config.ts headTags 非阻塞加载（media=print 技巧），
+   此处不再使用 @import（@import 会阻塞渲染）。
    ================================================================ */
-@import url('https://fontsapi.zeoseven.com/292/main/result.css');
 
 @layer theme, base, components, utilities;
 
@@ -14,80 +15,91 @@
 
 @layer base {
   :root {
-    /* astro-pure 配色（UnoCSS HSL）*/
-    --content-background: hsl(210 33% 99%);
-    --ifm-color-primary: hsl(200 29% 45%);
-    --ifm-color-primary-dark: hsl(200 29% 40%);
-    --ifm-color-primary-darker: hsl(200 29% 36%);
-    --ifm-color-primary-darkest: hsl(200 29% 30%);
-    --ifm-color-primary-light: hsl(200 29% 55%);
-    --ifm-color-primary-lighter: hsl(200 29% 75%);
-    --ifm-color-primary-lightest: hsl(200 29% 90%);
+    /* 暖纸底 · 墨色文本 · 青瓷主色（含蓄、有书卷气的文艺调校） */
+    --content-background: hsl(42 24% 97.2%);
+    --ifm-color-primary: hsl(168 30% 33%);
+    --ifm-color-primary-dark: hsl(168 30% 28%);
+    --ifm-color-primary-darker: hsl(168 32% 24%);
+    --ifm-color-primary-darkest: hsl(168 34% 20%);
+    --ifm-color-primary-light: hsl(168 26% 40%);
+    --ifm-color-primary-lighter: hsl(168 22% 58%);
+    --ifm-color-primary-lightest: hsl(168 30% 84%);
     --ifm-code-font-size: 95%;
-    --ifm-font-family-base: 'Clear Han Serif', ui-sans-serif, system-ui,
-      -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --ifm-font-family-base: 'Clear Han Serif', ui-serif, 'Songti SC',
+      'Noto Serif CJK SC', 'Source Han Serif SC', 'SimSun', serif;
 
-    --ifm-heading-font-family: 'Clear Han Serif', ui-sans-serif, system-ui,
-      -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+    --ifm-heading-font-family: 'Clear Han Serif', ui-serif, 'Songti SC',
+      'Noto Serif CJK SC', 'Source Han Serif SC', 'SimSun', serif;
 
-    --ifm-navbar-background-color: hsl(210 33% 99% / 0.85);
+    --ifm-navbar-background-color: hsl(42 24% 97.2% / 0.82);
     --ifm-navbar-shadow: none;
     --ifm-navbar-padding-vertical: 0.75rem;
 
-    --ifm-menu-color: hsl(240 10% 20%);
+    --ifm-menu-color: hsl(32 10% 26%);
 
     /* 代码块 */
-    --prism-background-color: #f6f8fa;
+    --prism-background-color: #f8f7f3;
     --ifm-code-padding-horizontal: 0.2rem;
     --ifm-code-padding-vertical: 0.2rem;
 
-    /* 文本 */
-    --ifm-text-color: hsl(240 10% 3.9%);
-    --ifm-secondary-text-color: hsl(240 3.8% 28.1%);
+    /* 文本（暖墨色） */
+    --ifm-text-color: hsl(28 14% 16%);
+    --ifm-secondary-text-color: hsl(30 8% 37%);
 
     --ifm-container-width: 1024px;
 
-    --ifm-heading-color: hsl(240 10% 3.9%);
+    --ifm-heading-color: hsl(28 14% 16%);
     --ifm-heading-font-weight: 600;
     --ifm-font-weight-bold: 600;
-    --ifm-border-color: hsl(240 5.9% 88%);
+    --ifm-border-color: hsl(40 16% 86%);
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: hsl(0 0% 100%);
-    --blog-item-shadow: 0 1px 3px rgba(0, 0, 0, 0.04),
-      0 4px 16px rgba(0, 0, 0, 0.04);
-    --blog-item-shade: hsl(240 4.8% 96%);
-    --blog-post-page-surface: hsl(210 33% 99%);
+    --blog-item-background-color: hsl(42 30% 99%);
+    --blog-item-shadow: 0 1px 2px rgba(70, 60, 40, 0.05),
+      0 2px 10px rgba(70, 60, 40, 0.05);
+    --blog-item-shade: hsl(40 16% 93%);
+    --blog-post-page-surface: hsl(42 24% 97.2%);
     --blog-post-page-background: var(--blog-post-page-surface);
+
+    /* Hero 副文本（保证浅色模式 ≥4.5:1） */
+    --hero-sub-text: hsl(32 8% 33%);
 
     --ifm-card-border-radius: 12px;
 
     --site-color-tooltip: #fff;
     --site-color-tooltip-background: #353738;
 
-    -webkit-font-smoothing: unset;
+    -webkit-font-smoothing: antialiased;
 
-    --docusaurus-highlighted-code-line-bg: #d1d5db;
+    --docusaurus-highlighted-code-line-bg: #e7e4db;
   }
 
   html[data-theme='dark'] {
-    --content-background: hsl(240 20.54% 5.2%);
-    --ifm-color-primary: hsl(195 95% 85%);
-    --ifm-color-primary-light: hsl(195 95% 90%);
-    --ifm-heading-color: hsl(0 0% 98%);
-    --ifm-menu-color: hsl(240 5% 74.9%);
-    --ifm-text-color: hsl(0 0% 98%);
-    --ifm-secondary-text-color: hsl(240 5% 74.9%);
-    --ifm-border-color: hsl(240 3.7% 22.9%);
+    --content-background: hsl(32 12% 8.5%);
+    --ifm-color-primary: hsl(168 38% 64%);
+    --ifm-color-primary-dark: hsl(168 32% 54%);
+    --ifm-color-primary-darker: hsl(168 30% 48%);
+    --ifm-color-primary-darkest: hsl(168 28% 42%);
+    --ifm-color-primary-light: hsl(168 45% 74%);
+    --ifm-color-primary-lighter: hsl(168 52% 82%);
+    --ifm-color-primary-lightest: hsl(168 22% 28%);
+    --ifm-heading-color: hsl(40 14% 93%);
+    --ifm-menu-color: hsl(38 8% 70%);
+    --ifm-text-color: hsl(40 14% 93%);
+    --ifm-secondary-text-color: hsl(38 8% 70%);
+    --ifm-border-color: hsl(35 8% 19%);
 
-    --ifm-navbar-background-color: hsl(240 20.54% 5.2% / 0.85);
+    --ifm-navbar-background-color: hsl(32 12% 8.5% / 0.82);
     --ifm-toc-border-color: var(--ifm-border-color);
 
-    --blog-item-background-color: hsl(240 3.7% 24.9%);
-    --blog-item-shadow: 0 1px 3px rgba(0, 0, 0, 0.3),
-      0 4px 16px rgba(0, 0, 0, 0.2);
-    --blog-item-shade: hsl(240 5.9% 13%);
-    --blog-post-page-surface: hsl(240 20.54% 5.2%);
+    --blog-item-background-color: hsl(32 10% 12%);
+    --blog-item-shadow: 0 1px 2px rgba(0, 0, 0, 0.35),
+      0 3px 12px rgba(0, 0, 0, 0.25);
+    --blog-item-shade: hsl(32 10% 10.5%);
+    --blog-post-page-surface: hsl(32 12% 8.5%);
+
+    /* Hero 副文本（深色模式） */
+    --hero-sub-text: hsl(40 10% 74%);
 
     --docusaurus-highlighted-code-line-bg: #4b5563;
   }
@@ -106,14 +118,62 @@ a:hover {
   }
 }
 
+/* 选中文字：青瓷淡染 */
+::selection {
+  background: color-mix(in srgb, var(--ifm-color-primary-lightest) 65%, transparent);
+}
+
 html,
 body {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: 'Clear Han Serif', ui-sans-serif, system-ui, -apple-system,
-    'PingFang SC', 'Microsoft YaHei', sans-serif;
+  font-family: 'Clear Han Serif', ui-serif, 'Songti SC', 'Noto Serif CJK SC',
+    'Source Han Serif SC', 'SimSun', serif;
+  text-rendering: optimizeLegibility;
+}
+
+/* 标题平衡换行，正文减少孤行 */
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+.markdown p,
+.markdown li,
+.markdown blockquote p {
+  text-wrap: pretty;
+}
+
+/* 标题层级：克制的字阶与间距 */
+.blog-post-page .markdown > h2 {
+  margin-top: 2.6em;
+  padding-bottom: 0.4em;
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+
+.blog-post-page .markdown > h3 {
+  margin-top: 2em;
+}
+
+/* 引用块：纸面色调盒，替代厚重的左侧色条 */
+.blog-post-page .markdown blockquote {
+  margin: 1.75rem 0;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 10px;
+  background: var(--blog-item-shade);
+  color: var(--ifm-secondary-text-color);
+}
+
+.blog-post-page .markdown blockquote p {
+  margin: 0;
+}
+
+.blog-post-page .markdown blockquote p + p {
+  margin-top: 0.6em;
 }
 
 /* 页面淡入动画 */
@@ -202,19 +262,24 @@ article[itemProp="blogPost"]:hover h3 a {
   transform: translateY(-2px);
 }
 
-/* 博客详情页正文使用 Zhuque Fangsong */
+/* 博客详情页正文使用 Zhuque Fangsong（仿宋），兜底到系统中文字体 */
 .blog-post-page .markdown,
 .blog-post-page .markdown p,
 .blog-post-page .markdown li,
 .blog-post-page .markdown blockquote,
 .blog-post-page .markdown td,
 .blog-post-page .markdown th {
-  font-family: 'Zhuque Fangsong (technical preview)', 'LXGW WenKai', serif;
+  font-family: 'Zhuque Fangsong (technical preview)', 'LXGW WenKai',
+    'FangSong', 'STFangsong', 'Noto Serif CJK SC', 'Source Han Serif SC',
+    'SimSun', serif;
 }
 
 .blog-post-page .markdown {
-  line-height: 2;
+  line-height: 1.95;
   font-size: 1.05rem;
+  /* 舒适的行宽：避免宽屏上整行过长 */
+  max-width: 72ch;
+  margin-inline: auto;
 }
 
 .blog-post-page .markdown img {
@@ -338,7 +403,7 @@ html[data-theme='dark'] .tk-comments .tk-tag-blue {
 
 /* 代码块 */
 .theme-code-block {
-  --prism-background-color: #f6f8fa !important;
+  --prism-background-color: #f8f7f2 !important;
 }
 
 html[data-theme='dark'] .theme-code-block {

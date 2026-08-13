@@ -16,7 +16,7 @@ const APPLY_EMAIL = 'bcihal@qq.com';
 const SITE_INFO = `title: 'Brandon's Blog'
 bio: '一个高中生的个人博客'
 website: 'https://blog.oopss.top'
-avatar: 'https://jsd.oopss.top/icon.jpg'
+avatar: '/img/icon.jpg'
 `;
 const friends = Friends;
 
@@ -53,7 +53,7 @@ function FriendHeader() {
 function ApplyNotice() {
   return (
     <section className="mx-auto mb-10 max-w-3xl px-4">
-      <div className="relative overflow-hidden rounded-card border border-solid border-[var(--ifm-color-emphasis-200)] bg-[linear-gradient(135deg,rgb(18,175,250,0.08),transparent_60%),var(--ifm-card-background-color)] p-6 text-center shadow-[var(--blog-item-shadow)]">
+      <div className="relative overflow-hidden rounded-card border border-solid border-[var(--ifm-color-emphasis-200)] bg-[linear-gradient(135deg,color-mix(in_srgb,var(--ifm-color-primary)_9%,transparent),transparent_60%),var(--ifm-card-background-color)] p-6 text-center shadow-[var(--blog-item-shadow)]">
         <div className="mb-3 text-[var(--ifm-color-primary)]">
           <Icon icon="ri:user-add-line" width="28" height="28" />
         </div>
@@ -63,7 +63,7 @@ function ApplyNotice() {
         </p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           <a
-            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--ifm-color-primary)] px-5 py-2.5 text-sm font-medium text-white no-underline shadow-[0_4px_14px_rgb(18,175,250,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:no-underline hover:brightness-105"
+            className="inline-flex items-center gap-1.5 rounded-full bg-[var(--ifm-color-primary)] px-5 py-2.5 text-sm font-medium text-white no-underline shadow-[0_4px_14px_color-mix(in_srgb,var(--ifm-color-primary)_35%,transparent)] transition-all duration-300 hover:-translate-y-0.5 hover:no-underline hover:brightness-105"
             href={APPLY_FORM_URL}
             target="_blank"
             rel="noreferrer">

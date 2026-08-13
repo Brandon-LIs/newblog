@@ -178,7 +178,7 @@ export default function Footer(): JSX.Element {
           <section className={styles.brand} aria-label="站点信息">
             <img
               className={styles.avatar}
-              src="https://jsd.oopss.top/icon.jpg"
+              src="/img/icon.jpg"
               alt={siteInfo.name}
               width={64}
               height={64}
@@ -236,6 +236,7 @@ export default function Footer(): JSX.Element {
               src="https://status.oopss.top/badge?theme=dark&lang=zh"
               width="250"
               height="30"
+              loading="lazy"
               frameborder="0"
               scrolling="no"
               style={{'color-scheme': 'normal'}}

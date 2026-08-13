@@ -1,15 +1,18 @@
 @reference "../../../../css/custom.css";
 
 .title {
-  font-size: 1.4rem;
-  font-weight: 500;
+  font-size: 1.5rem;
+  font-weight: 600;
   margin-bottom: 0.5rem;
+  letter-spacing: -0.01em;
+  line-height: 1.45;
 }
 
 /* 文章详情页大标题保持醒目 */
 .title:is(h1) {
-  font-size: 2rem;
+  font-size: clamp(1.9rem, 4vw, 2.4rem);
   font-weight: 700;
+  letter-spacing: 0;
 }
 
 .titleLink {

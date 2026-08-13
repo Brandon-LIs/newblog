@@ -5,12 +5,16 @@
   z-index: 2;
   margin-bottom: 1rem;
   padding: 0.95rem 1rem 1rem;
-  border: 1px solid rgb(18 175 250 / 16%);
-  border-radius: 8px;
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 10px;
   background:
-    linear-gradient(90deg, rgb(18 175 250 / 10%), rgb(18 175 250 / 3%)),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ifm-color-primary-lightest) 30%, transparent),
+      transparent
+    ),
     var(--content-background);
-  box-shadow: 0 10px 24px rgb(15 23 42 / 5%);
+  box-shadow: var(--blog-item-shadow);
 }
 
 .title {
@@ -31,9 +35,12 @@
 }
 
 :global(html[data-theme='dark']) .summary {
-  border-color: rgb(59 130 246 / 22%);
   background:
-    linear-gradient(90deg, rgb(59 130 246 / 16%), rgb(59 130 246 / 4%)),
+    linear-gradient(
+      90deg,
+      color-mix(in srgb, var(--ifm-color-primary-lightest) 16%, transparent),
+      transparent
+    ),
     var(--content-background);
   box-shadow: none;
 }

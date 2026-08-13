@@ -1,6 +1,6 @@
 @reference "../../../css/custom.css";
 
-/* hero */
+/* hero：编辑排版式，暖纸 + 墨 + 青瓷 + 朱砂印章 */
 .hero {
   @apply relative m-0 grid h-[calc(100vh-60px)] w-screen max-w-full grid-cols-[8fr_11fr] items-center;
   letter-spacing: 0.04em;
@@ -11,16 +11,77 @@
   @apply relative z-10 p-4 pl-16;
 }
 
-.intro > p {
-  @apply my-6 text-justify text-base leading-8 text-[#6e7b8c];
-  letter-spacing: -0.04em;
-  text-shadow: 0 0 #8c99ab;
+.headline {
+  @apply mb-5;
+}
+
+/* 印章 + 问候语 */
+.greeting {
+  @apply mb-3 inline-flex items-center gap-3 text-lg;
+  color: var(--ifm-text-color);
+  letter-spacing: 0.08em;
+}
+
+.seal {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 0.375rem;
+  background: #a63d2f;
+  color: #f6f1e8;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  writing-mode: vertical-rl;
+  text-orientation: upright;
+  box-shadow: 0 1px 3px rgba(120, 50, 35, 0.25);
+}
+
+.nameRow {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.name {
+  margin: 0;
+  font-size: clamp(2.6rem, 6vw, 4.4rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  color: var(--ifm-text-color);
+  text-wrap: balance;
+}
+
+.underline {
+  width: min(16rem, 60vw);
+  height: 0.6rem;
+  margin-top: -0.15rem;
+  margin-left: 0.25rem;
+}
+
+.tagline {
+  @apply mt-4 text-base;
+  margin: 1.1rem 0 0;
+  color: var(--hero-sub-text);
+  letter-spacing: 0.22em;
+  text-indent: 0.22em;
+}
+
+.intro > p:not(.tagline) {
+  @apply my-6 max-w-xl text-justify text-base leading-8;
+  color: var(--hero-sub-text);
+  letter-spacing: 0.01em;
 }
 
 .yiyan {
-  @apply mb-6 inline-flex max-w-full items-center gap-2 text-sm text-[#6e7b8c];
+  @apply mb-6 inline-flex max-w-full items-center gap-2 text-sm;
+  color: var(--hero-sub-text);
   overflow: hidden;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.01em;
 }
 
 .yiyanText {
@@ -28,7 +89,6 @@
   flex: 1;
   min-width: 0;
   max-width: min(24rem, 70vw);
-  font-style: italic;
   white-space: nowrap;
   overflow: hidden;
   position: relative;
@@ -49,38 +109,13 @@
 }
 
 .yiyanRefresh {
-  @apply inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent text-[#9aa7b8] transition-colors duration-200;
+  @apply inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-full border-0 bg-transparent transition-colors duration-200;
+  color: var(--hero-sub-text);
+  opacity: 0.65;
 }
 
 .yiyanRefresh:hover {
   @apply text-[var(--ifm-color-primary)];
-}
-
-.hero_text {
-  font-size: calc(1.5em + 1.2vw);
-}
-
-.name {
-  --lighting-size: 300px;
-  --lighting-color: var(--ifm-color-primary);
-  --lighting-highlight-color: var(--ifm-color-primary-lightest);
-
-  background-image: radial-gradient(
-    var(--lighting-highlight-color),
-    var(--lighting-color),
-    var(--lighting-color)
-  );
-  background-size: var(--lighting-size) var(--lighting-size);
-  background-repeat: no-repeat;
-  background-position-x: calc(
-    var(--x) - var(--mouse-x) - calc(var(--lighting-size) / 2)
-  );
-  background-position-y: calc(
-    var(--y) - var(--mouse-y) - calc(var(--lighting-size) / 2)
-  );
-  background-color: var(--lighting-color);
-  color: transparent;
-  background-clip: text;
 }
 
 .background {
@@ -90,12 +125,7 @@
 
 .background svg {
   @apply h-auto w-full;
-}
-
-.circle {
-  @apply absolute top-0 h-full w-full rounded-full bg-gradient-to-r from-[rgb(150,255,244,0.81)] to-[rgb(0,71,252,0.81)] opacity-30;
-  filter: blur(80px);
-  z-index: -1;
+  max-width: 34rem;
 }
 
 @media (max-width: 1000px) {
@@ -105,14 +135,20 @@
 
   .intro {
     @apply flex flex-col items-center p-0 pt-16;
+    text-align: center;
+  }
+
+  .nameRow {
+    align-items: center;
   }
 
   .background {
-    @apply grid h-full w-full place-items-center justify-self-center pt-16;
+    @apply grid h-full w-full place-items-center justify-self-center pt-10;
   }
 
   .background svg {
-    @apply h-auto w-[90%];
+    @apply h-auto w-[86%];
+    max-width: 26rem;
   }
 }
 
@@ -122,11 +158,12 @@
   }
 
   .background {
-    @apply pt-8;
+    @apply pt-6;
   }
 
   .background svg {
     @apply h-auto w-full;
+    max-width: 22rem;
   }
 
   .intro {

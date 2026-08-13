@@ -1,7 +1,7 @@
-import {type Variants, motion} from 'framer-motion';
+import {type Variants, motion, useReducedMotion} from 'framer-motion';
 import {useEffect, useRef, useState} from 'react';
 
-import HeroSvg from './img/hero.svg';
+import HeroInkSvg from './img/hero-ink.svg';
 
 import {Icon} from '@iconify/react';
 import SocialLinks from '@site/src/components/SocialLinks';
@@ -19,32 +19,38 @@ const variants: Variants = {
       damping: 25,
       stiffness: 100,
       duration: 0.3,
-      delay: i * 0.3,
+      delay: i * 0.15,
     },
   }),
-  hidden: {opacity: 0, y: 30},
+  hidden: {opacity: 0, y: 24},
 };
 
-function Circle() {
-  return <div className={styles.circle} />;
+function Seal() {
+  return (
+    <span className={styles.seal} aria-hidden="true">
+      光明
+    </span>
+  );
 }
 
 function Name() {
   return (
-    <motion.div
-      className={styles.hero_text}
-      custom={1}
-      initial="hidden"
-      animate="visible"
-      variants={variants}
-      onMouseMove={(e) => {
-        e.currentTarget.style.setProperty('--x', `${e.clientX}px`);
-        e.currentTarget.style.setProperty('--y', `${e.clientY}px`);
-      }}>
-      你好! 我是
-      <span className={styles.name}>Brandon</span>
-      <span className="ml-1">👋</span>
-    </motion.div>
+    <div className={styles.nameRow}>
+      <h1 className={styles.name}>Brandon</h1>
+      <svg
+        className={styles.underline}
+        viewBox="0 0 220 12"
+        aria-hidden="true"
+        preserveAspectRatio="none">
+        <path
+          d="M3 8 C 60 2, 150 3, 217 7"
+          fill="none"
+          stroke="var(--ifm-color-primary-lighter)"
+          strokeWidth="4"
+          strokeLinecap="round"
+        />
+      </svg>
+    </div>
   );
 }
 
@@ -73,6 +79,7 @@ function Yiyan() {
     if (typeof window === 'undefined') return;
     const timer = setTimeout(fetchComments, 3000);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function fetchComments() {
@@ -198,13 +205,40 @@ function Yiyan() {
 }
 
 export default function Hero() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <motion.div className={styles.hero}>
       <div className={styles.intro}>
-        <Name />
+        <div className={styles.headline}>
+          <motion.div
+            custom={0}
+            initial={reduceMotion ? false : 'hidden'}
+            animate="visible"
+            variants={variants}
+            className={styles.greeting}>
+            <Seal />
+            <span>你好，我是</span>
+          </motion.div>
+          <motion.div
+            custom={1}
+            initial={reduceMotion ? false : 'hidden'}
+            animate="visible"
+            variants={variants}>
+            <Name />
+          </motion.div>
+          <motion.p
+            custom={1.6}
+            initial={reduceMotion ? false : 'hidden'}
+            animate="visible"
+            variants={variants}
+            className={styles.tagline}>
+            我们都有光明的未来
+          </motion.p>
+        </div>
         <motion.p
           custom={2}
-          initial="hidden"
+          initial={reduceMotion ? false : 'hidden'}
           animate="visible"
           variants={variants}
           className="max-lg:px-4">
@@ -212,13 +246,16 @@ export default function Hero() {
           这里记录我的学习笔记、项目实践与生活分享。
         </motion.p>
         <Yiyan />
-        <motion.div custom={3} initial="hidden" animate="visible" variants={variants}>
+        <motion.div custom={3} initial={reduceMotion ? false : 'hidden'} animate="visible" variants={variants}>
           <SocialLinks />
         </motion.div>
       </div>
-      <motion.div className={styles.background}>
-        <HeroSvg />
-        <Circle />
+      <motion.div
+        className={styles.background}
+        initial={reduceMotion ? false : {opacity: 0, y: 16}}
+        animate={{opacity: 1, y: 0}}
+        transition={{duration: 0.8, delay: 0.3}}>
+        <HeroInkSvg />
       </motion.div>
     </motion.div>
   );

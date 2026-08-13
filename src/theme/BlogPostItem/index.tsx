@@ -11,7 +11,7 @@ import BlogPostItemSummary from '../BlogPostItem/Summary';
 // apply a bottom margin in list view
 function useContainerClassName() {
   const {isBlogPostPage} = useBlogPost();
-  return !isBlogPostPage ? 'group/blog rounded-2xl border border-border bg-card overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 mb-5' : '';
+  return !isBlogPostPage ? 'group/blog border-b border-border pb-6 mb-6 last:border-b-0' : '';
 }
 
 export default function BlogPostItem({

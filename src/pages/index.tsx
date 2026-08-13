@@ -3,7 +3,6 @@ import Layout from '@theme/Layout';
 import BlogSection from '../components/landing/BlogSection';
 import FeaturesSection from '../components/landing/FeaturesSection';
 import Hero from '../components/landing/Hero';
-import Particles from '../components/magicui/particles';
 
 export default function Home() {
   const {
@@ -15,13 +14,6 @@ export default function Home() {
     <Layout title={title} description={description}>
       <main>
         <Hero />
-        <Particles
-          className="absolute inset-0"
-          quantity={100}
-          ease={80}
-          color="#ffffff"
-          refresh
-        />
 
         <div className="relative">
           <div className="mx-auto max-w-7xl lg:px-8">

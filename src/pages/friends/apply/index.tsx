@@ -146,7 +146,7 @@ export default function FriendApply(): JSX.Element {
             </div>
 
             <button type="submit" disabled={submitting}
-              className="w-full rounded-lg bg-gradient-to-r from-[#12affa] to-[#0598df] py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:shadow-lg disabled:opacity-60">
+              className="w-full rounded-lg bg-[var(--ifm-color-primary)] py-3 text-sm font-semibold text-white transition-all hover:-translate-y-0.5 hover:bg-[var(--ifm-color-primary-dark)] hover:shadow-lg disabled:opacity-60">
               {submitting ? (
                 <span className="inline-flex items-center gap-2"><Icon icon="ri:loader-4-line" className="animate-spin" width="16" height="16" /> 提交中…</span>
               ) : (

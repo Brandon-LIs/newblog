@@ -67,7 +67,7 @@ export default function BlogPostItemFooter(): JSX.Element | null {
           {truncatedPost && (
             <div
               className={cn(
-                'flex flex-1 items-center justify-end gap-0.5 font-medium text-[var(--ifm-link-color)] opacity-0 transition-opacity duration-200 group-hover/blog:opacity-100',
+                'flex flex-1 items-center justify-end gap-0.5 font-medium text-[var(--ifm-link-color)] opacity-70 transition-opacity duration-200 group-hover/blog:opacity-100',
                 {
                   'col--3': tagsExists,
                 },

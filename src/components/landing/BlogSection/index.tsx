@@ -23,9 +23,9 @@ export function BlogItem({post}: {post: BlogPost}) {
     <motion.div
       className={cn('card', 'margin-bottom--md flex w-full bg-blog shadow-blog')}
       key={permalink}
-      initial={{y: 100, opacity: 0.001}}
+      initial={{y: 40, opacity: 0.001}}
       whileInView={{y: 0, opacity: 1, transition: {duration: 0.5}}}
-      whileHover={{y: -10, transition: {duration: 0.3}}}
+      whileHover={{y: -4, transition: {duration: 0.3}}}
       viewport={{once: true}}>
       {frontMatter.image && (
         <Link

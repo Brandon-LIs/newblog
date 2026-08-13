@@ -5,23 +5,16 @@
   margin: 1rem 0 1.25rem;
   padding: 0.9rem 1.1rem 1rem;
   border-radius: 14px;
-  border: 1px solid rgb(18 175 250 / 22%);
+  border: 1px solid var(--ifm-border-color);
   background:
-    linear-gradient(135deg, rgb(18 175 250 / 9%), transparent 60%),
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--ifm-color-primary-lightest) 40%, transparent),
+      transparent 60%
+    ),
     var(--ifm-card-background-color);
   box-shadow: var(--blog-item-shadow);
   overflow: hidden;
-}
-
-/* 左上角装饰条 */
-.box::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 3px;
-  background: linear-gradient(180deg, var(--ifm-color-primary), var(--ifm-color-primary-dark));
 }
 
 .header {

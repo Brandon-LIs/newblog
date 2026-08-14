@@ -24,7 +24,7 @@
 .title {
   margin: 0;
   font-size: clamp(2.5rem, 7vw, 4.5rem);
-  font-weight: 700;
+  font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.025em;
   color: var(--ifm-text-color);
@@ -65,18 +65,19 @@
   color: var(--ifm-color-primary);
 }
 
-.yiyanText.scrolling {
+.yiyanTextInner {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.yiyanTextInner.scrolling {
   animation: marquee-scroll linear forwards;
 }
 
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
   100% { transform: translateX(var(--scroll-distance)); }
-}
-
-.yiyanTextInner {
-  display: inline-block;
-  white-space: nowrap;
 }
 
 .yiyanRefresh {

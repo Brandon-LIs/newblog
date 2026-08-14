@@ -1,6 +1,28 @@
 /* ================================================================
-   全局样式：优雅极简（紫罗兰主色 · 系统无衬线 · 柔和层次）
+   全局样式：优雅极简（紫罗兰主色 · Satoshi + 系统无衬线 · 柔和层次）
    ================================================================ */
+
+/* Satoshi（几何无衬线，拉丁字符），与参考站一致；自托管，仅拉丁字距生效 */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/satoshi-500.woff2') format('woff2');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
 
 @layer theme, base, components, utilities;
 
@@ -23,11 +45,11 @@
     --ifm-color-primary-lighter: hsl(267 45% 72%);
     --ifm-color-primary-lightest: hsl(267 50% 92%);
     --ifm-code-font-size: 95%;
-    --ifm-font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    --ifm-font-family-base: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei',
       'Noto Sans SC', sans-serif;
 
-    --ifm-heading-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    --ifm-heading-font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI',
       'PingFang SC', 'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei',
       'Noto Sans SC', sans-serif;
 
@@ -129,7 +151,7 @@ body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
   text-rendering: optimizeLegibility;
   letter-spacing: 0.01em;
@@ -204,10 +226,38 @@ html.blog-post-page #__docusaurus {
 }
 
 .navbar {
+  background: transparent;
   box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-bottom: 1px solid transparent;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+/* 滚动后：毛玻璃 + 边框 + 阴影（参考 lemonadorable 的 .not-top） */
+.navbar-scrolled .navbar {
+  background: var(--ifm-navbar-background-color);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--ifm-border-color);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* 文章目录（参考站右侧 sticky 目录） */
+.table-of-contents__link {
+  color: var(--ifm-secondary-text-color);
+  font-size: 0.85rem;
+  line-height: 1.6;
+  transition: color 0.15s ease;
+}
+
+.table-of-contents__link:hover {
+  color: var(--ifm-text-color);
+}
+
+.table-of-contents__link--active {
+  color: var(--ifm-color-primary);
+  font-weight: 600;
 }
 
 .navbar__logo img {
@@ -270,7 +320,7 @@ article[itemProp="blogPost"]:hover h3 a {
 .blog-post-page .markdown blockquote,
 .blog-post-page .markdown td,
 .blog-post-page .markdown th {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
+  font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC',
     'HarmonyOS Sans SC', 'MiSans', 'Microsoft YaHei', 'Noto Sans SC', sans-serif;
 }
 

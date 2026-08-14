@@ -25,7 +25,6 @@ function Yiyan() {
   const [scrollDur, setScrollDur] = useState('0s');
   const textRef = useRef<HTMLSpanElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
-  const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
   // 延迟请求最近评论（通过后端 API，不加载完整 Twikoo JS）
   useEffect(() => {
@@ -74,43 +73,31 @@ function Yiyan() {
     }
   }
 
-  // 检查是否需要滚动
+  // 检查是否需要滚动，并排定切换时机
   useEffect(() => {
-    if (!textRef.current || !innerRef.current) return;
+    if (!loaded || comments.length === 0) return;
     const outer = textRef.current;
     const inner = innerRef.current;
-    const over = inner.scrollWidth > outer.clientWidth;
-    if (over && inner.scrollWidth > 0) {
-      const dist = outer.clientWidth - inner.scrollWidth - 20;
-      const speed = 50;
-      const duration = Math.abs(dist) / speed;
-      setScrollDist(dist + 'px');
-      setScrollDur(duration + 's');
+    if (!outer || !inner) return;
+
+    const over = inner.scrollWidth > outer.clientWidth + 1;
+    let delay = 5000;
+    if (over) {
+      const dist = outer.clientWidth - inner.scrollWidth - 24;
+      const duration = Math.max(Math.abs(dist) / 40, 2);
+      setScrollDist(`${dist}px`);
+      setScrollDur(`${duration}s`);
       setScrolling(true);
+      delay = duration * 1000 + 2000;
     } else {
       setScrolling(false);
     }
-  }, [current, comments]);
 
-  // 切换逻辑
-  useEffect(() => {
-    if (!loaded || comments.length < 2) return;
-    timerRef.current = setInterval(() => {
-      if (scrolling) {
-        const dur = parseFloat(scrollDur);
-        if (dur > 5) {
-          setTimeout(() => {
-            setCurrent((prev) => (prev + 1) % comments.length);
-          }, dur * 1000 + 500);
-          return;
-        }
-      }
+    const timer = setTimeout(() => {
       setCurrent((prev) => (prev + 1) % comments.length);
-    }, 5000);
-    return () => {
-      if (timerRef.current) clearInterval(timerRef.current);
-    };
-  }, [loaded, comments.length, scrolling, scrollDur]);
+    }, delay);
+    return () => clearTimeout(timer);
+  }, [loaded, comments, current]);
 
   const shuffle = async () => {
     await fetchComments();
@@ -119,6 +106,11 @@ function Yiyan() {
 
   const display = comments[current] || null;
   const text = display ? `「${display.commentText}」—— ${display.nick}` : FALLBACK;
+  const innerStyle = scrolling
+    ? ({'--scroll-distance': scrollDist, animationDuration: scrollDur} as any)
+    : undefined;
+  const innerClassName =
+    styles.yiyanTextInner + (scrolling ? ' ' + styles.scrolling : '');
 
   return (
     <div className={styles.yiyan}>
@@ -127,14 +119,17 @@ function Yiyan() {
           href={display.url}
           target="_blank"
           rel="noreferrer"
-          className={styles.yiyanText + ' ' + (scrolling ? styles.scrolling : '')}
-          style={scrolling ? {animationDuration: scrollDur, '--scroll-distance': scrollDist} as any : {}}
+          className={styles.yiyanText}
           ref={textRef}>
-          <span className={styles.yiyanTextInner} ref={innerRef}>{text}</span>
+          <span className={innerClassName} style={innerStyle} ref={innerRef}>
+            {text}
+          </span>
         </a>
       ) : (
         <span className={styles.yiyanText} ref={textRef}>
-          <span className={styles.yiyanTextInner} ref={innerRef}>{text}</span>
+          <span className={innerClassName} style={innerStyle} ref={innerRef}>
+            {text}
+          </span>
         </span>
       )}
       <button

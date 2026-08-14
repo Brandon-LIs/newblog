@@ -8,11 +8,12 @@
   line-height: 1.45;
 }
 
-/* 文章详情页大标题保持醒目 */
+/* 文章详情页大标题：更醒目、字距收紧 */
 .title:is(h1) {
-  font-size: clamp(1.9rem, 4vw, 2.4rem);
-  font-weight: 700;
-  letter-spacing: 0;
+  font-size: clamp(2rem, 5vw, 2.7rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
 }
 
 .titleLink {

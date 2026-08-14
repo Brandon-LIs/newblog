@@ -94,6 +94,7 @@ const config: Config = {
     require.resolve('./src/vercelAnalytics.ts'),
     require.resolve('./src/imgFade.ts'),
     require.resolve('./src/iconifyOffline.ts'),
+    require.resolve('./src/navbarScroll.ts'),
   ],
 
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本

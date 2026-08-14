@@ -1,5 +1,5 @@
 import {motion, useReducedMotion} from 'framer-motion';
-import {useEffect, useRef, useState} from 'react';
+import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 
 import {Icon} from '@iconify/react';
 import SocialLinks from '@site/src/components/SocialLinks';
@@ -73,8 +73,8 @@ function Yiyan() {
     }
   }
 
-  // 检查是否需要滚动，并排定切换时机
-  useEffect(() => {
+  // 检查是否需要滚动，并排定切换时机（绘制前测量，避免旧动画残留导致从中间显示）
+  useLayoutEffect(() => {
     if (!loaded || comments.length === 0) return;
     const outer = textRef.current;
     const inner = innerRef.current;
@@ -100,8 +100,14 @@ function Yiyan() {
   }, [loaded, comments, current]);
 
   const shuffle = async () => {
-    await fetchComments();
-    setLoaded(true);
+    if (comments.length > 1) {
+      // 立即切换下一条，后台同时刷新评论列表
+      setCurrent((prev) => (prev + 1) % comments.length);
+      fetchComments();
+    } else {
+      await fetchComments();
+      setLoaded(true);
+    }
   };
 
   const display = comments[current] || null;
@@ -121,13 +127,21 @@ function Yiyan() {
           rel="noreferrer"
           className={styles.yiyanText}
           ref={textRef}>
-          <span className={innerClassName} style={innerStyle} ref={innerRef}>
+          <span
+            key={current}
+            className={innerClassName}
+            style={innerStyle}
+            ref={innerRef}>
             {text}
           </span>
         </a>
       ) : (
         <span className={styles.yiyanText} ref={textRef}>
-          <span className={innerClassName} style={innerStyle} ref={innerRef}>
+          <span
+            key={current}
+            className={innerClassName}
+            style={innerStyle}
+            ref={innerRef}>
             {text}
           </span>
         </span>

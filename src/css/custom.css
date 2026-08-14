@@ -274,8 +274,9 @@ html.blog-post-page #__docusaurus {
   color: var(--ifm-color-primary);
 }
 
-/* 隐藏导航栏外链的"往外开"小图标（主页/订阅） */
-.navbar__link svg {
+/* 隐藏导航栏与移动端侧边菜单的外链"往外开"小图标（主页/订阅） */
+.navbar__link svg,
+.navbar-sidebar [class^="iconExternalLink"] {
   display: none;
 }
 

@@ -361,6 +361,9 @@
   position: relative;
   display: block;
   line-height: 0;
+  /* 与页脚同色：遮住 iframe 加载时的白色底，避免闪烁 */
+  background: var(--footer-bg);
+  border-radius: 8px;
 }
 
 .statusPlaceholder {

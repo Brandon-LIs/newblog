@@ -22,8 +22,8 @@ async function main() {
       avatarUrl: a.avatar || '',
     }).toString();
     const reapplyUrl = APPLY_URL + '?' + params;
-    const au = 'https://api.oopss.top/api/friend-apply/approve?token=' + (a.id || '');
-    const ru = 'https://api.oopss.top/api/friend-apply/reject?token=' + (a.id || '');
+    const au = 'https://apii.oopss.top/api/friend-apply/approve?token=' + (a.id || '');
+    const ru = 'https://apii.oopss.top/api/friend-apply/reject?token=' + (a.id || '');
     let html = '', sub = '', to = '';
     if (e.type === 'new-application') {
       to = process.env.ADMIN_EMAIL;

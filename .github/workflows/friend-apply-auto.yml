@@ -11,5 +11,5 @@ jobs:
     steps:
       - name: Auto-approve expired applications
         run: |
-          curl -s "https://api.oopss.top/api/friend-apply/auto" \
+          curl -s "https://apii.oopss.top/api/friend-apply/auto" \
             -H "Authorization: Bearer ${{ secrets.GH_TOKEN }}" || true

@@ -36,7 +36,7 @@ function Yiyan() {
 
   async function fetchComments() {
     try {
-      const res = await fetch('https://api.oopss.top/api/recent-comments', {
+      const res = await fetch('https://apii.oopss.top/api/recent-comments', {
         method: 'GET',
       });
       if (!res.ok) throw new Error();

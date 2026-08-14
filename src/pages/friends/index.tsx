@@ -1,12 +1,10 @@
-import CodeBlock from '@theme/CodeBlock';
 import Layout from '@theme/Layout';
-import {memo, useMemo, useRef} from 'react';
+import {memo, useMemo, useRef, useState} from 'react';
 
 import {Friend, Friends} from '@site/data/friends';
 
 import {Icon} from '@iconify/react';
 import {motion} from 'framer-motion';
-import styles from './styles.module.css';
 
 const TITLE = '友链';
 const DESCRIPTION = '有很多良友，胜于有很多财富。';
@@ -31,11 +29,43 @@ function stableFriendOrder(friend: Friend): number {
 }
 
 function SiteInfo() {
+  const [copied, setCopied] = useState(false);
+
+  const copy = async () => {
+    try {
+      await navigator.clipboard.writeText(SITE_INFO);
+      setCopied(true);
+    } catch {
+      // 兼容旧浏览器
+      const ta = document.createElement('textarea');
+      ta.value = SITE_INFO;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      ta.remove();
+      setCopied(true);
+    }
+    setTimeout(() => setCopied(false), 1500);
+  };
+
   return (
-    <div className="w-96 max-w-[calc(100vw-2rem)] rounded-[var(--ifm-pre-border-radius)] border border-solid border-black/10 text-left text-sm leading-none">
-      <CodeBlock language="yaml" title="本站信息" className={styles.codeBlock}>
-        {SITE_INFO}
-      </CodeBlock>
+    <div className="w-96 max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-border bg-blog shadow-[0_8px_30px_rgba(0,0,0,0.14)]">
+      <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
+        <span className="text-xs font-semibold tracking-wide text-secondary">本站信息</span>
+        <button
+          type="button"
+          onClick={copy}
+          title="复制本站信息"
+          className="inline-flex cursor-pointer items-center gap-1 rounded-md border border-border bg-transparent px-2 py-1 text-xs text-secondary transition-colors duration-200 hover:border-[var(--ifm-color-primary)] hover:text-primary">
+          <Icon icon={copied ? 'ri:check-line' : 'ri:file-copy-line'} width="14" height="14" />
+          {copied ? '已复制' : '复制'}
+        </button>
+      </div>
+      <pre className="m-0 select-text overflow-x-auto p-4 text-left text-xs leading-6">
+        <code>{SITE_INFO}</code>
+      </pre>
     </div>
   );
 }
@@ -159,7 +189,7 @@ export default function FriendLink(): JSX.Element {
         <motion.div
           drag
           dragConstraints={ref}
-          className="sticky bottom-4 left-4 inline-flex cursor-move text-right">
+          className="sticky bottom-4 left-4 z-50 inline-flex cursor-move text-right">
           <SiteInfo />
         </motion.div>
       </motion.main>

@@ -8,9 +8,11 @@ import riArrowRightLine from '@iconify-icons/ri/arrow-right-line';
 import riArrowRightSLine from '@iconify-icons/ri/arrow-right-s-line';
 import riBilibiliLine from '@iconify-icons/ri/bilibili-line';
 import riCalendarLine from '@iconify-icons/ri/calendar-line';
+import riCheckLine from '@iconify-icons/ri/check-line';
 import riDoubleQuotesL from '@iconify-icons/ri/double-quotes-l';
 import riEye2Line from '@iconify-icons/ri/eye-2-line';
 import riEyeLine from '@iconify-icons/ri/eye-line';
+import riFileCopyLine from '@iconify-icons/ri/file-copy-line';
 import riGithubLine from '@iconify-icons/ri/github-line';
 import riLink from '@iconify-icons/ri/link';
 import riLoader4Line from '@iconify-icons/ri/loader-4-line';
@@ -35,9 +37,11 @@ addCollection({
     'arrow-right-s-line': riArrowRightSLine,
     'bilibili-line': riBilibiliLine,
     'calendar-line': riCalendarLine,
+    'check-line': riCheckLine,
     'double-quotes-l': riDoubleQuotesL,
     'eye-2-line': riEye2Line,
     'eye-line': riEyeLine,
+    'file-copy-line': riFileCopyLine,
     'github-line': riGithubLine,
     link: riLink,
     'loader-4-line': riLoader4Line,

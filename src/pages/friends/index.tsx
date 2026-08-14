@@ -4,7 +4,7 @@ import {memo, useMemo, useRef, useState} from 'react';
 import {Friend, Friends} from '@site/data/friends';
 
 import {Icon} from '@iconify/react';
-import {motion} from 'framer-motion';
+import {AnimatePresence, motion} from 'framer-motion';
 
 const TITLE = '友链';
 const DESCRIPTION = '有很多良友，胜于有很多财富。';
@@ -28,7 +28,7 @@ function stableFriendOrder(friend: Friend): number {
   return hash;
 }
 
-function SiteInfo() {
+function SiteInfo({onClose}: {onClose: () => void}) {
   const [copied, setCopied] = useState(false);
 
   const copy = async () => {
@@ -54,14 +54,24 @@ function SiteInfo() {
     <div className="w-96 max-w-[calc(100vw-2rem)] overflow-hidden rounded-2xl border border-border bg-blog shadow-[0_8px_30px_rgba(0,0,0,0.14)]">
       <div className="flex items-center justify-between border-b border-border px-4 py-2.5">
         <span className="text-xs font-semibold tracking-wide text-secondary">本站信息</span>
-        <button
-          type="button"
-          onClick={copy}
-          title="复制本站信息"
-          className="inline-flex cursor-pointer items-center gap-1 rounded-md border border-border bg-transparent px-2 py-1 text-xs text-secondary transition-colors duration-200 hover:border-[var(--ifm-color-primary)] hover:text-primary">
-          <Icon icon={copied ? 'ri:check-line' : 'ri:file-copy-line'} width="14" height="14" />
-          {copied ? '已复制' : '复制'}
-        </button>
+        <div className="flex items-center gap-1">
+          <button
+            type="button"
+            onClick={copy}
+            title="复制本站信息"
+            className="inline-flex cursor-pointer items-center gap-1 rounded-md border border-border bg-transparent px-2 py-1 text-xs text-secondary transition-colors duration-200 hover:border-[var(--ifm-color-primary)] hover:text-primary">
+            <Icon icon={copied ? 'ri:check-line' : 'ri:file-copy-line'} width="14" height="14" />
+            {copied ? '已复制' : '复制'}
+          </button>
+          <button
+            type="button"
+            onClick={onClose}
+            title="关闭（刷新页面可重新打开）"
+            aria-label="关闭本站信息"
+            className="inline-flex size-6 cursor-pointer items-center justify-center rounded-md border border-border bg-transparent text-secondary transition-colors duration-200 hover:border-[var(--ifm-color-primary)] hover:text-primary">
+            <Icon icon="ri:close-line" width="14" height="14" />
+          </button>
+        </div>
       </div>
       <pre className="m-0 select-text overflow-x-auto p-4 text-left text-xs leading-6">
         <code>{SITE_INFO}</code>
@@ -179,6 +189,7 @@ function FriendCards() {
 
 export default function FriendLink(): JSX.Element {
   const ref = useRef<HTMLDivElement>(null);
+  const [showSiteInfo, setShowSiteInfo] = useState(true);
 
   return (
     <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
@@ -186,12 +197,18 @@ export default function FriendLink(): JSX.Element {
         <FriendHeader />
         <ApplyNotice />
         <FriendCards />
-        <motion.div
-          drag
-          dragConstraints={ref}
-          className="sticky bottom-4 left-4 z-50 inline-flex cursor-move text-right">
-          <SiteInfo />
-        </motion.div>
+        <AnimatePresence>
+          {showSiteInfo && (
+            <motion.div
+              drag
+              dragConstraints={ref}
+              exit={{opacity: 0, y: 8, scale: 0.98}}
+              transition={{duration: 0.2}}
+              className="sticky bottom-4 left-4 z-50 inline-flex cursor-move text-right">
+              <SiteInfo onClose={() => setShowSiteInfo(false)} />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </motion.main>
     </Layout>
   );

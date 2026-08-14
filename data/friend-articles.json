@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-14T14:08:56.843Z",
-  "count": 85,
+  "updated_at": "2026-08-14T15:13:03.986Z",
+  "count": 95,
   "list": [
     {
       "title": "看了《主持人大赛（新闻主播季）》的一些小感想",
@@ -138,6 +138,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
     },
     {
+      "title": "梳理江苏省职业教育体系",
+      "link": "https://pinpe.top/posts/vocational-edu/",
+      "date": "Sun, 09 Aug 2026 00:00:00 GMT",
+      "description": "这篇文章虽然是老文章，但想到可以让人省去碎片化的麻烦，快速获得大概的信息，决定重新翻修一下。",
+      "site": "Pinpe 的云端",
+      "siteUrl": "https://pinpe.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140008.webp"
+    },
+    {
       "title": "试玩神人游戏《完蛋！我被男同学包围了》",
       "link": "https://474029.xyz/posts/shi-wan-wdwbntxbwl-game/",
       "date": "Sat, 08 Aug 2026 16:41:00 GMT",
@@ -163,6 +172,15 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "【26年31周记】琐事记",
+      "link": "https://www.haoyu233.com/2668.html",
+      "date": "Fri, 07 Aug 2026 18:28:59 +0000",
+      "description": "请输入文本",
+      "site": "小改学习志",
+      "siteUrl": "https://www.haoyu233.com",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
     },
     {
       "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
@@ -300,6 +318,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08120001.webp"
     },
     {
+      "title": "【26年31周记】毕业及七月小记",
+      "link": "https://www.haoyu233.com/2631.html",
+      "date": "Sun, 02 Aug 2026 17:17:49 +0000",
+      "description": "同学您好，我想请问这是什么新式流水账？",
+      "site": "小改学习志",
+      "siteUrl": "https://www.haoyu233.com",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
+    },
+    {
       "title": "假如我有一块可以抹去记忆的橡皮",
       "link": "https://hehuang.site/p/an-eraser/",
       "date": "Sun, 02 Aug 2026 17:25:00 +0800",
@@ -354,6 +381,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
     },
     {
+      "title": "从网页对话到Agent，我是如何学会使用AI的",
+      "link": "https://pinpe.top/posts/ai-timeline/",
+      "date": "Tue, 28 Jul 2026 00:00:00 GMT",
+      "description": "只不过，现在AI已经可以为我做绝大部分事，前端已经好久没亲自写了，甚至打开VSCode都少了很多，大部分需求只需要打开终端，输入claude了。",
+      "site": "Pinpe 的云端",
+      "siteUrl": "https://pinpe.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140008.webp"
+    },
+    {
       "title": "周而复始，浑然天成——恭喜台北一哥周天成夺冠！",
       "link": "https://hehuang.site/p/chou-tien-chen/",
       "date": "Sun, 26 Jul 2026 19:25:00 +0800",
@@ -372,6 +408,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
     },
     {
+      "title": "【26年30周记】小~调整——第n次博客微调计划",
+      "link": "https://www.haoyu233.com/2563.html",
+      "date": "Fri, 24 Jul 2026 08:54:43 +0000",
+      "description": "说实话，这是我第几次去改造（微调）博客了？ 无所谓，要不当这个假期的第一篇文章吧？",
+      "site": "小改学习志",
+      "siteUrl": "https://www.haoyu233.com",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
+    },
+    {
       "title": "有双无形的大手，扼住了我的喉咙",
       "link": "https://blog.weasel6.cn/posts/life-hand/",
       "date": "Thu, 23 Jul 2026 17:17:00 GMT",
@@ -379,6 +424,15 @@
       "site": "黄鼠狼的树洞",
       "siteUrl": "https://blog.weasel6.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
+    },
+    {
+      "title": "【26年29周记】梅开二度、高强度衔接班",
+      "link": "https://www.haoyu233.com/2534.html",
+      "date": "Thu, 23 Jul 2026 14:39:04 +0000",
+      "description": "这更多是一篇搞笑内容，不完全算一篇讨伐/诉苦文。 什么？！初三生（初升高，初中2026届）实际假期比高三（高二升高三）还短？",
+      "site": "小改学习志",
+      "siteUrl": "https://www.haoyu233.com",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
     },
     {
       "title": "欢呼吧！新的博客",
@@ -433,6 +487,15 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "童年回忆补完计划：上海科技馆专题",
+      "link": "https://pinpe.top/posts/to-shanghai-4/",
+      "date": "Mon, 20 Jul 2026 00:00:00 GMT",
+      "description": "翻新了将近三年，现在怎么样了？",
+      "site": "Pinpe 的云端",
+      "siteUrl": "https://pinpe.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140008.webp"
     },
     {
       "title": "「闲言碎语」202607-中考后的胡思乱想",
@@ -505,6 +568,33 @@
       "site": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
       "siteUrl": "https://66619.eu.org",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp"
+    },
+    {
+      "title": "阈限空间与少女",
+      "link": "https://pinpe.top/posts/nophenia/",
+      "date": "Mon, 06 Jul 2026 00:00:00 GMT",
+      "description": "我们在何人之梦？",
+      "site": "Pinpe 的云端",
+      "siteUrl": "https://pinpe.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140008.webp"
+    },
+    {
+      "title": "我离睡眠渐行渐远",
+      "link": "https://pinpe.top/posts/sleep/",
+      "date": "Sat, 04 Jul 2026 00:00:00 GMT",
+      "description": "大概是6月初开始吧，我发现自己已经不太容易睡得着觉了。",
+      "site": "Pinpe 的云端",
+      "siteUrl": "https://pinpe.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140008.webp"
+    },
+    {
+      "title": "【26年27周记】中考、初中毕业和网站优化",
+      "link": "https://www.haoyu233.com/2487.html",
+      "date": "Tue, 30 Jun 2026 16:59:04 +0000",
+      "description": "2026年6月14日，初中毕业。",
+      "site": "小改学习志",
+      "siteUrl": "https://www.haoyu233.com",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
     },
     {
       "title": "💬静态博客评论系统对比指南",

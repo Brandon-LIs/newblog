@@ -235,7 +235,7 @@ export default function Footer(): JSX.Element {
             <span className={styles.statusWrap}>
               {!badgeLoaded && (
                 <img
-                  src="https://blogimg.tos-cn-shanghai.volces.com/img/status-badge.svg"
+                  src="https://blogimg.tos-cn-shanghai.volces.com/img/status-badge.svg?v=2"
                   width={250}
                   height={30}
                   alt="服务状态加载中"

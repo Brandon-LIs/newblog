@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="30" viewBox="0 0 250 30" role="img" aria-label="服务状态加载中">
+  <rect width="250" height="30" rx="7" fill="#1d1d20"/>
+  <rect width="250" height="30" rx="7" fill="none" stroke="#333336" stroke-width="1"/>
+  <circle cx="18" cy="15" r="5" fill="#8e8e93"/>
+  <text x="32" y="19" font-family="'PingFang SC','Microsoft YaHei','Noto Sans SC',sans-serif" font-size="12" fill="#a1a1aa">服务状态检测中…</text>
+</svg>

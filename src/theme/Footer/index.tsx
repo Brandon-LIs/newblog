@@ -170,6 +170,7 @@ function BszStats() {
 }
 
 export default function Footer(): JSX.Element {
+  const [badgeLoaded, setBadgeLoaded] = useState(false);
   return (
     <footer className={styles.footer}>
       <div className={styles.inner}>
@@ -231,16 +232,33 @@ export default function Footer(): JSX.Element {
             target="_blank"
             rel="noopener noreferrer"
             title="服务状态">
-            <iframe
-              src="https://status.oopss.top/badge?theme=dark&lang=zh"
-              width="250"
-              height="30"
-              loading="lazy"
-              frameborder="0"
-              scrolling="no"
-              style={{'color-scheme': 'normal'}}
-              title="Uptime Status"
-            />
+            <span className={styles.statusWrap}>
+              {!badgeLoaded && (
+                <img
+                  src="https://blogimg.tos-cn-shanghai.volces.com/img/status-badge.svg"
+                  width={250}
+                  height={30}
+                  alt="服务状态加载中"
+                  className={styles.statusPlaceholder}
+                  onError={(e) => {
+                    // TOS 未上传时回退到本地占位图
+                    e.currentTarget.onerror = null;
+                    e.currentTarget.src = '/img/status-badge.svg';
+                  }}
+                />
+              )}
+              <iframe
+                src="https://status.oopss.top/badge?theme=dark&lang=zh"
+                width="250"
+                height="30"
+                loading="lazy"
+                onLoad={() => setBadgeLoaded(true)}
+                frameborder="0"
+                scrolling="no"
+                style={{'color-scheme': 'normal'}}
+                title="Uptime Status"
+              />
+            </span>
           </a>
         </div>
 

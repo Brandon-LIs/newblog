@@ -24,9 +24,9 @@
 .title {
   margin: 0;
   font-size: clamp(2.5rem, 7vw, 4.5rem);
-  font-weight: 600;
-  line-height: 1.08;
-  letter-spacing: -0.025em;
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: -0.02em;
   color: var(--ifm-text-color);
   text-wrap: balance;
 }

@@ -156,7 +156,9 @@ export default function Hero() {
     <div className={styles.hero}>
       <div className={styles.inner}>
         <motion.h1 {...fade(0)} className={styles.title}>
-          你好，我是 Brandon。
+          你好，
+          <br />
+          我是 Brandon。
         </motion.h1>
         <motion.p {...fade(1)} className={styles.subtitle}>
           一名热爱前端与计算机科学的高中生，在这里记录学习、项目与生活。

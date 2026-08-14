@@ -369,8 +369,6 @@
   left: 0;
   width: 250px;
   height: 30px;
-  border-radius: 8px;
-  background: #1d1d20;
 }
 
 @media (max-width: 996px) {

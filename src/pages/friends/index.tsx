@@ -11,9 +11,9 @@ const DESCRIPTION = '有很多良友，胜于有很多财富。';
 const APPLY_FORM_URL = 'https://blog.oopss.top/friends/apply';
 const APPLY_EMAIL = 'bcihal@qq.com';
 const SITE_INFO = `title: 'Brandon's Blog'
-bio: '一个高中生的个人博客'
+bio: 'Brandon的个人博客'
 website: 'https://blog.oopss.top'
-avatar: '/img/icon.jpg'
+avatar: 'https://cdn.oopss.top/icon.jpg'
 `;
 const friends = Friends;
 

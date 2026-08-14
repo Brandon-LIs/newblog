@@ -274,6 +274,11 @@ html.blog-post-page #__docusaurus {
   color: var(--ifm-color-primary);
 }
 
+/* 隐藏导航栏外链的"往外开"小图标（主页/订阅） */
+.navbar__link svg {
+  display: none;
+}
+
 /* 文章卡片 - astro-pure 风格 */
 .card-wrapper,
 article[itemProp="blogPost"] {

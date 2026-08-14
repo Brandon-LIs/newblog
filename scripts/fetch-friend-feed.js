@@ -54,7 +54,7 @@ function parseRss(xml) {
     };
     let title = get('title');
     let link = isAtom ? getAttr('link') : get('link');
-    const pubDate = isAtom ? get('updated') : get('pubDate');
+    const pubDate = isAtom ? (get('published') || get('updated')) : get('pubDate');
     const desc = isAtom ? get('summary') : get('description');
     if (!title && !link) continue;
     items.push({

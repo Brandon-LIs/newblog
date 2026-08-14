@@ -114,7 +114,6 @@ function BszStats() {
 
   return (
     <div className={styles.bsz} aria-label="访问统计">
-      <span className={styles.bszHeading}>📊 访问统计</span>
       <span className={styles.bszGroup}>
         {bszStats.map((stat) => (
           <span key={stat.id} className={styles.bszItem}>

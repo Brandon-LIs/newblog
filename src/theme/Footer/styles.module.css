@@ -265,12 +265,6 @@
   align-items: center;
 }
 
-.bszHeading {
-  color: var(--footer-muted);
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-}
 
 .bszGroup {
   display: flex;

@@ -244,6 +244,28 @@ export default function Footer(): JSX.Element {
             />
           </a>
         </div>
+
+        <div className={styles.sponsor} aria-label="赞助商">
+          <p className={styles.sponsorText}>
+            该网站由
+            <a href="https://www.synidc.cn" target="_blank" rel="noopener noreferrer">
+              双翼鸟数据
+            </a>
+            提供加速防御
+          </p>
+          <ul className={styles.sponsorLinks}>
+            <li>
+              <a href="https://www.synidc.cn" target="_blank" rel="noopener noreferrer">
+                双翼鸟数据 - 高防服务器
+              </a>
+            </li>
+            <li>
+              <a href="https://www.95duns.com" target="_blank" rel="noopener noreferrer">
+                95盾 - 高防CDN
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
     </footer>
   );

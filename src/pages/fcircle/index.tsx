@@ -6,7 +6,7 @@ import {Icon} from '@iconify/react';
 
 const TITLE = '友链文章';
 const DESCRIPTION = '来自好友们的最新博文，持续更新中。';
-const API_URL = 'https://friendsdata.oopss.top/friend-articles.json';
+const API_URL = '/friend-articles.json';
 const REFRESH_URL = 'https://apis.oopss.top/api/friends-refresh';
 const PAGE_SIZE = 20;
 

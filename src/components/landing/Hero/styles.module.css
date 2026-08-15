@@ -92,3 +92,13 @@
   @apply text-[var(--ifm-color-primary)];
   opacity: 1;
 }
+
+.cursor {
+  animation: blink 0.7s step-end infinite;
+  font-weight: 300;
+  color: var(--hero-sub-text);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}

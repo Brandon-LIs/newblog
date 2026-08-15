@@ -16,7 +16,8 @@
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" }
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "Cache-Control", "value": "public, s-maxage=86400, stale-while-revalidate=86400" }
       ]
     },
     {
@@ -41,6 +42,18 @@
         { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate, proxy-revalidate" },
         { "key": "Pragma", "value": "no-cache" },
         { "key": "Expires", "value": "0" }
+      ]
+    },
+    {
+      "source": "/ai-summaries.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/friend-articles.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, s-maxage=1500, stale-while-revalidate=1500" }
       ]
     }
   ]

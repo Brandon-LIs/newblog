@@ -49,7 +49,7 @@ function Yiyan() {
     return () => clearTimeout(timer);
   }, []);
 
-  async function fetchMemos() {
+  async function fetchMemos(randomize = true) {
     try {
       const res = await fetch('https://apii.oopss.top/api/memos?limit=3', {method: 'GET'});
       if (!res.ok) throw new Error();
@@ -57,7 +57,7 @@ function Yiyan() {
       const list: Memo[] = (data.memos || []).filter((m: Memo) => m.content).slice(0, 3);
       if (list.length > 0) {
         setMemos(list);
-        setCurrent(Math.floor(Math.random() * list.length));
+        if (randomize) setCurrent(Math.floor(Math.random() * list.length));
         setLoaded(true);
         return;
       }
@@ -105,7 +105,7 @@ function Yiyan() {
   const shuffle = async () => {
     if (memos.length > 1) {
       setCurrent((prev) => (prev + 1) % memos.length);
-      fetchMemos();
+      fetchMemos(false);
     } else {
       await fetchMemos();
       setLoaded(true);
@@ -173,16 +173,40 @@ export default function Hero() {
     transition: {duration: 0.7, ease: 'easeOut' as const, delay: reduceMotion ? 0 : i * 0.1},
   });
 
+  const [typed, setTyped] = useState('');
+  const [done, setDone] = useState(false);
+  const fullText = '你好，\n我是 Brandon。';
+
+  useEffect(() => {
+    if (reduceMotion) {
+      setTyped(fullText);
+      setDone(true);
+      return;
+    }
+    let i = 0;
+    setTyped('');
+    setDone(false);
+    const timer = setInterval(() => {
+      i++;
+      setTyped(fullText.slice(0, i));
+      if (i >= fullText.length) {
+        clearInterval(timer);
+        setTimeout(() => setDone(true), 250);
+      }
+    }, 80);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className={styles.hero}>
       <div className={styles.inner}>
         <motion.h1 {...fade(0)} className={styles.title}>
-          你好，
-          <br />
-          我是 Brandon。
+          <span style={{whiteSpace: 'pre-wrap'}}>
+            {typed}{!done && <span className={styles.cursor}>|</span>}
+          </span>
         </motion.h1>
         <motion.p {...fade(1)} className={styles.subtitle}>
-          一名热爱前端与计算机科学的高中生，在这里记录学习、项目与生活。
+          一名普普通通的高中生，在这里记录学习、技术与生活。
         </motion.p>
         <motion.div {...fade(2)}>
           <Yiyan />

@@ -206,7 +206,7 @@ export default function Hero() {
           </span>
         </motion.h1>
         <motion.p {...fade(1)} className={styles.subtitle}>
-          一名普普通通的高中生，在这里记录学习、技术与生活。
+          一名普普通通的高中生，在这里记录日常与生活。
         </motion.p>
         <motion.div {...fade(2)}>
           <Yiyan />

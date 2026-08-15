@@ -172,10 +172,10 @@ async function fetchWithFallback(url) {
 }
 
 async function fetchFriendFeed(friend) {
-  const rss = friend.rss || friend.feed || '';
-  if (!rss) return [];
-
-  const tryUrls = [rss, ...feedUrlVariants(rss)];
+  const rss = friend.rss || '';
+  const primaryUrls = rss ? [rss] : [];
+  const websiteUrls = friend.website ? feedUrlVariants(friend.website) : [];
+  const tryUrls = [...primaryUrls, ...websiteUrls];
   const tried = new Set();
 
   for (const url of tryUrls) {

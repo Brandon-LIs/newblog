@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-15T09:18:18.824Z",
-  "count": 95,
+  "updated_at": "2026-08-15T09:47:16.387Z",
+  "count": 105,
   "list": [
     {
       "title": "看了《主持人大赛（新闻主播季）》的一些小感想",
@@ -10,6 +10,15 @@
       "site": "逸树の小屋",
       "siteUrl": "https://474029.xyz",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120001.webp"
+    },
+    {
+      "title": "换了个主题给程序做了个归档插件",
+      "link": "https://lzh1.cn/?post=42",
+      "date": "Fri, 14 Aug 2026 23:05:28 +0800",
+      "description": "晚上看自己博客的主题不满意最近应用商店出现了不少新主题就打算换一个，新主题的头部图标有个归档链接但是程序官方并没有这个功能索性自己开发了也上传到了cnb.cool。",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://lzh1.cn/img/touxiang.jpg"
     },
     {
       "title": "如果世界是假的",
@@ -66,6 +75,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
+      "title": "【原创】我的高二生活-完整版",
+      "link": "https://blog.iamcrl.cn/?post=64",
+      "date": "Wed, 12 Aug 2026 09:07:20 +0800",
+      "description": "【 因为我写东西喜欢先在备忘录写好再复制过来，结果复制的时候少复制了一段...现在才发现，所以重新发一次完整版本的。 】 今天是2026年8月11日，距离开学已不到一个月。最近偶然间阅读了 路明笔记 的文章，忽然也想记录、回顾一下我的高二。讲真的，高二这一年过得很快，记忆中很多事好像是刚刚发生一样。 参观高一新生军训 高一开学时我们是没有操场用的，去年，也就是高二上学期开学，学校终于启用了新操场和",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
+    },
+    {
       "title": "我试着把一张风景照变成一束花",
       "link": "https://mingblog.site/posts/floraform-bouquet/",
       "date": "Wed, 12 Aug 2026 00:00:00 GMT",
@@ -120,6 +138,33 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
+      "title": "【投稿?】那些事",
+      "link": "https://blog.iamcrl.cn/?post=59",
+      "date": "Mon, 10 Aug 2026 21:15:03 +0800",
+      "description": "投稿者：R15m 初春的一天，我坐在回校的大巴上，听着他的歌，忽然发觉他的歌好像是我歌单中最多的，就即兴发了个朋友圈，配文“才发现他的歌是我歌单里最多的”。没想到被朋友圈的共友发给你了。回到学校后，我正准备为第二天的月考复习，你忽然走过来问我：“嘿，你也听他的歌吗，我看到你朋友圈发了”，我有点没反应过来，磕磕绊绊的回答是。 从那天起，我便意识到了你的存在，开始在意你。 起初，只是觉得你很有趣，但慢",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
+    },
+    {
+      "title": "报平安！",
+      "link": "https://lzh1.cn/?post=39",
+      "date": "Mon, 10 Aug 2026 08:17:27 +0800",
+      "description": "台风已过，信号不稳定，还没来电！",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://lzh1.cn/img/touxiang.jpg"
+    },
+    {
+      "title": "博客防汛防旱防风指挥部 · 2026年1号文件",
+      "link": "https://lzh1.cn/?post=38",
+      "date": "Sun, 09 Aug 2026 14:16:14 +0800",
+      "description": "各位于订阅列表、访客记录及友情链接中的朋友们： 受强热带气压“近期疲惫/灵感枯竭”（代号：白海豚）过境影响，本博客即将面临严峻的“断更”考验。为确保博主身心健康与未来内容质量，经紧急会议研究决定，即日起启动最高级别应急响应——「五停」措施： 停更：暂停发布新文章，脑子先放空。 停推：暂停各平台动态推送，不刷存在感。 停互：暂停友链回访与评论区深度互动（邮件留言会积攒，回来一起回）。 停改：暂停折腾",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://lzh1.cn/img/touxiang.jpg"
+    },
+    {
       "title": "梳理江苏省职业教育体系",
       "link": "https://pinpe.top/posts/vocational-edu/",
       "date": "Sun, 09 Aug 2026 00:00:00 GMT",
@@ -163,6 +208,15 @@
       "site": "小改学习志",
       "siteUrl": "https://www.haoyu233.com",
       "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
+    },
+    {
+      "title": "我把非遗做成了图纸",
+      "link": "https://lzh1.cn/?post=36",
+      "date": "Fri, 07 Aug 2026 22:05:40 +0800",
+      "description": "我这边有一个国家级非遗叫大奏鼓是男扮女装敲锣打鼓跳舞，我为这个国家级非遗做了几套卡通表情包。 今天突发奇想用自己做的大奏鼓卡通形象生成了拼豆图纸，目前也只是做出了图纸因为整个拼完要用到2147颗豆子很多人劝我去拼豆店因为自己不好烫熨。",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://lzh1.cn/img/touxiang.jpg"
     },
     {
       "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
@@ -255,6 +309,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
+      "title": "【公告】关于本站文章更新频率调整的相关说明",
+      "link": "https://blog.iamcrl.cn/important",
+      "date": "Wed, 05 Aug 2026 17:49:12 +0800",
+      "description": "各位访客： 未来一年秘密基地文章更新频率可能大幅降低，但仍会不定期更新文章，同时碎碎念更新频率仍保持不变。 由于秘密基地内的文章属于长文章，撰写需要耗费一定的时间，未来一年我可能不能投入太多精力在这方面，因此秘密基地的更新频率会大幅降低。 另一方面，因为碎碎念是想到什么说什么，所以碎碎念可以保持正常更新频率。 各位友链站长朋友们，希望您们能够保留本站入口，我会不定期更新文章，有空的时候也会到您们的",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
+    },
+    {
       "title": "weflow遭下架有感：他们拿走了仓库，也拿走了我们的往昔，却拿不走真正为自由而奋勇向前的开源社区",
       "link": "https://upxuu.com/posts/rip-weflow/",
       "date": "Wed, 05 Aug 2026 07:15:06 GMT",
@@ -262,6 +325,15 @@
       "site": "UpXuu's blog",
       "siteUrl": "https://upxuu.com",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
+    },
+    {
+      "title": "台风天，天气变换无常",
+      "link": "https://lzh1.cn/?post=34",
+      "date": "Wed, 05 Aug 2026 14:37:50 +0800",
+      "description": "早上准备出门发现地上车上全是水但是太阳又很大应该是突然下了几分钟大雨，到外婆家后又开始下雨了都是间接性下雨一直下到2点多。 趁着没雨大太阳我赶紧拿着转正申请书跑到派出所签字，接待大厅的人跟我说签字的人不在让我放在那签完电话通知我去取。",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://lzh1.cn/img/touxiang.jpg"
     },
     {
       "title": "与Leo的对话：一次对自己的重识",
@@ -325,6 +397,15 @@
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
+    {
+      "title": "【原创】终于把平板修好了！",
+      "link": "https://blog.iamcrl.cn/?post=55",
+      "date": "Thu, 30 Jul 2026 22:43:33 +0800",
+      "description": "前言 这几天在家里翻出来一台iPad mini 1，是我上幼儿园的时候家里买的，后来摔坏了家里又买了台mini4就放起来吃灰了。 19年底，四年级。我把这台平板找了出来，发现是背光坏了，只要拿强光照着还能正常用，于是就用爱思刷机重置了一下带到学校托管午休的时候悄悄听歌，被老师发现后老师想收走平板，我就指着平板的屏幕说，“这是坏的，拿来当玩具而已”，成功蒙混过关。20年初寒假，我回我外公外婆家的时候",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
     },
     {
       "title": "亿不小心破解了清北道远学习机",
@@ -406,6 +487,15 @@
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120009.webp"
+    },
+    {
+      "title": "【原创】关于AI的一些思考",
+      "link": "https://blog.iamcrl.cn/?post=53",
+      "date": "Tue, 21 Jul 2026 23:54:31 +0800",
+      "description": "最近回了我外公外婆家。一天我把我期末考的卷子拿出来想总结一下大题的答题模板。因为是期末考，所以老师并没有评讲试卷，我就打开手机上的作业帮开始扫题然后逐行把答案抄写下来。正在旁边玩平板的表弟表妹看见，对我说“你也用AI啊”。我说这不是AI，他们顿了一下，说“你这不就是AI吗？都拿手机拍试卷了还犟”，我有点无语，“这是作业帮你知道吗？这不是AI，你们不用这个App吗？”，我问。没想到的是他们告诉我他们",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
     },
     {
       "title": "「工具推荐」TRAE：字节跳动自研AI原生IDE编程软件（非广告）",
@@ -707,7 +797,7 @@
     {
       "title": "有端",
       "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
-      "date": "2026-02-01T02:44:53Z",
+      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
       "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -716,7 +806,7 @@
     {
       "title": "无端",
       "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
-      "date": "2026-02-01T02:44:32Z",
+      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
       "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -725,7 +815,7 @@
     {
       "title": "奇技淫巧之高中多选题拿分策略",
       "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
-      "date": "2026-01-30T16:00:03Z",
+      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
       "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -761,7 +851,7 @@
     {
       "title": "怀念",
       "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
-      "date": "2026-01-02T06:24:00Z",
+      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
       "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -788,7 +878,7 @@
     {
       "title": "年前",
       "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
-      "date": "2025-12-30T16:00:00Z",
+      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
       "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",

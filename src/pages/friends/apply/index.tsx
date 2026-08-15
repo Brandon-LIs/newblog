@@ -7,6 +7,7 @@ const TITLE = '申请友链';
 const DESCRIPTION = '填写表单，提交后自动审核并通知您结果。';
 const SUBMIT_URL = 'https://apis.oopss.top/api/friend-apply';
 const UPLOAD_URL = 'https://admin.oopss.top/upload';
+const AI_PARSE_URL = 'https://apii.oopss.top/api/ai/parse-friends';
 
 type FormState = {
   name: string;
@@ -36,9 +37,49 @@ export default function FriendApply(): JSX.Element {
   const [avatarPreview, setAvatarPreview] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [result, setResult] = useState<{ok: boolean; message: string} | null>(null);
+  const [aiText, setAiText] = useState('');
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiDialogOpen, setAiDialogOpen] = useState(false);
 
   const set = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({...f, [key]: e.target.value}));
+
+  // AI 智能识别友链信息并填充表单
+  const handleAiParse = async () => {
+    if (!aiText.trim()) {
+      setResult({ok: false, message: '请先粘贴您在其他博主页面的友链信息'});
+      return;
+    }
+    setAiLoading(true);
+    setResult(null);
+    try {
+      const r = await fetch(AI_PARSE_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({text: aiText}),
+      });
+      const data = await r.json();
+      if (r.ok && data.ok && data.list && data.list.length > 0) {
+        const f = data.list[0];
+        setForm((prev) => ({
+          ...prev,
+          name: f.title || prev.name,
+          website: f.website || prev.website,
+          avatarUrl: f.avatar || prev.avatarUrl,
+          description: f.description || prev.description,
+          rss: f.rss || prev.rss,
+        }));
+        setAiDialogOpen(false);
+        setResult({ok: true, message: 'AI 已识别并填充信息，请核对后修改再提交'});
+      } else {
+        setResult({ok: false, message: data.error || 'AI 未能识别有效信息'});
+      }
+    } catch {
+      setResult({ok: false, message: 'AI 识别失败，请稍后重试'});
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -86,6 +127,13 @@ export default function FriendApply(): JSX.Element {
             <p className="text-sm text-[var(--ifm-secondary-text-color)] mt-2">
               填写下方信息，提交后系统会自动审核并通知您结果
             </p>
+            <button
+              type="button"
+              onClick={() => setAiDialogOpen(true)}
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] px-5 py-2 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:shadow-lg">
+              <Icon icon="ri:sparkles-2-line" width="16" height="16" />
+              AI 智能填表
+            </button>
           </div>
 
           {result && (
@@ -154,6 +202,47 @@ export default function FriendApply(): JSX.Element {
               )}
             </button>
           </form>
+
+          {/* AI 智能填表弹窗 */}
+          {aiDialogOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setAiDialogOpen(false)}>
+              <div className="w-full max-w-lg rounded-2xl border border-[var(--ifm-color-emphasis-200)] bg-card p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
+                <div className="mb-4 flex items-center gap-2">
+                  <Icon icon="ri:sparkles-2-line" width="20" height="20" className="text-[#8b5cf6]" />
+                  <h3 className="m-0 text-lg font-semibold">AI 智能填表</h3>
+                </div>
+                <p className="mb-3 text-sm text-[var(--ifm-secondary-text-color)]">
+                  其他博主通常会在其友链页或关于页写明互换友链需提供的信息，将那段文字粘贴到这里，
+                  AI 会自动识别并填入左侧表单，你可以在提交前修改。
+                </p>
+                <textarea
+                  value={aiText}
+                  onChange={(e) => setAiText(e.target.value)}
+                  rows={6}
+                  placeholder="例如：本站友链申请信息：名称=…，网址=…，简介=…"
+                  className="w-full resize-none rounded-lg border border-[var(--ifm-color-emphasis-300)] px-3 py-2.5 text-sm outline-none focus:border-[var(--ifm-color-primary)]"
+                />
+                <div className="mt-4 flex justify-end gap-2">
+                  <button type="button" onClick={() => setAiDialogOpen(false)} className="rounded-lg border border-[var(--ifm-color-emphasis-300)] px-4 py-2 text-sm text-[var(--ifm-secondary-text-color)] hover:bg-[var(--ifm-color-emphasis-100)]">
+                    取消
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleAiParse}
+                    disabled={aiLoading}
+                    className="inline-flex items-center gap-1.5 rounded-lg bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] px-5 py-2 text-sm font-medium text-white transition-all hover:opacity-90 disabled:opacity-60">
+                    {aiLoading ? (
+                      <Icon icon="ri:loader-4-line" className="animate-spin" width="16" height="16" />
+                    ) : (
+                      <Icon icon="ri:scan-line" width="16" height="16" />
+                    )}
+                    {aiLoading ? '识别中…' : '开始识别'}
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
+
 
           <div className="mt-6 rounded-card border border-[var(--ifm-color-emphasis-200)] bg-card p-4 text-sm">
             <div className="mb-2 font-medium">我的站点信息</div>

@@ -72,7 +72,9 @@
 }
 
 .yiyanTextInner.scrolling {
-  animation: marquee-scroll linear forwards;
+  animation-name: marquee-scroll;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
 }
 
 @keyframes marquee-scroll {

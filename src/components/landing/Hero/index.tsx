@@ -6,114 +6,121 @@ import SocialLinks from '@site/src/components/SocialLinks';
 import styles from './styles.module.css';
 
 const FALLBACK = '我们都有光明的未来';
-const TWIKOO_ENV = 'https://co.oopss.top';
 
-type Comment = {
-  nick: string;
-  commentText: string;
-  url: string;
-  avatar: string;
-  relativeTime: string;
+type Memo = {
+  id?: number;
+  content?: string;
+  createdTs?: number;
+  creator?: {nickname?: string; username?: string; avatarUrl?: string};
+  link?: string;
 };
 
+function stripMarkdown(md: string): string {
+  return md
+    .replace(/!\[.*?\]\(.*?\)/g, '')
+    .replace(/\[([^\]]*)\]\(.*?\)/g, '$1')
+    .replace(/#{1,6}\s/g, '')
+    .replace(/\*\*\*(.*?)\*\*\*/g, '$1')
+    .replace(/\*\*(.*?)\*\*/g, '$1')
+    .replace(/\*(.*?)\*/g, '$1')
+    .replace(/~~(.*?)~~/g, '$1')
+    .replace(/`([^`]+)`/g, '$1')
+    .replace(/```[\s\S]*?```/g, '')
+    .replace(/>\s/g, '')
+    .replace(/\n{2,}/g, ' ')
+    .replace(/\n/g, ' ')
+    .trim();
+}
+
 function Yiyan() {
-  const [comments, setComments] = useState<Comment[]>([]);
+  const [memos, setMemos] = useState<Memo[]>([]);
   const [current, setCurrent] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const [scrolling, setScrolling] = useState(false);
   const [scrollDist, setScrollDist] = useState('0px');
   const [scrollDur, setScrollDur] = useState('0s');
-  const textRef = useRef<HTMLSpanElement>(null);
+  const [scrollDelay, setScrollDelay] = useState('0s');
+  const textRef = useRef<HTMLAnchorElement>(null);
   const innerRef = useRef<HTMLSpanElement>(null);
 
-  // 延迟请求最近评论（通过后端 API，不加载完整 Twikoo JS）
   useEffect(() => {
     if (typeof window === 'undefined') return;
-    const timer = setTimeout(fetchComments, 3000);
+    const timer = setTimeout(fetchMemos, 3000);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  async function fetchComments() {
+  async function fetchMemos() {
     try {
-      const res = await fetch('https://apii.oopss.top/api/recent-comments', {
-        method: 'GET',
-      });
+      const res = await fetch('https://apii.oopss.top/api/memos?limit=3', {method: 'GET'});
       if (!res.ok) throw new Error();
       const data = await res.json();
-      applyComments(data);
-    } catch {
-      tryFallback();
-    }
-  }
-
-  async function tryFallback() {
-    try {
-      const res = await fetch(`${TWIKOO_ENV}/api/comment`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          event: 'GET_RECENT_COMMENTS',
-          accessToken: '',
-          pageSize: 5,
-          includeReply: true,
-          envId: TWIKOO_ENV,
-        }),
-      });
-      const json = await res.json();
-      applyComments(json.data);
+      const list: Memo[] = (data.memos || []).filter((m: Memo) => m.content).slice(0, 3);
+      if (list.length > 0) {
+        setMemos(list);
+        setCurrent(Math.floor(Math.random() * list.length));
+        setLoaded(true);
+        return;
+      }
     } catch {}
   }
 
-  function applyComments(data: any[]) {
-    if (data && data.length > 0) {
-      setComments(data);
-      setCurrent(Math.floor(Math.random() * data.length));
-      setLoaded(true);
-    }
-  }
-
-  // 检查是否需要滚动，并排定切换时机（绘制前测量，避免旧动画残留导致从中间显示）
   useLayoutEffect(() => {
-    if (!loaded || comments.length === 0) return;
+    if (!loaded || memos.length === 0) return;
     const outer = textRef.current;
     const inner = innerRef.current;
     if (!outer || !inner) return;
 
     const over = inner.scrollWidth > outer.clientWidth + 1;
-    let delay = 5000;
+    setScrolling(false);
+
     if (over) {
       const dist = outer.clientWidth - inner.scrollWidth - 24;
-      const duration = Math.max(Math.abs(dist) / 40, 2);
+      const duration = Math.max(Math.abs(dist) / 25, 2);
+      const delay = 1.2;
       setScrollDist(`${dist}px`);
       setScrollDur(`${duration}s`);
-      setScrolling(true);
-      delay = duration * 1000 + 2000;
-    } else {
-      setScrolling(false);
-    }
+      setScrollDelay(`${delay}s`);
 
-    const timer = setTimeout(() => {
-      setCurrent((prev) => (prev + 1) % comments.length);
-    }, delay);
-    return () => clearTimeout(timer);
-  }, [loaded, comments, current]);
+      const raf = requestAnimationFrame(() => {
+        setScrolling(true);
+      });
+
+      const onEnd = () => {
+        setScrolling(false);
+        setCurrent((prev) => (prev + 1) % memos.length);
+      };
+      inner.addEventListener('animationend', onEnd, {once: true});
+      return () => {
+        cancelAnimationFrame(raf);
+        inner.removeEventListener('animationend', onEnd);
+      };
+    } else {
+      const timer = setTimeout(() => {
+        setCurrent((prev) => (prev + 1) % memos.length);
+      }, 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [loaded, memos, current]);
 
   const shuffle = async () => {
-    if (comments.length > 1) {
-      // 立即切换下一条，后台同时刷新评论列表
-      setCurrent((prev) => (prev + 1) % comments.length);
-      fetchComments();
+    if (memos.length > 1) {
+      setCurrent((prev) => (prev + 1) % memos.length);
+      fetchMemos();
     } else {
-      await fetchComments();
+      await fetchMemos();
       setLoaded(true);
     }
   };
 
-  const display = comments[current] || null;
-  const text = display ? `「${display.commentText}」—— ${display.nick}` : FALLBACK;
+  const display = memos[current] || null;
+  const text = display ? `「${stripMarkdown(display.content || '')}」` : FALLBACK;
+  const memoUrl = display?.link || `https://memos.oopss.top/m/${display?.id}`;
   const innerStyle = scrolling
-    ? ({'--scroll-distance': scrollDist, animationDuration: scrollDur} as any)
+    ? ({
+        '--scroll-distance': scrollDist,
+        animationDuration: scrollDur,
+        animationDelay: scrollDelay,
+      } as any)
     : undefined;
   const innerClassName =
     styles.yiyanTextInner + (scrolling ? ' ' + styles.scrolling : '');
@@ -122,7 +129,7 @@ function Yiyan() {
     <div className={styles.yiyan}>
       {display ? (
         <a
-          href={display.url}
+          href={memoUrl}
           target="_blank"
           rel="noreferrer"
           className={styles.yiyanText}
@@ -136,7 +143,7 @@ function Yiyan() {
           </span>
         </a>
       ) : (
-        <span className={styles.yiyanText} ref={textRef}>
+        <span className={styles.yiyanText} ref={textRef as any}>
           <span
             key={current}
             className={innerClassName}

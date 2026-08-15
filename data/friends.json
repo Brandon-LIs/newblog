@@ -158,5 +158,12 @@
     "website": "https://lzh1.cn/",
     "avatar": "https://jsd.oopss.top/twikoo/08150002.webp",
     "rss": "https://lzh1.cn/rss.php"
+  },
+  {
+    "title": "Mayx的博客",
+    "description": "Mayx’s Home Page",
+    "website": "https://mabbs.github.io",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08150008.webp",
+    "rss": "https://mabbs.github.io/atom.xml"
   }
 ]

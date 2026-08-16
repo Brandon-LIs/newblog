@@ -39,7 +39,7 @@ function parseFrontMatter(file) {
     if (v.startsWith('[')) v = v.slice(1).split(',')[0].trim()
     return v
   }
-  return { title: get('title'), slug: get('slug'), content: m[2] }
+  return { title: get('title'), slug: get('slug'), content: m[2], aiSummary: get('ai_summary') }
 }
 
 // 计算文章 permalink（与 Docusaurus 保持一致）
@@ -145,11 +145,20 @@ async function main() {
   let changed = 0
 
   for (const file of files) {
-    const { title, slug, content } = parseFrontMatter(join(blogDir, file))
+    const { title, slug, content, aiSummary } = parseFrontMatter(join(blogDir, file))
     const permalink = computePermalink(file, slug)
     const h = hashContent(content)
 
     console.log(`→ ${permalink} (${title || file})`)
+
+    // ai_summary: false → 跳过
+    if (aiSummary === 'false') {
+      console.log('  ai_summary: false，跳过')
+      delete summaries[permalink]
+      delete hashes[permalink]
+      changed++
+      continue
+    }
 
     // 内容未变且已有摘要 → 跳过
     if (hashes[permalink] === h && summaries[permalink]) {

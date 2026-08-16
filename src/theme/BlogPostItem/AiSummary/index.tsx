@@ -18,8 +18,12 @@ export default function AiSummary(): JSX.Element | null {
   const {isBlogPostPage, metadata} = useBlogPost();
   const [summary, setSummary] = useState<string | null>(null);
 
+  // 文章 front matter 中 ai_summary: false 则不显示
+  const frontMatter = metadata.frontMatter as Record<string, unknown> | undefined;
+  const disabled = frontMatter?.ai_summary === false || frontMatter?.ai_summary === 'false';
+
   useEffect(() => {
-    if (!isBlogPostPage) {
+    if (!isBlogPostPage || disabled) {
       return;
     }
     let cancelled = false;
@@ -31,7 +35,7 @@ export default function AiSummary(): JSX.Element | null {
     return () => {
       cancelled = true;
     };
-  }, [isBlogPostPage, metadata.permalink]);
+  }, [isBlogPostPage, metadata.permalink, disabled]);
 
   if (!isBlogPostPage || !summary) {
     return null;

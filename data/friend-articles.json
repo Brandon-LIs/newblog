@@ -1,7 +1,16 @@
 {
-  "updated_at": "2026-08-16T02:15:42.266Z",
+  "updated_at": "2026-08-16T02:57:48.957Z",
   "count": 105,
   "list": [
+    {
+      "title": "浏览其他人的博客",
+      "link": "https://lzh1.cn/?post=44",
+      "date": "Sun, 16 Aug 2026 10:41:24 +0800",
+      "description": "最近一直在聚合平台以及友链页访问他人的博客。 我访问他人博客除了看名字介绍以外还会看一下头像图标，一些吸引我的头像和图标我会毫不犹豫的点进去。 我觉得头像都那么吸引人的话这个博客站长肯定是个很有趣的人。",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://jsd.oopss.top/twikoo/08150002.webp"
+    },
     {
       "title": "为什么upxuu 不发朋友圈",
       "link": "https://upxuu.com/posts/pyq/",
@@ -235,15 +244,6 @@
       "site": "小改学习志",
       "siteUrl": "https://www.haoyu233.com",
       "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
-    },
-    {
-      "title": "我把非遗做成了图纸",
-      "link": "https://lzh1.cn/?post=36",
-      "date": "Fri, 07 Aug 2026 22:05:40 +0800",
-      "description": "我这边有一个国家级非遗叫大奏鼓是男扮女装敲锣打鼓跳舞，我为这个国家级非遗做了几套卡通表情包。 今天突发奇想用自己做的大奏鼓卡通形象生成了拼豆图纸，目前也只是做出了图纸因为整个拼完要用到2147颗豆子很多人劝我去拼豆店因为自己不好烫熨。",
-      "site": "林子浩的日记",
-      "siteUrl": "https://lzh1.cn/",
-      "avatar": "https://jsd.oopss.top/twikoo/08150002.webp"
     },
     {
       "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",

@@ -92,20 +92,26 @@ export default function Review(): JSX.Element {
                 RSS：{app.rssOk ? '✅ 可访问' : '❌ 不可用或未提供'}
               </div>
 
+              {app.status !== 'pending' ? (
+                <div className="mt-6 rounded-lg bg-amber-50 p-4 text-center text-sm font-medium text-amber-700 border border-amber-200">
+                  {app.status === 'approved' ? '✅ 已同意' : app.status === 'rejected' ? '❌ 已拒绝' : '已处理，请勿重复操作'}
+                </div>
+              ) : (
               <div className="mt-6 flex gap-3">
                 <button
                   onClick={() => act(`${APPROVE_URL}?token=${app.id}`)}
-                  disabled={processing || app.status === 'approved'}
+                  disabled={processing}
                   className="flex-1 rounded-lg bg-gradient-to-r from-emerald-500 to-emerald-600 py-3 text-sm font-semibold text-white disabled:opacity-50">
                   ✅ 同意申请
                 </button>
                 <button
                   onClick={() => act(`${REJECT_URL}?token=${app.id}`)}
-                  disabled={processing || app.status === 'rejected'}
+                  disabled={processing}
                   className="flex-1 rounded-lg bg-gradient-to-r from-rose-500 to-rose-600 py-3 text-sm font-semibold text-white disabled:opacity-50">
                   ❌ 拒绝申请
                 </button>
               </div>
+              )}
             </div>
           )}
         </div>

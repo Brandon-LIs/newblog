@@ -220,6 +220,7 @@ const config: Config = {
         {type: 'dropdown', label: '友链', position: 'left', items: [
           {to: '/friends', label: '友情链接'},
           {to: '/teleport', label: '随机穿梭'},
+          {to: '/linux', label: 'Linux 终端'},
           {to: '/fcircle', label: '友链文章'},
         ]},
         {href: 'https://github.com/Brandon-LIs/newblog/issues/4', label: '订阅', position: 'left'},

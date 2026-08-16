@@ -29,7 +29,7 @@ const HELP_CMDS: [string, string][] = [
   ['shuttle <name>', '穿梭到指定友链'],
   ['friends', '列出友链列表'],
   ['posts', '列出博客文章'],
-  ['open <slug>', '打开一篇博客'],
+  ['open <n>', '打开博客 #n（编号见 posts）'],
   ['feed', '列出友链最近文章'],
   ['openfeed <n>', '打开友链文章 #n'],
   ['comments', '列出最近评论'],
@@ -196,23 +196,24 @@ export default function LinuxTerminal(): JSX.Element {
         if (!posts.length) { push('暂无博客文章', 'err'); break; }
         push(`共 ${posts.length} 篇博客：`, 'bold');
         posts.forEach((p, i) => {
-          const slug = p.metadata?.permalink || '';
-          push(`${String(i + 1).padStart(2, ' ')}. ${p.metadata?.title}  (slug: ${slug})`, 't2');
+          push(`${String(i + 1).padStart(2, ' ')}. ${p.metadata?.title}`, 't2');
         });
-        push('用法：open <slug>', 'dim');
+        push('用法：open <编号>', 'dim');
         break;
       }
       case 'open': {
-        if (!arg) { push('用法：open <slug>', 'warn'); break; }
-        const slug = arg.startsWith('/') ? arg : `/blog/${arg}`;
-        const found = posts.find((p) =>
-          p.metadata?.permalink === slug || p.metadata?.title?.toLowerCase().includes(arg.toLowerCase()));
-        if (found) {
-          push(`正在打开 ${found.metadata?.title} …`, 'ok');
-          setTimeout(() => { window.open(found.metadata?.permalink, '_blank'); }, 600);
-        } else {
-          push(`未找到文章 "${arg}"`, 'err');
+        const n = parseInt(arg, 10);
+        if (isNaN(n)) { push('用法：open <编号>', 'warn'); break; }
+        const found = posts[n - 1];
+        if (!found) {
+          push(`未找到第 ${n} 篇文章`, 'err');
+          break;
         }
+        push(`正在打开 ${found.metadata?.title} …`, 'ok');
+        setTimeout(() => {
+          const permalink = found.metadata?.permalink;
+          if (permalink) window.open(permalink, '_blank');
+        }, 600);
         break;
       }
       case 'feed': {
@@ -292,7 +293,7 @@ export default function LinuxTerminal(): JSX.Element {
   }
 
   return (
-    <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="linux-page">
+    <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="linux-page" noFooter>
       <div className={styles.root}>
         <div className={styles.bar}>
           <span className={`${styles.dot} ${styles.red}`} />

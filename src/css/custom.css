@@ -443,8 +443,38 @@ html[data-theme='dark'] .twikoo .OwO {
 }
 
 .tk-comments .tk-comment {
-  border-bottom: 1px solid var(--ifm-border-color);
-  padding: 1rem 0;
+  position: relative;
+  padding: 1.25rem 0.5rem;
+}
+
+/* 每层评论之间加渐变分割线（适配双主题） */
+.tk-comments .tk-comment + .tk-comment::before,
+.tk-comments .tk-comment:not(:first-child)::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 3.2rem;
+  right: 1rem;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    color-mix(in srgb, var(--ifm-color-primary) 35%, var(--ifm-border-color)) 18%,
+    var(--ifm-border-color) 55%,
+    transparent
+  );
+}
+
+/* 回复（子评论）层级：让分割线从更靠右开始，形成缩进的视觉层次 */
+.tk-comments .tk-comment .tk-replies .tk-comment::before,
+.tk-comments .tk-comment .tk-children .tk-comment::before {
+  left: 4.5rem;
+}
+
+/* 回复容器自身与父评论内容之间留白 */
+.tk-comments .tk-comment .tk-replies,
+.tk-comments .tk-comment .tk-children {
+  margin-top: 0.5rem;
 }
 
 .tk-comments .tk-content {

@@ -207,5 +207,11 @@
     "website": "https://i.limhy.cn",
     "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp",
     "rss": "https://i.limhy.cn/rss.xml"
+  },
+  {
+    "title": "测试博客",
+    "description": "测试微信模板消息推送",
+    "website": "https://example.com",
+    "avatar": ""
   }
 ]

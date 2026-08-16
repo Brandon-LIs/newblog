@@ -1,0 +1,225 @@
+.root {
+  position: relative;
+  min-height: calc(100vh - 60px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  color: var(--ifm-text-color);
+  background: var(--ifm-background-color);
+}
+
+/* ---------- 星空 ---------- */
+.stars {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.stars :global(.twinkle) {
+  position: absolute;
+  border-radius: 50%;
+  background: currentColor;
+  animation: twinkle 2s ease-in-out infinite;
+  color: var(--ifm-color-primary);
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.15; transform: scale(0.7); }
+  50% { opacity: 1; transform: scale(1.3); }
+}
+
+/* ---------- 内容层 ---------- */
+.content {
+  position: relative;
+  z-index: 1;
+  width: min(92vw, 720px);
+  text-align: center;
+}
+
+/* idle 状态 */
+.title {
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: 0.35em;
+  margin-bottom: 0.5rem;
+  background: linear-gradient(135deg, var(--ifm-color-primary), #a5b4fc);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.sub {
+  color: var(--ifm-secondary-text-color);
+  margin-bottom: 2rem;
+  font-size: 1.05rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.4rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  color: #fff;
+  background: linear-gradient(135deg, var(--ifm-color-primary), #0598df);
+  box-shadow: 0 8px 24px rgba(18, 175, 250, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(18, 175, 250, 0.5);
+}
+
+.btnIcon { font-size: 1.3rem; }
+
+.hint {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--ifm-secondary-text-color);
+  opacity: 0.7;
+}
+
+/* ---------- 扫描终端 ---------- */
+.term {
+  background: var(--ifm-card-background-color);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 14px;
+  overflow: hidden;
+  text-align: left;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.termBar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  background: var(--ifm-color-emphasis-100);
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+
+.dot { width: 11px; height: 11px; border-radius: 50%; }
+.red { background: #ff5f57; }
+.yellow { background: #febc2e; }
+.green { background: #28c840; }
+
+.termTitle {
+  margin-left: 10px;
+  font-size: 0.8rem;
+  font-family: var(--ifm-font-family-monospace);
+  color: var(--ifm-secondary-text-color);
+}
+
+.termBody {
+  padding: 18px 20px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  line-height: 1.85;
+}
+
+.line { margin: 2px 0; }
+
+.prompt { color: var(--ifm-color-primary); font-weight: 600; }
+.dim { color: var(--ifm-secondary-text-color); opacity: 0.85; }
+.ok { color: #10b981; }
+.hi { color: var(--ifm-color-primary); font-weight: 700; }
+
+.scanList {
+  margin-top: 16px;
+  text-align: left;
+  max-height: 180px;
+  overflow: hidden;
+}
+
+/* ---------- 虫洞 ---------- */
+.wormhole {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 24px;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--ifm-color-primary);
+  opacity: 0.7;
+}
+
+.r1 { animation: spin 3s linear infinite; }
+.r2 { inset: 18px; animation: spin 2.2s linear infinite reverse; opacity: 0.85; }
+.r3 { inset: 40px; animation: spin 1.6s linear infinite; opacity: 1; }
+
+.core {
+  position: absolute;
+  inset: 62px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--ifm-card-background-color);
+  border: 2px solid var(--ifm-color-primary);
+  font-size: 1.6rem;
+}
+
+.core img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.wormhole.leaving .ring { border-color: #a5b4fc; }
+
+/* ---------- jump 文案 ---------- */
+.arrive {
+  font-size: 1rem;
+  letter-spacing: 0.3em;
+  color: var(--ifm-secondary-text-color);
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.site {
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  font-weight: 800;
+  margin: 0;
+  color: var(--ifm-text-color);
+}
+
+.desc {
+  margin-top: 0.6rem;
+  color: var(--ifm-secondary-text-color);
+  font-size: 1rem;
+}
+
+.countline {
+  margin-top: 1.4rem;
+  font-size: 0.9rem;
+  color: var(--ifm-color-primary);
+  letter-spacing: 0.15em;
+  animation: blink 1s steps(2) infinite;
+}
+
+@keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+/* 背景装饰 */
+.glow {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(600px 300px at 30% 20%, rgba(18, 175, 250, 0.1), transparent 60%),
+    radial-gradient(500px 300px at 75% 80%, rgba(165, 180, 252, 0.1), transparent 60%);
+}

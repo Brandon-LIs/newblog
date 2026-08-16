@@ -177,12 +177,13 @@
     "title": "wangxinyang",
     "description": "个人博客 / 学习交流 / 生活日常",
     "website": "https://wangxinyang.top",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08160006.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160006.webp",
+    "rss": "https://wangxinyang.top/rss.xml"
   },
   {
-    "title": "测试博客",
-    "description": "测试",
-    "website": "https://example.com",
-    "avatar": ""
+    "title": "云白",
+    "description": "一名地球 Online 玩家的随想集",
+    "website": "https://denjuy.com",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160007.webp"
   }
 ]

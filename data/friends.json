@@ -200,18 +200,5 @@
     "website": "https://blog.elysium-stack.cn",
     "avatar": "https://jsd.oopss.top/uploads/2026/08160009.webp",
     "rss": "https://blog.elysium-stack.cn/rss.xml"
-  },
-  {
-    "title": "LiMhy Blog",
-    "description": "一个关于技术折腾、生活记录和个人项目的静态博客。",
-    "website": "https://i.limhy.cn",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp",
-    "rss": "https://i.limhy.cn/rss.xml"
-  },
-  {
-    "title": "测试博客",
-    "description": "测试微信模板消息推送",
-    "website": "https://example.com",
-    "avatar": ""
   }
 ]

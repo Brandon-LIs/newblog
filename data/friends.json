@@ -200,5 +200,11 @@
     "website": "https://blog.elysium-stack.cn",
     "avatar": "https://jsd.oopss.top/uploads/2026/08160009.webp",
     "rss": "https://blog.elysium-stack.cn/rss.xml"
+  },
+  {
+    "title": "中文独立博客聚合列表",
+    "description": "一个非营利性的中文博客聚合项目。",
+    "website": "https://blogroll.online/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160013.webp"
   }
 ]

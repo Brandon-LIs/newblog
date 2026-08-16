@@ -686,3 +686,19 @@ code {
     display: block;
   }
 }
+
+
+/* ===== Linux 终端页面：全屏（隐藏导航栏、底栏、侧边按钮） ===== */
+html:has(.linux-page) .navbar,
+html:has(.linux-page) .theme-layout-navbar,
+html:has(.linux-page) .footer,
+html:has(.linux-page) .theme-doc-footer,
+html:has(.linux-page) .theme-doc-breadcrumbs,
+html:has(.linux-page) .pagination-nav {
+  display: none !important;
+}
+
+html:has(.linux-page) .skipToContent,
+html:has(.linux-page) [aria-label="跳到主要内容"] {
+  display: none;
+}

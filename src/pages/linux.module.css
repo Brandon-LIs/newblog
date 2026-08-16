@@ -125,14 +125,3 @@
 @media (max-width: 768px) {
   .screen { font-size: 13px; padding: 12px 10px; }
 }
-
-/* 全屏：隐藏导航栏和底栏，让终端占满视口 */
-:global(.navbar) {
-  display: none;
-}
-
-:global(.theme-doc-footer),
-:global(.theme-doc-breadcrumbs),
-:global(.pagination-nav) {
-  display: none;
-}

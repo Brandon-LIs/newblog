@@ -702,3 +702,15 @@ html:has(.linux-page) .skipToContent,
 html:has(.linux-page) [aria-label="跳到主要内容"] {
   display: none;
 }
+
+
+/* ===== 穿梭菜单：仅在电脑端显示，手机端隐藏 ===== */
+.navbar-item-shuttle {
+  display: inline-flex !important;
+}
+
+@media (max-width: 996px) {
+  .navbar-item-shuttle {
+    display: none !important;
+  }
+}

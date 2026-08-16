@@ -219,9 +219,12 @@ const config: Config = {
 {href: 'https://www.oopss.top', label: '主页', position: 'left'},
         {type: 'dropdown', label: '友链', position: 'left', items: [
           {to: '/friends', label: '友情链接'},
-          {to: '/teleport', label: '随机穿梭'},
-          {to: '/linux', label: 'Linux 终端'},
           {to: '/fcircle', label: '友链文章'},
+        ]},
+        {type: 'dropdown', label: '穿梭', position: 'left', className: 'navbar-item-shuttle', items: [
+          {to: '/teleport', label: '随机穿梭'},
+          {to: '/wormhole', label: '跃迁通道'},
+          {to: '/linux', label: 'Linux 终端'},
         ]},
         {href: 'https://github.com/Brandon-LIs/newblog/issues/4', label: '订阅', position: 'left'},
         {to: '/about', label: '关于', position: 'left'},

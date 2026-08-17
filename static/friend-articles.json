@@ -1,7 +1,16 @@
 {
-  "updated_at": "2026-08-17T16:54:14.853Z",
-  "count": 121,
+  "updated_at": "2026-08-17T17:19:05.925Z",
+  "count": 126,
   "list": [
+    {
+      "title": "【原创】要开学了，怎么保住火花？",
+      "link": "https://blog.iamcrl.cn/?post=69",
+      "date": "Tue, 18 Aug 2026 00:48:29 +0800",
+      "description": "声明：本教程及脚本仅供技术交流与学习使用，因使用自动化工具导致的账号异常、火花中断等问题，作者概不承担任何法律与经济以及其他责任。 过程 距离开学只剩下12天了，除了对即将到来的高三生活的焦虑以外，最担心的就是抖音的火花该怎么办。我和我朋友抖音的火花时间最长的已经有六百多天了，最短的也有快五百天，这要是断了...之前我是让我堂姐登我的抖音号每天帮我续的，但因为她当时上学比较忙忘记续的情况也很常见（",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
+    },
     {
       "title": "「说说」lcrworld 和 lcr99 喵～",
       "link": "https://upxuu.com/talk/lcrworld-和-lcr99-喵/",
@@ -145,6 +154,24 @@
       "site": "xf_blog",
       "siteUrl": "https://husd.cc.cd/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
+    },
+    {
+      "title": "ESP32 / ESP8266 物联网开发环境配置指南",
+      "link": "https://blog.liseezn.top/919.html/",
+      "date": "Wed, 12 Aug 2026 13:59:40 +0000",
+      "description": "前言 ESP32 与 ESP8266 是当前物联网开发领域普及率最高的两款芯片：ESP32 搭载双核处理器，支 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
+      "title": "Codex 接入 DeepSeek 保姆级教程｜ Codex++",
+      "link": "https://blog.liseezn.top/903.html/",
+      "date": "Wed, 12 Aug 2026 13:44:35 +0000",
+      "description": "用 Codex 写代码的朋友，大概率都遇到过这些糟心事：OpenAI 接口时不时抽风、网络不稳半天出不来结果、 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【原创】我的高二生活",
@@ -318,6 +345,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
     },
     {
+      "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
+      "link": "https://blog.liseezn.top/896.html/",
+      "date": "Fri, 07 Aug 2026 13:56:10 +0000",
+      "description": "这是一份面向普通用户的全流程实践指南。不论你是刚接触 Obsidian 的新手，还是想将 AI 能力彻底融入笔 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "8个月的钢笔使用感想",
       "link": "https://iluc.cn/posts/2026-08-07-00/",
       "date": "Fri, 07 Aug 2026 00:00:00 GMT",
@@ -345,6 +381,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
     },
     {
+      "title": "烧几亿Token搭完AI工作台SaaS平台，在上线前止损",
+      "link": "https://blog.liseezn.top/883.html/",
+      "date": "Thu, 06 Aug 2026 09:00:12 +0000",
+      "description": "从空仓库到全链路跑通。全程AI辅助开发，前前后后烧掉几亿Token，把一套多职业AI工作台SaaS的核心骨架全 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "博客大更新",
       "link": "https://xfcnl.github.io/note/2026-08-06-%E5%8D%9A%E5%AE%A2%E5%A4%A7%E6%9B%B4%E6%96%B0/",
       "date": "2026-08-06T00:00:00.000Z",
@@ -361,6 +406,15 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "全栈开发Skill矩阵：从前端审美到后端运维，打造完整AI开发流水线",
+      "link": "https://blog.liseezn.top/877.html/",
+      "date": "Wed, 05 Aug 2026 22:00:00 +0000",
+      "description": "上一篇我们聊了前端开发的Skill组合，解决了AI写页面“模板化、审美差”的痛点。但对全栈开发者来说，前端只是 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【公告】关于本站文章更新频率调整的相关说明",
@@ -550,15 +604,6 @@
       "site": "Mimosa的小屋",
       "siteUrl": "https://loneapex.cn/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120009.webp"
-    },
-    {
-      "title": "【原创】关于AI的一些思考",
-      "link": "https://blog.iamcrl.cn/?post=53",
-      "date": "Tue, 21 Jul 2026 23:54:31 +0800",
-      "description": "最近回了我外公外婆家。一天我把我期末考的卷子拿出来想总结一下大题的答题模板。因为是期末考，所以老师并没有评讲试卷，我就打开手机上的作业帮开始扫题然后逐行把答案抄写下来。正在旁边玩平板的表弟表妹看见，对我说“你也用AI啊”。我说这不是AI，他们顿了一下，说“你这不就是AI吗？都拿手机拍试卷了还犟”，我有点无语，“这是作业帮你知道吗？这不是AI，你们不用这个App吗？”，我问。没想到的是他们告诉我他们",
-      "site": "睿朗的小窝",
-      "siteUrl": "https://iamcrl.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
     },
     {
       "title": "「工具推荐」TRAE：字节跳动自研AI原生IDE编程软件（非广告）",
@@ -923,7 +968,7 @@
     {
       "title": "有端",
       "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
-      "date": "2026-02-01T02:44:53Z",
+      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
       "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -932,7 +977,7 @@
     {
       "title": "无端",
       "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
-      "date": "2026-02-01T02:44:32Z",
+      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
       "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -941,7 +986,7 @@
     {
       "title": "奇技淫巧之高中多选题拿分策略",
       "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
-      "date": "2026-01-30T16:00:03Z",
+      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
       "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -977,7 +1022,7 @@
     {
       "title": "怀念",
       "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
-      "date": "2026-01-02T06:24:00Z",
+      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
       "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",
@@ -1004,7 +1049,7 @@
     {
       "title": "年前",
       "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
-      "date": "2025-12-30T16:00:00Z",
+      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
       "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
       "site": "Tilawa Cesoil的小站",
       "siteUrl": "https://www.tilawacesoil.top",

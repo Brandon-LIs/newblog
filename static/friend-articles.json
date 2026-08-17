@@ -1,16 +1,7 @@
 {
-  "updated_at": "2026-08-17T14:00:25.834Z",
+  "updated_at": "2026-08-17T14:29:23.200Z",
   "count": 121,
   "list": [
-    {
-      "title": "「说说」lcrworld 和 lcr99 喵～",
-      "link": "https://upxuu.com/talk/lcrworld-和-lcr99-喵/",
-      "date": "Mon, 17 Aug 2026 10:27:34 GMT",
-      "description": "嗯对，其实你们一直不知道 lcrworld 和 lcr 到底是啥关系🤔 其实是小学同学，今天 lcr 从🇨🇦回来也是直接让 lcrworld 接她把她送回家，也算是成功了...吧 99 也是第一次体验当狗头军师（删 !https://img.upxuu.lcrworld.xyz/images/2026/8/17/20260817183002122.jpg",
-      "site": "UpXuu's blog",
-      "siteUrl": "https://upxuu.com",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
-    },
     {
       "title": "舞萌DX 落雪查分器使用指南",
       "link": "https://xice.cx/posts/maiLxnsSync/",
@@ -37,15 +28,6 @@
       "site": "林子浩的日记",
       "siteUrl": "https://lzh1.cn/",
       "avatar": "https://jsd.oopss.top/twikoo/08150002.webp"
-    },
-    {
-      "title": "为什么upxuu 不发朋友圈",
-      "link": "https://upxuu.com/posts/pyq/",
-      "date": "Sun, 16 Aug 2026 01:03:45 GMT",
-      "description": "表达了 upxuu 对于无法自由发朋友圈的气愤",
-      "site": "UpXuu's blog",
-      "siteUrl": "https://upxuu.com",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
       "title": "wdf，火车上有邪教！！！",
@@ -111,15 +93,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08120004.webp"
     },
     {
-      "title": "什么？你的vercel还没深绿？一文研究透vercel优选|缓存配置",
-      "link": "https://upxuu.com/posts/vercel-youxuan-cache/",
-      "date": "Thu, 13 Aug 2026 03:00:00 GMT",
-      "description": "从地区优选、IP优选到边缘缓存配置与缓存预热，让你的 Vercel 站点在国内测速全绿、加载飞快",
-      "site": "UpXuu's blog",
-      "siteUrl": "https://upxuu.com",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
-    },
-    {
       "title": "Typeless，一款可以让你只动嘴、不动手的输入法，Typeless 初体验",
       "link": "https://xfcnl.github.io/tech/2026-08-13-Typeless%EF%BC%8C%E4%B8%80%E6%AC%BE%E5%8F%AF%E4%BB%A5%E8%AE%A9%E4%BD%A0%E5%8F%AA%E5%8A%A8%E5%98%B4%E3%80%81%E4%B8%8D%E5%8A%A8%E6%89%8B%E7%9A%84%E8%BE%93%E5%85%A5%E6%B3%95%EF%BC%8CTypeless%20%E5%88%9D%E4%BD%93%E9%AA%8C/",
       "date": "2026-08-13T00:00:00.000Z",
@@ -131,7 +104,7 @@
     {
       "title": "ESP32 / ESP8266 物联网开发环境配置指南",
       "link": "https://blog.liseezn.top/919.html/",
-      "date": "2026-08-12T13:59:40Z",
+      "date": "Wed, 12 Aug 2026 13:59:40 +0000",
       "description": "前言 ESP32 与 ESP8266 是当前物联网开发领域普及率最高的两款芯片：ESP32 搭载双核处理器，支 [&#8230;]",
       "site": "Liseezn'blog",
       "siteUrl": "https://blog.liseezn.top",
@@ -140,20 +113,11 @@
     {
       "title": "Codex 接入 DeepSeek 保姆级教程｜ Codex++",
       "link": "https://blog.liseezn.top/903.html/",
-      "date": "2026-08-12T13:44:35Z",
+      "date": "Wed, 12 Aug 2026 13:44:35 +0000",
       "description": "用 Codex 写代码的朋友，大概率都遇到过这些糟心事：OpenAI 接口时不时抽风、网络不稳半天出不来结果、 [&#8230;]",
       "site": "Liseezn'blog",
       "siteUrl": "https://blog.liseezn.top",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
-    },
-    {
-      "title": "你的vercel项目，还能更快",
-      "link": "https://upxuu.com/posts/vercel666/",
-      "date": "Wed, 12 Aug 2026 10:02:22 GMT",
-      "description": "通过更改vercel项目地区加快vercel项目的速度",
-      "site": "UpXuu's blog",
-      "siteUrl": "https://upxuu.com",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
     },
     {
       "title": "【原创】我的高二生活",
@@ -329,7 +293,7 @@
     {
       "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
       "link": "https://blog.liseezn.top/896.html/",
-      "date": "2026-08-07T13:56:10Z",
+      "date": "Fri, 07 Aug 2026 13:56:10 +0000",
       "description": "这是一份面向普通用户的全流程实践指南。不论你是刚接触 Obsidian 的新手，还是想将 AI 能力彻底融入笔 [&#8230;]",
       "site": "Liseezn'blog",
       "siteUrl": "https://blog.liseezn.top",
@@ -363,18 +327,9 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
     },
     {
-      "title": "「说说」偶然发现，cloudflare竟然还在这里保护着我们",
-      "link": "https://upxuu.com/talk/2026-08-06-偶然发现cloudflare竟然还在这里保护着我们/",
-      "date": "Thu, 06 Aug 2026 12:39:18 GMT",
-      "description": "今天我在看自己博客时，神秘客户端么有关，导致我访问到了国外通过cloudflare的节点，并且不知道咋回事，cf 的鉴权js疑似没有正常加载，才发现我的所有页面的邮箱（我自己的公开邮箱），都被替换成了email protected ，我起初还纳闷，不对啊我记得我也妹加这个功能啊 点击一看跳到了这个页面，cloudflare为了防止bot收集网站的email发邮件，竟然还有这种小巧思，大善人他真的我",
-      "site": "UpXuu's blog",
-      "siteUrl": "https://upxuu.com",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
-    },
-    {
       "title": "烧几亿Token搭完AI工作台SaaS平台，在上线前止损",
       "link": "https://blog.liseezn.top/883.html/",
-      "date": "2026-08-06T09:00:12Z",
+      "date": "Thu, 06 Aug 2026 09:00:12 +0000",
       "description": "从空仓库到全链路跑通。全程AI辅助开发，前前后后烧掉几亿Token，把一套多职业AI工作台SaaS的核心骨架全 [&#8230;]",
       "site": "Liseezn'blog",
       "siteUrl": "https://blog.liseezn.top",
@@ -401,7 +356,7 @@
     {
       "title": "全栈开发Skill矩阵：从前端审美到后端运维，打造完整AI开发流水线",
       "link": "https://blog.liseezn.top/877.html/",
-      "date": "2026-08-05T22:00:00Z",
+      "date": "Wed, 05 Aug 2026 22:00:00 +0000",
       "description": "上一篇我们聊了前端开发的Skill组合，解决了AI写页面“模板化、审美差”的痛点。但对全栈开发者来说，前端只是 [&#8230;]",
       "site": "Liseezn'blog",
       "siteUrl": "https://blog.liseezn.top",
@@ -966,6 +921,33 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
+      "title": "有端",
+      "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
+      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
+      "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "无端",
+      "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
+      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
+      "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "奇技淫巧之高中多选题拿分策略",
+      "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
+      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
+      "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
       "title": "重生之我是蒟蒻打CTF-misc",
       "link": "https://619.pp.ua/article/ctf-personal-writeups-misc",
       "date": "Mon, 26 Jan 2026 00:00:00 GMT",
@@ -993,6 +975,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
     },
     {
+      "title": "怀念",
+      "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
+      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
+      "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
       "title": "Astro Theme Iris：打造个人知识管理系统",
       "link": "https://lemonadorable.github.io/blog/astro-theme-iris",
       "date": "Fri, 02 Jan 2026 00:00:00 GMT",
@@ -1009,6 +1000,15 @@
       "site": "Sunrise.博客",
       "siteUrl": "https://wowtang.top",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120008.webp"
+    },
+    {
+      "title": "年前",
+      "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
+      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
+      "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
     },
     {
       "title": "告别2025 迎接2026",

@@ -177,8 +177,24 @@ export default function Hero() {
   const [done, setDone] = useState(false);
   const fullText = '你好，\n我是 Brandon。';
 
+  // 24 小时内只播放一次打字动画，之后直接显示全文（cookie 标记）
+  const hasPlayed = () => {
+    try {
+      return document.cookie.split(';').some((c) => c.trim().startsWith('typed_played=1'));
+    } catch {
+      return false;
+    }
+  };
+
+  const markPlayed = () => {
+    try {
+      const maxAge = 24 * 60 * 60;
+      document.cookie = `typed_played=1; path=/; max-age=${maxAge}; SameSite=Lax`;
+    } catch {}
+  };
+
   useEffect(() => {
-    if (reduceMotion) {
+    if (reduceMotion || hasPlayed()) {
       setTyped(fullText);
       setDone(true);
       return;
@@ -194,6 +210,7 @@ export default function Hero() {
         setTimeout(() => setDone(true), 250);
       }
     }, 80);
+    markPlayed();
     return () => clearInterval(timer);
   }, []);
 

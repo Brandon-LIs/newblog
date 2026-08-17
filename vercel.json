@@ -22,15 +22,13 @@
     {
       "source": "/",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=0, must-revalidate" },
-        { "key": "CDN-Cache-Control", "value": "no-cache" }
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=600, stale-while-revalidate=86400" }
       ]
     },
     {
       "source": "/:path(.+)\\.html",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, s-maxage=0, must-revalidate" },
-        { "key": "CDN-Cache-Control", "value": "no-cache" }
+        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=600, stale-while-revalidate=86400" }
       ]
     },
     {

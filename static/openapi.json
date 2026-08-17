@@ -1,0 +1,523 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Brandon's Blog API",
+    "description": "Brandon's Blog 后端公开 API 接口，提供说说、评论、友链、AI 摘要等服务。\n\n**基础域名**: `https://apii.oopss.top`",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Brandon",
+      "url": "https://blog.oopss.top"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://apii.oopss.top",
+      "description": "Production"
+    }
+  ],
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "API 服务说明页",
+        "description": "返回 API 服务说明的 HTML 页面",
+        "responses": {
+          "200": {
+            "description": "HTML 页面",
+            "content": {
+              "text/html": {}
+            }
+          }
+        }
+      }
+    },
+    "/script.js": {
+      "get": {
+        "summary": "Umami 统计脚本",
+        "description": "Umami 网站统计追踪脚本，前端页面通过 <script> 标签加载。",
+        "responses": {
+          "200": {
+            "description": "JavaScript 脚本",
+            "content": {
+              "application/javascript": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/memos": {
+      "get": {
+        "summary": "获取说说列表",
+        "description": "从 Memos 实例获取说说列表，通过 KV 缓存 30 秒。",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": { "type": "integer", "default": 20 },
+            "description": "每页数量"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": { "type": "integer", "default": 1 },
+            "description": "页码"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "说说列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "memos": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": { "type": "integer" },
+                          "content": { "type": "string" },
+                          "visibility": { "type": "string" },
+                          "createdTs": { "type": "integer" },
+                          "updatedTs": { "type": "integer" },
+                          "pinned": { "type": "boolean" },
+                          "creator": {
+                            "type": "object",
+                            "properties": {
+                              "id": { "type": "integer" },
+                              "nickname": { "type": "string" },
+                              "username": { "type": "string" },
+                              "avatarUrl": { "type": "string" }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai-summaries": {
+      "get": {
+        "summary": "获取 AI 文章摘要",
+        "description": "从 GitHub 仓库实时读取 static/ai-summaries.json，返回文章的 AI 摘要数据。",
+        "responses": {
+          "200": {
+            "description": "AI 摘要数据",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "summaries": {
+                      "type": "object",
+                      "additionalProperties": { "type": "string" },
+                      "description": "key 为文章 permalink，value 为摘要内容"
+                    },
+                    "hashes": {
+                      "type": "object",
+                      "additionalProperties": { "type": "string" },
+                      "description": "内容哈希，用于增量更新"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/wechat": {
+      "get": {
+        "summary": "微信服务器验证",
+        "description": "微信公众号服务器配置验证接口（GET），返回 echostr 验证通过。",
+        "parameters": [
+          { "name": "signature", "in": "query", "schema": { "type": "string" } },
+          { "name": "timestamp", "in": "query", "schema": { "type": "string" } },
+          { "name": "nonce", "in": "query", "schema": { "type": "string" } },
+          { "name": "echostr", "in": "query", "schema": { "type": "string" } }
+        ],
+        "responses": {
+          "200": { "description": "验证成功，返回 echostr" },
+          "403": { "description": "验证失败" }
+        }
+      },
+      "post": {
+        "summary": "接收微信消息",
+        "description": "接收微信公众号用户发送的消息，支持图片和文字消息。图片消息自动上传到自有存储后回复提示；文字消息识别命令（历史/删除X）或直接发布到 Memos。",
+        "requestBody": {
+          "content": {
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "xml": {
+                    "type": "object",
+                    "properties": {
+                      "ToUserName": { "type": "string" },
+                      "FromUserName": { "type": "string" },
+                      "MsgType": { "type": "string", "enum": ["text", "image"] },
+                      "Content": { "type": "string" },
+                      "PicUrl": { "type": "string" },
+                      "MsgId": { "type": "string" }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "返回 XML 格式的回复消息",
+            "content": { "application/xml": {} }
+          }
+        }
+      }
+    },
+    "/api/proxy-fetch": {
+      "get": {
+        "summary": "RSS 代理抓取",
+        "description": "代理抓取 RSS 订阅源，绕过 Cloudflare 等反爬限制。",
+        "parameters": [
+          {
+            "name": "url",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "uri" },
+            "description": "要抓取的 RSS/XML 地址"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "RSS/XML 内容",
+            "content": {
+              "application/xml": {}
+            }
+          },
+          "502": {
+            "description": "抓取失败",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friends-feed": {
+      "get": {
+        "summary": "友链文章聚合",
+        "description": "从 GitHub 仓库读取 data/friend-articles.json，通过 KV 缓存 5 分钟。",
+        "parameters": [
+          {
+            "name": "refresh",
+            "in": "query",
+            "schema": { "type": "string", "enum": ["1"] },
+            "description": "传入 ?refresh=1 强制刷新缓存"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "友链文章列表",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "updated_at": { "type": "string", "format": "date-time" },
+                    "count": { "type": "integer" },
+                    "list": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": { "type": "string" },
+                          "link": { "type": "string" },
+                          "date": { "type": "string" },
+                          "description": { "type": "string" },
+                          "site": { "type": "string" },
+                          "siteUrl": { "type": "string" },
+                          "avatar": { "type": "string" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friends-refresh": {
+      "post": {
+        "summary": "触发友链刷新",
+        "description": "触发 GitHub Actions 工作流 friend-feed.yml 重新抓取所有友链 RSS。",
+        "responses": {
+          "200": {
+            "description": "触发结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "message": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friend-apply": {
+      "post": {
+        "summary": "提交友链申请",
+        "description": "提交友链申请表单，支持头像文件上传，自动初审后存储到 QuickForm 并触发邮件通知。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "website", "email"],
+                "properties": {
+                  "name": { "type": "string", "description": "博客名称" },
+                  "website": { "type": "string", "format": "uri", "description": "网站地址" },
+                  "friendLink": { "type": "string", "format": "uri", "description": "已添加我站友链的页面地址" },
+                  "rss": { "type": "string", "format": "uri", "description": "RSS 订阅地址（可选）" },
+                  "email": { "type": "string", "format": "email", "description": "邮箱" },
+                  "description": { "type": "string", "description": "博客简介" },
+                  "avatar": { "type": "string", "format": "binary", "description": "头像文件（可选）" },
+                  "avatarUrl": { "type": "string", "format": "uri", "description": "头像链接（可选）" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "提交结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "message": { "type": "string" },
+                    "pending": { "type": "boolean" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friend-apply/get": {
+      "get": {
+        "summary": "查询单个申请",
+        "description": "通过申请 ID 查询友链申请的详细信息。",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" },
+            "description": "申请 ID"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "申请详情",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "app": {
+                      "type": "object",
+                      "properties": {
+                        "id": { "type": "string" },
+                        "name": { "type": "string" },
+                        "website": { "type": "string" },
+                        "friendLink": { "type": "string" },
+                        "rss": { "type": "string" },
+                        "email": { "type": "string" },
+                        "description": { "type": "string" },
+                        "avatar": { "type": "string" },
+                        "linkOk": { "type": "boolean" },
+                        "avatarOk": { "type": "boolean" },
+                        "rssOk": { "type": "boolean" },
+                        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+                        "createdAt": { "type": "string", "format": "date-time" }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "未找到申请",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/friend-apply/approve": {
+      "get": {
+        "summary": "同意友链申请",
+        "description": "管理员通过点击邮件中的链接同意申请，将友链添加到 friends.json 并发送通知。",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "申请 token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "处理结果（HTML 文本）",
+            "content": {
+              "text/html": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/friend-apply/reject": {
+      "get": {
+        "summary": "拒绝友链申请",
+        "description": "管理员通过点击邮件中的链接拒绝申请，发送拒绝通知邮件。",
+        "parameters": [
+          {
+            "name": "token",
+            "in": "query",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "申请 token"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "处理结果（HTML 文本）",
+            "content": {
+              "text/html": {}
+            }
+          }
+        }
+      }
+    },
+    "/api/friend-apply/auto": {
+      "get": {
+        "summary": "自动处理过期申请",
+        "description": "自动处理超过 24 小时未处理的申请，自动同意并添加友链（由 GitHub Actions 定时触发）。",
+        "responses": {
+          "200": {
+            "description": "处理结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "approved": { "type": "integer" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/ai/parse-friends": {
+      "post": {
+        "summary": "AI 识别友链信息",
+        "description": "通过 AI（agnes-2.0-flash）从用户输入的文本中提取友链信息，返回 JSON 数组。Referer 鉴权，仅允许 blog.oopss.top 和 apii.oopss.top 来源。",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string", "description": "包含友链信息的一段文本" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "识别结果",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "list": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": { "type": "string", "description": "网站名称" },
+                          "website": { "type": "string", "description": "网站链接" },
+                          "avatar": { "type": "string", "description": "头像链接" },
+                          "description": { "type": "string", "description": "简介" },
+                          "rss": { "type": "string", "description": "RSS 地址" }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "鉴权失败（Referer 不被允许）",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "ok": { "type": "boolean" },
+                    "error": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

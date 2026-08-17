@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-17T23:15:24.981Z",
-  "count": 125,
+  "updated_at": "2026-08-17T23:45:06.988Z",
+  "count": 126,
   "list": [
     {
       "title": "【原创】要开学了，怎么才能保住火花？",
@@ -469,6 +469,15 @@
       "site": "合荒小站",
       "siteUrl": "https://hehuang.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120004.webp"
+    },
+    {
+      "title": "我们的静态博客：把速度、内容与发布放回简单的秩序",
+      "link": "https://i.limhy.cn/blog/1/",
+      "date": "Sun, 02 Aug 2026 02:10:58 +0800",
+      "description": "从静态优先、按需动态到可回滚发布，记录这套博客如何把阅读体验与日常维护放回简单而可靠的秩序。",
+      "site": "LiMhy Blog",
+      "siteUrl": "https://i.limhy.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp"
     },
     {
       "title": "EdgeOne-Pages-ImgBed，一个网页图床应用",

@@ -53,7 +53,11 @@
     {
       "source": "/friend-articles.json",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=1500, stale-while-revalidate=1500" }
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate, proxy-revalidate" },
+        { "key": "CDN-Cache-Control", "value": "no-cache" },
+        { "key": "Cloudflare-CDN-Cache-Control", "value": "no-cache" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
       ]
     }
   ]

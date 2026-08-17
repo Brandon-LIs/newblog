@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-17T11:49:05.183Z",
-  "count": 120,
+  "updated_at": "2026-08-17T12:24:03.591Z",
+  "count": 121,
   "list": [
     {
       "title": "「说说」lcrworld 和 lcr99 喵～",
@@ -10,6 +10,15 @@
       "site": "UpXuu's blog",
       "siteUrl": "https://upxuu.com",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg"
+    },
+    {
+      "title": "舞萌DX 落雪查分器使用指南",
+      "link": "https://xice.cx/posts/maiLxnsSync/",
+      "date": "2026-08-17T00:00:00.000Z",
+      "description": "最近落雪查分器确实更新了很多好用的功能，以及看到部分bot今后将把落雪作为主要支持数据源，故本文将会详细介绍落雪查分器的成绩导入到使用的完整指南 注册 落雪查分器官网为: maimai DX 查分器 进入官网注册账号即可 导入成绩 落雪代理上传 登录 落雪查分器官网 ，点击左上角菜单，选中 同步游戏数据 您可以手动在系统设置的WLAN设定中设置HTTP代理（非必要不推荐），这里主要演示使用代理工具",
+      "site": "Chongxiの咖啡屋",
+      "siteUrl": "https://xice.cx/",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08160008.webp"
     },
     {
       "title": "正式成为了共产党员",
@@ -345,15 +354,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp"
     },
     {
-      "title": "舞萌开机网络自检底层技术说明，断网如何排查讲解",
-      "link": "https://xice.cx/posts/maimaiNetworkCheck/",
-      "date": "2026-08-07T00:00:00.000Z",
-      "description": "本文通过逆向手段深入讲解了舞萌机台开机时网络自检底层说明，并提供了排查方向",
-      "site": "Chongxiの咖啡屋",
-      "siteUrl": "https://xice.cx/",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08160008.webp"
-    },
-    {
       "title": "从2007到2026，QQ拼音陪伴我的19年",
       "link": "https://blog.weasel6.cn/posts/qqpinyin/",
       "date": "Thu, 06 Aug 2026 17:06:00 GMT",
@@ -460,6 +460,15 @@
       "site": "合荒小站",
       "siteUrl": "https://hehuang.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08120004.webp"
+    },
+    {
+      "title": "我们的静态博客：把速度、内容与发布放回简单的秩序",
+      "link": "https://i.limhy.cn/blog/1/",
+      "date": "Sun, 02 Aug 2026 02:10:58 +0800",
+      "description": "从静态优先、按需动态到可回滚发布，记录这套博客如何把阅读体验与日常维护放回简单而可靠的秩序。",
+      "site": "LiMhy Blog",
+      "siteUrl": "https://i.limhy.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp"
     },
     {
       "title": "EdgeOne-Pages-ImgBed，一个网页图床应用",

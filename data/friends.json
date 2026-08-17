@@ -206,5 +206,12 @@
     "description": "一个非营利性的中文博客聚合项目。",
     "website": "https://blogroll.online/",
     "avatar": "https://jsd.oopss.top/uploads/2026/08160013.webp"
+  },
+  {
+    "title": "LiMhy Blog",
+    "description": "一个关于技术折腾、生活记录和个人项目的静态博客。",
+    "website": "https://i.limhy.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp",
+    "rss": "https://i.limhy.cn/rss.xml"
   }
 ]

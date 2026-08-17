@@ -221,7 +221,7 @@ const config: Config = {
           {to: '/friends', label: '友情链接'},
           {to: '/fcircle', label: '友链文章'},
         ]},
-        {type: 'dropdown', label: '穿梭', position: 'left', className: 'navbar-item-shuttle', items: [
+        {type: 'dropdown', label: '穿梭', position: 'left', hideOnMobile: true, items: [
           {to: '/teleport', label: '随机穿梭'},
           {to: '/wormhole', label: '跃迁通道'},
           {to: '/linux', label: 'Linux 终端'},

@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-08-18T07:14:37.448Z",
-  "count": 116,
+  "updated_at": "2026-08-18T08:01:54.146Z",
+  "count": 121,
   "list": [
     {
       "title": "遭到虚假宣传了",
@@ -165,6 +165,24 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp"
     },
     {
+      "title": "ESP32 / ESP8266 物联网开发环境配置指南",
+      "link": "https://blog.liseezn.top/919.html/",
+      "date": "Wed, 12 Aug 2026 13:59:40 +0000",
+      "description": "前言 ESP32 与 ESP8266 是当前物联网开发领域普及率最高的两款芯片：ESP32 搭载双核处理器，支 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
+      "title": "Codex 接入 DeepSeek 保姆级教程｜ Codex++",
+      "link": "https://blog.liseezn.top/903.html/",
+      "date": "Wed, 12 Aug 2026 13:44:35 +0000",
+      "description": "用 Codex 写代码的朋友，大概率都遇到过这些糟心事：OpenAI 接口时不时抽风、网络不稳半天出不来结果、 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "【原创】我的高二生活",
       "link": "https://blog.iamcrl.cn/?post=64",
       "date": "Wed, 12 Aug 2026 09:07:20 +0800",
@@ -327,6 +345,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp"
     },
     {
+      "title": "Obsidian  AI 知识库搭建教程：从 DeepSeek API 到本地模型、RAG 与 Agent 全攻略",
+      "link": "https://blog.liseezn.top/896.html/",
+      "date": "Fri, 07 Aug 2026 13:56:10 +0000",
+      "description": "这是一份面向普通用户的全流程实践指南。不论你是刚接触 Obsidian 的新手，还是想将 AI 能力彻底融入笔 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "华为jkm-al00（畅享9Plus）线刷降级教程",
       "link": "https://blog.wudarensheng.top/posts/jkmal00-demotion/",
       "date": "Fri, 07 Aug 2026 00:00:00 GMT",
@@ -345,6 +372,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
     },
     {
+      "title": "烧几亿Token搭完AI工作台SaaS平台，在上线前止损",
+      "link": "https://blog.liseezn.top/883.html/",
+      "date": "Thu, 06 Aug 2026 09:00:12 +0000",
+      "description": "从空仓库到全链路跑通。全程AI辅助开发，前前后后烧掉几亿Token，把一套多职业AI工作台SaaS的核心骨架全 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
+    },
+    {
       "title": "博客大更新",
       "link": "https://xfcnl.github.io/note/2026-08-06-%E5%8D%9A%E5%AE%A2%E5%A4%A7%E6%9B%B4%E6%96%B0/",
       "date": "2026-08-06T00:00:00.000Z",
@@ -361,6 +397,15 @@
       "site": "MingBlog",
       "siteUrl": "https://mingblog.site/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp"
+    },
+    {
+      "title": "全栈开发Skill矩阵：从前端审美到后端运维，打造完整AI开发流水线",
+      "link": "https://blog.liseezn.top/877.html/",
+      "date": "Wed, 05 Aug 2026 22:00:00 +0000",
+      "description": "上一篇我们聊了前端开发的Skill组合，解决了AI写页面“模板化、审美差”的痛点。但对全栈开发者来说，前端只是 [&#8230;]",
+      "site": "Liseezn'blog",
+      "siteUrl": "https://blog.liseezn.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp"
     },
     {
       "title": "【公告】关于本站文章更新频率调整的相关说明",

@@ -1,7 +1,16 @@
 {
-  "updated_at": "2026-08-19T12:24:43.330Z",
+  "updated_at": "2026-08-19T13:23:49.948Z",
   "count": 125,
   "list": [
+    {
+      "title": "重新启用登录评论并增加了认证功能",
+      "link": "https://lzh1.cn/?post=49",
+      "date": "Wed, 19 Aug 2026 21:03:23 +0800",
+      "description": "最近评论广告猖獗然后又看到小曦的园子的评论有认证图标就打算自己也做一个。 认证图标采用是应用商店里的徽章生成器插件，颁发认证图标是自己做的一个插件对接官方用户系统。 友联以后注册的用户会给这个认证。 注册用户评论以后会给这个认证。 评论五条的用户会给这个认证。 如果有赞助商会给这个认证。",
+      "site": "林子浩的日记",
+      "siteUrl": "https://lzh1.cn/",
+      "avatar": "https://jsd.oopss.top/twikoo/08150002.webp"
+    },
     {
       "title": "游玩日记·第二期",
       "link": "https://blog.weasel6.cn/posts/life-second/",
@@ -109,15 +118,6 @@
       "site": "黄鼠狼的树洞",
       "siteUrl": "https://blog.weasel6.cn",
       "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp"
-    },
-    {
-      "title": "换了个主题给程序做了个归档插件",
-      "link": "https://lzh1.cn/?post=42",
-      "date": "Fri, 14 Aug 2026 23:05:28 +0800",
-      "description": "晚上看自己博客的主题不满意最近应用商店出现了不少新主题就打算换一个，新主题的头部图标有个归档链接但是程序官方并没有这个功能索性自己开发了也上传到了cnb.cool。",
-      "site": "林子浩的日记",
-      "siteUrl": "https://lzh1.cn/",
-      "avatar": "https://jsd.oopss.top/twikoo/08150002.webp"
     },
     {
       "title": "看了《主持人大赛（新闻主播季）》的一些小感想",

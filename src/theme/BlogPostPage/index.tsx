@@ -27,7 +27,8 @@ function BlogPostPageContent({
   children: ReactNode;
 }): JSX.Element {
   const {metadata, toc} = useBlogPost();
-  const {nextItem, prevItem, frontMatter, lastUpdatedAt} = metadata;
+  const {nextItem, prevItem, frontMatter, lastUpdatedAt, date} = metadata;
+  const modTime = lastUpdatedAt ? new Date(lastUpdatedAt).toISOString() : (date ? new Date(date).toISOString() : null);
   const {
     hide_table_of_contents: hideTableOfContents,
     toc_min_heading_level: tocMinHeadingLevel,
@@ -37,9 +38,9 @@ function BlogPostPageContent({
 
   return (
     <>
-      {lastUpdatedAt && (
+      {modTime && (
         <Head>
-          <meta property="article:modified_time" content={new Date(lastUpdatedAt).toISOString()} />
+          <meta property="article:modified_time" content={modTime} />
         </Head>
       )}
       <BlogLayout

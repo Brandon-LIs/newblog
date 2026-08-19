@@ -7,6 +7,7 @@ import {
   HtmlClassNameProvider,
   ThemeClassNames,
 } from '@docusaurus/theme-common';
+import Head from '@docusaurus/Head';
 import Comment from '@site/src/components/Comment';
 import {cn} from '@site/src/lib/utils';
 import BackToTopButton from '@theme/BackToTopButton';
@@ -26,7 +27,7 @@ function BlogPostPageContent({
   children: ReactNode;
 }): JSX.Element {
   const {metadata, toc} = useBlogPost();
-  const {nextItem, prevItem, frontMatter} = metadata;
+  const {nextItem, prevItem, frontMatter, lastUpdatedAt} = metadata;
   const {
     hide_table_of_contents: hideTableOfContents,
     toc_min_heading_level: tocMinHeadingLevel,
@@ -35,7 +36,13 @@ function BlogPostPageContent({
   } = frontMatter;
 
   return (
-    <BlogLayout
+    <>
+      {lastUpdatedAt && (
+        <Head>
+          <meta property="article:modified_time" content={new Date(lastUpdatedAt).toISOString()} />
+        </Head>
+      )}
+      <BlogLayout
       wrapperClassName="blog-post-page-background"
       sidebar={sidebar}
       toc={
@@ -57,6 +64,7 @@ function BlogPostPageContent({
       {!hideComment && <Comment />}
       <BackToTopButton />
     </BlogLayout>
+    </>
   );
 }
 

@@ -39,6 +39,14 @@ const config: Config = {
         name: "Brandon's Blog",
         url: 'https://blog.oopss.top',
         description: '一个高中生的个人博客，分享技术与生活',
+        potentialAction: {
+          '@type': 'SearchAction',
+          target: {
+            '@type': 'EntryPoint',
+            urlTemplate: 'https://blog.oopss.top/search?q={search_term_string}',
+          },
+          'query-input': 'required name=search_term_string',
+        },
         author: {
           '@type': 'Person',
           name: 'Brandon',
@@ -142,7 +150,7 @@ const config: Config = {
         },
         sitemap: {
           // lastmod 依赖 git 信息，Vercel 云端构建无 .git 目录会失败，故关闭
-          lastmod: null,
+          lastmod: 'filePath',
           priority: null,
           changefreq: null,
         },

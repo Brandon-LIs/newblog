@@ -150,7 +150,7 @@ const config: Config = {
         },
         sitemap: {
           // lastmod 依赖 git 信息，Vercel 云端构建无 .git 目录会失败，故关闭
-          lastmod: 'filePath',
+          lastmod: 'date',
           priority: null,
           changefreq: null,
         },

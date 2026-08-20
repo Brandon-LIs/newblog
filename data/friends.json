@@ -1,9 +1,211 @@
 [
   {
-    "title": "日和",
-    "description": "想把一些代码笔记、阅读碎片和日常里的小幸福慢慢留下来，以及分享一些有趣的东西",
-    "website": "https://codevfun.work",
-    "avatar": "https://i0.hdslb.com/bfs/face/a09cb25595f69324ed7da361391de337dbe47601.jpg"
+    "title": "UpXuu's blog",
+    "description": "逐光而上",
+    "website": "https://upxuu.com",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080002.jpg",
+    "rss": "https://upxuu.com/rss.xml"
+  },
+  {
+    "title": "Liseezn'blog",
+    "description": "分享学习，项目，及教程",
+    "website": "https://blog.liseezn.top",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080003.webp",
+    "rss": "https://blog.liseezn.top/feed/"
+  },
+  {
+    "title": "睿朗的小窝",
+    "description": "睿朗的个人网站",
+    "website": "https://iamcrl.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp",
+    "rss": "https://blog.iamcrl.cn/rss.php"
+  },
+  {
+    "title": "黄鼠狼的树洞",
+    "description": "小黄的博客，记录生活中的美好",
+    "website": "https://blog.weasel6.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08080005.webp",
+    "rss": "https://blog.weasel6.cn/rss.xml"
+  },
+  {
+    "title": "xf_blog",
+    "description": "立志用 cloudflare workers，GitHub pages 和 vercel 做出整个互联网的 up（虽然不会成功",
+    "website": "https://husd.cc.cd/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08070001.webp",
+    "rss": "https://xfcnl.github.io/feed.xml"
+  },
+  {
+    "title": "灵的梦境",
+    "description": "愿美梦成真",
+    "website": "https://lemonadorable.github.io/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif",
+    "rss": "https://lemonadorable.github.io/rss.xml"
+  },
+  {
+    "title": "MingBlog",
+    "description": "记录日常生活、城市影像、旅行与观察，以及认真看过、读过和听过的作品。",
+    "website": "https://mingblog.site/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100009.webp",
+    "rss": "https://mingblog.site/rss.xml"
+  },
+  {
+    "title": "彬红茶日记",
+    "description": "我的个人笔记📒",
+    "website": "https://note.redcha.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100001.webp",
+    "rss": "https://note.redcha.cn/rss.xml"
+  },
+  {
+    "title": "涵哲子居",
+    "description": "天哲地理，共公卿好",
+    "website": "https://iluc.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100002.webp",
+    "rss": "https://iluc.cn/rss.xml"
+  },
+  {
+    "title": "星河hmの小窝",
+    "description": "人生是開發，不是預設",
+    "website": "https://www.xhehm.com",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100003.webp"
+  },
+  {
+    "title": "TT清沫uk",
+    "description": "TT清沫ukの博客",
+    "website": "https://ttquk.netlify.app",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100007.webp",
+    "rss": "https://ttquk.netlify.app/atom.xml"
+  },
+  {
+    "title": "高新炀的小站",
+    "description": "一个装着些稀奇古怪东西的个人小站，欢迎来逛逛~",
+    "website": "https://gxy.cn.mt",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp",
+    "rss": "https://gxy.cn.mt/rss.xml"
+  },
+  {
+    "title": "无大人生",
+    "description": "远赴人间惊鸿宴，一睹人间盛世颜。",
+    "website": "https://blog.wudarensheng.top/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08110007.webp",
+    "rss": "https://blog.wudarensheng.top/rss.xml"
+  },
+  {
+    "title": "逸树の小屋",
+    "description": "逸枝向野，静木生风。",
+    "website": "https://474029.xyz",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120001.webp",
+    "rss": "https://474029.xyz/rss.xml"
+  },
+  {
+    "title": "Mimosa的小屋",
+    "description": "含羞草居住的地方",
+    "website": "https://loneapex.cn/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120009.webp",
+    "rss": "https://loneapex.cn/feed"
+  },
+  {
+    "title": "Sunrise.博客",
+    "description": "心境自成天地，地狱可化作桃源，天堂也能沦为苦海。",
+    "website": "https://wowtang.top",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120008.webp",
+    "rss": "https://wowtang.top/feed.xml"
+  },
+  {
+    "title": "砚海栖翎",
+    "description": "笑对阴晴，心向阳生",
+    "website": "https://yqf.kesug.com/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120002.webp",
+    "rss": "https://yqf.kesug.com/feed"
+  },
+  {
+    "title": "Tilawa Cesoil的小站",
+    "description": "可怜花无嘴。",
+    "website": "https://www.tilawacesoil.top",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png",
+    "rss": "https://www.tilawacesoil.top/feed"
+  },
+  {
+    "title": "合荒小站",
+    "description": "万物合鸣·独守一荒",
+    "website": "https://hehuang.site/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120004.webp",
+    "rss": "https://hehuang.site/index.xml"
+  },
+  {
+    "title": "𝟞𝟙𝟡'𝕤 𝔹𝕃𝕆𝔾",
+    "description": "𝓙𝓾𝓼𝓽 𝓪 𝓬𝓵𝓸𝓾𝓭.",
+    "website": "https://66619.eu.org",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08120012.webp",
+    "rss": "https://66619.eu.org/rss/feed.xml"
+  },
+  {
+    "title": "小改学习志",
+    "description": "行到水穷处，坐看云起时",
+    "website": "https://www.haoyu233.com",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08140007.webp",
+    "rss": "https://www.haoyu233.com/feed"
+  },
+  {
+    "title": "Pinpe 的云端",
+    "description": "一个属于自己的云朵。",
+    "website": "https://pinpe.top",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08140008.webp",
+    "rss": "https://pinpe.top/rss.xml"
+  },
+  {
+    "title": "林子浩的日记",
+    "description": "一个努力写日记的博客站长。",
+    "website": "https://lzh1.cn/",
+    "avatar": "https://jsd.oopss.top/twikoo/08150002.webp",
+    "rss": "https://lzh1.cn/rss.php"
+  },
+  {
+    "title": "Mayx的博客",
+    "description": "Mayx’s Home Page",
+    "website": "https://mabbs.github.io",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08150008.webp",
+    "rss": "https://mabbs.github.io/atom.xml"
+  },
+  {
+    "title": "LiMhy'Blog",
+    "description": "记录小生活小美好",
+    "website": "https://i.lilog.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160005.webp",
+    "rss": "https://i.lilog.cn/feed"
+  },
+  {
+    "title": "wangxinyang",
+    "description": "个人博客 / 学习交流 / 生活日常",
+    "website": "https://wangxinyang.top",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160006.webp",
+    "rss": "https://wangxinyang.top/rss.xml"
+  },
+  {
+    "title": "云白",
+    "description": "一名地球 Online 玩家的随想集",
+    "website": "https://denjuy.com",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160007.webp",
+    "rss": "https://denjuy.com/feed.xml"
+  },
+  {
+    "title": "Chongxiの咖啡屋",
+    "description": "Lose yourself to find yourself",
+    "website": "https://xice.cx/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160008.webp",
+    "rss": "https://xice.cx/atom.xml"
+  },
+  {
+    "title": "ElysiumStack",
+    "description": "不会摄影的设计师不是优秀的旅行家",
+    "website": "https://blog.elysium-stack.cn",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160009.webp",
+    "rss": "https://blog.elysium-stack.cn/rss.xml"
+  },
+  {
+    "title": "中文独立博客聚合列表",
+    "description": "一个非营利性的中文博客聚合项目。",
+    "website": "https://blogroll.online/",
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160013.webp"
   },
   {
     "title": "LiMhy Blog",
@@ -11,5 +213,18 @@
     "website": "https://i.limhy.cn",
     "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp",
     "rss": "https://i.limhy.cn/rss.xml"
+  },
+  {
+    "title": "日和",
+    "description": "想把一些代码笔记、阅读碎片和日常里的小幸福慢慢留下来，以及分享一些有趣的东西",
+    "website": "https://codevfun.work",
+    "avatar": "https://i0.hdslb.com/bfs/face/a09cb25595f69324ed7da361391de337dbe47601.jpg"
+  },
+  {
+    "title": "没吃饱的天镜镜",
+    "description": "诺贝尔奖关注者，文学奖读者",
+    "website": "https://blog.8765777.xyz",
+    "avatar": "https://blogr2.8765777.xyz/assets/my/7590A261E0E39A642ABF4873E89EAFF9.jpg",
+    "rss": "https://blog.8765777.xyz/rss.xml"
   }
 ]

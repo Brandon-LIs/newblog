@@ -1,7 +1,16 @@
 {
-  "updated_at": "2026-08-20T11:50:21.314Z",
-  "count": 130,
+  "updated_at": "2026-08-20T12:27:31.476Z",
+  "count": 135,
   "list": [
+    {
+      "title": "【公告】本站26年7~8月更新日志",
+      "link": "https://blog.iamcrl.cn/?post=70",
+      "date": "Thu, 20 Aug 2026 20:01:56 +0800",
+      "description": "本更新日志记录了26年7月至8月20日的更新内容 2026.08.20 1.睿朗的碎碎念新增点赞功能； 2.新增 相册 功能，小窝、秘密基地站点均放置了其入口。 2026.08.18 1.本站接入腾讯云Edgeone，提升网站安全性与加载速度。但因域名未进行备案，CDN仅能使用境外节点。 2026.08.13 1.睿朗在干嘛升级，支持查看设备屏幕使用时间等详细历史数据。 [备注]本次更新内容所使用",
+      "site": "睿朗的小窝",
+      "siteUrl": "https://iamcrl.cn",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
+    },
     {
       "title": "「浅谈」时代峰峻造星乱象：低龄逐利之下，追星早已失了底线",
       "link": "https://wowtang.top/post/sdfj/",
@@ -588,15 +597,6 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08160004.webp"
     },
     {
-      "title": "【原创】终于把平板修好了！",
-      "link": "https://blog.iamcrl.cn/?post=55",
-      "date": "Thu, 30 Jul 2026 22:43:33 +0800",
-      "description": "前言 这几天在家里翻出来一台iPad mini 1，是我上幼儿园的时候家里买的，后来摔坏了家里又买了台mini4就放起来吃灰了。 19年底，四年级。我把这台平板找了出来，发现是背光坏了，只要拿强光照着还能正常用，于是就用爱思刷机重置了一下带到学校托管午休的时候悄悄听歌，被老师发现后老师想收走平板，我就指着平板的屏幕说，“这是坏的，拿来当玩具而已”，成功蒙混过关。20年初寒假，我回我外公外婆家的时候",
-      "site": "睿朗的小窝",
-      "siteUrl": "https://iamcrl.cn",
-      "avatar": "https://jsd.oopss.top/uploads/2026/08080004.webp"
-    },
-    {
       "title": "亿不小心破解了清北道远学习机",
       "link": "https://blog.wudarensheng.top/posts/fuck-xxdy/",
       "date": "Thu, 30 Jul 2026 00:00:00 GMT",
@@ -1056,6 +1056,33 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08100008.webp"
     },
     {
+      "title": "有端",
+      "link": "https://www.tilawacesoil.top/poem/%e6%9c%89%e7%ab%af/",
+      "date": "Sun, 01 Feb 2026 02:44:53 +0000",
+      "description": "怨有端，恨有名，散不开，涤不清。 锁环命中本无命，故事里，鄙人生。 结已定，果已成，挡不住，止不停。 阴雨晴时 [&#8230;] 有端 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "无端",
+      "link": "https://www.tilawacesoil.top/poem/%e6%97%a0%e7%ab%af/",
+      "date": "Sun, 01 Feb 2026 02:44:32 +0000",
+      "description": "怨无端，恨无名，解不开，说不清。 锁环相扣命中命，故事里，看人生。 结无定，果无成，抓不住，流不停。 阴雨须待 [&#8230;] 无端 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
+      "title": "奇技淫巧之高中多选题拿分策略",
+      "link": "https://www.tilawacesoil.top/knowledge/%e5%a5%87%e6%8a%80%e6%b7%ab%e5%b7%a7%e4%b9%8b%e9%ab%98%e4%b8%ad%e5%a4%9a%e9%80%89%e9%a2%98%e6%8b%bf%e5%88%86%e7%ad%96%e7%95%a5/",
+      "date": "Fri, 30 Jan 2026 16:00:03 +0000",
+      "description": "突发奇想，分享一个没用的做题技巧。阅前提示，本文具有时效性，并且我也懒得更新（doge） 我们都知道，数学、物 [&#8230;] 奇技淫巧之高中多选题拿分策略 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
       "title": "重生之我是蒟蒻打CTF-misc",
       "link": "https://619.pp.ua/article/ctf-personal-writeups-misc",
       "date": "Mon, 26 Jan 2026 00:00:00 GMT",
@@ -1083,6 +1110,15 @@
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
     },
     {
+      "title": "怀念",
+      "link": "https://www.tilawacesoil.top/poem/%e6%80%80%e5%bf%b5/",
+      "date": "Fri, 02 Jan 2026 06:24:00 +0000",
+      "description": "我是多么、多么、多么地怀念从前啊。 从前的树，从前的风， 从前的月光和虫鸣。 你啊，为什么要改变？ 顺从了俗人 [&#8230;] 怀念 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
+    },
+    {
       "title": "Astro Theme Iris：打造个人知识管理系统",
       "link": "https://lemonadorable.github.io/blog/astro-theme-iris",
       "date": "Fri, 02 Jan 2026 00:00:00 GMT",
@@ -1090,6 +1126,15 @@
       "site": "灵的梦境",
       "siteUrl": "https://lemonadorable.github.io/",
       "avatar": "https://jsd.oopss.top/uploads/2026/08070002.gif"
+    },
+    {
+      "title": "年前",
+      "link": "https://www.tilawacesoil.top/literature/%e5%b9%b4%e5%89%8d/",
+      "date": "Tue, 30 Dec 2025 16:00:00 +0000",
+      "description": "离2024年的除夕还有一个月的时候，学校对面的住宅区就开始燃起了碎炮。当傍晚西边只剩一条金边的时候，或在我们正 [&#8230;] 年前 最先出现在 Tilawa Cesoil的小站 。",
+      "site": "Tilawa Cesoil的小站",
+      "siteUrl": "https://www.tilawacesoil.top",
+      "avatar": "https://jsd.oopss.top/uploads/2026/08120003.png"
     },
     {
       "title": "告别2025 迎接2026",

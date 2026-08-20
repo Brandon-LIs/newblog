@@ -36,6 +36,6 @@ jobs:
           git add data/friend-articles.json static/friend-articles.json
           if git diff --cached --quiet; then echo "no changes"; echo "has_changes=false" >> $GITHUB_OUTPUT; exit 0; fi
           git commit -m "chore: 更新友链文章"
-          git pull --rebase origin main || true
-          git push
+          git pull --rebase -X theirs origin main 2>/dev/null || (git rebase --abort 2>/dev/null; git fetch origin main; git reset --soft FETCH_HEAD; git commit -m "chore: 更新友链文章" --allow-empty; git push) || git push --force-with-lease
+          git push || git push --force-with-lease
           echo "has_changes=true" >> $GITHUB_OUTPUT

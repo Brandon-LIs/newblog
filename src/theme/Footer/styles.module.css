@@ -195,69 +195,6 @@
   border-top: 1px solid var(--footer-line);
 }
 
-/* 赞助商条（双翼鸟数据 / 95盾） */
-.sponsor {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 1.5rem;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1.5rem;
-  padding-top: 1.25rem;
-  border-top: 1px solid var(--footer-line);
-  text-align: center;
-}
-
-.sponsorText {
-  margin: 0;
-  color: var(--footer-muted);
-  font-size: 0.85rem;
-  line-height: 1.6;
-}
-
-.sponsorText a {
-  color: var(--footer-text);
-  font-weight: 500;
-  text-decoration: none;
-  transition: color 0.25s ease;
-}
-
-.sponsorText a:hover {
-  color: var(--ifm-color-primary-light);
-}
-
-.sponsorLinks {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.sponsorLinks a {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.3rem 0.85rem;
-  border-radius: 999px;
-  background: rgb(255 255 255 / 5%);
-  border: 1px solid rgb(255 255 255 / 8%);
-  color: var(--footer-muted);
-  font-size: 0.78rem;
-  white-space: nowrap;
-  text-decoration: none;
-  transition:
-    background 0.25s ease,
-    border-color 0.25s ease,
-    color 0.25s ease;
-}
-
-.sponsorLinks a:hover {
-  background: color-mix(in srgb, var(--ifm-color-primary) 14%, transparent);
-  border-color: color-mix(in srgb, var(--ifm-color-primary) 40%, transparent);
-  color: var(--footer-text);
-}
-
 .bsz {
   display: flex;
   flex-wrap: wrap;

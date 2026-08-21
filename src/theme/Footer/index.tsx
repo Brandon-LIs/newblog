@@ -192,6 +192,14 @@ export default function Footer(): JSX.Element {
                     ? currentYear
                     : `${siteInfo.copyrightStartYear}-${currentYear}`
                 } ${siteInfo.name}`}
+                {' · '}
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/legalcode.en"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="知识共享署名 4.0 国际许可协议">
+                  CC-BY-4.0
+                </a>
               </span>
             </p>
           </section>
@@ -260,28 +268,6 @@ export default function Footer(): JSX.Element {
               />
             </span>
           </a>
-        </div>
-
-        <div className={styles.sponsor} aria-label="赞助商">
-          <p className={styles.sponsorText}>
-            该网站由
-            <a href="https://www.synidc.cn" target="_blank" rel="noopener noreferrer">
-              双翼鸟数据
-            </a>
-            提供加速防御
-          </p>
-          <ul className={styles.sponsorLinks}>
-            <li>
-              <a href="https://www.synidc.cn" target="_blank" rel="noopener noreferrer">
-                双翼鸟数据 - 高防服务器
-              </a>
-            </li>
-            <li>
-              <a href="https://www.95duns.com" target="_blank" rel="noopener noreferrer">
-                95盾 - 高防CDN
-              </a>
-            </li>
-          </ul>
         </div>
       </div>
     </footer>

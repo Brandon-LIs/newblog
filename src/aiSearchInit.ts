@@ -4,7 +4,7 @@
 export default (function () {
   if (typeof window === 'undefined') return;
 
-  const SCRIPT_SRC = 'https://jsd.oopss.top/vendor/cf-search/search-snippet.es.js';
+  const SCRIPT_SRC = 'https://blogimg.tos-cn-shanghai.volces.com/js/search-snippet.es.js';
   const API_URL = 'https://search.oopss.top';
 
   function createSearchBar(overrides?: Record<string, string>) {

@@ -52,7 +52,7 @@ export default (function () {
       const desktopTarget = rightItems?.querySelector('.toggle_vylO') || rightItems?.lastElementChild;
       if (rightItems && desktopTarget && !rightItems.querySelector('search-bar-snippet')) {
         const wrapper = document.createElement('div');
-        wrapper.style.cssText = 'display:flex;align-items:center;width:240px;height:30px;margin:0 4px;overflow:hidden;flex-shrink:0';
+        wrapper.style.cssText = 'display:flex;align-items:center;width:240px;height:30px;margin:0 4px;flex-shrink:0;position:relative;z-index:100';
         const bar = createBar();
         applyVars(bar);
         wrapper.appendChild(bar);

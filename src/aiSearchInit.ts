@@ -8,10 +8,10 @@ export default (function () {
   const API_URL = 'https://search.oopss.top';
 
   const CSS_VARS: Record<string, string> = {
-    '--search-snippet-min-width': '160px',
-    '--search-snippet-max-width': '200px',
-    '--search-snippet-input-height': '28px',
-    '--search-snippet-border-radius': '2rem',
+    '--search-snippet-min-width': '180px',
+    '--search-snippet-max-width': '240px',
+    '--search-snippet-input-height': '30px',
+    '--search-snippet-border-radius': '20px',
     '--search-snippet-background': 'var(--ifm-navbar-search-input-background-color, #f5f5f5)',
     '--search-snippet-text-color': 'var(--ifm-color-emphasis-700)',
     '--search-snippet-text-secondary': 'var(--ifm-color-emphasis-500)',
@@ -22,8 +22,8 @@ export default (function () {
     '--search-snippet-shadow': 'none',
     '--search-snippet-max-height': '480px',
     '--search-snippet-icon-size': '16px',
-    '--search-snippet-icon-margin-left': '6px',
-    '--search-snippet-spacing-sm': '4px',
+    '--search-snippet-icon-margin-left': '8px',
+    '--search-snippet-spacing-sm': '6px',
   };
 
   function applyVars(el: HTMLElement, extra?: Record<string, string>) {
@@ -52,7 +52,7 @@ export default (function () {
       const desktopTarget = rightItems?.querySelector('.toggle_vylO') || rightItems?.lastElementChild;
       if (rightItems && desktopTarget && !rightItems.querySelector('search-bar-snippet')) {
         const wrapper = document.createElement('div');
-        wrapper.style.cssText = 'display:flex;align-items:center;width:200px;height:32px;margin:0 4px';
+        wrapper.style.cssText = 'display:flex;align-items:center;width:240px;height:32px;margin:0 6px';
         const bar = createBar();
         applyVars(bar);
         wrapper.appendChild(bar);

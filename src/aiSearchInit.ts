@@ -10,7 +10,7 @@ export default (function () {
   const CSS_VARS: Record<string, string> = {
     '--search-snippet-min-width': '180px',
     '--search-snippet-max-width': '240px',
-    '--search-snippet-input-height': '30px',
+    '--search-snippet-input-height': '26px',
     '--search-snippet-border-radius': '20px',
     '--search-snippet-background': 'var(--ifm-navbar-search-input-background-color, #f5f5f5)',
     '--search-snippet-text-color': 'var(--ifm-color-emphasis-700)',
@@ -18,12 +18,12 @@ export default (function () {
     '--search-snippet-primary-color': 'var(--ifm-color-primary)',
     '--search-snippet-border-color': 'transparent',
     '--search-snippet-font-family': 'var(--ifm-font-family-base)',
-    '--search-snippet-font-size-sm': '14px',
+    '--search-snippet-font-size-sm': '13px',
     '--search-snippet-shadow': 'none',
     '--search-snippet-max-height': '480px',
-    '--search-snippet-icon-size': '16px',
+    '--search-snippet-icon-size': '14px',
     '--search-snippet-icon-margin-left': '8px',
-    '--search-snippet-spacing-sm': '6px',
+    '--search-snippet-spacing-sm': '4px',
   };
 
   function applyVars(el: HTMLElement, extra?: Record<string, string>) {
@@ -52,7 +52,7 @@ export default (function () {
       const desktopTarget = rightItems?.querySelector('.toggle_vylO') || rightItems?.lastElementChild;
       if (rightItems && desktopTarget && !rightItems.querySelector('search-bar-snippet')) {
         const wrapper = document.createElement('div');
-        wrapper.style.cssText = 'display:flex;align-items:center;width:240px;height:32px;margin:0 6px';
+        wrapper.style.cssText = 'display:flex;align-items:center;width:240px;height:30px;margin:0 4px;overflow:hidden;flex-shrink:0';
         const bar = createBar();
         applyVars(bar);
         wrapper.appendChild(bar);
@@ -69,7 +69,7 @@ export default (function () {
           '--search-snippet-border-radius': '28px',
           '--search-snippet-max-height': '60vh',
         });
-        mobileBar.style.cssText = 'margin:0 12px 8px;flex-shrink:0;';
+        mobileBar.style.cssText = 'margin:0 12px 6px;flex-shrink:0;';
         sidebarBrand.after(mobileBar);
       }
 

@@ -101,6 +101,7 @@ const config: Config = {
   },
 
   clientModules: [
+    require.resolve('./src/aiSearchInit.ts'),
     require.resolve('./src/vercelAnalytics.ts'),
     require.resolve('./src/imgFade.ts'),
     require.resolve('./src/iconifyOffline.ts'),
@@ -195,19 +196,7 @@ const config: Config = {
     },
   ],
 
-  themes: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
-      ({
-        hashed: true,
-        language: ['en', 'zh'],
-        highlightSearchTermsOnTargetPage: true,
-        searchResultLimits: 8,
-        searchResultContextMaxLength: 140,
-      }),
-    ],
-  ],
+  themes: [],
 
   themeConfig: {
     colorMode: {

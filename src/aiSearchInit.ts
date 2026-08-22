@@ -11,8 +11,8 @@ export default (function () {
   // 主题协调的 CSS 变量（紫罗兰 + 暖灰系）
   const CSS_VARS: Record<string, string> = {
     '--search-snippet-width': '100%',
-    '--search-snippet-min-width': '140px',
-    '--search-snippet-max-width': '240px',
+    '--search-snippet-min-width': '320px',
+    '--search-snippet-max-width': '340px',
     '--search-snippet-input-height': '34px',
     '--search-snippet-border-radius': '17px',
     '--search-snippet-border-radius-sm': '10px',

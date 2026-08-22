@@ -694,7 +694,7 @@ code {
 .ai-search-desktop {
   display: flex;
   align-items: center;
-  width: 240px;
+  width: 340px;
   height: 36px;
   margin: 0 8px 0 0;
   flex-shrink: 0;

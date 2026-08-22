@@ -40,6 +40,7 @@ export default function FriendApply(): JSX.Element {
   const [aiText, setAiText] = useState('');
   const [aiLoading, setAiLoading] = useState(false);
   const [aiDialogOpen, setAiDialogOpen] = useState(false);
+  const editId = getParam('id');
 
   const set = (key: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
     setForm((f) => ({...f, [key]: e.target.value}));
@@ -97,6 +98,8 @@ export default function FriendApply(): JSX.Element {
     setResult(null);
     try {
       const fd = new FormData();
+      // 修改重提：带上申请 id，后端会更新原申请而非新建
+      if (editId) fd.append('id', editId);
       fd.append('name', form.name);
       fd.append('website', form.website);
       fd.append('friendLink', form.friendLink);
@@ -123,9 +126,9 @@ export default function FriendApply(): JSX.Element {
       <main className="my-6">
         <div className="mx-auto max-w-2xl px-4">
           <div className="text-center mb-8">
-            <h1 className="text-2xl font-bold">申请交换友链</h1>
+            <h1 className="text-2xl font-bold">{editId ? '修改友链申请' : '申请交换友链'}</h1>
             <p className="text-sm text-[var(--ifm-secondary-text-color)] mt-2">
-              填写下方信息，提交后系统会自动审核并通知您结果
+              {editId ? '您正在修改之前的申请，修改后提交将覆盖原申请' : '填写下方信息，提交后系统会通知您审批结果'}
             </p>
             <button
               type="button"

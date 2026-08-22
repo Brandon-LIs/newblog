@@ -1,0 +1,71 @@
+name: 友链健康度检测
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # 每天 UTC 6:00 = 北京时间 14:00
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Run health check
+        id: health
+        continue-on-error: true
+        run: node scripts/friend-health-check.mjs
+
+      - name: Report broken links
+        if: steps.health.outcome == 'failure'
+        run: |
+          if [ -f /tmp/friend-health.json ]; then
+            node -e '
+              const s = require("/tmp/friend-health.json");
+              const lines = s.brokenList.map(b => `- ❌ ${b.title} | ${b.website} | ${b.error}`).join("\n");
+              const body = `## 🔴 友链健康度检测报告\n\n检测时间：$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')\n\n共 ${s.total} 个友链，${s.ok} 正常，${s.broken} 异常：\n\n${lines || "- 无"}\n`;
+              require("fs").writeFileSync("/tmp/health-issue-body.md", body);
+            '
+          fi
+
+      - name: Create or update issue
+        if: steps.health.outcome == 'failure'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const body = fs.readFileSync('/tmp/health-issue-body.md', 'utf8');
+            const title = '🔴 友链健康度检测：存在异常链接';
+            const {data: issues} = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+              labels: ['友链'],
+            });
+            const existing = issues.find(i => i.title.includes('友链健康度检测'));
+            if (existing) {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+                labels: ['友链'],
+              });
+            }

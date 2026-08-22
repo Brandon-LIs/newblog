@@ -1,0 +1,8 @@
+{
+  "$schema": "https://edgeone.ai/schemas/edgeone.json",
+  "projectName": "oopss-email",
+  "functions": {
+    "type": "cloud",
+    "runtime": "nodejs"
+  }
+}

@@ -1,43 +1,56 @@
-// 友链申请邮件处理脚本（由 GitHub Action 运行）
-// 读取 /tmp/payload.json，发送邮件 + 飞书通知
-const nm = require('nodemailer');
-const fs = require('fs');
-const p = JSON.parse(fs.readFileSync('/tmp/payload.json', 'utf8'));
+// Brandon's Blog 邮件发送服务（EdgeOne Makers Cloud Function）
+// POST /api/send  { emails: [{ type, app }] }
+// 入参结构与原 GitHub Actions 的 client_payload.emails 一致。
+// 鉴权：Authorization: Bearer <MAIL_API_TOKEN>（context.env.MAIL_API_TOKEN）
+import nodemailer from 'nodemailer';
+
 const SITE = 'https://blog.oopss.top';
 const APPLY_URL = SITE + '/friends/apply';
+const SMTP_HOST = 'smtp.qq.com';
 
-function buildApplyParams(a) {
-  const params = new URLSearchParams({
-    id: a.id || '',
-    name: a.name || '', website: a.website || '', friendLink: a.friendLink || '',
-    rss: a.rss || '', email: a.email || '', description: a.description || '',
-    avatarUrl: a.avatar || '',
-  });
-  return params.toString();
-}
+export async function onRequestPost(context) {
+  const env = context.env || {};
+  // 鉴权
+  const auth = context.request.headers.get('authorization') || '';
+  const token = auth.replace(/^Bearer\s+/i, '').trim();
+  if (!env.MAIL_API_TOKEN || token !== env.MAIL_API_TOKEN) {
+    return jsonRes({ok: false, error: '鉴权失败'}, 401);
+  }
 
-async function main() {
-  const t = nm.createTransport({
-    host: 'smtp.qq.com',
+  let body;
+  try {
+    body = await context.request.json();
+  } catch {
+    return jsonRes({ok: false, error: '请提供 JSON 请求体'}, 400);
+  }
+
+  if (!env.SMTP_USER || !env.SMTP_PASSWORD) {
+    return jsonRes({ok: false, error: '缺少 SMTP 配置'}, 500);
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: SMTP_HOST,
     port: 465,
     secure: true,
-    auth: {user: process.env.SMTP_USER, pass: process.env.SMTP_PASSWORD},
+    auth: {user: env.SMTP_USER, pass: env.SMTP_PASSWORD},
   });
+
   const feishuMsgs = [];
-  for (const e of (p.emails || [])) {
+  const results = [];
+
+  for (const e of (body.emails || [])) {
     const a = e.app || {};
     const reapplyUrl = APPLY_URL + '?' + buildApplyParams(a);
     const au = 'https://apii.oopss.top/api/friend-apply/approve?token=' + (a.id || '');
     const ru = 'https://apii.oopss.top/api/friend-apply/reject?token=' + (a.id || '');
-    let html = '', sub = '', to = '';
+    let html = '', sub = '', to = '', from = env.MAIL_FROM || 'liboning2011@vip.qq.com';
+
     if (e.type === 'new-application') {
-      // 发给管理员的通知：点同意/拒绝即可审批
-      to = process.env.ADMIN_EMAIL;
+      to = env.ADMIN_EMAIL || '';
       sub = '【友链申请】' + a.name + ' 申请交换友链';
       html = adminEmail(a, au, ru);
       feishuMsgs.push(buildFeishu(a, au, ru));
     } else if (e.type === 'thankyou') {
-      // 提交后统一发感谢邮件，请耐心等待审批
       to = a.email;
       sub = '【Brandon 友链申请】已收到您的申请';
       html = thankyouEmail(a);
@@ -53,22 +66,61 @@ async function main() {
       to = a.email;
       sub = '【Brandon 友链申请】未通过';
       html = rejectedEmail(a, reapplyUrl);
+    } else {
+      results.push({type: e.type, ok: false, error: '未知邮件类型'});
+      continue;
     }
-    if (to && html) {
-      await t.sendMail({from: 'liboning2011@vip.qq.com', to, subject: sub, html});
-      console.log('Sent to ' + to + ': ' + sub);
+
+    if (!to || !html) {
+      results.push({type: e.type, ok: false, error: '缺少收件人或内容'});
+      continue;
+    }
+
+    try {
+      await transporter.sendMail({from: `"Brandon's Blog" <${from}>`, to, subject: sub, html});
+      results.push({type: e.type, to, subject: sub, ok: true});
+    } catch (err) {
+      results.push({type: e.type, to, subject: sub, ok: false, error: err.message});
     }
   }
-  if (feishuMsgs.length) {
-    const msg = {
-      msg_type: 'interactive',
-      card: {
-        header: {title: {tag: 'plain_text', content: '📬 友链申请通知'}, template: 'blue'},
-        elements: feishuMsgs.flat(),
-      },
-    };
-    fs.writeFileSync('/tmp/feishu_data.json', JSON.stringify(msg));
+
+  // 飞书通知（仅 new-application）
+  if (feishuMsgs.length && env.FEISHU_URL) {
+    try {
+      const msg = {
+        msg_type: 'interactive',
+        card: {
+          header: {title: {tag: 'plain_text', content: '📬 友链申请通知'}, template: 'blue'},
+          elements: feishuMsgs.flat(),
+        },
+      };
+      await fetch(env.FEISHU_URL, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(msg),
+      });
+    } catch {}
   }
+
+  const okCount = results.filter((r) => r.ok).length;
+  return jsonRes({ok: okCount === results.length, total: results.length, okCount, results});
+}
+
+function jsonRes(data, status = 200) {
+  return new Response(JSON.stringify(data), {
+    status,
+    headers: {'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*'},
+  });
+}
+
+function buildApplyParams(a) {
+  const params = new URLSearchParams({
+    id: a.id || '',
+    name: a.name || '', website: a.website || '', friendLink: a.friendLink || '',
+    rss: a.rss || '', email: a.email || '', description: a.description || '',
+    avatarUrl: a.avatar || '',
+  });
+  return params.toString();
 }
 
 function shell(headColor, headTitle, subTitle, body, foot) {
@@ -82,7 +134,6 @@ function shell(headColor, headTitle, subTitle, body, foot) {
 }
 
 function adminEmail(a, au, ru) {
-  // 如果有自定义内容（如 URL 变更审批），则使用自定义内容
   if (a._adminCustom) {
     const customFoot = a._approveUrl
       ? '<a href="' + a._approveUrl + '" style="display:inline-block;text-align:center;padding:14px 32px;background:linear-gradient(135deg,#10b981,#059669);color:#fff;text-decoration:none;border-radius:10px;font-size:15px;font-weight:600">✅ 同意变更</a>'
@@ -111,7 +162,6 @@ function adminEmail(a, au, ru) {
   return shell('#12affa,#0598df', '友链自助申请系统', '新友链申请', body, foot);
 }
 
-// 提交后统一感谢邮件，请耐心等待审批
 function thankyouEmail(a) {
   const body =
     '您好，' + (a.name || '') + '：<br><br>'
@@ -185,7 +235,6 @@ function buildFeishu(a, au, ru) {
   ];
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+export function onRequestGet() {
+  return jsonRes({ok: true, message: 'EdgeOne 邮件发送服务，请使用 POST /api/send'});
+}

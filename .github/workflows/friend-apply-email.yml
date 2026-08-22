@@ -1,0 +1,39 @@
+name: 友链申请邮件发送
+
+on:
+  repository_dispatch:
+    types: [friend-apply-email]
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install nodemailer
+        run: npm install nodemailer
+
+      - name: Process and send emails
+        env:
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+          ADMIN_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
+          FEISHU_URL: ${{ secrets.FEISHU_WEBHOOK }}
+        run: |
+          echo '${{ toJson(github.event.client_payload) }}' > /tmp/payload.json
+          node scripts/process-apply-emails.js
+
+      - name: Feishu notification
+        if: always()
+        env:
+          FEISHU_URL: ${{ secrets.FEISHU_WEBHOOK }}
+        run: |
+          if [ -f /tmp/feishu_data.json ]; then
+            curl -s -X POST "$FEISHU_URL" -H "Content-Type: application/json" -d @/tmp/feishu_data.json
+          fi

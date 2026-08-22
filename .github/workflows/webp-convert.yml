@@ -32,13 +32,27 @@ jobs:
 
       - name: Commit changes
         run: |
-          if [ -n "$(git status --porcelain blog/)" ]; then
-            git config user.name "github-actions[bot]"
-            git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          for i in 1 2 3 4 5; do
+            # 基于最新 main 重新转换（幂等），避免与其他 Action 并发提交冲突
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/convert-images-webp.mjs
+
             git add blog/
+            if git diff --cached --quiet; then
+              echo "无图片需转换"
+              exit 0
+            fi
             git commit -m "chore: 博客图片自动转换为 webp"
-            git push
-            echo "✅ 已提交更新"
-          else
-            echo "无图片需转换"
-          fi
+            if git push origin main; then
+              echo "✅ 已提交更新"
+              exit 0
+            fi
+            echo "第 $i 次推送失败（可能并发冲突），重试..."
+            sleep 2
+          done
+          echo "多次推送失败" >&2
+          exit 1

@@ -99,7 +99,7 @@ export default (function () {
 
     const barHost = overlay.querySelector('.ai-search-modal-bar')!;
     const bar = createBar({
-      '--search-snippet-min-width': '100%',
+      '--search-snippet-min-width': '0',
       '--search-snippet-max-width': '100%',
       '--search-snippet-input-height': '42px',
       '--search-snippet-border-radius': '21px',

@@ -781,12 +781,15 @@ html[data-theme='dark'] .ai-search-modal {
 .ai-search-modal-bar {
   flex: 1;
   min-width: 0;
+  max-width: 100%;
   display: flex;
   align-items: center;
+  overflow: hidden;
 }
 
 .ai-search-modal-bar search-bar-snippet {
   width: 100%;
+  max-width: 100%;
 }
 
 .ai-search-close {

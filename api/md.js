@@ -2,7 +2,9 @@
 // Serves markdown versions of pages when Accept: text/markdown is sent
 // https://acceptmarkdown.com
 
-export default async function handler(req, res) {
+const SITE_URL = 'https://blog.oopss.top';
+
+module.exports = function handler(req, res) {
   const accept = (req.headers['accept'] || '').toLowerCase();
 
   if (!accept.includes('text/markdown')) {
@@ -13,7 +15,6 @@ export default async function handler(req, res) {
   const url = new URL(req.url, `https://${req.headers.host}`);
   const path = url.pathname === '/' ? '/index' : url.pathname;
 
-  // Serve llms.txt content for root path, otherwise return markdown of the page
   let md = '';
   if (path === '/index' || path === '') {
     md = `# Brandon's Blog
@@ -22,20 +23,20 @@ export default async function handler(req, res) {
 
 ## 快速链接
 
-- 首页：https://blog.oopss.top/
-- 博客：https://blog.oopss.top/blog
-- 说说：https://blog.oopss.top/shuoshuo
-- 笔记：https://blog.oopss.top/docs/intro
-- 友链：https://blog.oopss.top/friends
-- 关于：https://blog.oopss.top/about
-- 站点地图：https://blog.oopss.top/sitemap.xml
-- RSS 订阅：https://blog.oopss.top/blog/rss.xml
+- 首页：${SITE_URL}/
+- 博客：${SITE_URL}/blog
+- 说说：${SITE_URL}/shuoshuo
+- 笔记：${SITE_URL}/docs/intro
+- 友链：${SITE_URL}/friends
+- 关于：${SITE_URL}/about
+- 站点地图：${SITE_URL}/sitemap.xml
+- RSS 订阅：${SITE_URL}/blog/rss.xml
 
 ## 开发者资源
 
-- API 文档：https://blog.oopss.top/openapi.json
-- 项目指南：https://blog.oopss.top/llms.txt
-- 完整文档：https://blog.oopss.top/llms-full.txt
+- API 文档：${SITE_URL}/openapi.json
+- 项目指南：${SITE_URL}/llms.txt
+- 完整文档：${SITE_URL}/llms-full.txt
 
 ## 技术栈
 
@@ -44,20 +45,22 @@ Docusaurus 3.10 · React 19 · TypeScript · Tailwind CSS · Cloudflare Workers 
   } else {
     md = `# Brandon's Blog
 
-页面 [${path}](https://blog.oopss.top${url.pathname}) 的 Markdown 版本。
+页面 [${path}](${SITE_URL}${url.pathname}) 的 Markdown 版本。
 
-如需完整内容，请访问：https://blog.oopss.top${url.pathname}
+如需完整内容，请访问：${SITE_URL}${url.pathname}
 
 ## 相关链接
 
-- 首页：https://blog.oopss.top/
-- 博客：https://blog.oopss.top/blog
-- API 文档：https://blog.oopss.top/openapi.json
-- 项目指南：https://blog.oopss.top/llms.txt
+- 首页：${SITE_URL}/
+- 博客：${SITE_URL}/blog
+- API 文档：${SITE_URL}/openapi.json
+- 项目指南：${SITE_URL}/llms.txt
 `;
   }
 
   res.setHeader('Content-Type', 'text/markdown; charset=utf-8');
   res.setHeader('Vary', 'Accept, Accept-Encoding');
+  res.setHeader('Cache-Control', 'public, max-age=300, s-maxage=600');
+  res.setHeader('Access-Control-Allow-Origin', '*');
   res.status(200).send(md);
-}
+};

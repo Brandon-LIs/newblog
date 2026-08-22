@@ -1,0 +1,128 @@
+# Brandon's Blog — 完整项目文档
+
+## 概述
+
+Brandon's Blog 是一个基于 Docusaurus 3.10 构建的个人博客，分享技术、生活与项目经验。
+前端部署于 Vercel，后端服务使用 Cloudflare Workers 提供 API。
+
+## 技术栈
+
+- 前端框架：Docusaurus 3.10, React 19, TypeScript, Tailwind CSS v4
+- 状态/动画：Framer Motion, Iconify, clsx
+- 部署：Vercel（静态托管）
+- 后端：Cloudflare Workers（API 服务）
+- 存储：GitHub（博客内容与图片）、Cloudflare KV（缓存）
+- 搜索：Cloudflare AI Search
+- 评论：Twikoo（co.oopss.top）
+- 统计：Umami
+
+## 导航
+
+- 首页：https://blog.oopss.top/
+- 博客：https://blog.oopss.top/blog
+- 说说：https://blog.oopss.top/shuoshuo
+- 笔记：https://blog.oopss.top/docs/intro
+- 友链：https://blog.oopss.top/friends
+- 友链文章：https://blog.oopss.top/fcircle
+- 关于：https://blog.oopss.top/about
+- 穿梭（随机页面）：https://blog.oopss.top/teleport
+
+## 公开 API
+
+基础域名：`https://apii.oopss.top`
+
+所有 GET 接口返回 JSON，支持 CORS（`Access-Control-Allow-Origin: *`）。
+
+### 说说
+- `GET /api/memos?limit=20&page=1` — 获取说说列表（KV 缓存 30 秒）
+- `GET /api/memos` — 获取全部说说
+
+### AI 摘要
+- `GET /api/ai-summaries` — 获取所有博客文章的 AI 摘要 JSON
+
+### 友链文章
+- `GET /api/friends-feed` — 友链文章聚合列表（KV 缓存 5 分钟）
+- `GET /api/friends-feed?refresh=1` — 强制刷新友链文章
+
+### 友链申请
+- `POST /api/friend-apply` — 提交友链申请（multipart/form-data）
+- `GET /api/friend-apply/get?id=xxx` — 查询单个申请
+- `GET /api/friend-apply/approve?token=xxx` — 同意申请
+- `GET /api/friend-apply/reject?token=xxx` — 拒绝申请
+- `GET /api/friend-apply/auto` — 自动处理过期申请（24-48h）
+
+### 友链管理（需要密钥验证）
+- `GET /api/friend-manage/get?id=xxx&key=xxx` — 查询友链信息
+- `POST /api/friend-manage/update?id=xxx&key=xxx` — 更新友链信息
+
+### 友链识别
+- `POST /api/ai/parse-friends` — AI 友链信息提取（Referer 鉴权）
+
+### 其他
+- `GET /api/proxy-fetch?url=xxx` — RSS 代理
+- `GET /script.js` — Umami 统计追踪脚本
+- `POST /api/wechat` — 微信公众号消息接收
+
+### 管理后台 API（需认证）
+- 基础域名：`https://admin.oopss.top`
+- `POST /api/login` — 登录
+- `GET /api/posts?type=blog|docs` — 文章列表
+- `GET /api/post?path=xxx` — 获取文章内容
+- `POST /api/post` — 保存/发布文章
+- `DELETE /api/post` — 删除文章
+- `GET /api/about` — 关于页面
+- `POST /api/about` — 保存关于页面
+- `GET /api/friends` — 友链列表
+- `POST /api/friends` — 保存友链
+- `POST /api/upload` — 上传图片
+- `POST /api/upload/url` — 通过 URL 上传图片
+- `GET /api/drafts` — 草稿列表
+- `POST /api/draft` — 保存草稿
+- `DELETE /api/draft` — 删除草稿
+- `GET /api/stats` — 博客统计
+- `GET /api/twikoo-config` — Twikoo 评论配置
+- `GET /api/twikoo-login` — Twikoo 登录
+
+## 友链系统
+
+### 申请流程
+1. 申请者在 `/friends/apply` 填写表单
+2. 系统自动检测友链页、头像、RSS 可达性
+3. 管理员通过邮件链接或后台审批
+4. 通过后自动添加至 `data/friends.json`，触发友链文章刷新
+5. 自动审批：24-48h 内未处理的申请自动通过
+
+### 管理密钥
+批准申请时自动生成唯一管理密钥，用户可通过邮件中的链接管理自己的友链信息。
+
+## 开发指南
+
+### 本地开发
+```bash
+npm install
+npm start        # 开发服务器 localhost:3000
+npm run build    # 生产构建
+```
+
+### 部署
+- 前端：推送到 main 分支 → Vercel 自动部署
+- Workers：`cd workers/blog-api && npx wrangler deploy`
+
+## 项目结构
+
+- `blog/` — Markdown 博客文章
+- `src/pages/` — 自定义页面（友链、说说、友链管理、穿梭等）
+- `src/theme/` — 自定义主题组件
+- `src/components/` — 可复用 UI 组件
+- `src/plugin/` — 自定义 Docusaurus 插件
+- `workers/` — Cloudflare Workers 后端代码
+- `scripts/` — CI 脚本（AI 摘要、WebP 转换、友链抓取）
+- `data/` — 友链数据 JSON
+- `static/` — 静态资源（OpenAPI 规范、AI 搜索 JS 等）
+
+## 相关链接
+
+- GitHub 仓库：https://github.com/Brandon-LIs/newblog
+- 友链数据：https://github.com/Brandon-LIs/friend-data
+- 评论系统：https://co.oopss.top
+- 服务状态：https://status.oopss.top

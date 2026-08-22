@@ -29,6 +29,10 @@ const config: Config = {
     { tagName: 'meta', attributes: { name: 'google-site-verification', content: 'xxx' } },
     // 微软 Bing 站点验证
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'xxx' } },
+    // 添加 meta 标签方便 AI 爬虫识别
+    { tagName: 'meta', attributes: { name: 'agent-version', content: '1.0' } },
+    { tagName: 'meta', attributes: { name: 'llms', content: '/llms.txt' } },
+    { tagName: 'link', attributes: { rel: 'alternate', type: 'text/markdown', href: '/llms.txt', title: "Brandon's Blog (Markdown)" } },
     // JSON-LD 结构化数据 - 网站
     {
       tagName: 'script',

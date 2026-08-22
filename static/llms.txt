@@ -1,0 +1,41 @@
+# Brandon's Blog
+
+> 一个高中生的个人博客，分享技术与生活。
+
+## 站点地图
+
+- https://blog.oopss.top - 首页
+- https://blog.oopss.top/blog - 博客列表
+- https://blog.oopss.top/blog/archive - 归档
+- https://blog.oopss.top/shuoshuo - 说说
+- https://blog.oopss.top/docs/intro - 笔记
+- https://blog.oopss.top/friends - 友链
+- https://blog.oopss.top/fcircle - 友链文章
+- https://blog.oopss.top/about - 关于我
+- https://blog.oopss.top/sitemap.xml - 站点地图
+- https://blog.oopss.top/blog/rss.xml - RSS 订阅
+- https://blog.oopss.top/blog/atom.xml - Atom 订阅
+
+## 开发者资源
+
+- https://blog.oopss.top/openapi.json - OpenAPI 3.1 规范（公开 API 接口文档）
+- https://blog.oopss.top/llms-full.txt - 完整项目文档
+
+## 公开 API
+
+- https://apii.oopss.top/api/memos - 说说列表
+- https://apii.oopss.top/api/ai-summaries - AI 摘要 JSON
+- https://apii.oopss.top/api/friends-feed - 友链文章聚合
+- https://apii.oopss.top/api/proxy-fetch - RSS 代理
+- https://apii.oopss.top/api/friend-apply - 友链申请提交
+- https://apii.oopss.top/api/friend-apply/get - 查询申请
+- https://apii.oopss.top/api/friend-apply/approve - 同意申请
+- https://apii.oopss.top/api/friend-apply/reject - 拒绝申请
+- https://apii.oopss.top/api/friend-manage/get - 友链管理查询
+- https://apii.oopss.top/api/friend-manage/update - 友链管理更新
+- https://apii.oopss.top/api/ai/parse-friends - AI 友链识别
+
+## 关于
+
+Brandon 的个人博客，基于 Docusaurus 3.10 构建，托管于 Vercel。
+后端服务使用 Cloudflare Workers 提供。

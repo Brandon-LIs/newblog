@@ -15,9 +15,27 @@
     {
       "source": "/friends-feed.json",
       "destination": "https://raw.githubusercontent.com/Brandon-LIs/friend-data/refs/heads/main/friend-articles.json"
+    },
+    {
+      "source": "/llms.txt",
+      "destination": "/llms.txt"
+    },
+    {
+      "source": "/llms-full.txt",
+      "destination": "/llms-full.txt"
+    },
+    {
+      "source": "/openapi.json",
+      "destination": "/openapi.json"
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Vary", "value": "Accept, Accept-Encoding" }
+      ]
+    },
     {
       "source": "/assets/(.*)",
       "headers": [
@@ -46,6 +64,34 @@
       "source": "/ai-summaries.json",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/llms-full.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/openapi.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" }
       ]
     }
   ]

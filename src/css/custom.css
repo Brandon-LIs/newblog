@@ -688,6 +688,127 @@ code {
 }
 
 
+/* ===== AI 搜索（桌面搜索框 / 移动图标 + 虚化浮层）===== */
+
+/* 桌面端搜索框容器 */
+.ai-search-desktop {
+  display: flex;
+  align-items: center;
+  width: 240px;
+  height: 36px;
+  margin: 0 8px 0 0;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 100;
+}
+
+.ai-search-desktop search-bar-snippet {
+  width: 100%;
+}
+
+/* 移动端搜索图标 */
+.ai-search-icon {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--ifm-text-color);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease;
+}
+
+.ai-search-icon:hover {
+  background: var(--blog-item-shade);
+}
+
+/* 移动端虚化浮层 */
+.ai-search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 12vh;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  animation: ai-search-fade 0.2s ease;
+}
+
+@keyframes ai-search-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ai-search-modal {
+  width: min(560px, calc(100vw - 2rem));
+  background: var(--blog-item-background-color);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+  padding: 10px;
+  animation: ai-search-pop 0.25s ease;
+}
+
+@keyframes ai-search-pop {
+  from { opacity: 0; transform: translateY(-12px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.ai-search-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ai-search-modal-bar {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+}
+
+.ai-search-modal-bar search-bar-snippet {
+  width: 100%;
+}
+
+.ai-search-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 50%;
+  background: var(--blog-item-shade);
+  color: var(--ifm-secondary-text-color);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.ai-search-close:hover {
+  background: var(--ifm-color-emphasis-300, #d4d4d8);
+  color: var(--ifm-text-color);
+}
+
+/* 响应式：移动端显示图标，桌面端显示搜索框 */
+@media (max-width: 996px) {
+  .ai-search-desktop {
+    display: none;
+  }
+  .ai-search-icon {
+    display: inline-flex;
+  }
+}
+
+
 /* ===== Linux 终端页面：全屏（隐藏导航栏、底栏、侧边按钮） ===== */
 html:has(.linux-page) .navbar,
 html:has(.linux-page) .theme-layout-navbar,

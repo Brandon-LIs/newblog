@@ -102,6 +102,7 @@ export default (function () {
       '--search-snippet-min-width': '0',
       '--search-snippet-max-width': '100%',
       '--search-snippet-input-height': '42px',
+      '--search-snippet-button-height': '0px',
       '--search-snippet-border-radius': '21px',
       '--search-snippet-max-height': '60vh',
     });

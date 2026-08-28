@@ -48,7 +48,7 @@ export default function Review(): JSX.Element {
   const act = async (url: string) => {
     setProcessing(true);
     try {
-      const res = await fetch(url, {method: 'GET'});
+      const res = await fetch(url, {method: 'POST'});
       const text = await res.text();
       setDone(text);
     } catch { setDone('操作失败'); }

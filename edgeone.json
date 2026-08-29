@@ -16,6 +16,12 @@
       "statusCode": 301
     }
   ],
+  "rewrites": [
+    {
+      "source": "/friends-feed.json",
+      "destination": "/api/friends-feed"
+    }
+  ],
   "cloudFunctions": {
     "nodejs": {
       "maxDuration": 30

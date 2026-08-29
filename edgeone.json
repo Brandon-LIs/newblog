@@ -16,12 +16,11 @@
       "statusCode": 301
     }
   ],
-  "rewrites": [
-    {
-      "source": "/friends-feed.json",
-      "destination": "https://raw.githubusercontent.com/Brandon-LIs/friend-data/refs/heads/main/friend-articles.json"
+  "cloudFunctions": {
+    "nodejs": {
+      "maxDuration": 30
     }
-  ],
+  },
   "headers": [
     {
       "source": "/*",

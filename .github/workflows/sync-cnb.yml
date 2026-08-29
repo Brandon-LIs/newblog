@@ -1,0 +1,36 @@
+name: Sync to CNB
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # 每天 UTC 22:00 = 北京时间 06:00
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Push to cnb.cool
+        env:
+          CNB_TOKEN: ${{ secrets.CNB_TOKEN }}
+        run: |
+          if [ -z "$CNB_TOKEN" ]; then
+            echo "❌ CNB_TOKEN 未配置"
+            exit 1
+          fi
+          CNB_URL="https://cnb:${CNB_TOKEN}@cnb.cool/oopss.top/blog"
+          git remote add cnb "$CNB_URL" 2>/dev/null || git remote set-url cnb "$CNB_URL"
+          echo "→ 推送 main 到 cnb.cool ..."
+          if git push cnb main --force; then
+            echo "✅ 同步完成"
+          else
+            echo "❌ 同步失败"
+            exit 1
+          fi

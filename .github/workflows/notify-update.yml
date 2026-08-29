@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: 20
 
-      - name: Post comment to issue
+      - name: Post comment to issue (去重)
         env:
           GH_TOKEN: ${{ secrets.SUBSCRIBE_TOKEN }}
         run: |
@@ -34,7 +34,29 @@ jobs:
           
           ISSUE_NUMBER=4
           
-          echo "$CHANGED" | while read -r FILE; do
+          # 拉取 issue #4 已有的评论，提取其中已通知的标题（去重）
+          EXISTING_CONTS=$(curl -s \
+            -H "Authorization: token $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments?per_page=100" || echo "[]")
+          echo "$EXISTING_CONTS" > /tmp/existing_comments.json
+          
+          # 已通知的 permalink 列表
+          notify_history_for_permalink() {
+            local slug="$1"
+            local permalink="https://blog.oopss.top/blog/$slug"
+            node -e '
+              const fs = require("fs");
+              let comments = [];
+              try { comments = JSON.parse(fs.readFileSync("/tmp/existing_comments.json", "utf8")); } catch { }
+              const link = process.argv[1];
+              const hit = comments.some(c => (c.body || "").includes(link));
+              process.exit(hit ? 0 : 1);
+            ' "$permalink"
+          }
+          
+          POSTED=0
+          while IFS= read -r FILE; do
             [ -z "$FILE" ] && continue
             echo "处理: $FILE"
             
@@ -47,6 +69,12 @@ jobs:
             
             PERMALINK="https://blog.oopss.top/blog/$SLUG"
             
+            # 去重：该文章已通知过则跳过（webp-convert 二次 push 会重复触发）
+            if notify_history_for_permalink "$SLUG"; then
+              echo "⏭️ 已通知过，跳过: $TITLE ($PERMALINK)"
+              continue
+            fi
+            
             COMMENT="## 🎉 Brandon's Blog 更新啦！\n\n### [$TITLE]($PERMALINK)\n\n> $DESC\n\n📅 $DATE\n\n感谢你的关注 💙\n\n---\n*此通知由 GitHub Actions 自动发布*"
             
             # 发布评论
@@ -54,7 +82,10 @@ jobs:
               -H "Authorization: token $GH_TOKEN" \
               -H "Accept: application/vnd.github+json" \
               "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments" \
-              -d "{\"body\":\"$COMMENT\"}"
+              -d "{\"body\":\"$COMMENT\"}" > /tmp/notify_resp.json
             
+            POSTED=$((POSTED+1))
             echo "✅ 已发布评论: $TITLE"
-          done
+          done <<< "$CHANGED"
+          
+          echo "本次共发布 $POSTED 条通知"

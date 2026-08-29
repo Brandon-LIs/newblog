@@ -1,0 +1,91 @@
+{
+  "name": "oopss-blog",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "outputDirectory": "./build",
+  "nodeVersion": "20.18.0",
+  "redirects": [
+    {
+      "source": "/rss.xml",
+      "destination": "/blog/rss.xml",
+      "statusCode": 301
+    },
+    {
+      "source": "/feed.xml",
+      "destination": "/blog/rss.xml",
+      "statusCode": 301
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/friends-feed.json",
+      "destination": "https://raw.githubusercontent.com/Brandon-LIs/friend-data/refs/heads/main/friend-articles.json"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/*",
+      "headers": [
+        { "key": "Vary", "value": "Accept, Accept-Encoding" }
+      ]
+    },
+    {
+      "source": "/assets/*",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/friends-feed.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=1740, stale-while-revalidate=60" }
+      ]
+    },
+    {
+      "source": "/blog/rss.xml",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/blog/atom.xml",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/ai-summaries.json",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/llms.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/llms-full.txt",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" },
+        { "key": "Cache-Control", "value": "public, max-age=3600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/openapi.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json; charset=utf-8" },
+        { "key": "Access-Control-Allow-Origin", "value": "*" },
+        { "key": "Cache-Control", "value": "public, max-age=600, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/*.md",
+      "headers": [
+        { "key": "Content-Type", "value": "text/markdown; charset=utf-8" }
+      ]
+    }
+  ]
+}

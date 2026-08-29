@@ -205,7 +205,8 @@
     "title": "中文独立博客聚合列表",
     "description": "一个非营利性的中文博客聚合项目。",
     "website": "https://blogroll.online/",
-    "avatar": "https://jsd.oopss.top/uploads/2026/08160013.webp"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08160013.webp",
+    "rss": "https://blogroll.online/feed/"
   },
   {
     "title": "LiMhy Blog",
@@ -239,7 +240,8 @@
     "title": "0c0 的小窝",
     "description": "0c0 的奇奇怪怪想法堆积处",
     "website": "https://blog.0c0.ren",
-    "avatar": "https://blog.0c0.ren/favicon.ico"
+    "avatar": "https://jsd.oopss.top/uploads/2026/08290002.ico",
+    "rss": "https://blog.0c0.ren/feed/"
   },
   {
     "title": "懋和道人",

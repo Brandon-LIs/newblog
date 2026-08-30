@@ -275,6 +275,17 @@ async function aiGenerateSlug(env, title) {
 }
 __name(aiGenerateSlug, "aiGenerateSlug");
 __name(normalizeSlug, "normalizeSlug");
+const DEFAULT_COVER_IMG = "https://bing.oopss.top/1920x1080.php";
+function extractFirstImage(content) {
+  // Markdown 图片 !==[alt](url)
+  const md = String(content || "").match(/!\[[^\]]*\]\(([^)\s]+)\)/);
+  if (md && md[1]) return md[1];
+  // HTML <img src="...">
+  const html = String(content || "").match(/<img[^>]+src=["']([^"']+)["']/i);
+  if (html && html[1]) return html[1];
+  return "";
+}
+__name(extractFirstImage, "extractFirstImage");
 async function handleSavePost(env, body) {
   const type = body.type === "docs" ? "docs" : "blog";
   const title = (body.title || "").trim();
@@ -290,11 +301,16 @@ async function handleSavePost(env, body) {
   }
   const bodyContent = (body.content || "").trim();
   if (!bodyContent && !body.content) return fail("\u5185\u5BB9\u4E0D\u80FD\u4E3A\u7A7A");
+  // 封面图：手动设置优先；否则取正文第一张图；再无则用必应每日壁纸
+  let cover = (body.image || "").trim();
+  if (!cover) {
+    cover = extractFirstImage(bodyContent) || DEFAULT_COVER_IMG;
+  }
   const meta = {
     title,
     slug,
     description: (body.description || "").trim(),
-    image: (body.image || "").trim(),
+    image: cover,
     date: body.date || today(),
     authors: body.authors || env.AUTHORS_DEFAULT,
     tags: Array.isArray(body.tags) ? body.tags.map((t) => t.trim()).filter(Boolean).join(", ") : (body.tags || "").trim(),

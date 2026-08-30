@@ -225,12 +225,33 @@ function today() {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 __name(today, "today");
+const SLUG_MAX_LEN = 40;
+const SLUG_MAX_WORDS = 6;
+function normalizeSlug(s) {
+  let slug = String(s || "").trim().toLowerCase();
+  // 只保留字母数字连字符
+  slug = slug.replace(/[^a-z0-9-]+/g, "-").replace(/-+/g, "-").replace(/^-+|-+$/g, "");
+  if (!slug) return "";
+  // 按单词数限制
+  const words = slug.split("-").filter(Boolean);
+  if (words.length > SLUG_MAX_WORDS) slug = words.slice(0, SLUG_MAX_WORDS).join("-");
+  // 按总长度限制
+  if (slug.length > SLUG_MAX_LEN) {
+    let out = "";
+    for (const w of slug.split("-")) {
+      if (out && out.length + 1 + w.length > SLUG_MAX_LEN) break;
+      out = out ? out + "-" + w : w;
+    }
+    slug = out.replace(/-+$/g, "") || slug.slice(0, SLUG_MAX_LEN).replace(/-+$/g, "");
+  }
+  return slug;
+}
 async function aiGenerateSlug(env, title) {
   if (!env.AI_API_KEY) return "";
   const apiUrl = env.AI_API_URL || "https://api.agnes-ai.cn/v1/chat/completions";
   const model = env.AI_MODEL || "agnes-2.0-flash";
   const prompt =
-    "根据博文标题生成一个简洁的英文 URL slug。\n\n要求：\n- 只输出 slug 本身，不要引号、反引号、空格或任何额外文字\n- 由小写英文字母、数字、连字符组成，不含中文\n- 尽量简短（3~6 个词，通常 30 个字符以内）\n- 可以是纯英文，也可含数字（数字非必需）\n\n博文标题：\n" + title;
+    "根据博文标题生成一个简短、干净的英文 URL slug。\n\n硬性要求：\n- 只输出 slug 本身，不要引号、反引号、空格或任何额外文字\n- 全小写，仅由字母、数字、连字符组成（以字母开头）\n- 不超过 4 个词（即最多 4 个连字符分段）\n- 总长度控制在 20~30 个字符\n- 去掉 and/of/the/a/to/for 等虚词，去掉中英文标点\n- 只保留最能代表主题的关键词，数字尽量省去\n\n博文标题：\n" + title;
   try {
     const r = await fetch(apiUrl, {
       method: "POST",
@@ -241,18 +262,19 @@ async function aiGenerateSlug(env, title) {
           { role: "system", content: "你是一个 URL slug 生成助手，只输出 slug 字符串，不含任何其他内容。" },
           { role: "user", content: prompt }
         ],
-        max_tokens: 32,
-        temperature: 0.3
+        max_tokens: 24,
+        temperature: 0.2
       })
     });
     if (!r.ok) return "";
     const j = await r.json();
-    return (j.choices?.[0]?.message?.content || "").trim();
+    return normalizeSlug(j.choices?.[0]?.message?.content || "");
   } catch {
     return "";
   }
 }
 __name(aiGenerateSlug, "aiGenerateSlug");
+__name(normalizeSlug, "normalizeSlug");
 async function handleSavePost(env, body) {
   const type = body.type === "docs" ? "docs" : "blog";
   const title = (body.title || "").trim();

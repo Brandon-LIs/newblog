@@ -31,6 +31,8 @@ jobs:
         run: node scripts/convert-images-webp.mjs
 
       - name: Commit changes
+        env:
+          IMG_TOKEN: ${{ secrets.IMG_TOKEN }}
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

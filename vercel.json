@@ -9,6 +9,31 @@
       "source": "/feed.xml",
       "destination": "/blog/rss.xml",
       "permanent": true
+    },
+    {
+      "source": "/blog/welcome",
+      "destination": "/blog/welcome-to-my-blog",
+      "permanent": true
+    },
+    {
+      "source": "/blog/1",
+      "destination": "/blog/xiangyang-2-day-trip",
+      "permanent": true
+    },
+    {
+      "source": "/blog/cfmemos",
+      "destination": "/blog/cfmemos-cloudflare-notes",
+      "permanent": true
+    },
+    {
+      "source": "/blog/blog-updates-2026",
+      "destination": "/blog/blog-recent-updates",
+      "permanent": true
+    },
+    {
+      "source": "/blog/aisearch",
+      "destination": "/blog/tech-add-ai-search-to-blog",
+      "permanent": true
     }
   ],
   "rewrites": [

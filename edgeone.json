@@ -14,6 +14,31 @@
       "source": "/feed.xml",
       "destination": "/blog/rss.xml",
       "statusCode": 301
+    },
+    {
+      "source": "/blog/welcome",
+      "destination": "/blog/welcome-to-my-blog",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/1",
+      "destination": "/blog/xiangyang-2-day-trip",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/cfmemos",
+      "destination": "/blog/cfmemos-cloudflare-notes",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/blog-updates-2026",
+      "destination": "/blog/blog-recent-updates",
+      "statusCode": 301
+    },
+    {
+      "source": "/blog/aisearch",
+      "destination": "/blog/tech-add-ai-search-to-blog",
+      "statusCode": 301
     }
   ],
   "rewrites": [

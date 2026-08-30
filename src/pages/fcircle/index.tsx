@@ -20,6 +20,11 @@ function formatDate(d: string): string {
   const t = new Date(d);
   if (isNaN(t.getTime())) return d.slice(0, 10);
   const n = Date.now() - t.getTime();
+  // 未来时间（对方站点提前发布/时区异常）：直接显示日期，避免显示"刚刚"
+  if (n < 0) {
+    const p = (x: number) => String(x).padStart(2, '0');
+    return `${t.getFullYear()}-${p(t.getMonth() + 1)}-${p(t.getDate())}`;
+  }
   const day = Math.floor(n / 864e5);
   if (day < 1) { const h = Math.floor(n / 36e5); return h < 1 ? '刚刚' : h + '小时前'; }
   if (day < 7) return day + '天前';

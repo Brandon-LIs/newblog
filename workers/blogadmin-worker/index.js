@@ -225,11 +225,47 @@ function today() {
   return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())}`;
 }
 __name(today, "today");
+async function aiGenerateSlug(env, title) {
+  if (!env.AI_API_KEY) return "";
+  const apiUrl = env.AI_API_URL || "https://api.agnes-ai.cn/v1/chat/completions";
+  const model = env.AI_MODEL || "agnes-2.0-flash";
+  const prompt =
+    "根据博文标题生成一个简洁的英文 URL slug。\n\n要求：\n- 只输出 slug 本身，不要引号、反引号、空格或任何额外文字\n- 由小写英文字母、数字、连字符组成，不含中文\n- 尽量简短（3~6 个词，通常 30 个字符以内）\n- 可以是纯英文，也可含数字（数字非必需）\n\n博文标题：\n" + title;
+  try {
+    const r = await fetch(apiUrl, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": "Bearer " + env.AI_API_KEY },
+      body: JSON.stringify({
+        model,
+        messages: [
+          { role: "system", content: "你是一个 URL slug 生成助手，只输出 slug 字符串，不含任何其他内容。" },
+          { role: "user", content: prompt }
+        ],
+        max_tokens: 32,
+        temperature: 0.3
+      })
+    });
+    if (!r.ok) return "";
+    const j = await r.json();
+    return (j.choices?.[0]?.message?.content || "").trim();
+  } catch {
+    return "";
+  }
+}
+__name(aiGenerateSlug, "aiGenerateSlug");
 async function handleSavePost(env, body) {
   const type = body.type === "docs" ? "docs" : "blog";
   const title = (body.title || "").trim();
   if (!title) return fail("\u6807\u9898\u4E0D\u80FD\u4E3A\u7A7A");
-  const slug = sanitizeSlug(body.slug || title);
+  const userSlug = (body.slug || "").trim();
+  let slug;
+  if (userSlug) {
+    slug = sanitizeSlug(userSlug);
+  } else {
+    // 用户未填写 slug：由 AI 根据标题生成，失败则回退标题清洗
+    slug = await aiGenerateSlug(env, title);
+    slug = slug ? sanitizeSlug(slug) : sanitizeSlug(title);
+  }
   const bodyContent = (body.content || "").trim();
   if (!bodyContent && !body.content) return fail("\u5185\u5BB9\u4E0D\u80FD\u4E3A\u7A7A");
   const meta = {

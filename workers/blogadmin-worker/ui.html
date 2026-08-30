@@ -44,6 +44,7 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "P
 .editor-ft .hint { color: #909399; font-size: 12px; margin-right: auto; }
 .about-wrap { height: calc(100vh - 200px); display: flex; flex-direction: column; }
 #md-editor-about { flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #dcdfe6; }
+.comments-area { height: calc(100vh - 56px); flex: 1; min-height: 0; }
 .draft-card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
 .draft-card .info { flex: 1; min-width: 0; }
 .ai-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #ebeef5; border-radius: 8px; background: #fff; }
@@ -217,6 +218,10 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "P
           </div>
         </div>
       </div>
+    </div>
+
+    <div class="main-area comments-area" v-show="activeView==='comments'" style="padding:0;overflow:hidden;display:flex;flex-direction:column;height:100%">
+      <iframe id="twikoo-frame" src="about:blank" style="width:100%;flex:1;border:none;min-height:0" title="评论管理"></iframe>
     </div>
   </div>
 
@@ -437,7 +442,7 @@ const app = createApp({
       else if(v==='about') loadAbout();
       else if(v==='friends') loadFriends();
       else if(v==='stats') loadStats();
-      else if(v==='comments') window.open('https://twikoo.oopss.top/#account=admin&password=lbn201164', '_blank');
+      else if(v==='comments') { /* iframe 内嵌评论管理，加载时刷新一次 */ const f=document.getElementById('twikoo-frame'); if(f) f.src = 'https://twikoo.oopss.top/#account=admin&password=lbn201164'; }
       else loadDrafts();
     }
 

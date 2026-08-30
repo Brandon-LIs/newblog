@@ -1,5 +1,5 @@
 ---
-slug: blog-updates-2026
+slug: blog-recent-updates
 title: 技术|博客近期更新
 authors: [brandon]
 date: 2026-08-11

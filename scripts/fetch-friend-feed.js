@@ -227,9 +227,11 @@ async function main() {
   });
   await Promise.all(workers);
 
+  const now = Date.now();
   const flat = results
     .flat()
-    .filter((a) => a.title && a.link)
+    // 过滤无效项 + 未来时间的文章（对方站点提前排期，未实际发布）
+    .filter((a) => a.title && a.link && !(parseDate(a.date) > now))
     .sort((a, b) => parseDate(b.date) - parseDate(a.date));
 
   const out = {

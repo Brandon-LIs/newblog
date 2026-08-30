@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Brandon's Blog 后台管理</title>
+<link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/element-plus/dist/index.css" />
+<link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.css" />
+<style>
+* { box-sizing: border-box; }
+body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #303133; }
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+.login-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px; background: radial-gradient(1000px 600px at 10% -10%, rgba(64,158,255,.12), transparent 60%), radial-gradient(800px 500px at 110% 110%, rgba(251,114,153,.08), transparent 60%), #f5f7fa; }
+.login-card { width: 100%; max-width: 400px; }
+.login-card .el-card__body { padding: 36px 32px; text-align: center; }
+.login-avatar { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 14px; display: block; }
+.header-bar { display: flex; align-items: center; padding: 0 16px; background: #fff; border-bottom: 1px solid #e4e7ed; gap: 12px; flex-shrink: 0; overflow-x: auto; }
+.header-bar .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; white-space: nowrap; flex-shrink: 0; }
+.header-bar .brand img { width: 30px; height: 30px; border-radius: 50%; }
+.main-area { flex: 1; overflow-y: auto; padding: 16px; }
+.toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.toolbar .tt { font-size: 18px; font-weight: 700; margin-right: auto; }
+.post-list { display: flex; flex-direction: column; gap: 8px; }
+.post-card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
+.post-card:hover { border-color: #409eff; }
+.post-card .info { flex: 1; min-width: 0; }
+.post-card .info .t { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.post-card .info .m { font-size: 12px; color: #909399; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.post-card .acts { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
+.friend-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
+.friend-card .info { flex: 1; min-width: 0; }
+.friend-card .info .t { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.friend-card .info .m { font-size: 12px; color: #909399; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.friend-card .acts { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
+.friend-card .mv { display: flex; gap: 4px; flex-shrink: 0; }
+.editor-overlay { position: fixed; inset: 0; z-index: 2000; background: #f5f7fa; display: none; flex-direction: column; }
+.editor-overlay.open { display: flex; }
+.editor-hd { background: #fff; border-bottom: 1px solid #e4e7ed; padding: 10px 16px; }
+.editor-hd .r1 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.editor-hd .r1 .sp { flex: 1; }
+.editor-bd { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 16px 16px; }
+#md-editor { width: 100%; flex: 1; min-height: 0; border-radius: 8px; overflow: hidden; border: 1px solid #dcdfe6; }
+.editor-ft { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: #fff; border-top: 1px solid #e4e7ed; flex-wrap: wrap; }
+.editor-ft .hint { color: #909399; font-size: 12px; margin-right: auto; }
+.about-wrap { height: calc(100vh - 200px); display: flex; flex-direction: column; }
+#md-editor-about { flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #dcdfe6; }
+.draft-card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
+.draft-card .info { flex: 1; min-width: 0; }
+.ai-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #ebeef5; border-radius: 8px; background: #fff; }
+#meta-toggle-btn { display: none; }
+@media (max-width: 640px) {
+  #meta-toggle-btn { display: inline-flex; }
+  .meta-fields { display: none !important; }
+  .meta-fields.open { display: flex !important; }
+  .main-area { padding: 12px; }
+  .toolbar .tt { width: 100%; margin-bottom: 4px; }
+  .post-card { padding: 12px; flex-wrap: wrap; }
+  .post-card .info { flex: 1 1 60%; }
+  .friend-card { flex-wrap: wrap; gap: 6px; padding: 10px; }
+  .friend-card .mv { flex-direction: row; width: 100%; order: -1; gap: 6px; }
+  .friend-card .mv .el-button { width: auto; height: 24px; padding: 0 6px; min-height: 24px; font-size: 11px; }
+  .friend-card .el-avatar { flex-shrink: 0; }
+  .friend-card .info { flex: 1; min-width: 0; }
+  .friend-card .info .t { white-space: normal; word-break: break-word; line-height: 1.4; }
+  .friend-card .info .m { white-space: normal; word-break: break-word; line-height: 1.4; }
+  .friend-card .acts { width: 100%; justify-content: flex-end; gap: 6px; }
+  .editor-hd { padding: 8px 10px; }
+  .editor-bd { padding: 8px 10px; }
+  .editor-ft .hint { display: none; }
+  .el-dialog { width: 92% !important; max-width: 92vw !important; }
+  .login-card .el-card__body { padding: 24px 20px !important; }
+  .header-bar { padding: 0 8px; gap: 8px; }
+}
+</style>
+</head>
+<body>
+<div id="vue-mount"></div>
+<div id="app">
+  <div v-if="!authed" class="login-wrap">
+    <el-card shadow="never" class="login-card">
+      <img class="login-avatar" src="https://cdn.oopss.top/icon.jpg" alt="Brandon" />
+      <h2 style="margin:0 0 6px;font-size:20px">Brandon's Blog 后台</h2>
+      <p style="color:#909399;font-size:13px;margin:0 0 22px">输入管理密码进入控制台</p>
+      <el-input v-model="loginPass" type="password" placeholder="管理密码" size="large" @keyup.enter="doLogin" style="margin-bottom:14px"></el-input>
+      <el-button type="primary" size="large" style="width:100%" :loading="loginLoading" @click="doLogin">登 录</el-button>
+      <p v-if="loginErr" style="color:#f56c6c;font-size:13px;margin-top:10px">{{ loginErr }}</p>
+    </el-card>
+  </div>
+  <div v-else style="display:flex;flex-direction:column;height:100vh;overflow:hidden">
+    <div class="header-bar">
+      <div class="brand"><img src="https://cdn.oopss.top/icon.jpg" alt="logo" />Brandon's Blog</div>
+      <el-menu mode="horizontal" :default-active="activeView" @select="switchView" :ellipsis="false" style="flex:1;min-width:0;border-bottom:none!important;overflow-x:auto">
+        <el-menu-item index="blog">📝 博客</el-menu-item>
+        <el-menu-item index="docs">📚 笔记</el-menu-item>
+        <el-menu-item index="about">👤 关于</el-menu-item>
+        <el-menu-item index="friends">🔗 友链</el-menu-item>
+        <el-menu-item index="stats">📊 统计</el-menu-item>
+        <el-menu-item index="comments">💬 评论</el-menu-item>
+        <el-menu-item index="drafts">💾 草稿</el-menu-item>
+      </el-menu>
+      <el-button size="small" @click="logout">退出</el-button>
+    </div>
+    <div class="main-area" v-show="activeView==='blog'||activeView==='docs'">
+      <div class="toolbar">
+        <span class="tt">{{ activeView==='blog'?'📝 博客':'📚 笔记' }}</span>
+        <el-button type="primary" @click="openEditor(activeView,{})">＋ 新建</el-button>
+        <el-button @click="importFile">📥 导入 .md</el-button>
+        <el-button @click="loadList(activeView)">⟳ 刷新</el-button>
+      </div>
+      <el-empty v-if="postItems.length===0&&!postLoading" description="暂无内容，点击「新建」开始创作"></el-empty>
+      <div v-loading="postLoading" class="post-list">
+        <div v-for="it in postItems" :key="it.path" class="post-card">
+          <div class="info"><div class="t">{{ it.title||it.name }}</div><div class="m">{{ it.name }}</div></div>
+          <div class="acts">
+            <el-button size="small" @click="openEditor(activeView,{path:it.path,title:it.title||''})">编辑</el-button>
+            <el-button size="small" type="danger" plain @click="delPost(it.path,it.sha)">删除</el-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-area" v-show="activeView==='about'">
+      <div class="toolbar">
+        <span class="tt">关于页面</span>
+        <span style="font-size:12px;color:#909399">src/pages/about.mdx</span>
+        <el-button type="primary" :loading="aboutSaving" @click="saveAbout">💾 保存并发布</el-button>
+      </div>
+      <div class="about-wrap"><div id="md-editor-about"></div></div>
+    </div>
+    <div class="main-area" v-show="activeView==='friends'">
+      <div class="toolbar">
+        <span class="tt">友链管理</span>
+        <span style="font-size:12px;color:#909399">data/friends.json · 排序即显示顺序</span>
+        <el-button type="primary" @click="showFriendAdd">＋ 新增友链</el-button>
+        <el-button @click="showAiModal">🤖 AI 识别</el-button>
+        <el-button @click="saveFriends" :loading="friendsSaving">💾 保存全部</el-button>
+        <el-button @click="loadFriends">⟳ 刷新</el-button>
+      </div>
+      <el-empty v-if="friendsList.length===0" description="暂无友链，点击「＋ 新增友链」添加"></el-empty>
+      <div class="post-list">
+        <div v-for="(f,i) in friendsList" :key="i" class="friend-card">
+          <div class="mv">
+            <el-button size="small" :disabled="i===0" @click="friendMove(i,-1)">↑</el-button>
+            <el-button size="small" :disabled="i===friendsList.length-1" @click="friendMove(i,1)">↓</el-button>
+          </div>
+          <el-avatar :size="40" :src="f.avatar" shape="square"></el-avatar>
+          <div class="info"><div class="t">{{ f.title }}</div><div class="m">{{ f.website }} · {{ f.description }}</div></div>
+          <div class="acts">
+            <el-button size="small" @click="editFriend(i)">编辑</el-button>
+            <el-button size="small" type="danger" plain @click="delFriend(i)">删除</el-button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="main-area" v-show="activeView==='drafts'">
+      <div class="toolbar">
+        <span class="tt">草稿箱</span>
+        <el-button @click="loadDrafts">⟳ 刷新</el-button>
+      </div>
+      <el-empty v-if="draftItems.length===0&&!draftLoading" description="暂无草稿"></el-empty>
+      <div v-loading="draftLoading" class="post-list">
+        <div v-for="d in draftItems" :key="d.id" class="draft-card">
+          <div class="info">
+            <div class="t">{{ d.title||'(无标题)' }} <el-tag size="small" type="info">{{ d.type==='docs'?'笔记':'博客' }}</el-tag></div>
+            <div class="m">{{ new Date(d.updatedAt).toLocaleString() }}</div>
+          </div>
+          <div class="acts">
+            <el-button size="small" @click="openDraft(d)">继续编辑</el-button>
+            <el-button size="small" type="danger" plain @click="delDraft(d.id)">删除</el-button>
+          </div>
+        </div>
+      </div>
+</div>
+    <div class="main-area" v-show="activeView==='stats'">
+      <div class="toolbar">
+        <span class="tt">📊 博客统计</span>
+        <el-button @click="loadStats">⟳ 刷新</el-button>
+      </div>
+      <div v-loading="statsLoading" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px">
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
+            <div style="font-size:12px;color:#909399;margin-bottom:6px">今日活跃</div>
+            <div style="font-size:28px;font-weight:700;color:#409eff">{{ statsData.activeVisitors }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
+            <div style="font-size:12px;color:#909399;margin-bottom:6px">30天浏览量</div>
+            <div style="font-size:28px;font-weight:700;color:#12affa">{{ statsData.pageviews }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
+            <div style="font-size:12px;color:#909399;margin-bottom:6px">30天访客</div>
+            <div style="font-size:28px;font-weight:700;color:#10b981">{{ statsData.visitors }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
+            <div style="font-size:12px;color:#909399;margin-bottom:6px">30天访问次数</div>
+            <div style="font-size:28px;font-weight:700;color:#f59e0b">{{ statsData.visits }}</div>
+          </div>
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
+            <div style="font-size:12px;color:#909399;margin-bottom:6px">跳出率</div>
+            <div style="font-size:28px;font-weight:700;color:#ef4444">{{ statsData.bounceRate }}%</div>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px">
+            <div style="font-size:14px;font-weight:600;margin-bottom:12px">浏览器排名</div>
+            <div v-for="b in statsData.browsers" :key="b.x" style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px">
+              <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.x }}</span>
+              <span style="font-weight:600;color:#409eff">{{ b.y }}</span>
+            </div>
+            <el-empty v-if="!statsData.browsers.length" description="暂无数据" style="height:40px"></el-empty>
+          </div>
+          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px">
+            <div style="font-size:14px;font-weight:600;margin-bottom:12px">来源排名</div>
+            <div v-for="r in statsData.referrers" :key="r.x" style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px">
+              <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.x }}</span>
+              <span style="font-weight:600;color:#f59e0b">{{ r.y }}</span>
+            </div>
+            <el-empty v-if="!statsData.referrers.length" description="暂无数据" style="height:40px"></el-empty>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="editor-overlay" :class="{open:editorOpen}">
+    <div class="editor-hd">
+      <div class="r1">
+        <el-button @click="closeEditor">← 返回</el-button>
+        <el-tag size="small" type="primary" effect="plain">{{ editorState.type==='docs'?'📚 笔记':'📝 博客' }}</el-tag>
+        <span class="sp"></span>
+        <el-button @click="editorUpload">🖼 上传图片/文件</el-button>
+        <el-button @click="saveDraft">💾 存草稿</el-button>
+        <el-button type="primary" @click="doPublish" :loading="publishing">🚀 发布</el-button>
+        <el-button v-if="!editorState.isNew" type="danger" plain @click="deletePost">🗑 删除</el-button>
+      </div>
+      <el-input v-model="editorTitle" placeholder="文章标题（必填）" style="margin-top:10px"></el-input>
+      <el-button id="meta-toggle-btn" size="small" style="margin-top:10px" @click="metaOpen=!metaOpen">{{ metaOpen?'收起设置':'⚙ 更多设置' }}</el-button>
+      <div id="meta-fields" class="meta-fields" :class="{open:metaOpen}" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+        <el-input v-model="editorSlug" placeholder="链接 slug（自动生成）" style="width:200px" size="small"></el-input>
+        <el-input v-model="editorDate" type="date" style="width:150px" size="small"></el-input>
+        <el-input v-model="editorTags" placeholder="标签1, 标签2" style="width:220px" size="small"></el-input>
+        <el-input v-model="editorCover" placeholder="封面图链接（留空自动取正文第一张图）" style="width:280px" size="small"></el-input>
+        <el-checkbox v-model="editorAiSummary" style="margin-left:8px" size="small">AI 摘要</el-checkbox>
+        <el-input v-if="editorState.type==='docs'" v-model="editorDesc" placeholder="摘要" style="width:220px" size="small"></el-input>
+        <el-input v-if="editorState.type==='docs'" v-model="editorSidebar" placeholder="sidebar_position" style="width:90px" size="small"></el-input>
+      </div>
+    </div>
+    <div class="editor-bd"><div id="md-editor"></div></div>
+    <div class="editor-ft"><span class="hint">支持 Markdown · 点击「发布」自动提交 GitHub 并触发 Vercel 部署 · 可拖拽/粘贴图片自动上传</span></div>
+  </div>
+
+  <el-dialog v-model="friendDialogVisible" :title="friendEditIndex>=0?'编辑友链':'新增友链'" width="420px" :close-on-click-modal="false">
+    <el-form label-position="top">
+      <el-form-item label="标题"><el-input v-model="friendForm.title" placeholder="网站名称"></el-input></el-form-item>
+      <el-form-item label="网址"><el-input v-model="friendForm.website" placeholder="https://example.com/"></el-input></el-form-item>
+      <el-form-item label="头像链接（可留空）"><el-input v-model="friendForm.avatar" placeholder="https://example.com/icon.png"></el-input></el-form-item>
+      <el-form-item label="RSS 订阅地址（可留空）"><el-input v-model="friendForm.rss" placeholder="https://example.com/feed.xml"></el-input></el-form-item>
+      <el-form-item label="简介"><el-input v-model="friendForm.description" type="textarea" :rows="3" placeholder="一句话介绍"></el-input></el-form-item>
+    </el-form>
+    <template #footer><el-button @click="friendDialogVisible=false">取消</el-button><el-button type="primary" @click="saveFriend">确定</el-button></template>
+  </el-dialog>
+
+  <el-dialog v-model="aiDialogVisible" title="🤖 AI 一键识别友链" width="540px" :close-on-click-modal="false" top="5vh">
+    <p style="margin:0 0 12px;font-size:12px;color:#909399">粘贴友链信息（支持各种格式），AI 自动提取网站标题、链接、图标、简介</p>
+    <el-input v-model="aiText" type="textarea" :rows="6" placeholder="例如：&#10;站点名:星河hmの小窝&#10;站点链接:https://www.xhehm.com&#10;站点简介:人生是開發，不是預設&#10;站点图标:https://www.xhehm.com/favicon.png"></el-input>
+    <div v-if="aiParsedFriends.length" style="margin-top:12px">
+      <div style="font-size:12px;color:#909399;margin-bottom:8px">识别结果（点击 ✕ 可移除，勾选留用）：</div>
+      <div v-for="(f,i) in aiParsedFriends" :key="i" class="ai-item">
+        <el-checkbox v-model="aiSelected[i]"></el-checkbox>
+        <el-avatar :size="36" shape="square" :src="f.avatar" style="flex-shrink:0"></el-avatar>
+        <div style="flex:1;min-width:0;font-size:13px">
+          <div style="font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.title }}</div>
+          <div style="color:#909399;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.website }}</div>
+          <div style="color:#909399;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ f.description }}</div>
+        </div>
+        <el-button size="small" text type="danger" @click="removeAiItem(i)">✕</el-button>
+      </div>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <span style="font-size:12px;color:#909399">已识别 {{ aiParsedFriends.length }} 条</span>
+        <el-button size="small" @click="genAppMsg('email')">📧 生成邮件版</el-button>
+        <el-button size="small" @click="genAppMsg('comment')">💬 生成评论版</el-button>
+      </div>
+      <div v-if="aiAppType" style="margin-top:8px">
+        <div style="display:flex;align-items:center;gap:6px;margin-bottom:6px;font-size:12px;color:#909399;flex-wrap:wrap">
+          <span>{{ aiAppType==='email'?'📧 邮件版':'💬 评论版' }}</span>
+          <el-button size="small" text @click="copyText(aiAppMsg)">📋 复制</el-button>
+        </div>
+        <el-input v-model="aiAppMsg" type="textarea" :rows="6" readonly style="background:#f5f7fa"></el-input>
+      </div>
+    </div>
+    <template #footer>
+      <el-button @click="aiDialogVisible=false">取消</el-button>
+      <el-button :loading="aiLoading" @click="doAiParse">🚀 开始识别</el-button>
+      <el-button v-if="aiParsedFriends.length" type="primary" @click="insertAiFriends">✅ 确认插入所选</el-button>
+    </template>
+  </el-dialog>
+  <input type="file" ref="uploadInput" style="display:none" accept="image/*" @change="onUploadFile" />
+  <input type="file" ref="importInput" accept=".md,.mdx,text/markdown" style="display:none" @change="onImport" />
+</div>
+
+<script src="https://jsd.onmicrosoft.cn/npm/vue@3/dist/vue.global.prod.js"></script>
+<script src="https://jsd.onmicrosoft.cn/npm/element-plus@2/dist/index.full.min.js"></script>
+<script src="https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.min.js"></script>
+<script>
+const API = '/api';
+let TOKEN = '';
+try { TOKEN = localStorage.getItem('blogadmin_token') || ''; } catch {}
+
+async function api(path, opts = {}) {
+  const headers = opts.headers || {};
+  if (TOKEN) headers['Authorization'] = 'Bearer ' + TOKEN;
+  if (opts.body && typeof opts.body !== 'string' && !(opts.body instanceof FormData)) {
+    headers['Content-Type'] = 'application/json';
+    opts.body = JSON.stringify(opts.body);
+  }
+  const r = await fetch(API + path, {...opts, headers});
+  let data = null;
+  try { data = await r.json(); } catch {}
+  if (!r.ok) {
+    if (r.status === 401) { TOKEN = ''; try { localStorage.removeItem('blogadmin_token'); } catch {} }
+    throw new Error((data && data.error) || '请求失败 (' + r.status + ')');
+  }
+  return data;
+}
+
+function esc(s) { return String(s??'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+function parseFront(c) {
+  const m = c.match(/^---\s*\n([\s\S]*?)\n---\s*\n?([\s\S]*)$/);
+  if (!m) return {meta:{}, body: c};
+  const meta = {};
+  for (const l of m[1].split('\n')) { const kv = l.match(/^([\w-]+):\s*(.*)$/); if (kv) meta[kv[1]] = kv[2].trim(); }
+  return {meta, body: m[2]};
+}
+
+const { ElMessage, ElMessageBox } = ElementPlus;
+const { createApp, ref, reactive, nextTick, onMounted } = Vue;
+
+const app = createApp({
+  setup() {
+    const authed = ref(false);
+    const loginPass = ref('');
+    const loginLoading = ref(false);
+    const loginErr = ref('');
+    const activeView = ref('blog');
+    const postItems = ref([]);
+    const postLoading = ref(false);
+    const editorOpen = ref(false);
+    const editorState = reactive({type:'blog',path:'',sha:'',isNew:true,draftId:''});
+    const editorTitle = ref('');
+    const editorSlug = ref('');
+    const editorDate = ref('');
+    const editorTags = ref('');
+    const editorDesc = ref('');
+    const editorCover = ref('');
+    const editorSidebar = ref('');
+    const editorAiSummary = ref(true);
+    const metaOpen = ref(false);
+    const publishing = ref(false);
+    const aboutSaving = ref(false);
+    const draftItems = ref([]);
+    const draftLoading = ref(false);
+    const friendsList = ref([]);
+    const friendsSaving = ref(false);
+    const friendDialogVisible = ref(false);
+    const friendEditIndex = ref(-1);
+    const friendForm = reactive({title:'',website:'',avatar:'',description:'',rss:''});
+    const aiDialogVisible = ref(false);
+    const aiText = ref('');
+    const aiLoading = ref(false);
+    const aiParsedFriends = ref([]);
+    const aiSelected = ref({});
+    const aiAppMsg = ref('');
+    const aiAppType = ref('');
+    const statsData = reactive({activeVisitors:0,pageviews:0,visitors:0,visits:0,bounceRate:'0',browsers:[],referrers:[]});
+    const statsLoading = ref(false);
+    const uploadInput = ref(null);
+    const importInput = ref(null);
+    let mdEditor = null;
+    let aboutEditor = null;
+
+    function initEditor(c) {
+      if (mdEditor) { try { mdEditor.setValue(c||''); return; } catch {} }
+      mdEditor = new Vditor('md-editor', {
+        height:'100%', mode:'ir',
+        toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','line','|','preview','fullscreen','edit-mode'],
+        toolbarConfig:{pin:true}, cache:{enable:false}, preview:{hljs:{lineNumber:false,style:'github'}},
+        value:c||'', after:()=>{ mdEditor.setValue(c||''); },
+        upload:{
+          url:'/api/upload',
+          fieldName:'file',
+          headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+          format:(files, responseText)=>{
+            try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
+            catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+          }
+        }
+      });
+    }
+    function destroyEditor() { if(mdEditor){try{mdEditor.destroy()}catch{}} mdEditor=null; }
+
+    function initAboutEditor(c) {
+      if (aboutEditor) { try { aboutEditor.setValue(c||''); return; } catch {} }
+      aboutEditor = new Vditor('md-editor-about', {
+        height:'100%', mode:'ir',
+        toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','|','preview','fullscreen'],
+        toolbarConfig:{pin:true}, cache:{enable:false}, value:c||'', after:()=>{ aboutEditor.setValue(c||''); },
+        upload:{
+          url:'/api/upload',
+          fieldName:'file',
+          headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+          format:(files, responseText)=>{
+            try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
+            catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+          }
+        }
+      });
+    }
+
+    async function doLogin() {
+      if(!loginPass.value) return;
+      loginLoading.value=true; loginErr.value='';
+      try {
+        const res=await api('/login',{method:'POST',body:{password:loginPass.value}});
+        TOKEN=res.token; try{localStorage.setItem('blogadmin_token',TOKEN)}catch{}
+        authed.value=true; switchView('blog');
+      } catch(e){loginErr.value=e.message}
+      finally{loginLoading.value=false}
+    }
+
+    function logout() {
+      TOKEN=''; try{localStorage.removeItem('blogadmin_token')}catch{}
+      try{api('/logout',{method:'POST'})}catch{}
+      authed.value=false;
+    }
+
+    function switchView(v) {
+      activeView.value=v;
+      if(v==='blog'||v==='docs') loadList(v);
+      else if(v==='about') loadAbout();
+      else if(v==='friends') loadFriends();
+      else if(v==='stats') loadStats();
+      else if(v==='comments') window.open('https://twikoo.oopss.top/#account=admin&password=lbn201164', '_blank');
+      else loadDrafts();
+    }
+
+    async function loadList(t) {
+      postLoading.value=true;
+      try{const res=await api('/posts?type='+t); postItems.value=res.items||[]}
+      catch(e){ElMessage.error(e.message); postItems.value=[]}
+      finally{postLoading.value=false}
+    }
+
+    async function delPost(p,s) {
+      try {
+        await ElMessageBox.confirm('确定删除该文件吗？\n'+p,'确认删除');
+        await api('/post',{method:'DELETE',body:{path:p,sha:s}});
+        ElMessage.success('已删除'); loadList(activeView.value);
+      } catch(e){if(e!=='cancel') ElMessage.error(e.message||'取消删除')}
+    }
+
+    function importFile() { importInput.value?.click(); }
+    async function onImport(e) {
+      const f=e.target.files[0]; e.target.value='';
+      if(!f) return;
+      openEditor(activeView.value,{content:await f.text(),imported:true});
+    }
+
+    function titleFromBody(b) {
+      const m=(b||'').match(/^\s*#\s+(.+)$/m);
+      return m?m[1].trim():'';
+    }
+    async function openEditor(type,opts={}) {
+      Object.assign(editorState,{type,path:opts.path||'',sha:opts.sha||'',isNew:!opts.path,draftId:''});
+      editorTitle.value=''; editorSlug.value=''; editorTags.value=''; editorDesc.value=''; editorCover.value=''; editorSidebar.value='';
+      editorDate.value=new Date().toISOString().slice(0,10); metaOpen.value=false; editorOpen.value=true;
+      let body='';
+      if(opts.content) {
+        const{meta,body:b}=parseFront(opts.content); body=b.trimStart();
+        editorTitle.value=meta.title||''; editorSlug.value=meta.slug||''; editorDate.value=meta.date||new Date().toISOString().slice(0,10);
+        editorTags.value=(meta.tags||'').replace(/^\[|\]$/g,'').replace(/,/g,', '); editorDesc.value=meta.description||'';
+        editorCover.value=meta.image||''; editorSidebar.value=meta.sidebar_position||'';
+        editorAiSummary.value=meta.ai_summary!=='false';
+        if(!editorTitle.value) editorTitle.value=titleFromBody(body);
+      }
+      if(!editorState.isNew&&!opts.content) {
+        try {
+          const res=await api('/post?path='+encodeURIComponent(opts.path)); editorState.sha=res.sha;
+          const{meta,body:b}=parseFront(res.content); body=b.trimStart();
+          editorTitle.value=meta.title||''; editorSlug.value=meta.slug||''; editorDate.value=meta.date||new Date().toISOString().slice(0,10);
+          editorTags.value=(meta.tags||'').replace(/^\[|\]$/g,'').replace(/,/g,', '); editorDesc.value=meta.description||'';
+          editorCover.value=meta.image||''; editorSidebar.value=meta.sidebar_position||'';
+          if(!editorTitle.value) editorTitle.value=titleFromBody(body);
+        } catch(e){ElMessage.error(e.message)}
+      }
+      destroyEditor(); nextTick(()=>initEditor(body));
+    }
+
+    function closeEditor() { editorOpen.value=false; destroyEditor(); loadList(activeView.value==='docs'?'docs':'blog'); }
+
+    function collectEditor() {
+      const c=mdEditor?mdEditor.getValue()||'':'';
+      return {type:editorState.type,title:editorTitle.value,slug:editorSlug.value,date:editorDate.value,
+        tags:editorTags.value.split(/[,，]/).map(s=>s.trim()).filter(Boolean),description:editorDesc.value,
+        image:editorCover.value,sidebar_position:editorSidebar.value,aiSummary:editorAiSummary.value,content:c,path:editorState.path,sha:editorState.sha};
+    }
+
+    async function doPublish() {
+      const d=collectEditor(); if(!d.title){ElMessage.error('请填写标题');return}
+      publishing.value=true;
+      try{const res=await api('/post',{method:'POST',body:d}); editorState.path=res.path; editorState.sha=res.version||editorState.sha; editorState.isNew=false; ElMessage.success((res.isNew?'已发布':'已更新')+' 🎉 Vercel 正在自动部署')}
+      catch(e){ElMessage.error(e.message)}
+      finally{publishing.value=false}
+    }
+
+    async function saveDraft() {
+      const d=collectEditor(); if(!d.content&&!d.title){ElMessage.error('草稿内容为空');return}
+      try{const res=await api('/draft',{method:'POST',body:{id:editorState.draftId,type:d.type,title:d.title,content:d.content,path:editorState.path}}); editorState.draftId=res.id; ElMessage.success('草稿已保存 💾')}
+      catch(e){ElMessage.error(e.message)}
+    }
+
+    async function deletePost() {
+      try{await ElMessageBox.confirm('确定删除这篇'+(editorState.type==='docs'?'笔记':'博文')+'吗？','确认删除'); await api('/post',{method:'DELETE',body:{path:editorState.path,sha:editorState.sha}}); ElMessage.success('已删除'); closeEditor()}
+      catch(e){if(e!=='cancel')ElMessage.error(e.message||'取消删除')}
+    }
+
+    function editorUpload() { uploadInput.value?.click(); }
+    async function onUploadFile(e) {
+      const f=e.target.files[0]; e.target.value=''; if(!f) return;
+      ElMessage.info('上传中…');
+      const fd=new FormData(); fd.append('file',f);
+      try {
+        const res=await api('/upload',{method:'POST',body:fd}); const url=res.url;
+        let n=(f.name||'file').replace(/\.[^.]+$/,''); n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';
+        const isImg=/^image\//.test(f.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(f.name||'');
+        const md=isImg?`![${n}](${url})`:`[${n}](${url})`;
+        if(mdEditor) mdEditor.insertValue(md); ElMessage.success((isImg?'已插入图片':'已插入文件')+'链接 ✓');
+      } catch(e){ElMessage.error('上传失败: '+e.message)}
+    }
+
+    document.addEventListener('paste',e=>{if(!editorOpen.value)return; const items=(e.clipboardData||{}).items; if(!items)return; for(const it of items){if(it.kind==='file'){e.preventDefault();const f=it.getAsFile();if(!f)return;ElMessage.info('上传中…');const fd=new FormData();fd.append('file',f);api('/upload',{method:'POST',body:fd}).then(res=>{let n=(f.name||'file').replace(/\.[^.]+$/,'');n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';const isImg=/^image\//.test(f.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(f.name||'');const md=isImg?`![${n}](${res.url})`:`[${n}](${res.url})`;if(mdEditor)mdEditor.insertValue(md);ElMessage.success((isImg?'已插入图片':'已插入文件')+'链接 ✓')}).catch(e=>ElMessage.error('上传失败: '+e.message));return}}});document.addEventListener('dragover',e=>e.preventDefault());document.addEventListener('drop',e=>{if(!editorOpen.value)return;e.preventDefault();const files=Array.from((e.dataTransfer||{}).files||[]);if(!files.length)return;const f=files[0];ElMessage.info('上传中…');const fd=new FormData();fd.append('file',f);api('/upload',{method:'POST',body:fd}).then(res=>{let n=(f.name||'file').replace(/\.[^.]+$/,'');n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';const isImg=/^image\//.test(f.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(f.name||'');const md=isImg?`![${n}](${res.url})`:`[${n}](${res.url})`;if(mdEditor)mdEditor.insertValue(md);ElMessage.success((isImg?'已插入图片':'已插入文件')+'链接 ✓')}).catch(e=>ElMessage.error('上传失败: '+e.message))});
+
+    async function loadAbout() {
+      try{const res=await api('/about'); nextTick(()=>initAboutEditor(res.content))}
+      catch(e){ElMessage.error(e.message)}
+    }
+    async function saveAbout() {
+      const c=aboutEditor?aboutEditor.getValue()||'':''; if(!c){ElMessage.error('内容为空');return}
+      aboutSaving.value=true;
+      try{await api('/about',{method:'POST',body:{content:c}}); ElMessage.success('关于页已更新，Vercel 正在部署 ✓')}
+      catch(e){ElMessage.error(e.message)}
+      finally{aboutSaving.value=false}
+    }
+
+    async function loadDrafts() {
+      draftLoading.value=true;
+      try{const res=await api('/drafts'); draftItems.value=res.drafts||[]}
+      catch(e){ElMessage.error(e.message); draftItems.value=[]}
+      finally{draftLoading.value=false}
+    }
+    function openDraft(d) { editorState.draftId=d.id; openEditor(d.type==='docs'?'docs':'blog',{content:d.content||'',path:d.path||''}); }
+    async function delDraft(id) {
+      try{await ElMessageBox.confirm('删除该草稿？','确认删除'); await api('/draft?id='+encodeURIComponent(id),{method:'DELETE'}); loadDrafts()}
+      catch(e){if(e!=='cancel')ElMessage.error(e.message||'取消删除')}
+    }
+
+    function showFriendAdd() { friendEditIndex.value=-1; friendForm.title='';friendForm.website='';friendForm.avatar='';friendForm.description='';friendForm.rss=''; friendDialogVisible.value=true; }
+    function editFriend(i) { friendEditIndex.value=i; const f=friendsList.value[i]; friendForm.title=f.title||'';friendForm.website=f.website||'';friendForm.avatar=f.avatar||'';friendForm.description=f.description||'';friendForm.rss=f.rss||''; friendDialogVisible.value=true; }
+    function saveFriend() {
+      if(!friendForm.title.trim()){ElMessage.error('请填写标题');return}
+      const d={title:friendForm.title.trim(),website:friendForm.website.trim(),avatar:friendForm.avatar.trim()||undefined,description:friendForm.description.trim(),rss:friendForm.rss.trim()||undefined};
+      if(friendEditIndex.value>=0) friendsList.value[friendEditIndex.value]=d; else friendsList.value.push(d);
+      friendDialogVisible.value=false;
+    }
+    function delFriend(i) { ElMessageBox.confirm('删除该友链？','确认删除').then(()=>{friendsList.value.splice(i,1)}).catch(()=>{}) }
+    function friendMove(i,dir) { const j=i+dir; if(j<0||j>=friendsList.value.length)return; const a=friendsList.value; [a[i],a[j]]=[a[j],a[i]]; friendsList.value=[...a]; }
+    async function loadFriends() { try{const res=await api('/friends'); friendsList.value=res.list||[]} catch(e){ElMessage.error(e.message)} }
+
+    async function loadStats() {
+      statsLoading.value=true;
+      try{
+        const res=await api('/stats');
+        const s=res.stats||{}, pv=res.pageviews?.pageviews||[];
+        statsData.activeVisitors=res.active?.visitors||0;
+        statsData.pageviews=s.pageviews||0;
+        statsData.visitors=s.visitors||0;
+        statsData.visits=s.visits||0;
+        statsData.bounceRate=s.visits?((s.bounces/s.visits)*100).toFixed(1):'0';
+        statsData.browsers=res.browsers||[];
+        statsData.referrers=res.referrers||[];
+        statsData.pageviewsSeries=pv;
+      }catch(e){ElMessage.error(e.message)}
+      finally{statsLoading.value=false}
+    }
+    async function saveFriends() { friendsSaving.value=true; try{await api('/friends',{method:'POST',body:{list:friendsList.value}}); ElMessage.success('友链已保存并发布 ✅')} catch(e){ElMessage.error('保存失败: '+e.message)} finally{friendsSaving.value=false} }
+
+    function showAiModal() { aiText.value=''; aiParsedFriends.value=[]; aiSelected.value={}; aiAppMsg.value=''; aiAppType.value=''; aiDialogVisible.value=true; }
+    async function doAiParse() {
+      if(!aiText.value.trim()){ElMessage.error('请粘贴友链信息');return}
+      aiLoading.value=true;
+      try{
+        const r=await fetch('https://api.agnes-ai.cn/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer sk-kn5TCWPe4oVzKsUAk1qbhuWkFntImckwVhCq7EqB3T3jl0dg'},body:JSON.stringify({model:'agnes-2.0-flash',messages:[{role:'system',content:'你是一个严格输出 JSON 的数据提取助手，只输出 JSON 数组，不包含 markdown 代码块、反引号或任何额外文字。'},{role:'user',content:'你是友链信息提取器。从用户输入的文本中提取友链信息，返回 JSON 数组。\n\n每个友链对象字段：\n- title: 网站标题/名称 (string)\n- website: 网站链接 (string)\n- avatar: 网站图标链接 (string, 无则空字符串)\n- description: 网站简介 (string, 无则空字符串)\n- rss: RSS 订阅地址 (string, 无则空字符串)\n\n规则：\n1. 只返回 JSON 数组，不要 markdown 代码块，不要任何额外文字\n2. 如果找不到某个字段，设为空字符串\n3. 允许多个友链，每个友链一行或一段文字\n4. 字段名(key)出现的位置不定，请智能识别\n\n用户输入：\n'+aiText.value}],max_tokens:4096,temperature:0.1})});
+        if(!r.ok){const t=await r.text().catch(()=>'');throw new Error('AI 接口请求失败: '+r.status+' '+t)}
+        const j=await r.json();
+        const content=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content||'';
+        if(!content){ElMessage.error('AI 返回空结果');return}
+        let jsonStr=content.trim();
+        const cbm=jsonStr.match(/\x60{3}(?:json)?\s*([\s\S]*?)\x60{3}/);
+        if(cbm) jsonStr=cbm[1].trim();
+        const parsed=JSON.parse(jsonStr);
+        const list=Array.isArray(parsed)?parsed:(parsed.friends||parsed.list||parsed.items||[parsed]);
+        if(!list.length){ElMessage.error('AI 未识别出任何友链信息');return}
+        aiParsedFriends.value=list;
+        const sel={}; list.forEach((_,i)=>{sel[i]=true});
+        aiSelected.value=sel;
+        ElMessage.success('识别到 '+list.length+' 条友链')}
+      catch(e){ElMessage.error('AI 识别失败: '+e.message)}
+      finally{aiLoading.value=false}
+    }
+    function removeAiItem(i) { aiParsedFriends.value.splice(i,1); const ns={}; Object.keys(aiSelected.value).forEach(k=>{const idx=parseInt(k); if(idx<i)ns[idx]=aiSelected.value[k]; else if(idx>i)ns[idx-1]=aiSelected.value[k]}); aiSelected.value=ns; }
+    function insertAiFriends() {
+      const to=aiParsedFriends.value.filter((_,i)=>aiSelected.value[i]);
+      if(!to.length){ElMessage.error('请勾选要插入的友链');return}
+      friendsList.value.push(...to.map(f=>({title:String(f.title||'').trim(),website:String(f.website||'').trim(),avatar:String(f.avatar||'').trim()||undefined,description:String(f.description||'').trim(),rss:String(f.rss||'').trim()||undefined})));
+      aiDialogVisible.value=false; ElMessage.success('已插入 '+to.length+' 条友链，点击「保存全部」以发布 ✅');
+    }
+    function genAppMsg(type) {
+      const sel=aiParsedFriends.value.filter((_,i)=>aiSelected.value[i]);
+      if(!sel.length){ElMessage.error('请先勾选要生成申请的友链');return}
+      aiAppType.value=type;
+      const mySite = [
+        '- 名称：Brandon\'s Blog',
+        '- 链接：https://blog.oopss.top',
+        '- 图标：https://cdn.oopss.top/icon.jpg',
+        '- 简介：Brandon 的个人博客，分享技术与生活',
+        '- RSS：https://blog.oopss.top/blog/rss.xml',
+      ].join('\n');
+      if (type === 'comment') {
+        aiAppMsg.value = sel.map(() =>
+          `博主你好！我是 Brandon's Blog 的站长，申请与贵站互换友链 🤝\n\n已添加贵站友链，我的站点信息如下：\n\n${mySite}\n\n期待您的回复，感谢！🙏`
+        ).join('\n\n---\n\n');
+      } else {
+        aiAppMsg.value = sel.map((f,i) =>
+          `博主你好！我是 Brandon's Blog 的站长，申请与贵站互换友链 🤝\n\n【我的站点】\n${mySite}\n\n【友链页面】\nhttps://blog.oopss.top/friends\n（您可在此页面检查贵站友链是否已正常显示）\n\n【贵站信息】\n- 名称：${f.title||''}\n- 链接：${f.website||''}\n\n已添加贵站友链，期待您的回复，感谢！🙏\n\nBrandon's Blog：https://blog.oopss.top`
+        ).join('\n\n---\n\n');
+      }
+    }
+    function copyText(t) {
+      navigator.clipboard.writeText(t).then(()=>{ElMessage.success('已复制 ✓')}).catch(()=>{const ta=document.createElement('textarea');ta.value=t;document.body.appendChild(ta);ta.select();document.execCommand('copy');ta.remove();ElMessage.success('已复制 ✓')});
+    }
+
+    onMounted(async ()=>{
+      if(TOKEN) {
+        try{await api('/status'); authed.value=true; switchView('blog'); return}
+        catch{TOKEN=''; try{localStorage.removeItem('blogadmin_token')}catch{}}
+      }
+    });
+
+    return {
+      authed,loginPass,loginLoading,loginErr,doLogin,logout,activeView,switchView,
+      postItems,postLoading,loadList,delPost,importInput,importFile,onImport,
+      editorOpen,editorState,editorTitle,editorSlug,editorDate,editorTags,editorDesc,editorCover,editorSidebar,
+      publishing,metaOpen,openEditor,closeEditor,doPublish,saveDraft,deletePost,editorUpload,uploadInput,onUploadFile,
+      aboutSaving,loadAbout,saveAbout,draftItems,draftLoading,loadDrafts,openDraft,delDraft,
+      friendsList,friendsSaving,friendDialogVisible,friendEditIndex,friendForm,showFriendAdd,editFriend,saveFriend,delFriend,friendMove,loadFriends,saveFriends,
+      aiDialogVisible,aiText,aiLoading,aiParsedFriends,aiSelected,aiAppMsg,aiAppType,showAiModal,doAiParse,removeAiItem,insertAiFriends,genAppMsg,copyText,statsData,statsLoading,loadStats,
+    };
+  }
+});
+
+app.use(ElementPlus);
+app.config.errorHandler = (err, instance, info) => { console.error('[Vue error]', err, info); };
+try { app.mount('#app'); } catch (e) { document.getElementById('app').innerHTML = '<div style="padding:40px;text-align:center;color:red"><h3>Vue 挂载失败</h3><p>' + (e && e.message) + '</p></div>'; console.error(e); }
+</script>
+</body>
+</html>

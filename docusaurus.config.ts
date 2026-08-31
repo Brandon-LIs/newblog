@@ -203,6 +203,14 @@ const config: Config = {
   themes: [],
 
   themeConfig: {
+    // 全站默认分享图标/简介（微信等平台抓取 og:image；各博文页会用自身封面覆盖）
+    // 注意：需用无防盗链的图片，微信机器人才能抓取（volces CDN 有 Referer 防盗链，故用 jsd.oopss.top）
+    metadata: [
+      { property: 'og:image', content: 'https://jsd.oopss.top/twikoo/08310001.jpg' },
+      { property: 'og:image:alt', content: "Brandon's Blog" },
+      { name: 'twitter:image', content: 'https://jsd.oopss.top/twikoo/08310001.jpg' },
+      { name: 'twitter:image:alt', content: "Brandon's Blog" },
+    ],
     colorMode: {
       defaultMode: 'light',
       respectPrefersColorScheme: true,

@@ -25,8 +25,8 @@ jobs:
           SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
           ADMIN_EMAIL: ${{ secrets.NOTIFY_EMAIL }}
           FEISHU_URL: ${{ secrets.FEISHU_WEBHOOK }}
+          APPLY_PAYLOAD: ${{ toJson(github.event.client_payload) }}
         run: |
-          echo '${{ toJson(github.event.client_payload) }}' > /tmp/payload.json
           node scripts/process-apply-emails.js
 
       - name: Feishu notification

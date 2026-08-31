@@ -1,8 +1,10 @@
 // 友链申请邮件处理脚本（由 GitHub Action 运行）
-// 读取 /tmp/payload.json，发送邮件 + 飞书通知
+// 读取 env APPLY_PAYLOAD（JSON），发送邮件 + 飞书通知
 const nm = require('nodemailer');
 const fs = require('fs');
-const p = JSON.parse(fs.readFileSync('/tmp/payload.json', 'utf8'));
+const rawPayload = process.env.APPLY_PAYLOAD
+  || (fs.existsSync('/tmp/payload.json') ? fs.readFileSync('/tmp/payload.json', 'utf8') : '{"emails":[]}');
+const p = JSON.parse(rawPayload);
 const SITE = 'https://blog.oopss.top';
 const APPLY_URL = SITE + '/friends/apply';
 
@@ -53,6 +55,11 @@ async function main() {
       to = a.email;
       sub = '【Brandon 友链申请】未通过';
       html = rejectedEmail(a, reapplyUrl);
+    } else if (e.type === 'weekly-report') {
+      // 每周工作汇报：发往站长邮箱，HTML 由 worker 端渲染好直接发送
+      to = e.to || process.env.ADMIN_EMAIL;
+      sub = '📮 Brandon 博客每周工作汇报';
+      html = a._html || '<p>本周周报生成失败</p>';
     }
     if (to && html) {
       await t.sendMail({from: 'liboning2011@vip.qq.com', to, subject: sub, html});

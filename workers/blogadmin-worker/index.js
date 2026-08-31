@@ -643,8 +643,9 @@ async function handleUpload(env, request, ctx) {
     const filePath = `${folder}/${fileName}`;
     const url = `${env.IMG_PREFIX}/${filePath}`;
     const uploadBuf = isWebp ? webpBuf : buf;
-    // 异步上传到 GitHub，立即返回 URL
-    ctx.waitUntil(ghPutBase64(env, env.IMG_REPO, filePath, bytesToBase64(uploadBuf), `blog-admin upload ${fileName}`).catch(() => {}));
+    // 同步上传到 GitHub，写入成功后才返回 URL，避免"假成功"导致文件 404
+    // （jsDelivr 会对首次访问的 404 缓存很久，绝不能在写入完成前暴露 URL）
+    await ghPutBase64(env, env.IMG_REPO, filePath, bytesToBase64(uploadBuf), `blog-admin upload ${fileName}`);
     return ok({ url, path: filePath, name, fileName });
   } catch (e) {
     return fail(`\u4E0A\u4F20\u5931\u8D25: ${e.message}`, 500);

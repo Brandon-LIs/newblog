@@ -381,6 +381,45 @@ const app = createApp({
     let mdEditor = null;
     let aboutEditor = null;
 
+    // 本地过大图片先在浏览器端压缩，避免上传后 worker 转 WebP 时 CPU 超时(1102)
+    const COMPRESS_MAX_EDGE = 1280;
+    const COMPRESS_MAX_BYTES = 2 * 1024 * 1024;
+    const COMPRESS_QUALITY = 0.8;
+    function compressImageFile(file) {
+      if (file.size <= COMPRESS_MAX_BYTES) return Promise.resolve(file);
+      const t = (file.type || '').toLowerCase();
+      if (!['image/jpeg', 'image/png', 'image/webp'].includes(t)) return Promise.resolve(file);
+      return new Promise((resolve) => {
+        const url = URL.createObjectURL(file);
+        const img = new Image();
+        img.onload = () => {
+          URL.revokeObjectURL(url);
+          const longEdge = Math.max(img.naturalWidth, img.naturalHeight);
+          if (longEdge <= COMPRESS_MAX_EDGE) return resolve(file);
+          const scale = COMPRESS_MAX_EDGE / longEdge;
+          const canvas = document.createElement('canvas');
+          canvas.width = Math.round(img.naturalWidth * scale);
+          canvas.height = Math.round(img.naturalHeight * scale);
+          canvas.getContext('2d').drawImage(img, 0, 0, canvas.width, canvas.height);
+          const t0 = document.createElement('canvas');
+          const canWebp = t0.toDataURL('image/webp').indexOf('data:image/webp') === 0;
+          const mime = canWebp ? 'image/webp' : 'image/jpeg';
+          canvas.toBlob((blob) => {
+            if (!blob) return resolve(file);
+            const newName = file.name.replace(/\.[^.]+$/, '') + (canWebp ? '.webp' : '.jpg');
+            resolve(new File([blob], newName, {type: mime}));
+          }, mime, COMPRESS_QUALITY);
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); resolve(file); };
+        img.src = url;
+      });
+    }
+    async function vditorCompressFiles(files) {
+      const out = [];
+      for (const f of (files || [])) out.push(await compressImageFile(f));
+      return out;
+    }
+
     function initEditor(c) {
       if (mdEditor) { try { mdEditor.setValue(c||''); return; } catch {} }
       mdEditor = new Vditor('md-editor', {
@@ -392,6 +431,7 @@ const app = createApp({
           url:'/api/upload',
           fieldName:'file',
           headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+          file: vditorCompressFiles,
           format:(files, responseText)=>{
             try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
             catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
@@ -411,6 +451,7 @@ const app = createApp({
           url:'/api/upload',
           fieldName:'file',
           headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+          file: vditorCompressFiles,
           format:(files, responseText)=>{
             try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
             catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
@@ -527,20 +568,25 @@ const app = createApp({
     }
 
     function editorUpload() { uploadInput.value?.click(); }
-    async function onUploadFile(e) {
-      const f=e.target.files[0]; e.target.value=''; if(!f) return;
+    async function uploadSingleFile(f) {
+      if(!f) return;
       ElMessage.info('上传中…');
-      const fd=new FormData(); fd.append('file',f);
+      const file = await compressImageFile(f);
+      const fd=new FormData(); fd.append('file',file);
       try {
         const res=await api('/upload',{method:'POST',body:fd}); const url=res.url;
-        let n=(f.name||'file').replace(/\.[^.]+$/,''); n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';
-        const isImg=/^image\//.test(f.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(f.name||'');
+        let n=(file.name||'file').replace(/\.[^.]+$/,''); n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';
+        const isImg=/^image\//.test(file.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(file.name||'');
         const md=isImg?`![${n}](${url})`:`[${n}](${url})`;
         if(mdEditor) mdEditor.insertValue(md); ElMessage.success((isImg?'已插入图片':'已插入文件')+'链接 ✓');
       } catch(e){ElMessage.error('上传失败: '+e.message)}
     }
+    async function onUploadFile(e) {
+      const f=e.target.files[0]; e.target.value=''; if(!f) return;
+      await uploadSingleFile(f);
+    }
 
-    document.addEventListener('paste',e=>{if(!editorOpen.value)return; const items=(e.clipboardData||{}).items; if(!items)return; for(const it of items){if(it.kind==='file'){e.preventDefault();const f=it.getAsFile();if(!f)return;ElMessage.info('上传中…');const fd=new FormData();fd.append('file',f);api('/upload',{method:'POST',body:fd}).then(res=>{let n=(f.name||'file').replace(/\.[^.]+$/,'');n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';const isImg=/^image\//.test(f.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(f.name||'');const md=isImg?`![${n}](${res.url})`:`[${n}](${res.url})`;if(mdEditor)mdEditor.insertValue(md);ElMessage.success((isImg?'已插入图片':'已插入文件')+'链接 ✓')}).catch(e=>ElMessage.error('上传失败: '+e.message));return}}});document.addEventListener('dragover',e=>e.preventDefault());document.addEventListener('drop',e=>{if(!editorOpen.value)return;e.preventDefault();const files=Array.from((e.dataTransfer||{}).files||[]);if(!files.length)return;const f=files[0];ElMessage.info('上传中…');const fd=new FormData();fd.append('file',f);api('/upload',{method:'POST',body:fd}).then(res=>{let n=(f.name||'file').replace(/\.[^.]+$/,'');n=n.replace(/[^\w\u4e00-\u9fa5-]+/g,'-')||'file';const isImg=/^image\//.test(f.type||'')||/\.(png|jpe?g|gif|webp|svg|avif|ico|bmp)$/i.test(f.name||'');const md=isImg?`![${n}](${res.url})`:`[${n}](${res.url})`;if(mdEditor)mdEditor.insertValue(md);ElMessage.success((isImg?'已插入图片':'已插入文件')+'链接 ✓')}).catch(e=>ElMessage.error('上传失败: '+e.message))});
+    document.addEventListener('paste',e=>{if(!editorOpen.value)return; const items=(e.clipboardData||{}).items; if(!items)return; for(const it of items){if(it.kind==='file'){e.preventDefault();const f=it.getAsFile();if(!f)return;uploadSingleFile(f);return}}});document.addEventListener('dragover',e=>e.preventDefault());document.addEventListener('drop',e=>{if(!editorOpen.value)return;e.preventDefault();const files=Array.from((e.dataTransfer||{}).files||[]);if(!files.length)return;uploadSingleFile(files[0])});
 
     async function loadAbout() {
       try{const res=await api('/about'); nextTick(()=>initAboutEditor(res.content))}

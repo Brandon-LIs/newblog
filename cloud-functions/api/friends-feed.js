@@ -1,8 +1,7 @@
 // EdgeOne Cloud Function: 代理友链文章数据源
 // 路由：/api/friends-feed （edgeone.json 中 /friends-feed.json 内部 rewrite 到此处）
 // Vercel 上该路径由 vercel.json 的外部 rewrite 处理，此处仅用于 EdgeOne 部署
-const SOURCE_URL =
-  'https://raw.githubusercontent.com/Brandon-LIs/friend-data/refs/heads/main/friend-articles.json';
+const SOURCE_URL = 'https://friendsdata.oopss.top/friend-articles.json';
 
 export async function onRequestGet() {
   try {
@@ -17,7 +16,7 @@ export async function onRequestGet() {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
         'Access-Control-Allow-Origin': '*',
-        'Cache-Control': 'public, max-age=1740, stale-while-revalidate=60',
+        'Cache-Control': 'public, max-age=60, must-revalidate',
       },
     });
   } catch (e) {

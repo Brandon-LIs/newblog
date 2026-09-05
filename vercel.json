@@ -39,7 +39,7 @@
   "rewrites": [
     {
       "source": "/friends-feed.json",
-      "destination": "https://raw.githubusercontent.com/Brandon-LIs/friend-data/refs/heads/main/friend-articles.json"
+      "destination": "https://friendsdata.oopss.top/friend-articles.json"
     }
   ],
   "headers": [
@@ -58,7 +58,7 @@
     {
       "source": "/friends-feed.json",
       "headers": [
-        { "key": "Cache-Control", "value": "public, s-maxage=1740, max-age=1740, stale-while-revalidate=60" }
+        { "key": "Cache-Control", "value": "public, max-age=60, must-revalidate" }
       ]
     },
     {

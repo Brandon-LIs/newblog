@@ -116,18 +116,18 @@ jobs:
             fi
 
             # 6. 用 Node 构造 JSON（规避标题/描述中的引号、换行等特殊字符）
-            COMMENT="## 🎉 Brandon's Blog 更新啦！
-
-### [$TITLE]($PERMALINK)
-
-> $DESC
-
-📅 $DATE
-
-感谢你的关注 💙
-
----
-*此通知由 GitHub Actions 自动发布*"
+            echo "## 🎉 Brandon's Blog 更新啦!" > /tmp/comment_body.txt
+            echo "" >> /tmp/comment_body.txt
+            echo "### [$TITLE]($PERMALINK)" >> /tmp/comment_body.txt
+            echo "" >> /tmp/comment_body.txt
+            echo "> $DESC" >> /tmp/comment_body.txt
+            echo "" >> /tmp/comment_body.txt
+            echo "📅 $DATE" >> /tmp/comment_body.txt
+            echo "" >> /tmp/comment_body.txt
+            echo "感谢你的关注 💙" >> /tmp/comment_body.txt
+            echo "" >> /tmp/comment_body.txt
+            echo "---" >> /tmp/comment_body.txt
+            echo "*此通知由 GitHub Actions 自动发布*" >> /tmp/comment_body.txt
             echo "$COMMENT" > /tmp/comment_body.txt
             node -e '
               const fs = require("fs");

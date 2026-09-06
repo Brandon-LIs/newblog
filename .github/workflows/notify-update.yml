@@ -6,6 +6,15 @@ on:
     paths:
       - 'blog/**'
   workflow_dispatch:
+    inputs:
+      file:
+        description: '手动补发的文章文件（相对路径，如 blog/2026-08-31-生活-贵阳游记.md）'
+        required: false
+        type: string
+
+concurrency:
+  group: notify-blog-update
+  cancel-in-progress: false
 
 jobs:
   notify:
@@ -25,67 +34,122 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.SUBSCRIBE_TOKEN }}
         run: |
-          # 获取变更的博客文件
-          CHANGED=$(git diff --name-only HEAD~1 HEAD -- 'blog/*.md' 'blog/*.mdx' || echo "")
-          if [ -z "$CHANGED" ]; then
+          set -euo pipefail
+
+          ISSUE_NUMBER=4
+          MANUAL_FILE="${{ github.event.inputs.file }}"
+
+          if [ "${{ github.event_name }}" = "push" ]; then
+            BASE="${{ github.event.before }}"
+          else
+            BASE="HEAD~1"
+          fi
+          if [ -z "$BASE" ] || [ "$BASE" = "0000000000000000000000000000000000000000" ]; then
+            BASE="HEAD~1"
+          fi
+          SHA="${GITHUB_SHA}"
+          echo "diff 范围: $BASE..$SHA"
+
+          # 1. 收集本次变更的博客文件（状态 + 路径，tab 分隔以兼容中文/空格文件名）
+          if [ -n "$MANUAL_FILE" ]; then
+            echo "A	$MANUAL_FILE" > /tmp/changed.txt
+          else
+            git diff --name-status "$BASE" "$SHA" -- 'blog/*.md' 'blog/*.mdx' > /tmp/changed.txt || true
+          fi
+          if [ ! -s /tmp/changed.txt ]; then
             echo "无博客文件变更，跳过"
             exit 0
           fi
-          
-          ISSUE_NUMBER=4
-          
-          # 拉取 issue #4 已有的评论，提取其中已通知的标题（去重）
-          EXISTING_CONTS=$(curl -s \
+
+          # 2. 拉取 issue 已有评论（去重依据）
+          curl -s \
             -H "Authorization: token $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
-            "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments?per_page=100" || echo "[]")
-          echo "$EXISTING_CONTS" > /tmp/existing_comments.json
-          
-          # 已通知的 permalink 列表
-          notify_history_for_permalink() {
-            local slug="$1"
-            local permalink="https://blog.oopss.top/blog/$slug"
-            node -e '
-              const fs = require("fs");
-              let comments = [];
-              try { comments = JSON.parse(fs.readFileSync("/tmp/existing_comments.json", "utf8")); } catch { }
-              const link = process.argv[1];
-              const hit = comments.some(c => (c.body || "").includes(link));
-              process.exit(hit ? 0 : 1);
-            ' "$permalink"
-          }
-          
+            "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments?per_page=100" \
+            -o /tmp/existing_comments.json
+          echo "已有评论数: $(node -e 'try{console.log(JSON.parse(require("fs").readFileSync("/tmp/existing_comments.json","utf8")).length)}catch{console.log(0)}')"
+
           POSTED=0
-          while IFS= read -r FILE; do
+          while IFS=$'\t' read -r STATUS FILE NEWFILE; do
+            [ -n "$NEWFILE" ] && FILE="$NEWFILE"
             [ -z "$FILE" ] && continue
-            echo "处理: $FILE"
-            
-            # 提取 front matter
-            TITLE=$(sed -n 's/^title: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
-            DATE=$(sed -n 's/^date: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
-            DESC=$(sed -n 's/^description: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
-            SLUG=$(sed -n 's/^slug: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
-            [ -z "$SLUG" ] && SLUG=$(basename "$FILE" .md | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//' | sed 's/\.mdx$//')
-            
-            PERMALINK="https://blog.oopss.top/blog/$SLUG"
-            
-            # 去重：该文章已通知过则跳过（webp-convert 二次 push 会重复触发）
-            if notify_history_for_permalink "$SLUG"; then
-              echo "⏭️ 已通知过，跳过: $TITLE ($PERMALINK)"
+            # 纯删除的文件不通知
+            if [ "$STATUS" = "D" ]; then
+              echo "跳过删除: $FILE"
               continue
             fi
-            
-            COMMENT="## 🎉 Brandon's Blog 更新啦！\n\n### [$TITLE]($PERMALINK)\n\n> $DESC\n\n📅 $DATE\n\n感谢你的关注 💙\n\n---\n*此通知由 GitHub Actions 自动发布*"
-            
-            # 发布评论
-            curl -s -X POST \
+            echo "处理 [$STATUS]: $FILE"
+
+            # 3. 提取 front matter
+            TITLE=$(sed -n 's/^title: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            DATE=$(sed -n 's/^date: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            DESC=$(sed -n 's/^description: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//" | head -c 200)
+            SLUG=$(sed -n 's/^slug: *\(.*\)/\1/p' "$FILE" | head -1 | sed "s/^['\"]//;s/['\"]$//")
+            if [ -z "$SLUG" ]; then
+              SLUG=$(basename "$FILE" .md | sed 's/^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\}-//')
+            fi
+            PERMALINK="https://blog.oopss.top/blog/$SLUG"
+
+            # 4. 仅通知发布早期的新文章（避免旧文补发封面/字段时误触发）
+            if [ -z "$MANUAL_FILE" ]; then
+              AGE=$(node -e '
+                const d = new Date(process.argv[1]);
+                if (isNaN(d.getTime())) { console.log(-1); process.exit(0); }
+                console.log(Math.floor((Date.now() - d.getTime()) / 86400000));
+              ' "$DATE")
+              if [ "$AGE" -lt 0 ] || [ "$AGE" -gt 10 ]; then
+                echo "跳过（发布时间 $AGE 天前，超出新鲜窗口）: $TITLE"
+                continue
+              fi
+            fi
+
+            # 5. 去重：该 permalink 已通知过则跳过
+            if node -e '
+              const fs = require("fs");
+              const link = process.argv[1];
+              let comments = [];
+              try { comments = JSON.parse(fs.readFileSync("/tmp/existing_comments.json", "utf8")); } catch(e) { process.exit(1); }
+              process.exit(comments.some(c => (c.body || "").includes(link)) ? 0 : 1);
+            ' "$PERMALINK"; then
+              echo "已通知过，跳过: $TITLE ($PERMALINK)"
+              continue
+            fi
+
+            # 6. 用 Node 构造 JSON（规避标题/描述中的引号、换行等特殊字符）
+            COMMENT="## 🎉 Brandon's Blog 更新啦！
+
+### [$TITLE]($PERMALINK)
+
+> $DESC
+
+📅 $DATE
+
+感谢你的关注 💙
+
+---
+*此通知由 GitHub Actions 自动发布*"
+            echo "$COMMENT" > /tmp/comment_body.txt
+            node -e '
+              const fs = require("fs");
+              const body = fs.readFileSync("/tmp/comment_body.txt", "utf8");
+              fs.writeFileSync("/tmp/payload.json", JSON.stringify({ body }));
+            '
+
+            # 7. 发布并校验响应
+            CODE=$(curl -s -o /tmp/notify_resp.json -w "%{http_code}" \
+              -X POST \
               -H "Authorization: token $GH_TOKEN" \
               -H "Accept: application/vnd.github+json" \
-              "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments" \
-              -d "{\"body\":\"$COMMENT\"}" > /tmp/notify_resp.json
-            
+              -H "Content-Type: application/json" \
+              --data-binary @/tmp/payload.json \
+              "https://api.github.com/repos/Brandon-LIs/newblog/issues/$ISSUE_NUMBER/comments")
+            if [ "$CODE" != "201" ]; then
+              echo "❌ 发布失败 HTTP $CODE: $(cat /tmp/notify_resp.json)"
+              exit 1
+            fi
+
             POSTED=$((POSTED+1))
-            echo "✅ 已发布评论: $TITLE"
-          done <<< "$CHANGED"
-          
+            echo "✅ 已发布评论: $TITLE ($PERMALINK)"
+          done < /tmp/changed.txt
+
           echo "本次共发布 $POSTED 条通知"

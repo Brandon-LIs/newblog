@@ -837,4 +837,63 @@ html:has(.linux-page) [aria-label="跳到主要内容"] {
   display: none;
 }
 
+/* ================================================================
+   首页博客卡片网格（瀑布流效果）
+   ================================================================ */
+
+.blog-grid {
+  columns: 1;
+  column-gap: 16px;
+}
+
+@media (min-width: 640px) {
+  .blog-grid {
+    columns: 2;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-grid {
+    columns: 3;
+  }
+}
+
+.blog-card {
+  break-inside: avoid;
+  margin-bottom: 16px;
+  display: inline-block;
+  width: 100%;
+}
+
+.blog-card img {
+  display: block;
+}
+
+/* 暗色模式卡片样式 */
+html[data-theme='dark'] .blog-card {
+  background: var(--ifm-color-gray-900);
+  border-color: var(--ifm-color-gray-700);
+}
+
+/* 浅色模式卡片样式 */
+html[data-theme='light'] .blog-card {
+  background: #fff;
+  border-color: var(--ifm-color-gray-200);
+}
+
+/* 行数截断工具类 */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 

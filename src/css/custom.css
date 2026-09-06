@@ -5,7 +5,7 @@
 /* Satoshi（几何无衬线，拉丁字符），与参考站一致；自托管，仅拉丁字距生效 */
 @font-face {
   font-family: 'Satoshi';
-  src: url('https://npm.onmicrosoft.cn/br-blog@1.0.2/fonts/satoshi-400.woff2') format('woff2');
+  src: url('https://npm.onmicrosoft.cn/br-blog@1.0.3/fonts/satoshi-400.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -15,7 +15,7 @@
 }
 @font-face {
   font-family: 'Satoshi';
-  src: url('https://npm.onmicrosoft.cn/br-blog@1.0.2/fonts/satoshi-500.woff2') format('woff2');
+  src: url('https://npm.onmicrosoft.cn/br-blog@1.0.3/fonts/satoshi-500.woff2') format('woff2');
   font-weight: 500;
   font-style: normal;
   font-display: swap;

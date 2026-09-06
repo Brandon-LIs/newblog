@@ -178,7 +178,7 @@ export default function Footer(): JSX.Element {
           <section className={styles.brand} aria-label="站点信息">
             <img
               className={styles.avatar}
-              src="https://npm.onmicrosoft.cn/br-blog@1.0.2/img/icon.jpg"
+              src="https://npm.onmicrosoft.cn/br-blog@1.0.3/img/icon.jpg"
               alt={siteInfo.name}
               width={64}
               height={64}
@@ -243,7 +243,7 @@ export default function Footer(): JSX.Element {
             <span className={styles.statusWrap}>
               {!badgeLoaded && (
                 <img
-                  src="https://npm.onmicrosoft.cn/br-blog@1.0.2/img/status-badge.svg?v=2"
+                  src="https://npm.onmicrosoft.cn/br-blog@1.0.3/img/status-badge.svg?v=2"
                   width={250}
                   height={30}
                   alt="服务状态加载中"

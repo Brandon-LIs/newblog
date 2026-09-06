@@ -1,6 +1,6 @@
 // ViewImage 灯箱初始化 - 仅应用于正文/说说内容图片
 (function () {
-  var UI_SEL = '.navbar img, .footer img, .twikoo img';
+  var UI_SEL = '.navbar img, footer img, .twikoo img';
 
   function tagNoView() {
     var imgs = document.querySelectorAll(UI_SEL + ':not([no-view])');

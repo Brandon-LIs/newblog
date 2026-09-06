@@ -42,7 +42,7 @@ function generateShareImage(memo: Memo): Promise<HTMLCanvasElement> {
   canvas.height = H;
   const ctx = canvas.getContext('2d')!;
 
-  const avatar = memo.creator?.avatarUrl || 'https://npm.onmicrosoft.cn/br-blog@1.0.2/img/icon.jpg';
+  const avatar = memo.creator?.avatarUrl || 'https://npm.onmicrosoft.cn/br-blog@1.0.3/img/icon.jpg';
   const name = memo.creator?.nickname || memo.creator?.username || 'Brandon';
   const html = marked.parse(memo.content || '', {gfm: true, breaks: true}) as string;
   const text = stripHtml(html);
@@ -224,7 +224,7 @@ function wrapText(ctx: CanvasRenderingContext2D, text: string, x: number, y: num
 
 function MemoPost({memo, onShare}: {memo: Memo; onShare: (memo: Memo) => void}) {
   const html = marked.parse(memo.content || '', {gfm: true, breaks: true}) as string;
-  const avatar = memo.creator?.avatarUrl || 'https://npm.onmicrosoft.cn/br-blog@1.0.2/img/icon.jpg';
+  const avatar = memo.creator?.avatarUrl || 'https://npm.onmicrosoft.cn/br-blog@1.0.3/img/icon.jpg';
   const name = memo.creator?.nickname || memo.creator?.username || 'Brandon';
   const link = memo.link || `https://memos.oopss.top/m/${memo.id}`;
 
@@ -344,7 +344,7 @@ export default function Shuoshuo(): JSX.Element {
         <div className={styles.sidebar}>
           <div className={styles.sidebarInner}>
             <div className={styles.sidebarAvatar}>
-              <img src="https://npm.onmicrosoft.cn/br-blog@1.0.2/img/icon.jpg" alt="Brandon" width={80} height={80} />
+              <img src="https://npm.onmicrosoft.cn/br-blog@1.0.3/img/icon.jpg" alt="Brandon" width={80} height={80} />
             </div>
             <h2 className={styles.sidebarName}>Brandon</h2>
             <p className={styles.sidebarBio}>我们都有光明的未来</p>

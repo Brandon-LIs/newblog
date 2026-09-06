@@ -16,7 +16,7 @@ const config: Config = {
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
     // 导航栏头像预加载
-    { tagName: 'link', attributes: { rel: 'preload', as: 'image', href: 'https://npm.onmicrosoft.cn/br-blog@1.0.2/img/icon.jpg' } },
+    { tagName: 'link', attributes: { rel: 'preload', as: 'image', href: 'https://npm.onmicrosoft.cn/br-blog@1.0.3/img/icon.jpg' } },
     // DNS 预解析 + 预连接外部资源
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://npm.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
@@ -75,7 +75,7 @@ const config: Config = {
       }),
     },
   ],
-  favicon: 'https://npm.onmicrosoft.cn/br-blog@1.0.2/img/favicon.ico',
+  favicon: 'https://npm.onmicrosoft.cn/br-blog@1.0.3/img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {
@@ -115,19 +115,19 @@ const config: Config = {
   // 不蒜子访问统计已改为 React 组件（src/components/Busuanzi）请求，无需全局脚本
   scripts: [
     {
-      src: 'https://npm.onmicrosoft.cn/br-blog@1.0.2/js/umami.min.js',
+      src: 'https://npm.onmicrosoft.cn/br-blog@1.0.3/js/umami.min.js',
       async: true,
       defer: true,
       'data-website-id': '1eb5f40d-b5f6-4dbc-8406-9135f77e1368',
       'data-host-url': 'https://umami.oopss.top',
     },
     {
-      src: 'https://npm.onmicrosoft.cn/br-blog@1.0.2/js/view-image.min.js',
+      src: 'https://npm.onmicrosoft.cn/br-blog@1.0.3/js/view-image.min.js',
       async: false,
       defer: true,
     },
     {
-      src: 'https://npm.onmicrosoft.cn/br-blog@1.0.2/js/view-image-init.js',
+      src: 'https://npm.onmicrosoft.cn/br-blog@1.0.3/js/view-image-init.js',
       async: false,
       defer: true,
     },
@@ -219,7 +219,7 @@ const config: Config = {
       title: "Brandon's Blog",
       logo: {
         alt: 'Brandon',
-        src: 'https://npm.onmicrosoft.cn/br-blog@1.0.2/img/icon.jpg',
+        src: 'https://npm.onmicrosoft.cn/br-blog@1.0.3/img/icon.jpg',
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},

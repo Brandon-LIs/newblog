@@ -39,7 +39,7 @@
   "rewrites": [
     {
       "source": "/friends-feed.json",
-      "destination": "https://cdn.jsdmirror.cn/gh/Brandon-LIs/friend-data@main/friend-articles.json"
+      "destination": "https://data.blog.oopss.top/friend-articles.json"
     }
   ],
   "headers": [

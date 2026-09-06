@@ -128,7 +128,6 @@ jobs:
             echo "" >> /tmp/comment_body.txt
             echo "---" >> /tmp/comment_body.txt
             echo "*此通知由 GitHub Actions 自动发布*" >> /tmp/comment_body.txt
-            echo "$COMMENT" > /tmp/comment_body.txt
             node -e '
               const fs = require("fs");
               const body = fs.readFileSync("/tmp/comment_body.txt", "utf8");

@@ -1,7 +1,9 @@
-// ViewImage 灯箱初始化 - 应用于所有博客与说说图片
+// ViewImage 灯箱初始化 - 仅应用于正文/说说内容图片
 (function () {
-  function tagTwikooImages() {
-    var imgs = document.querySelectorAll('.twikoo img:not([no-view])');
+  var UI_SEL = '.navbar img, .footer img, .twikoo img';
+
+  function tagNoView() {
+    var imgs = document.querySelectorAll(UI_SEL + ':not([no-view])');
     for (var i = 0; i < imgs.length; i++) {
       imgs[i].setAttribute('no-view', '');
     }
@@ -9,15 +11,14 @@
 
   function init() {
     if (typeof window.ViewImage === 'undefined') return;
-    // 初始化所有 markdown 内容图片与说说图片
+    // 仅正文与说说内容图片启用灯箱；导航栏/页脚/Twikoo 等 UI 图片全部排除
     try {
       window.ViewImage.init(
-        '.markdown img, .theme-doc-markdown img, .theme-blog-post-markdown img, .blog-post-page img, .shuoshuo img, .post-content img, article img'
+        '.markdown img, .theme-doc-markdown img, .theme-blog-post-markdown img, .blog-post-page img, .shuoshuo img, .post-content img'
       );
-      // Twikoo 评论区内图片不启用灯箱（否则点击表情会弹出灯箱）
-      tagTwikooImages();
+      tagNoView();
       if (window.MutationObserver) {
-        new MutationObserver(tagTwikooImages).observe(document, {
+        new MutationObserver(tagNoView).observe(document, {
           childList: true,
           subtree: true,
         });

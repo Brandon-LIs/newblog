@@ -54,7 +54,7 @@ jobs:
           if [ -n "$MANUAL_FILE" ]; then
             echo "A	$MANUAL_FILE" > /tmp/changed.txt
           else
-            git diff --name-status "$BASE" "$SHA" -- 'blog/*.md' 'blog/*.mdx' > /tmp/changed.txt || true
+            git -c core.quotePath=false diff --name-status "$BASE" "$SHA" -- 'blog/*.md' 'blog/*.mdx' > /tmp/changed.txt || true
           fi
           if [ ! -s /tmp/changed.txt ]; then
             echo "无博客文件变更，跳过"
@@ -72,6 +72,9 @@ jobs:
           POSTED=0
           while IFS=$'\t' read -r STATUS FILE NEWFILE; do
             [ -n "$NEWFILE" ] && FILE="$NEWFILE"
+            # 剥离 git 对特殊字符（中文等）文件名可能添加的引号与 C 转义
+            FILE="${FILE%\"}"
+            FILE="${FILE#\"}"
             [ -z "$FILE" ] && continue
             # 纯删除的文件不通知
             if [ "$STATUS" = "D" ]; then

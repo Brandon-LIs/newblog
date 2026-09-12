@@ -21,8 +21,10 @@ const config: Config = {
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://apii.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://status.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://status.oopss.top' } },
     // 百度站点验证
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-xxx' } },
     // Google 站点验证

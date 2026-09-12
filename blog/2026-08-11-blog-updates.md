@@ -3,7 +3,7 @@ slug: blog-recent-updates
 title: 技术|博客近期更新
 authors: [brandon]
 date: 2026-08-11
-image: https://jsd.oopss.top/twikoo/08110001.webp
+image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp
 ---
 这段时间给博客折腾了不少新东西，从友链申请到自动化通知再到微信联动，越玩越上头。挑几个有意思的分享一下。
 
@@ -19,7 +19,7 @@ image: https://jsd.oopss.top/twikoo/08110001.webp
 
 初审通过后，会在**邮件**、**飞书**、**微信公众号**三个渠道同时通知我，通知里直接带「同意 / 拒绝」按钮，点一下就能处理，不用再登录后台。
 
-![友链申请系统](https://jsd.oopss.top/twikoo/08110001.webp)
+![友链申请系统](https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp)
 
 三个渠道的通知效果：
 

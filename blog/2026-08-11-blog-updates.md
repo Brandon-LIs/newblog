@@ -23,9 +23,7 @@ image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp
 
 三个渠道的通知效果：
 
-![邮件通知](https://jsd.oopss.top/uploads/2026/08110004.webp)
-![飞书通知](https://jsd.oopss.top/uploads/2026/08110006.webp)
-![微信公众号通知](https://jsd.oopss.top/uploads/2026/08110005.webp)
+![友链申请通知](https://jsd.oopss.top/img/1789268154815.webp)
 
 如果 24 小时内我没有操作，系统会自动同意。对访客来说，全程无需等待，体验很顺滑。
 
@@ -33,7 +31,7 @@ image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp
 
 既然友链都加了 RSS，那不如把大家的最新文章也聚合起来。我搭了一个「[友链文章](https://blog.oopss.top/fcircle)」页面，用 **GitHub Action 每 30 分钟**定时抓取所有友链的 RSS，文章数据存到独立的 Cloudflare Pages 上，加载飞快。
 
-![友链文章聚合](https://jsd.oopss.top/twikoo/08110003.webp)
+![友链文章聚合](https://jsd.oopss.top/img/1789268177373.webp)
 
 新申请并被同意的友链，只要填了可访问的 RSS，就会自动进入聚合列表，完全不用手动维护。
 
@@ -43,7 +41,7 @@ image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp
 
 只要在公众号里发一条文字消息，后端会自动创建一条 Memos，公众号还会回复说说的链接。我设置的是用我自己的账号（Brandon）发布，所以说说页看起来完全是我自己在写。
 
-![微信公众号发说说](https://jsd.oopss.top/twikoo/08110002.webp)
+![微信公众号发说说](https://jsd.oopss.top/img/1789268184994.webp)
 
 配合之前改版的说说页（换成了类似 X / Twitter 的卡片式信息流），现在发说说、看说说都顺手多了。
 
@@ -51,15 +49,19 @@ image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp
 
 说说页全部重写了，改成了类似 X / Twitter 的布局——左侧是个人资料栏，右侧是纵向信息流，每条说说有头像、昵称、时间、内容，底部还有评论和分享按钮。图片点击可放大灯箱查看，手机端左侧栏自动隐藏。
 
-![说说页信息流](https://jsd.oopss.top/twikoo/08110004.webp)
+![说说页信息流](https://jsd.oopss.top/img/1789268191761.webp)
 
 ## 图片灯箱
 
 博客和说说里的图片，我也给它们加上了灯箱效果——点击图片就能放大预览，支持左右切换，用的是 2KB 的轻量插件 ViewImage，已经集成到站内，不依赖外部 CDN。
 
+![图片灯箱](https://jsd.oopss.top/img/1789268198953.webp)
+
 ## 数据统计可视化
 
 后台也接入了 Umami 统计，现在能直观看到博客的浏览量、访客数、跳出率、浏览器和来源分布，不用再猜"到底有没有人看我的博客"了。
+
+![数据统计可视化](https://jsd.oopss.top/img/1789268204523.webp)
 
 ---
 

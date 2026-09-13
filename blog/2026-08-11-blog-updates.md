@@ -4,6 +4,7 @@ title: 技术|博客近期更新
 authors: [brandon]
 date: 2026-08-11
 image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.5/covers/08110001.webp
+ai_summary: true
 ---
 这段时间给博客折腾了不少新东西，从友链申请到自动化通知再到微信联动，越玩越上头。挑几个有意思的分享一下。
 

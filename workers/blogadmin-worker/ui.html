@@ -4,227 +4,411 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Brandon's Blog 后台管理</title>
-<link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/element-plus/dist/index.css" />
+<link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/element-plus@2.9.8/dist/index.css" />
 <link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.css" />
 <style>
-* { box-sizing: border-box; }
-body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f7fa; color: #303133; }
-#app { min-height: 100vh; display: flex; flex-direction: column; }
-.login-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 16px; background: radial-gradient(1000px 600px at 10% -10%, rgba(64,158,255,.12), transparent 60%), radial-gradient(800px 500px at 110% 110%, rgba(251,114,153,.08), transparent 60%), #f5f7fa; }
-.login-card { width: 100%; max-width: 400px; }
-.login-card .el-card__body { padding: 36px 32px; text-align: center; }
-.login-avatar { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 14px; display: block; }
-.header-bar { display: flex; align-items: center; padding: 0 16px; background: #fff; border-bottom: 1px solid #e4e7ed; gap: 12px; flex-shrink: 0; overflow-x: auto; }
-.header-bar .brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; white-space: nowrap; flex-shrink: 0; }
-.header-bar .brand img { width: 30px; height: 30px; border-radius: 50%; }
-.main-area { flex: 1; overflow-y: auto; padding: 16px; }
-.toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
-.toolbar .tt { font-size: 18px; font-weight: 700; margin-right: auto; }
-.post-list { display: flex; flex-direction: column; gap: 8px; }
-.post-card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
-.post-card:hover { border-color: #409eff; }
-.post-card .info { flex: 1; min-width: 0; }
-.post-card .info .t { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.post-card .info .m { font-size: 12px; color: #909399; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.post-card .acts { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
-.friend-card { display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
-.friend-card .info { flex: 1; min-width: 0; }
-.friend-card .info .t { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.friend-card .info .m { font-size: 12px; color: #909399; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.friend-card .acts { display: flex; gap: 6px; flex-shrink: 0; flex-wrap: wrap; }
-.friend-card .mv { display: flex; gap: 4px; flex-shrink: 0; }
-.editor-overlay { position: fixed; inset: 0; z-index: 2000; background: #f5f7fa; display: none; flex-direction: column; }
-.editor-overlay.open { display: flex; }
-.editor-hd { background: #fff; border-bottom: 1px solid #e4e7ed; padding: 10px 16px; }
-.editor-hd .r1 { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.editor-hd .r1 .sp { flex: 1; }
-.editor-bd { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 12px 16px 16px; }
-#md-editor { width: 100%; flex: 1; min-height: 0; border-radius: 8px; overflow: hidden; border: 1px solid #dcdfe6; }
-.editor-ft { display: flex; align-items: center; gap: 8px; padding: 8px 16px; background: #fff; border-top: 1px solid #e4e7ed; flex-wrap: wrap; }
-.editor-ft .hint { color: #909399; font-size: 12px; margin-right: auto; }
-.about-wrap { height: calc(100vh - 200px); display: flex; flex-direction: column; }
-#md-editor-about { flex: 1; border-radius: 8px; overflow: hidden; border: 1px solid #dcdfe6; }
-.comments-area { height: calc(100vh - 56px); flex: 1; min-height: 0; }
-.draft-card { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: #fff; border: 1px solid #ebeef5; border-radius: 8px; }
-.draft-card .info { flex: 1; min-width: 0; }
-.ai-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid #ebeef5; border-radius: 8px; background: #fff; }
-#meta-toggle-btn { display: none; }
-@media (max-width: 640px) {
-  #meta-toggle-btn { display: inline-flex; }
-  .meta-fields { display: none !important; }
-  .meta-fields.open { display: flex !important; }
-  .main-area { padding: 12px; }
-  .toolbar .tt { width: 100%; margin-bottom: 4px; }
-  .post-card { padding: 12px; flex-wrap: wrap; }
-  .post-card .info { flex: 1 1 60%; }
-  .friend-card { flex-wrap: wrap; gap: 6px; padding: 10px; }
-  .friend-card .mv { flex-direction: row; width: 100%; order: -1; gap: 6px; }
-  .friend-card .mv .el-button { width: auto; height: 24px; padding: 0 6px; min-height: 24px; font-size: 11px; }
-  .friend-card .el-avatar { flex-shrink: 0; }
+  :root {
+    --el-color-primary: #5b8cff;
+    --brand: #5b8cff;
+    --brand-dark: #3f6fe8;
+    --sidebar-bg: #1c2130;
+    --sidebar-hover: #262d40;
+    --sidebar-active: #2c3654;
+    --sidebar-text: #a7b0c3;
+    --sidebar-text-active: #ffffff;
+    --bg: #f3f5f9;
+    --card: #ffffff;
+    --border: #e7eaf0;
+    --text: #2b3245;
+    --text-sub: #8a93a6;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    -webkit-font-smoothing: antialiased;
+  }
+  #app { height: 100vh; overflow: hidden; }
+
+  /* ---------- 登录 ---------- */
+  .login-wrap {
+    height: 100vh; display: flex; align-items: center; justify-content: center; padding: 16px;
+    background:
+      radial-gradient(900px 500px at 12% -10%, rgba(91,140,255,.16), transparent 60%),
+      radial-gradient(700px 480px at 108% 108%, rgba(123,97,255,.12), transparent 60%),
+      #f3f5f9;
+  }
+  .login-card { width: 100%; max-width: 400px; border-radius: 16px; border: 1px solid #eef0f5; box-shadow: 0 20px 60px rgba(31,45,80,.10); }
+  .login-card .el-card__body { padding: 40px 36px; text-align: center; }
+  .login-avatar { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 16px; display: block; box-shadow: 0 8px 24px rgba(91,140,255,.25); }
+  .login-title { font-size: 20px; font-weight: 700; margin: 0 0 4px; letter-spacing: .5px; }
+  .login-sub { color: var(--text-sub); font-size: 13px; margin: 0 0 26px; }
+
+  /* ---------- 框架布局 ---------- */
+  .layout { display: flex; height: 100vh; }
+  .sidebar {
+    width: 216px; flex-shrink: 0; background: var(--sidebar-bg); color: var(--sidebar-text);
+    display: flex; flex-direction: column; overflow: hidden;
+  }
+  .sidebar .sb-brand {
+    display: flex; align-items: center; gap: 10px; padding: 18px 18px 16px; color: #fff; font-weight: 700; font-size: 15px;
+  }
+  .sidebar .sb-brand img { width: 32px; height: 32px; border-radius: 50%; }
+  .sb-nav { flex: 1; overflow-y: auto; padding: 6px 10px 16px; }
+  .sb-nav .nav-item {
+    display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin: 2px 0; border-radius: 10px;
+    cursor: pointer; font-size: 14px; color: var(--sidebar-text); transition: all .16s ease; border: none; background: transparent; width: 100%; text-align: left;
+  }
+  .sb-nav .nav-item:hover { background: var(--sidebar-hover); color: #fff; }
+  .sb-nav .nav-item.active { background: var(--sidebar-active); color: var(--sidebar-text-active); font-weight: 600; }
+  .sb-nav .nav-item .ico { width: 20px; text-align: center; flex-shrink: 0; }
+  .sb-nav .nav-item .cnt { margin-left: auto; font-size: 11px; opacity: .75; }
+  .sb-foot { padding: 12px 16px; border-top: 1px solid rgba(255,255,255,.06); }
+  .sb-foot .logout-btn {
+    width: 100%; display: flex; align-items: center; justify-content: center; gap: 6px; padding: 9px;
+    border-radius: 9px; background: rgba(255,255,255,.06); color: var(--sidebar-text); border: none; cursor: pointer; font-size: 13px; transition: all .15s;
+  }
+  .sb-foot .logout-btn:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+  .main-col { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  .topbar {
+    height: 56px; flex-shrink: 0; background: #fff; border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; padding: 0 24px; gap: 12px;
+  }
+  .topbar .tb-title { font-size: 16px; font-weight: 700; margin-right: auto; }
+  .main-area { flex: 1; overflow-y: auto; padding: 22px 24px; }
+
+  /* ---------- 工具栏 ---------- */
+  .toolbar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+  .toolbar .tt { font-size: 15px; font-weight: 700; margin-right: auto; display: flex; align-items: center; gap: 8px; }
+  .toolbar .tt .sub { font-size: 12px; color: var(--text-sub); font-weight: 400; }
+
+  /* ---------- 列表卡片 ---------- */
+  .post-list { display: flex; flex-direction: column; gap: 10px; }
+  .post-card {
+    display: flex; align-items: center; gap: 14px; padding: 13px 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px; transition: box-shadow .18s ease, transform .18s ease, border-color .18s;
+  }
+  .post-card:hover { border-color: #d6def0; box-shadow: 0 8px 24px rgba(31,45,80,.07); }
+  .post-card .cover {
+    width: 88px; height: 52px; border-radius: 8px; object-fit: cover; flex-shrink: 0;
+    background: linear-gradient(135deg,#eef2fb,#e7ecf6);
+  }
+  .post-card .info { flex: 1; min-width: 0; }
+  .post-card .info .t { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .post-card .info .m { font-size: 12px; color: var(--text-sub); margin-top: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .post-card .acts { display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }
+
+  .friend-card {
+    display: flex; align-items: center; gap: 14px; padding: 12px 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px; transition: box-shadow .18s;
+  }
+  .friend-card:hover { box-shadow: 0 8px 24px rgba(31,45,80,.07); }
   .friend-card .info { flex: 1; min-width: 0; }
-  .friend-card .info .t { white-space: normal; word-break: break-word; line-height: 1.4; }
-  .friend-card .info .m { white-space: normal; word-break: break-word; line-height: 1.4; }
-  .friend-card .acts { width: 100%; justify-content: flex-end; gap: 6px; }
-  .editor-hd { padding: 8px 10px; }
-  .editor-bd { padding: 8px 10px; }
-  .editor-ft .hint { display: none; }
-  .el-dialog { width: 92% !important; max-width: 92vw !important; }
-  .login-card .el-card__body { padding: 24px 20px !important; }
-  .header-bar { padding: 0 8px; gap: 8px; }
-}
+  .friend-card .info .t { font-size: 14px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .friend-card .info .m { font-size: 12px; color: var(--text-sub); margin-top: 3px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .friend-card .acts { display: flex; gap: 8px; flex-shrink: 0; flex-wrap: wrap; }
+  .friend-card .mv { display: flex; gap: 6px; flex-shrink: 0; flex-direction: column; }
+
+  .draft-card {
+    display: flex; align-items: center; gap: 14px; padding: 14px 16px; background: var(--card);
+    border: 1px solid var(--border); border-radius: 12px;
+  }
+  .draft-card .info { flex: 1; min-width: 0; }
+
+  /* ---------- 编辑器 ---------- */
+  .editor-overlay { position: fixed; inset: 0; z-index: 2000; background: var(--bg); display: none; flex-direction: column; }
+  .editor-overlay.open { display: flex; }
+  .editor-hd { background: #fff; border-bottom: 1px solid var(--border); padding: 12px 20px; }
+  .editor-hd .r1 { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .editor-hd .r1 .sp { flex: 1; }
+  .editor-hd .meta-fields { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px; }
+  .editor-bd { flex: 1; min-height: 0; display: flex; flex-direction: column; padding: 14px 20px 16px; }
+  #md-editor { width: 100%; flex: 1; min-height: 0; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .editor-ft { display: flex; align-items: center; gap: 10px; padding: 8px 20px; background: #fff; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .editor-ft .hint { color: var(--text-sub); font-size: 12px; margin-right: auto; }
+
+  /* ---------- 关于 ---------- */
+  .about-wrap { height: calc(100vh - 170px); display: flex; flex-direction: column; }
+  #md-editor-about { flex: 1; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+
+  .comments-area { height: calc(100vh - 120px); flex: 1; min-height: 0; }
+
+  /* ---------- 统计 ---------- */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px,1fr)); gap: 14px; margin-bottom: 18px; }
+  .stat-card {
+    background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px;
+    box-shadow: 0 4px 16px rgba(31,45,80,.04);
+  }
+  .stat-card .lb { font-size: 12px; color: var(--text-sub); margin-bottom: 8px; }
+  .stat-card .val { font-size: 26px; font-weight: 700; line-height: 1; }
+  .stat-card .val .unit { font-size: 13px; font-weight: 400; color: var(--text-sub); margin-left: 2px; }
+  .stat-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .stat-panel { background: #fff; border: 1px solid var(--border); border-radius: 14px; padding: 18px 20px; }
+  .stat-panel .ph { font-size: 14px; font-weight: 600; margin-bottom: 14px; display:flex; align-items:center; gap:8px; }
+  .stat-bar { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 13px; }
+  .stat-bar .nm { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .stat-bar .track { flex: 1.2; height: 6px; background: #eef1f7; border-radius: 4px; overflow: hidden; }
+  .stat-bar .fill { height: 100%; border-radius: 4px; }
+  .stat-bar .v { width: 46px; text-align: right; font-weight: 600; }
+
+  .chart-wrap { margin-top: 18px; }
+  .bars { display: flex; align-items: flex-end; gap: 4px; height: 120px; margin-top: 12px; }
+  .bars .bar { flex: 1; background: linear-gradient(180deg,#7aa2ff,#5b8cff); border-radius: 4px 4px 0 0; position: relative; min-width: 2px; transition: opacity .15s; }
+  .bars .bar:hover { opacity: .75; }
+  .bar-x { display: flex; gap: 4px; margin-top: 6px; }
+  .bar-x span { flex: 1; font-size: 10px; color: var(--text-sub); text-align: center; overflow: hidden; white-space: nowrap; }
+
+  .ai-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--border); border-radius: 10px; background: #fff; }
+
+  /* ---------- 响应式 ---------- */
+  #meta-toggle-btn { display: none; }
+  @media (max-width: 860px) {
+    .sidebar { width: 62px; }
+    .sidebar .sb-brand span { display: none; }
+    .sb-nav .nav-item span:not(.ico) { display: none; }
+    .sb-nav .nav-item .cnt { display: none; }
+    .sb-brand { justify-content: center; padding: 18px 0 14px; }
+    .sb-foot .logout-btn span { display: none; }
+  }
+  @media (max-width: 640px) {
+    #meta-toggle-btn { display: inline-flex; }
+    .editor-hd .meta-fields { display: none !important; }
+    .editor-hd .meta-fields.open { display: flex !important; }
+    .main-area { padding: 14px 12px; }
+    .topbar { padding: 0 14px; }
+    .post-card { padding: 11px 12px; flex-wrap: wrap; }
+    .post-card .info { flex: 1 1 55%; }
+    .post-card .cover { width: 68px; height: 40px; }
+    .friend-card { flex-wrap: wrap; gap: 8px; padding: 10px 12px; }
+    .friend-card .mv { flex-direction: row; width: 100%; order: -1; gap: 6px; }
+    .friend-card .mv .el-button { width: auto; height: 26px; padding: 0 10px; }
+    .friend-card .el-avatar { flex-shrink: 0; }
+    .friend-card .info { flex: 1; min-width: 0; }
+    .friend-card .info .t, .friend-card .info .m { white-space: normal; word-break: break-word; line-height: 1.4; }
+    .friend-card .acts { width: 100%; justify-content: flex-end; gap: 6px; }
+    .editor-hd { padding: 8px 10px; }
+    .editor-bd { padding: 8px 10px; }
+    .editor-ft .hint { display: none; }
+    .el-dialog { width: 92% !important; max-width: 92vw !important; }
+    .login-card .el-card__body { padding: 24px 20px !important; }
+    .stat-row2 { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
 <div id="vue-mount"></div>
 <div id="app">
+  <!-- 登录 -->
   <div v-if="!authed" class="login-wrap">
     <el-card shadow="never" class="login-card">
       <img class="login-avatar" src="https://cdn.oopss.top/icon.jpg" alt="Brandon" />
-      <h2 style="margin:0 0 6px;font-size:20px">Brandon's Blog 后台</h2>
-      <p style="color:#909399;font-size:13px;margin:0 0 22px">输入管理密码进入控制台</p>
+      <h2 class="login-title">Brandon's Blog 后台</h2>
+      <p class="login-sub">输入管理密码进入控制台</p>
       <el-input v-model="loginPass" type="password" placeholder="管理密码" size="large" @keyup.enter="doLogin" style="margin-bottom:14px"></el-input>
       <el-button type="primary" size="large" style="width:100%" :loading="loginLoading" @click="doLogin">登 录</el-button>
-      <p v-if="loginErr" style="color:#f56c6c;font-size:13px;margin-top:10px">{{ loginErr }}</p>
+      <p v-if="loginErr" style="color:#f56c6c;font-size:13px;margin-top:12px">{{ loginErr }}</p>
     </el-card>
   </div>
-  <div v-else style="display:flex;flex-direction:column;height:100vh;overflow:hidden">
-    <div class="header-bar">
-      <div class="brand"><img src="https://cdn.oopss.top/icon.jpg" alt="logo" />Brandon's Blog</div>
-      <el-menu mode="horizontal" :default-active="activeView" @select="switchView" :ellipsis="false" style="flex:1;min-width:0;border-bottom:none!important;overflow-x:auto">
-        <el-menu-item index="blog">📝 博客</el-menu-item>
-        <el-menu-item index="docs">📚 笔记</el-menu-item>
-        <el-menu-item index="about">👤 关于</el-menu-item>
-        <el-menu-item index="friends">🔗 友链</el-menu-item>
-        <el-menu-item index="stats">📊 统计</el-menu-item>
-        <el-menu-item index="comments">💬 评论</el-menu-item>
-        <el-menu-item index="drafts">💾 草稿</el-menu-item>
-      </el-menu>
-      <el-button size="small" @click="logout">退出</el-button>
-    </div>
-    <div class="main-area" v-show="activeView==='blog'||activeView==='docs'">
-      <div class="toolbar">
-        <span class="tt">{{ activeView==='blog'?'📝 博客':'📚 笔记' }}</span>
-        <el-button type="primary" @click="openEditor(activeView,{})">＋ 新建</el-button>
-        <el-button @click="importFile">📥 导入 .md</el-button>
-        <el-button @click="loadList(activeView)">⟳ 刷新</el-button>
-      </div>
-      <el-empty v-if="postItems.length===0&&!postLoading" description="暂无内容，点击「新建」开始创作"></el-empty>
-      <div v-loading="postLoading" class="post-list">
-        <div v-for="it in postItems" :key="it.path" class="post-card">
-          <div class="info"><div class="t">{{ it.title||it.name }}</div><div class="m">{{ it.name }}</div></div>
-          <div class="acts">
-            <el-button size="small" @click="openEditor(activeView,{path:it.path,title:it.title||''})">编辑</el-button>
-            <el-button size="small" type="danger" plain @click="delPost(it.path,it.sha)">删除</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="main-area" v-show="activeView==='about'">
-      <div class="toolbar">
-        <span class="tt">关于页面</span>
-        <span style="font-size:12px;color:#909399">src/pages/about.mdx</span>
-        <el-button type="primary" :loading="aboutSaving" @click="saveAbout">💾 保存并发布</el-button>
-      </div>
-      <div class="about-wrap"><div id="md-editor-about"></div></div>
-    </div>
-    <div class="main-area" v-show="activeView==='friends'">
-      <div class="toolbar">
-        <span class="tt">友链管理</span>
-        <span style="font-size:12px;color:#909399">data/friends.json · 排序即显示顺序</span>
-        <el-button type="primary" @click="showFriendAdd">＋ 新增友链</el-button>
-        <el-button @click="showAiModal">🤖 AI 识别</el-button>
-        <el-button @click="saveFriends" :loading="friendsSaving">💾 保存全部</el-button>
-        <el-button @click="loadFriends">⟳ 刷新</el-button>
-      </div>
-      <el-empty v-if="friendsList.length===0" description="暂无友链，点击「＋ 新增友链」添加"></el-empty>
-      <div class="post-list">
-        <div v-for="(f,i) in friendsList" :key="i" class="friend-card">
-          <div class="mv">
-            <el-button size="small" :disabled="i===0" @click="friendMove(i,-1)">↑</el-button>
-            <el-button size="small" :disabled="i===friendsList.length-1" @click="friendMove(i,1)">↓</el-button>
-          </div>
-          <el-avatar :size="40" :src="f.avatar" shape="square"></el-avatar>
-          <div class="info"><div class="t">{{ f.title }}</div><div class="m">{{ f.website }} · {{ f.description }}</div></div>
-          <div class="acts">
-            <el-button size="small" @click="editFriend(i)">编辑</el-button>
-            <el-button size="small" type="danger" plain @click="delFriend(i)">删除</el-button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="main-area" v-show="activeView==='drafts'">
-      <div class="toolbar">
-        <span class="tt">草稿箱</span>
-        <el-button @click="loadDrafts">⟳ 刷新</el-button>
-      </div>
-      <el-empty v-if="draftItems.length===0&&!draftLoading" description="暂无草稿"></el-empty>
-      <div v-loading="draftLoading" class="post-list">
-        <div v-for="d in draftItems" :key="d.id" class="draft-card">
-          <div class="info">
-            <div class="t">{{ d.title||'(无标题)' }} <el-tag size="small" type="info">{{ d.type==='docs'?'笔记':'博客' }}</el-tag></div>
-            <div class="m">{{ new Date(d.updatedAt).toLocaleString() }}</div>
-          </div>
-          <div class="acts">
-            <el-button size="small" @click="openDraft(d)">继续编辑</el-button>
-            <el-button size="small" type="danger" plain @click="delDraft(d.id)">删除</el-button>
-          </div>
-        </div>
-      </div>
-</div>
-    <div class="main-area" v-show="activeView==='stats'">
-      <div class="toolbar">
-        <span class="tt">📊 博客统计</span>
-        <el-button @click="loadStats">⟳ 刷新</el-button>
-      </div>
-      <div v-loading="statsLoading" style="display:flex;flex-direction:column;gap:16px">
-        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px">
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:12px;color:#909399;margin-bottom:6px">今日活跃</div>
-            <div style="font-size:28px;font-weight:700;color:#409eff">{{ statsData.activeVisitors }}</div>
-          </div>
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:12px;color:#909399;margin-bottom:6px">30天浏览量</div>
-            <div style="font-size:28px;font-weight:700;color:#12affa">{{ statsData.pageviews }}</div>
-          </div>
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:12px;color:#909399;margin-bottom:6px">30天访客</div>
-            <div style="font-size:28px;font-weight:700;color:#10b981">{{ statsData.visitors }}</div>
-          </div>
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:12px;color:#909399;margin-bottom:6px">30天访问次数</div>
-            <div style="font-size:28px;font-weight:700;color:#f59e0b">{{ statsData.visits }}</div>
-          </div>
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px;text-align:center">
-            <div style="font-size:12px;color:#909399;margin-bottom:6px">跳出率</div>
-            <div style="font-size:28px;font-weight:700;color:#ef4444">{{ statsData.bounceRate }}%</div>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px">
-            <div style="font-size:14px;font-weight:600;margin-bottom:12px">浏览器排名</div>
-            <div v-for="b in statsData.browsers" :key="b.x" style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px">
-              <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ b.x }}</span>
-              <span style="font-weight:600;color:#409eff">{{ b.y }}</span>
-            </div>
-            <el-empty v-if="!statsData.browsers.length" description="暂无数据" style="height:40px"></el-empty>
-          </div>
-          <div style="background:#fff;border:1px solid #ebeef5;border-radius:10px;padding:16px">
-            <div style="font-size:14px;font-weight:600;margin-bottom:12px">来源排名</div>
-            <div v-for="r in statsData.referrers" :key="r.x" style="display:flex;align-items:center;gap:8px;margin-bottom:8px;font-size:13px">
-              <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.x }}</span>
-              <span style="font-weight:600;color:#f59e0b">{{ r.y }}</span>
-            </div>
-            <el-empty v-if="!statsData.referrers.length" description="暂无数据" style="height:40px"></el-empty>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="main-area comments-area" v-show="activeView==='comments'" style="padding:0;overflow:hidden;display:flex;flex-direction:column;height:100%">
-      <iframe id="twikoo-frame" src="about:blank" style="width:100%;flex:1;border:none;min-height:0" title="评论管理"></iframe>
+  <!-- 主框架 -->
+  <div v-else class="layout">
+    <aside class="sidebar">
+      <div class="sb-brand">
+        <img src="https://cdn.oopss.top/icon.jpg" alt="logo" />
+        <span>Brandon's Blog</span>
+      </div>
+      <nav class="sb-nav">
+        <button class="nav-item" :class="{active:activeView==='blog'}" @click="switchView('blog')"><span class="ico">📝</span><span>博客</span></button>
+        <button class="nav-item" :class="{active:activeView==='docs'}" @click="switchView('docs')"><span class="ico">📚</span><span>笔记</span></button>
+        <button class="nav-item" :class="{active:activeView==='drafts'}" @click="switchView('drafts')"><span class="ico">💾</span><span>草稿箱</span></button>
+        <button class="nav-item" :class="{active:activeView==='friends'}" @click="switchView('friends')"><span class="ico">🔗</span><span>友链</span></button>
+        <button class="nav-item" :class="{active:activeView==='stats'}" @click="switchView('stats')"><span class="ico">📊</span><span>统计</span></button>
+        <button class="nav-item" :class="{active:activeView==='comments'}" @click="switchView('comments')"><span class="ico">💬</span><span>评论</span></button>
+        <button class="nav-item" :class="{active:activeView==='about'}" @click="switchView('about')"><span class="ico">👤</span><span>关于页</span></button>
+      </nav>
+      <div class="sb-foot">
+        <button class="logout-btn" @click="logout"><span>🚪</span><span>退出登录</span></button>
+      </div>
+    </aside>
+
+    <div class="main-col">
+      <div class="topbar">
+        <span class="tb-title">{{ viewTitle }}</span>
+        <template v-if="activeView==='blog'||activeView==='docs'">
+          <el-input v-model="postFilter" placeholder="搜索标题 / 文件名…" clearable size="default" style="width:220px">
+            <template #prefix><span style="font-size:13px">🔍</span></template>
+          </el-input>
+        </template>
+        <span v-if="authed && false"></span>
+      </div>
+
+      <!-- 博客 / 笔记 -->
+      <div class="main-area" v-show="activeView==='blog'||activeView==='docs'">
+        <div class="toolbar">
+          <span class="tt">{{ activeView==='blog'?'📝 博客文章':'📚 笔记' }}<span class="sub">{{ postItems.length }} 篇</span></span>
+          <el-button type="primary" @click="openEditor(activeView,{})">＋ 新建</el-button>
+          <el-button @click="importFile">📥 导入 .md</el-button>
+          <el-button @click="loadList(activeView)">⟳ 刷新</el-button>
+        </div>
+        <el-empty v-if="filteredPosts.length===0&&!postLoading" description="暂无内容，点击「新建」开始创作"></el-empty>
+        <el-empty v-if="filteredPosts.length===0&&postLoading===false&&postItems.length>0" description="没有匹配的结果"></el-empty>
+        <div v-loading="postLoading" class="post-list">
+          <div v-for="it in filteredPosts" :key="it.path" class="post-card">
+            <img v-if="it.cover" class="cover" :src="it.cover" alt="" loading="lazy" />
+            <div v-else class="cover" style="display:flex;align-items:center;justify-content:center;color:#b9c3d6;font-size:18px">📄</div>
+            <div class="info">
+              <div class="t">{{ it.title||it.name }}</div>
+              <div class="m">{{ it.name }}</div>
+            </div>
+            <div class="acts">
+              <el-button size="small" @click="openEditor(activeView,{path:it.path,title:it.title||''})">编辑</el-button>
+              <el-button size="small" text @click="copyPath(it.path)">📋 路径</el-button>
+              <el-button size="small" type="danger" plain @click="delPost(it.path,it.sha)">删除</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 关于 -->
+      <div class="main-area" v-show="activeView==='about'">
+        <div class="toolbar">
+          <span class="tt">关于页<span class="sub">src/pages/about.mdx</span></span>
+          <el-button type="primary" :loading="aboutSaving" @click="saveAbout">💾 保存并发布</el-button>
+        </div>
+        <div class="about-wrap"><div id="md-editor-about"></div></div>
+      </div>
+
+      <!-- 友链 -->
+      <div class="main-area" v-show="activeView==='friends'">
+        <div class="toolbar">
+          <span class="tt">友链管理<span class="sub">data/friends.json · 排序即显示顺序</span></span>
+          <el-button type="primary" @click="showFriendAdd">＋ 新增友链</el-button>
+          <el-button @click="showAiModal">🤖 AI 识别</el-button>
+          <el-button type="success" plain @click="saveFriends" :loading="friendsSaving">💾 保存全部</el-button>
+          <el-button @click="loadFriends">⟳ 刷新</el-button>
+        </div>
+        <el-empty v-if="friendsList.length===0" description="暂无友链，点击「＋ 新增友链」添加"></el-empty>
+        <div class="post-list">
+          <div v-for="(f,i) in friendsList" :key="i" class="friend-card">
+            <div class="mv">
+              <el-button size="small" :disabled="i===0" @click="friendMove(i,-1)">↑</el-button>
+              <el-button size="small" :disabled="i===friendsList.length-1" @click="friendMove(i,1)">↓</el-button>
+            </div>
+            <el-avatar :size="42" :src="f.avatar" shape="square"></el-avatar>
+            <div class="info">
+              <div class="t">{{ f.title }}</div>
+              <div class="m">{{ f.website }} · {{ f.description }}</div>
+            </div>
+            <div class="acts">
+              <el-button size="small" @click="editFriend(i)">编辑</el-button>
+              <el-button size="small" type="danger" plain @click="delFriend(i)">删除</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 统计 -->
+      <div class="main-area" v-show="activeView==='stats'" v-loading="statsLoading">
+        <div class="toolbar">
+          <span class="tt">站点统计<span class="sub">近 30 天</span></span>
+          <el-button @click="loadStats">⟳ 刷新</el-button>
+        </div>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <div class="lb">今日活跃</div>
+            <div class="val" style="color:#5b8cff">{{ statsData.activeVisitors }}<span class="unit">人</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="lb">浏览量 PV</div>
+            <div class="val" style="color:#12affa">{{ statsData.pageviews }}</div>
+          </div>
+          <div class="stat-card">
+            <div class="lb">访客数 UV</div>
+            <div class="val" style="color:#10b981">{{ statsData.visitors }}</div>
+          </div>
+          <div class="stat-card">
+            <div class="lb">访问次数</div>
+            <div class="val" style="color:#f59e0b">{{ statsData.visits }}</div>
+          </div>
+          <div class="stat-card">
+            <div class="lb">跳出率</div>
+            <div class="val" style="color:#ef4444">{{ statsData.bounceRate }}<span class="unit">%</span></div>
+          </div>
+        </div>
+
+        <div class="stat-row2">
+          <div class="stat-panel">
+            <div class="ph">🌐 浏览器排名</div>
+            <div v-if="!statsData.browsers.length" style="color:#a0a8ba;font-size:13px;padding:10px 0">暂无数据</div>
+            <div v-for="b in statsData.browsers" :key="b.x" class="stat-bar">
+              <span class="nm">{{ b.x }}</span>
+              <span class="track"><span class="fill" :style="{width:barWidth(statsData.browsers,b.y)+'%',background:'#5b8cff'}"></span></span>
+              <span class="v" style="color:#5b8cff">{{ b.y }}</span>
+            </div>
+          </div>
+          <div class="stat-panel">
+            <div class="ph">🔗 来源排名</div>
+            <div v-if="!statsData.referrers.length" style="color:#a0a8ba;font-size:13px;padding:10px 0">暂无数据</div>
+            <div v-for="r in statsData.referrers" :key="r.x" class="stat-bar">
+              <span class="nm">{{ r.x }}</span>
+              <span class="track"><span class="fill" :style="{width:barWidth(statsData.referrers,r.y)+'%',background:'#f59e0b'}"></span></span>
+              <span class="v" style="color:#f59e0b">{{ r.y }}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-panel chart-wrap">
+          <div class="ph">📈 近 30 天浏览量趋势</div>
+          <el-empty v-if="!chartPoints.length" description="暂无数据" :image-size="60"></el-empty>
+          <template v-else>
+            <div class="bars">
+              <div v-for="(p,i) in chartPoints" :key="i" class="bar"
+                   :style="{height:chartH(p.y)+'%'}"
+                   :title="chartLabel(p)"></div>
+            </div>
+            <div class="bar-x">
+              <span v-for="(p,i) in chartPoints" :key="'x'+i">{{ chartX(p) }}</span>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <!-- 评论 -->
+      <div class="main-area comments-area" v-show="activeView==='comments'" style="padding:0;overflow:hidden;display:flex;flex-direction:column;height:100%">
+        <iframe id="twikoo-frame" src="about:blank" style="width:100%;flex:1;border:none;min-height:0" title="评论管理"></iframe>
+      </div>
+
+      <!-- 草稿 -->
+      <div class="main-area" v-show="activeView==='drafts'">
+        <div class="toolbar">
+          <span class="tt">草稿箱<span class="sub">{{ draftItems.length }} 份</span></span>
+          <el-button @click="loadDrafts">⟳ 刷新</el-button>
+        </div>
+        <el-empty v-if="draftItems.length===0&&!draftLoading" description="暂无草稿"></el-empty>
+        <div v-loading="draftLoading" class="post-list">
+          <div v-for="d in draftItems" :key="d.id" class="draft-card">
+            <div class="info">
+              <div class="t">
+                {{ d.title||'(无标题)' }}
+                <el-tag size="small" type="info" style="margin-left:6px">{{ d.type==='docs'?'笔记':'博客' }}</el-tag>
+              </div>
+              <div class="m">{{ new Date(d.updatedAt).toLocaleString() }}</div>
+            </div>
+            <div class="acts">
+              <el-button size="small" @click="openDraft(d)">继续编辑</el-button>
+              <el-button size="small" type="danger" plain @click="delDraft(d.id)">删除</el-button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
+  <!-- 编辑器 -->
   <div class="editor-overlay" :class="{open:editorOpen}">
     <div class="editor-hd">
       <div class="r1">
@@ -236,22 +420,25 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "P
         <el-button type="primary" @click="doPublish" :loading="publishing">🚀 发布</el-button>
         <el-button v-if="!editorState.isNew" type="danger" plain @click="deletePost">🗑 删除</el-button>
       </div>
-      <el-input v-model="editorTitle" placeholder="文章标题（必填）" style="margin-top:10px"></el-input>
-      <el-button id="meta-toggle-btn" size="small" style="margin-top:10px" @click="metaOpen=!metaOpen">{{ metaOpen?'收起设置':'⚙ 更多设置' }}</el-button>
-      <div id="meta-fields" class="meta-fields" :class="{open:metaOpen}" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">
+      <el-input v-model="editorTitle" placeholder="文章标题（必填）" style="margin-top:12px"></el-input>
+      <div style="display:flex;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap">
+        <el-button id="meta-toggle-btn" size="small" @click="metaOpen=!metaOpen">{{ metaOpen?'收起设置':'⚙ 更多设置' }}</el-button>
+      </div>
+      <div id="meta-fields" class="meta-fields" :class="{open:metaOpen}">
         <el-input v-model="editorSlug" placeholder="链接 slug（自动生成）" style="width:200px" size="small"></el-input>
         <el-input v-model="editorDate" type="date" style="width:150px" size="small"></el-input>
         <el-input v-model="editorTags" placeholder="标签1, 标签2" style="width:220px" size="small"></el-input>
         <el-input v-model="editorCover" placeholder="封面图链接（留空自动取正文第一张图）" style="width:280px" size="small"></el-input>
         <el-checkbox v-model="editorAiSummary" style="margin-left:8px" size="small">AI 摘要</el-checkbox>
         <el-input v-if="editorState.type==='docs'" v-model="editorDesc" placeholder="摘要" style="width:220px" size="small"></el-input>
-        <el-input v-if="editorState.type==='docs'" v-model="editorSidebar" placeholder="sidebar_position" style="width:90px" size="small"></el-input>
+        <el-input v-if="editorState.type==='docs'" v-model="editorSidebar" placeholder="sidebar_position" style="width:110px" size="small"></el-input>
       </div>
     </div>
     <div class="editor-bd"><div id="md-editor"></div></div>
     <div class="editor-ft"><span class="hint">支持 Markdown · 点击「发布」自动提交 GitHub 并触发 Vercel 部署 · 可拖拽/粘贴图片自动上传</span></div>
   </div>
 
+  <!-- 友链弹窗 -->
   <el-dialog v-model="friendDialogVisible" :title="friendEditIndex>=0?'编辑友链':'新增友链'" width="420px" :close-on-click-modal="false">
     <el-form label-position="top">
       <el-form-item label="标题"><el-input v-model="friendForm.title" placeholder="网站名称"></el-input></el-form-item>
@@ -263,7 +450,8 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "P
     <template #footer><el-button @click="friendDialogVisible=false">取消</el-button><el-button type="primary" @click="saveFriend">确定</el-button></template>
   </el-dialog>
 
-  <el-dialog v-model="aiDialogVisible" title="🤖 AI 一键识别友链" width="540px" :close-on-click-modal="false" top="5vh">
+  <!-- AI 识别弹窗 -->
+  <el-dialog v-model="aiDialogVisible" title="🤖 AI 一键识别友链" width="560px" :close-on-click-modal="false" top="5vh">
     <p style="margin:0 0 12px;font-size:12px;color:#909399">粘贴友链信息（支持各种格式），AI 自动提取网站标题、链接、图标、简介</p>
     <el-input v-model="aiText" type="textarea" :rows="6" placeholder="例如：&#10;站点名:星河hmの小窝&#10;站点链接:https://www.xhehm.com&#10;站点简介:人生是開發，不是預設&#10;站点图标:https://www.xhehm.com/favicon.png"></el-input>
     <div v-if="aiParsedFriends.length" style="margin-top:12px">
@@ -297,12 +485,13 @@ body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "P
       <el-button v-if="aiParsedFriends.length" type="primary" @click="insertAiFriends">✅ 确认插入所选</el-button>
     </template>
   </el-dialog>
+
   <input type="file" ref="uploadInput" style="display:none" accept="image/*" @change="onUploadFile" />
   <input type="file" ref="importInput" accept=".md,.mdx,text/markdown" style="display:none" @change="onImport" />
 </div>
 
-<script src="https://jsd.onmicrosoft.cn/npm/vue@3/dist/vue.global.prod.js"></script>
-<script src="https://jsd.onmicrosoft.cn/npm/element-plus@2/dist/index.full.min.js"></script>
+<script src="https://jsd.onmicrosoft.cn/npm/vue@3.5.43/dist/vue.global.prod.js"></script>
+<script src="https://jsd.onmicrosoft.cn/npm/element-plus@2.9.8/dist/index.full.min.js"></script>
 <script src="https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.min.js"></script>
 <script>
 const API = '/api';
@@ -336,7 +525,7 @@ function parseFront(c) {
 }
 
 const { ElMessage, ElMessageBox } = ElementPlus;
-const { createApp, ref, reactive, nextTick, onMounted } = Vue;
+const { createApp, ref, reactive, computed, nextTick, onMounted } = Vue;
 
 const app = createApp({
   setup() {
@@ -347,6 +536,7 @@ const app = createApp({
     const activeView = ref('blog');
     const postItems = ref([]);
     const postLoading = ref(false);
+    const postFilter = ref('');
     const editorOpen = ref(false);
     const editorState = reactive({type:'blog',path:'',sha:'',isNew:true,draftId:''});
     const editorTitle = ref('');
@@ -374,12 +564,44 @@ const app = createApp({
     const aiSelected = ref({});
     const aiAppMsg = ref('');
     const aiAppType = ref('');
-    const statsData = reactive({activeVisitors:0,pageviews:0,visitors:0,visits:0,bounceRate:'0',browsers:[],referrers:[]});
+    const statsData = reactive({activeVisitors:0,pageviews:0,visitors:0,visits:0,bounceRate:'0',browsers:[],referrers:[],pageviewsSeries:[]});
     const statsLoading = ref(false);
     const uploadInput = ref(null);
     const importInput = ref(null);
     let mdEditor = null;
     let aboutEditor = null;
+
+    const viewTitle = computed(() => {
+      const map = {blog:'📝 博客管理',docs:'📚 笔记管理',about:'👤 关于页',friends:'🔗 友链管理',stats:'📊 站点统计',comments:'💬 评论管理',drafts:'💾 草稿箱'};
+      return map[activeView.value] || '';
+    });
+
+    const filteredPosts = computed(() => {
+      const kw = postFilter.value.trim().toLowerCase();
+      if (!kw) return postItems.value;
+      return postItems.value.filter(it => (String(it.title||'')+' '+(it.name||'')).toLowerCase().includes(kw));
+    });
+
+    const chartPoints = computed(() => (statsData.pageviewsSeries||[]));
+    function chartH(y) {
+      const max = Math.max(1, ...chartPoints.value.map(p => Number(p.y)||0));
+      return Math.max(4, Math.round((Number(y)||0) / max * 100));
+    }
+    function chartLabel(p) {
+      const d = new Date(Number(p.x));
+      return (isNaN(d.getTime()) ? String(p.x) : (d.getMonth()+1)+'/'+d.getDate()) + ' : ' + (p.y||0);
+    }
+    function chartX(p) {
+      const d = new Date(Number(p.x));
+      return isNaN(d.getTime()) ? '·' : String(d.getDate());
+    }
+    function barWidth(list, y) {
+      const max = Math.max(1, ...(list||[]).map(i => Number(i.y)||0));
+      return Math.max(6, Math.round((Number(y)||0)/max*100));
+    }
+    function copyPath(p) {
+      navigator.clipboard.writeText(p).then(()=>{ElMessage.success('已复制路径 ✓')}).catch(()=>{ElMessage.warning('复制失败，请手动复制')});
+    }
 
     // 本地过大图片先在浏览器端压缩，避免上传后 worker 转 WebP 时 CPU 超时(1102)
     const COMPRESS_MAX_EDGE = 1280;
@@ -483,7 +705,7 @@ const app = createApp({
       else if(v==='about') loadAbout();
       else if(v==='friends') loadFriends();
       else if(v==='stats') loadStats();
-      else if(v==='comments') { /* iframe 内嵌评论管理，加载时刷新一次 */ const f=document.getElementById('twikoo-frame'); if(f) f.src = 'https://twikoo.oopss.top/#account=admin&password=lbn201164'; }
+      else if(v==='comments') { const f=document.getElementById('twikoo-frame'); if(f) f.src = 'https://twikoo.oopss.top/#account=admin&password=lbn201164'; }
       else loadDrafts();
     }
 
@@ -533,6 +755,7 @@ const app = createApp({
           editorTitle.value=meta.title||''; editorSlug.value=meta.slug||''; editorDate.value=meta.date||new Date().toISOString().slice(0,10);
           editorTags.value=(meta.tags||'').replace(/^\[|\]$/g,'').replace(/,/g,', '); editorDesc.value=meta.description||'';
           editorCover.value=meta.image||''; editorSidebar.value=meta.sidebar_position||'';
+          editorAiSummary.value=meta.ai_summary!=='false';
           if(!editorTitle.value) editorTitle.value=titleFromBody(body);
         } catch(e){ElMessage.error(e.message)}
       }
@@ -653,7 +876,7 @@ const app = createApp({
         const content=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content||'';
         if(!content){ElMessage.error('AI 返回空结果');return}
         let jsonStr=content.trim();
-        const cbm=jsonStr.match(/\x60{3}(?:json)?\s*([\s\S]*?)\x60{3}/);
+        const cbm=jsonStr.match(/```(?:json)?\s*([\s\S]*?)```/);
         if(cbm) jsonStr=cbm[1].trim();
         const parsed=JSON.parse(jsonStr);
         const list=Array.isArray(parsed)?parsed:(parsed.friends||parsed.list||parsed.items||[parsed]);
@@ -705,13 +928,14 @@ const app = createApp({
     });
 
     return {
-      authed,loginPass,loginLoading,loginErr,doLogin,logout,activeView,switchView,
-      postItems,postLoading,loadList,delPost,importInput,importFile,onImport,
+      authed,loginPass,loginLoading,loginErr,doLogin,logout,activeView,switchView,viewTitle,
+      postItems,postLoading,postFilter,filteredPosts,loadList,delPost,importInput,importFile,onImport,copyPath,
       editorOpen,editorState,editorTitle,editorSlug,editorDate,editorTags,editorDesc,editorCover,editorSidebar,editorAiSummary,
       publishing,metaOpen,openEditor,closeEditor,doPublish,saveDraft,deletePost,editorUpload,uploadInput,onUploadFile,
       aboutSaving,loadAbout,saveAbout,draftItems,draftLoading,loadDrafts,openDraft,delDraft,
       friendsList,friendsSaving,friendDialogVisible,friendEditIndex,friendForm,showFriendAdd,editFriend,saveFriend,delFriend,friendMove,loadFriends,saveFriends,
-      aiDialogVisible,aiText,aiLoading,aiParsedFriends,aiSelected,aiAppMsg,aiAppType,showAiModal,doAiParse,removeAiItem,insertAiFriends,genAppMsg,copyText,statsData,statsLoading,loadStats,
+      aiDialogVisible,aiText,aiLoading,aiParsedFriends,aiSelected,aiAppMsg,aiAppType,showAiModal,doAiParse,removeAiItem,insertAiFriends,genAppMsg,copyText,
+      statsData,statsLoading,loadStats,chartPoints,chartH,chartLabel,chartX,barWidth,
     };
   }
 });

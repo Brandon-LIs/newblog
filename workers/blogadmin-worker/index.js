@@ -164,20 +164,26 @@ async function handleList(env, url) {
   for (const f of files) {
     if (f.type !== "file" || !/\.(md|mdx)$/i.test(f.name)) continue;
     let title = "";
+    let cover = "";
     try {
       const c = await ghRead(env, env.BLOG_REPO, f.path);
       title = extractTitle(c.content);
+      const im = String(c.content || "").match(/^---\s*\n([\s\S]*?)\n---\s*\n/);
+      if (im) {
+        const img = im[1].match(/^image:\s*(.+)$/m);
+        if (img) cover = img[1].trim().replace(/^['"]|['"]$/g, "");
+      }
     } catch {
       title = "";
     }
-    items.push({ name: f.name, path: f.path, sha: f.sha, size: f.size, title });
+    items.push({ name: f.name, path: f.path, sha: f.sha, size: f.size, title, cover });
   }
   items.sort((a, b) => a.name < b.name ? 1 : -1);
   const result = { type, items };
   // 写入 KV 缓存
   if (env.KV) {
     try {
-      await env.KV.put(cacheKey, JSON.stringify(result), { expirationTtl: 3600 });
+      await env.KV.put(cacheKey, JSON.stringify(result), { expirationTtl: 600 });
     } catch {}
   }
   return ok(result);

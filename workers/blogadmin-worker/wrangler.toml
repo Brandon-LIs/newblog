@@ -1,0 +1,28 @@
+name = "blog-admin"
+main = "index.js"
+compatibility_date = "2026-06-01"
+compatibility_flags = ["nodejs_compat"]
+
+[[rules]]
+type = "Text"
+globs = ["**/*.html"]
+
+[[kv_namespaces]]
+binding = "KV"
+id = "6823c84e42cf4c61aa7c7761cbafd019"
+
+[vars]
+ABOUT_PATH = "src/pages/about.mdx"
+AI_API_URL = "https://api.agnes-ai.cn/v1/chat/completions"
+AI_MODEL = "agnes-2.0-flash"
+AUTHORS_DEFAULT = "brandon"
+BLOG_DIR = "blog"
+BLOG_REPO = "Brandon-LIs/newblog"
+DOCS_DIR = "docs"
+GLM_API_KEY = "84113200cb4d493595bf2284db5a954f.QZ8koTOFzkCgbWmo"
+IMG_PREFIX = "https://jsd.oopss.top"
+IMG_REPO = "Brandon-LIs/blogimg"
+
+[[routes]]
+pattern = "admin.oopss.top/*"
+zone_id = "9d8f93d6d724dc7af644e9eb3d43d1d5"

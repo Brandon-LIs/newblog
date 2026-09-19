@@ -3,7 +3,7 @@ slug: 收到了Blogsclub的鼠标垫
 title: 收到了Blogsclub的鼠标垫
 authors: [brandon]
 date: 2026-09-13
-image: https://jsd.oopss.top/img/1789271159758.webp
+image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.7/covers/1789271159758.webp
 ai_summary: true
 ---
 上周末看到Blogsclub入选“每月拾光”的博主可以0.01积分兑换一个Blogsclub鼠标垫，而我恰好入选了，于是就兑换了一个。

@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Brandon's Blog 后台管理</title>
 <link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/element-plus@2.9.8/dist/index.css" />
-<link rel="stylesheet" href="https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.css" />
 <style>
   :root {
     --el-color-primary: #5b8cff;
@@ -524,7 +523,6 @@
 
 <script src="https://jsd.onmicrosoft.cn/npm/vue@3.5.43/dist/vue.global.prod.js"></script>
 <script src="https://jsd.onmicrosoft.cn/npm/element-plus@2.9.8/dist/index.full.min.js"></script>
-<script src="https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.min.js"></script>
 <script>
 const API = '/api';
 let TOKEN = '';
@@ -675,44 +673,115 @@ const app = createApp({
       return out;
     }
 
+    let vditorLoading = null;
+    function loadVditor() {
+      if (window.Vditor) return Promise.resolve();
+      if (vditorLoading) return vditorLoading;
+      vditorLoading = new Promise((resolve, reject) => {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = 'https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.css';
+        document.head.appendChild(link);
+        const s = document.createElement('script');
+        s.src = 'https://jsd.onmicrosoft.cn/npm/vditor@3.11.0/dist/index.min.js';
+        s.onload = () => resolve();
+        s.onerror = () => { vditorLoading = null; reject(new Error('Vditor 加载失败')); };
+        document.head.appendChild(s);
+      });
+      return vditorLoading;
+    }
+
     function initEditor(c) {
       if (mdEditor) { try { mdEditor.setValue(c||''); return; } catch {} }
-      mdEditor = new Vditor('md-editor', {
-        height:'100%', mode:'ir',
-        toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','line','|','preview','fullscreen','edit-mode'],
-        toolbarConfig:{pin:true}, cache:{enable:false}, preview:{hljs:{lineNumber:false,style:'github'}},
-        value:c||'', after:()=>{ mdEditor.setValue(c||''); },
-        upload:{
-          url:'/api/upload',
-          fieldName:'file',
-          headers:{'Authorization':'Bearer ' + (TOKEN || '')},
-          file: vditorCompressFiles,
-          format:(files, responseText)=>{
-            try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
-            catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+      if (!window.Vditor) {
+        loadVditor().then(() => {
+          if (!editorOpen.value) return;
+          if (mdEditor) return;
+          try {
+            mdEditor = new Vditor('md-editor', {
+              height:'100%', mode:'ir',
+              toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','line','|','preview','fullscreen','edit-mode'],
+              toolbarConfig:{pin:true}, cache:{enable:false}, preview:{hljs:{lineNumber:false,style:'github'}},
+              value:c||'', after:()=>{ try{mdEditor.setValue(c||'');}catch{} },
+              upload:{
+                url:'/api/upload',
+                fieldName:'file',
+                headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+                file: vditorCompressFiles,
+                format:(files, responseText)=>{
+                  try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
+                  catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+                }
+              }
+            });
+          } catch(e) { ElMessage.error('编辑器初始化失败: ' + e.message); }
+        }).catch((e) => ElMessage.error(e.message));
+        return;
+      }
+      try {
+        mdEditor = new Vditor('md-editor', {
+          height:'100%', mode:'ir',
+          toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','line','|','preview','fullscreen','edit-mode'],
+          toolbarConfig:{pin:true}, cache:{enable:false}, preview:{hljs:{lineNumber:false,style:'github'}},
+          value:c||'', after:()=>{ try{mdEditor.setValue(c||'');}catch{} },
+          upload:{
+            url:'/api/upload',
+            fieldName:'file',
+            headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+            file: vditorCompressFiles,
+            format:(files, responseText)=>{
+              try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
+              catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+            }
           }
-        }
-      });
+        });
+      } catch(e) { ElMessage.error('编辑器初始化失败: ' + e.message); }
     }
     function destroyEditor() { if(mdEditor){try{mdEditor.destroy()}catch{}} mdEditor=null; }
 
     function initAboutEditor(c) {
       if (aboutEditor) { try { aboutEditor.setValue(c||''); return; } catch {} }
-      aboutEditor = new Vditor('md-editor-about', {
-        height:'100%', mode:'ir',
-        toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','|','preview','fullscreen'],
-        toolbarConfig:{pin:true}, cache:{enable:false}, value:c||'', after:()=>{ aboutEditor.setValue(c||''); },
-        upload:{
-          url:'/api/upload',
-          fieldName:'file',
-          headers:{'Authorization':'Bearer ' + (TOKEN || '')},
-          file: vditorCompressFiles,
-          format:(files, responseText)=>{
-            try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
-            catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+      if (!window.Vditor) {
+        loadVditor().then(() => {
+          if (!editorOpen.value && activeView.value !== 'about') return;
+          if (aboutEditor) return;
+          try {
+            aboutEditor = new Vditor('md-editor-about', {
+              height:'100%', mode:'ir',
+              toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','|','preview','fullscreen'],
+              toolbarConfig:{pin:true}, cache:{enable:false}, value:c||'', after:()=>{ try{aboutEditor.setValue(c||'');}catch{} },
+              upload:{
+                url:'/api/upload',
+                fieldName:'file',
+                headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+                file: vditorCompressFiles,
+                format:(files, responseText)=>{
+                  try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
+                  catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+                }
+              }
+            });
+          } catch(e) { ElMessage.error('关于页编辑器初始化失败: ' + e.message); }
+        }).catch((e) => ElMessage.error(e.message));
+        return;
+      }
+      try {
+        aboutEditor = new Vditor('md-editor-about', {
+          height:'100%', mode:'ir',
+          toolbar:['headings','bold','italic','strike','|','upload','link','list','ordered-list','check','quote','code','inline-code','table','|','preview','fullscreen'],
+          toolbarConfig:{pin:true}, cache:{enable:false}, value:c||'', after:()=>{ try{aboutEditor.setValue(c||'');}catch{} },
+          upload:{
+            url:'/api/upload',
+            fieldName:'file',
+            headers:{'Authorization':'Bearer ' + (TOKEN || '')},
+            file: vditorCompressFiles,
+            format:(files, responseText)=>{
+              try{const d=JSON.parse(responseText);if(d.ok)return JSON.stringify({code:0,data:{errFiles:[],succMap:{[d.fileName||'file']:d.url}}});return JSON.stringify({code:1,msg:d.error||'Upload failed',data:{errFiles:[],succMap:{}}})}
+              catch{return JSON.stringify({code:1,msg:'Upload failed',data:{errFiles:[],succMap:{}}})}
+            }
           }
-        }
-      });
+        });
+      } catch(e) { ElMessage.error('关于页编辑器初始化失败: ' + e.message); }
     }
 
     async function doLogin() {

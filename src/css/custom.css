@@ -688,140 +688,6 @@ code {
 }
 
 
-/* ===== AI 搜索（桌面搜索框 / 移动图标 + 虚化浮层）===== */
-
-/* 桌面端搜索框容器 */
-.ai-search-desktop {
-  display: flex;
-  align-items: center;
-  width: 340px;
-  height: 36px;
-  margin: 0 8px 0 0;
-  flex-shrink: 0;
-  position: relative;
-  z-index: 100;
-}
-
-.ai-search-desktop search-bar-snippet {
-  width: 100%;
-}
-
-/* 移动端搜索图标 */
-.ai-search-icon {
-  display: none;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border: none;
-  border-radius: 10px;
-  background: transparent;
-  color: var(--ifm-text-color);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.2s ease;
-}
-
-.ai-search-icon:hover {
-  background: var(--blog-item-shade);
-}
-
-/* 移动端虚化浮层 */
-.ai-search-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 12vh;
-  background: rgba(0, 0, 0, 0.35);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  animation: ai-search-fade 0.2s ease;
-}
-
-@keyframes ai-search-fade {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.ai-search-modal {
-  width: min(560px, calc(100vw - 2rem));
-  /* 液态玻璃 */
-  background: color-mix(in srgb, var(--blog-item-background-color) 60%, transparent);
-  backdrop-filter: blur(24px) saturate(180%);
-  -webkit-backdrop-filter: blur(24px) saturate(180%);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  border-radius: 20px;
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.25),
-    0 0 40px color-mix(in srgb, var(--ifm-color-primary) 8%, transparent);
-  padding: 12px;
-  animation: ai-search-pop 0.25s ease;
-}
-
-html[data-theme='dark'] .ai-search-modal {
-  border-color: rgba(255, 255, 255, 0.08);
-  background: color-mix(in srgb, var(--blog-item-background-color) 50%, transparent);
-}
-
-@keyframes ai-search-pop {
-  from { opacity: 0; transform: translateY(-12px) scale(0.98); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
-}
-
-.ai-search-modal-header {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.ai-search-modal-bar {
-  flex: 1;
-  min-width: 0;
-  max-width: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.ai-search-modal-bar search-bar-snippet {
-  width: 100%;
-  max-width: 100%;
-}
-
-.ai-search-close {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border: none;
-  border-radius: 50%;
-  background: var(--blog-item-shade);
-  color: var(--ifm-secondary-text-color);
-  cursor: pointer;
-  flex-shrink: 0;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.ai-search-close:hover {
-  background: var(--ifm-color-emphasis-300, #d4d4d8);
-  color: var(--ifm-text-color);
-}
-
-/* 响应式：移动端显示图标，桌面端显示搜索框 */
-@media (max-width: 996px) {
-  .ai-search-desktop {
-    display: none;
-  }
-  .ai-search-icon {
-    display: inline-flex;
-  }
-}
-
-
 /* ===== Linux 终端页面：全屏（隐藏导航栏、底栏、侧边按钮） ===== */
 html:has(.linux-page) .navbar,
 html:has(.linux-page) .theme-layout-navbar,
@@ -894,6 +760,51 @@ html[data-theme='light'] .blog-card {
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
+}
+
+/* ===== Pagefind 本地搜索 ===== */
+
+/* 搜索触发器按钮核心样式由 JS 内联控制（避免被 Pagefind 组件 CSS 覆盖），
+   此处仅保留图标/标签文字等辅助排版 */
+.pf-trigger .pf-trigger-icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+.pf-trigger .pf-trigger-label {
+  white-space: nowrap;
+}
+.pf-trigger .pf-trigger-kbd {
+  font-size: 11px;
+  padding: 1px 5px;
+  border: 1px solid #d4d4d8;
+  border-radius: 5px;
+  background: #fff;
+  color: #71717a;
+  font-family: inherit;
+}
+
+/* Pagefind modal 主题变量适配（跟随站点明暗） */
+html[data-theme='dark'] pagefind-modal {
+  --pf-text: #e5e5e5;
+  --pf-text-secondary: #a0a0a0;
+  --pf-text-muted: #949494;
+  --pf-background: #1a1a1a;
+  --pf-border: #333;
+  --pf-border-focus: #555;
+  --pf-skeleton: #2a2a2a;
+  --pf-skeleton-shine: #333;
+  --pf-hover: #252525;
+  --pf-mark: #e5e5e5;
+  --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
+  --pf-outline-focus: #58a6ff;
+}
+
+/* 小屏下 modal 更贴边 */
+@media (max-width: 640px) {
+  pagefind-modal {
+    --pf-modal-top: 4dvh;
+  }
 }
 
 

@@ -107,7 +107,7 @@ const config: Config = {
   },
 
   clientModules: [
-    require.resolve('./src/aiSearchInit.ts'),
+    require.resolve('./src/pagefindInit.ts'),
     require.resolve('./src/vercelAnalytics.ts'),
     require.resolve('./src/imgFade.ts'),
     require.resolve('./src/iconifyOffline.ts'),

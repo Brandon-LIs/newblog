@@ -134,7 +134,7 @@ export default function FriendApply(): JSX.Element {
               type="button"
               onClick={() => setAiDialogOpen(true)}
               className="mt-4 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[#6366f1] to-[#8b5cf6] px-5 py-2 text-sm font-medium text-white transition-all hover:-translate-y-0.5 hover:shadow-lg">
-              <Icon icon="ri:sparkles-2-line" width="16" height="16" />
+              <Icon icon="ri:magic-line" width="16" height="16" />
               AI 智能填表
             </button>
           </div>
@@ -211,7 +211,7 @@ export default function FriendApply(): JSX.Element {
             <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4" onClick={() => setAiDialogOpen(false)}>
               <div className="w-full max-w-lg rounded-2xl border border-[var(--ifm-color-emphasis-200)] bg-card p-6 shadow-xl" onClick={(e) => e.stopPropagation()}>
                 <div className="mb-4 flex items-center gap-2">
-                  <Icon icon="ri:sparkles-2-line" width="20" height="20" className="text-[#8b5cf6]" />
+                  <Icon icon="ri:magic-line" width="20" height="20" className="text-[#8b5cf6]" />
                   <h3 className="m-0 text-lg font-semibold">AI 智能填表</h3>
                 </div>
                 <p className="mb-3 text-sm text-[var(--ifm-secondary-text-color)]">

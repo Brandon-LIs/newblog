@@ -131,6 +131,11 @@
   margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--ifm-color-emphasis-200);
 }
+/* Twikoo 在 0 条时给计数加 __hidden（visibility:hidden），
+   留言板需要始终显示条数，否则标题行只剩一条孤立分隔线 */
+.board :global(.twikoo .tk-comments-count.__hidden) {
+  visibility: visible;
+}
 .board :global(.twikoo .tk-comments-count) {
   font-size: 0.8rem;
   font-weight: 600;
@@ -138,6 +143,20 @@
   background: var(--ifm-color-primary-lightest);
   border-radius: 999px;
   padding: 3px 11px;
+}
+
+/* 收紧 Twikoo 默认的顶部留白，让编辑器贴近卡片顶部 */
+.board :global(.twikoo .tk-comments) {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+/* 空状态：留言板语境 */
+.board :global(.twikoo .tk-comments-no) {
+  color: var(--ifm-color-emphasis-600);
+  font-size: 0.9rem;
+  padding: 1.75rem 0;
+  letter-spacing: 0.2px;
 }
 
 /* 排序按钮 */

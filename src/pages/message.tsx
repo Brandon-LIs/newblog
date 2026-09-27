@@ -47,12 +47,51 @@ function loadScript(src: string): Promise<void> {
   });
 }
 
+// Twikoo 内置文案为「评论」语境，留言板统一改为「留言」
+const WORDING: Array<[RegExp, string]> = [
+  [/(\d+)\s*条评论/g, '$1 条留言'],
+  [/条评论/g, '条留言'],
+  [/没有评论/g, '还没有留言，来写第一条吧'],
+  [/评论/g, '留言'],
+];
+
+function normalizeWording(root: HTMLElement): void {
+  const targets = [
+    '.tk-comments-count', '.tk-comments-title', '.tk-comments-no',
+    '.tk-comments-actions', '.tk-sort-item', '.tk-comments-search',
+  ];
+  for (const sel of targets) {
+    root.querySelectorAll<HTMLElement>(sel).forEach((el) => {
+      // 只处理自身直接文本节点，避免破坏表情/按钮内的图标结构
+      const own = [...el.childNodes].filter((n) => n.nodeType === 3) as Text[];
+      own.forEach((node) => {
+        let text = node.nodeValue || '';
+        WORDING.forEach(([re, to]) => { text = text.replace(re, to); });
+        if (text !== node.nodeValue) { node.nodeValue = text; }
+      });
+    });
+  }
+}
+
 export default function Message(): JSX.Element {
   const boardRef = useRef<HTMLDivElement>(null);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
   useEffect(() => {
     let disposed = false;
+    let observer: MutationObserver | null = null;
+    let timer: number | undefined;
+
+    const sync = () => {
+      if (disposed || !boardRef.current) { return; }
+      normalizeWording(boardRef.current);
+    };
+
+    // Twikoo 异步渲染/翻页/提交后文案会重写，用节流的 MutationObserver 保持术语一致
+    const debounced = () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(sync, 120);
+    };
 
     (async () => {
       try {
@@ -67,17 +106,28 @@ export default function Message(): JSX.Element {
           envId: TWIKOO_ENV,
           el: boardRef.current,
           url: TWIKOO_URL,
-          onCommentLoaded: () => { if (!disposed) { setStatus('ready'); } },
+          onCommentLoaded: () => {
+            if (disposed) { return; }
+            setStatus('ready');
+            sync();
+          },
         });
         // 部分情况下 onCommentLoaded 不触发，init 成功后兜底解除骨架
         if (!disposed) { setStatus('ready'); }
+        sync();
+        observer = new MutationObserver(debounced);
+        observer.observe(boardRef.current, {childList: true, subtree: true, characterData: true});
       } catch (err) {
         console.warn('[留言板] Twikoo 初始化失败', err);
         if (!disposed) { setStatus('error'); }
       }
     })();
 
-    return () => { disposed = true; };
+    return () => {
+      disposed = true;
+      window.clearTimeout(timer);
+      observer?.disconnect();
+    };
   }, []);
 
   return (

@@ -27,7 +27,133 @@
     background: var(--bg);
     color: var(--text);
     -webkit-font-smoothing: antialiased;
+    transition: background .2s ease, color .2s ease;
   }
+
+  /* ---------- 暗色模式 ---------- */
+  html.dark {
+    --el-color-primary: #6ea0ff;
+    --brand: #6ea0ff;
+    --brand-dark: #4f6ef7;
+    --sidebar-text: #8a93a6;
+    --sidebar-text-active: #6ea0ff;
+    --sidebar-hover: #1c2233;
+    --bg: #0f131c;
+    --card: #171c28;
+    --border: #262d3d;
+    --text: #e4e8f0;
+    --text-sub: #909bad;
+  }
+  html.dark body { background: var(--bg); color: var(--text); }
+  html.dark .login-wrap {
+    background:
+      radial-gradient(900px 500px at 12% -10%, rgba(91,140,255,.18), transparent 60%),
+      radial-gradient(700px 480px at 108% 108%, rgba(123,97,255,.14), transparent 60%),
+      #0f131c;
+  }
+  html.dark .login-card { background: var(--card); border-color: var(--border); box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+  html.dark .sidebar { background: var(--card); }
+  html.dark .sb-brand { color: var(--text); }
+  html.dark .el-input__wrapper,
+  html.dark .el-textarea__inner,
+  html.dark .el-select__wrapper { background: #121722 !important; box-shadow: 0 0 0 1px var(--border) inset !important; }
+  html.dark .el-input__inner,
+  html.dark .el-textarea__inner,
+  html.dark .el-select__placeholder { color: var(--text) !important; }
+  html.dark .el-input__inner::placeholder,
+  html.dark .el-textarea__inner::placeholder { color: var(--text-sub) !important; }
+  html.dark .el-dialog, html.dark .el-message-box, html.dark .el-drawer { background: var(--card); }
+  html.dark .el-dialog__title, html.dark .el-message-box__title, html.dark .el-drawer__title, html.dark .el-drawer__header { color: var(--text); margin: 0; font-weight: 600; }
+  html.dark .el-drawer__body { color: var(--text); }
+  html.dark .el-drawer__close-btn { color: var(--text-sub); }
+  html.dark .el-table, html.dark .el-table tr, html.dark .el-table th.el-table__cell, html.dark .el-table td.el-table__cell {
+    background: var(--card) !important; border-color: var(--border) !important; color: var(--text);
+  }
+  html.dark .el-table th.el-table__cell { background: #121722 !important; }
+  html.dark .el-table--enable-row-hover .el-table__body tr:hover > td.el-table__cell { background: #1c2233 !important; }
+  html.dark .el-empty__description p { color: var(--text-sub); }
+  html.dark .vditor { background: #121722 !important; color: var(--text); }
+  html.dark .vditor--dark .vditor-reset { color: #cfd6e4; background: #121722; }
+  html.dark .el-popper.is-light, html.dark .el-popper.is-pure, html.dark .el-select-dropdown, html.dark .el-picker-panel {
+    background: #121722 !important; border-color: var(--border) !important; color: var(--text) !important;
+  }
+  html.dark .el-popper.is-light .el-popper__arrow::before { background: #121722 !important; border-color: var(--border) !important; }
+  html.dark .el-select-dropdown__item { color: var(--text); }
+  html.dark .el-select-dropdown__item.is-hovering, html.dark .el-select-dropdown__item:hover { background: #1c2233; }
+  html.dark .el-message-box__message, html.dark .el-message__content { color: var(--text); }
+  html.dark .el-checkbox__label, html.dark .el-radio__label { color: var(--text); }
+  html.dark .el-tag { border-color: var(--border); }
+  html.dark .el-radio-button__inner { background: #121722 !important; border-color: var(--border) !important; box-shadow: none !important; color: var(--text-sub); }
+  html.dark .el-radio-button__original-radio:checked + .el-radio-button__inner { background: var(--el-color-primary) !important; border-color: var(--el-color-primary) !important; color: #fff; box-shadow: -1px 0 0 0 var(--el-color-primary) !important; }
+  html.dark ::-webkit-scrollbar-thumb { background: #333c50; }
+  html.dark ::-webkit-scrollbar-thumb:hover { background: #414d66; }
+  html.dark ::-webkit-scrollbar-track { background: transparent; }
+  html.no-anim *, html.no-anim *::before, html.no-anim *::after { transition: none !important; animation: none !important; }
+
+  /* ---------- 紧凑模式 ---------- */
+  html.compact .post-card, html.compact .friend-card { padding: 8px 10px !important; }
+  html.compact .toolbar { padding: 8px 12px !important; }
+  html.compact .main-area { padding: 10px !important; }
+  html.compact .el-table .cell { padding: 4px 0; }
+
+  /* ---------- 骨架屏 ---------- */
+  @keyframes sk-shine { 0%{background-position:-420px 0} 100%{background-position:420px 0} }
+  .sk-card { display:flex; gap:12px; align-items:center; padding:12px; background:var(--card); border:1px solid var(--border); border-radius:12px; margin-bottom:10px; }
+  .sk { background:linear-gradient(90deg,var(--sk-a) 25%,var(--sk-b) 37%,var(--sk-a) 63%); background-size:840px 100%; animation:sk-shine 1.3s infinite linear; border-radius:6px; }
+  :root { --sk-a:#eef1f6; --sk-b:#e2e7f0; }
+  html.dark { --sk-a:#1b2130; --sk-b:#242c3d; }
+  .sk-cover { width:52px; height:40px; flex-shrink:0; border-radius:8px; }
+  .sk-lines { flex:1; min-width:0; }
+  .sk-line { height:11px; margin-bottom:8px; }
+  .sk-line.w60 { width:60%; } .sk-line.w40 { width:40%; } .sk-line.w80 { width:80%; }
+  .sk-btn { width:56px; height:24px; flex-shrink:0; border-radius:6px; }
+
+  /* ---------- 欢迎横幅 ---------- */
+  .welcome { position:relative; overflow:hidden; border-radius:14px; padding:18px 20px; margin-bottom:14px;
+    background:linear-gradient(120deg, color-mix(in srgb, var(--brand) 12%, var(--card)), var(--card) 62%);
+    border:1px solid var(--border); display:flex; align-items:center; gap:16px; flex-wrap:wrap; }
+  .welcome::after { content:''; position:absolute; right:-40px; top:-56px; width:180px; height:180px; border-radius:50%;
+    background:radial-gradient(circle, color-mix(in srgb, var(--brand) 22%, transparent), transparent 70%); pointer-events:none; }
+  .welcome .w-ico { width:44px; height:44px; border-radius:13px; display:flex; align-items:center; justify-content:center; font-size:21px;
+    background:linear-gradient(135deg, var(--brand), color-mix(in srgb, var(--brand) 55%, #fff)); color:#fff; flex-shrink:0;
+    box-shadow:0 6px 18px color-mix(in srgb, var(--brand) 32%, transparent); }
+  .welcome .w-txt { flex:1; min-width:190px; position:relative; z-index:1; }
+  .welcome .w-hi { font-size:16.5px; font-weight:700; letter-spacing:.2px; }
+  .welcome .w-sub { font-size:12.5px; color:var(--text-sub); margin-top:3px; }
+  .welcome .w-acts { display:flex; gap:8px; flex-wrap:wrap; position:relative; z-index:1; }
+  @media (max-width:640px){ .welcome { padding:14px; } .welcome .w-acts { width:100%; } .welcome .w-acts .el-button { flex:1; } }
+
+  /* ---------- 偏好设置 ---------- */
+  .pf-row { display:flex; align-items:center; justify-content:space-between; gap:12px; padding:9px 0; }
+  .pf-row + .pf-row { border-top:1px solid var(--border); }
+  .pf-label { font-size:13.5px; }
+  .pf-hint { font-size:11.5px; color:var(--text-sub); margin-top:2px; }
+  .swatches { display:flex; gap:8px; flex-wrap:wrap; }
+  .sw { width:22px; height:22px; border-radius:7px; cursor:pointer; border:2px solid transparent; padding:0; }
+  .sw.on { border-color: var(--text); }
+  .pref-fab { position:fixed; right:16px; bottom:16px; z-index:1500; width:38px; height:38px; border-radius:12px; border:1px solid var(--border); background:var(--card); color:var(--text); cursor:pointer; font-size:15px; box-shadow:0 6px 18px rgba(31,45,80,.14); }
+  html.dark .pref-fab { box-shadow:0 6px 18px rgba(0,0,0,.5); }
+  @media (max-width:768px){ .pref-fab { display:none; } }
+
+  /* ---------- 命令面板 ---------- */
+  .cp-mask { position:fixed; inset:0; background:rgba(15,19,28,.42); backdrop-filter:blur(3px); z-index:3000; display:flex; align-items:flex-start; justify-content:center; padding:12vh 16px 16px; }
+  .cp-box { width:100%; max-width:520px; background:var(--card); border:1px solid var(--border); border-radius:16px; box-shadow:0 26px 70px rgba(15,23,42,.30); overflow:hidden; }
+  html.dark .cp-box { box-shadow:0 26px 70px rgba(0,0,0,.6); }
+  .cp-input { display:flex; align-items:center; gap:10px; padding:14px 16px; border-bottom:1px solid var(--border); }
+  .cp-input input { flex:1; border:0; outline:0; background:transparent; color:var(--text); font-size:15px; }
+  .cp-input input::placeholder { color:var(--text-sub); }
+  .cp-list { max-height:340px; overflow-y:auto; padding:6px; }
+  .cp-item { display:flex; align-items:center; gap:11px; padding:9px 11px; border-radius:10px; cursor:pointer; font-size:13.5px; }
+  .cp-item .ci { width:22px; text-align:center; flex-shrink:0; }
+  .cp-item .cw { flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .cp-item .ck { font-size:11px; color:var(--text-sub); border:1px solid var(--border); border-radius:5px; padding:1px 5px; flex-shrink:0; }
+  .cp-item.sel { background:var(--el-color-primary); color:#fff; }
+  .cp-item.sel .ck { color:#fff; border-color:rgba(255,255,255,.45); }
+  .cp-empty { padding:26px; text-align:center; color:var(--text-sub); font-size:13px; }
+  .cp-foot { display:flex; gap:14px; padding:8px 14px; border-top:1px solid var(--border); font-size:11px; color:var(--text-sub); }
+  .cp-btn { margin-left:auto; border:1px solid var(--border); background:var(--card); color:var(--text-sub); border-radius:8px; font-size:11.5px; padding:4px 9px; cursor:pointer; display:none; }
+  .cp-btn:hover { color:var(--text); border-color:var(--brand); }
+  @media (min-width:769px){ .cp-btn { display:inline-block; } }
   #app { height: 100vh; overflow: hidden; }
 
   /* ---------- 登录 ---------- */
@@ -250,6 +376,8 @@
         <div class="sb-user">
           <span class="sb-logo" style="width:30px;height:30px;font-size:13px">B</span>
           <div class="un"><div class="a">Brandon</div><div class="b">管理员</div></div>
+          <button class="u-btn" title="偏好设置" @click="prefOpen=true">⚙️</button>
+          <button class="u-btn" title="命令面板 (⌘K)" @click="openCmd('key')">⌘</button>
           <button class="u-btn" title="锁定后台" @click="lockAdmin">🔒</button>
           <button class="u-btn" title="退出登录" @click="logout">🚪</button>
         </div>
@@ -269,6 +397,7 @@
     <div class="main-col">
       <div class="topbar">
         <span class="tb-title">{{ viewTitle }}</span>
+        <button class="cp-btn" title="命令面板 (⌘K)" @click="openCmd('key')">⌘K</button>
         <template v-if="activeView==='blog'||activeView==='docs'">
           <el-input v-model="postFilter" placeholder="搜索标题 / 文件名…" clearable size="default" style="width:220px">
             <template #prefix><span style="font-size:13px">🔍</span></template>
@@ -279,15 +408,41 @@
 
       <!-- 博客 / 笔记 -->
       <div class="main-area" v-show="activeView==='blog'||activeView==='docs'">
+        <div class="welcome">
+          <div class="w-ico">{{ greetingIcon }}</div>
+          <div class="w-txt">
+            <div class="w-hi">{{ greeting }}，Brandon</div>
+            <div class="w-sub">{{ todayText }} · 当前共 {{ postItems.length }} 篇{{ activeView==='blog'?'博客':'笔记' }}<span v-if="draftItems.length"> · {{ draftItems.length }} 份草稿待完成</span></div>
+          </div>
+          <div class="w-acts">
+            <el-button type="primary" @click="openEditor(activeView,{})">✍️ 写一篇</el-button>
+            <el-button @click="switchView('drafts')">💾 草稿箱</el-button>
+            <el-button @click="switchView('stats')">📊 看数据</el-button>
+          </div>
+        </div>
         <div class="toolbar">
           <span class="tt">{{ activeView==='blog'?'📝 博客文章':'📚 笔记' }}<span class="sub">{{ postItems.length }} 篇</span></span>
           <el-button type="primary" @click="openEditor(activeView,{})">＋ 新建</el-button>
+          <el-select v-model="postSort" size="default" style="width:132px">
+            <el-option label="按名称排序" value="name" />
+            <el-option label="按标题排序" value="title" />
+          </el-select>
           <el-button @click="importFile">📥 导入 .md</el-button>
           <el-button @click="loadList(activeView)">⟳ 刷新</el-button>
         </div>
         <el-empty v-if="filteredPosts.length===0&&!postLoading" description="暂无内容，点击「新建」开始创作"></el-empty>
         <el-empty v-if="filteredPosts.length===0&&postLoading===false&&postItems.length>0" description="没有匹配的结果"></el-empty>
-        <div v-loading="postLoading" class="post-list">
+        <div v-if="postLoading" class="post-list">
+          <div v-for="n in 5" :key="'sk'+n" class="sk-card">
+            <div class="sk sk-cover"></div>
+            <div class="sk-lines">
+              <div class="sk sk-line w60"></div>
+              <div class="sk sk-line w80" style="margin-bottom:0"></div>
+            </div>
+            <div class="sk sk-btn"></div>
+          </div>
+        </div>
+        <div v-else class="post-list">
           <div v-for="it in filteredPosts" :key="it.path" class="post-card">
             <img v-if="it.cover" class="cover" :src="it.cover" alt="" loading="lazy" />
             <div v-else class="cover" style="display:flex;align-items:center;justify-content:center;color:#b9c3d6;font-size:18px">📄</div>
@@ -317,26 +472,31 @@
       <div class="main-area" v-show="activeView==='friends'">
         <div class="toolbar">
           <span class="tt">友链管理<span class="sub">data/friends.json · 排序即显示顺序</span></span>
+          <el-input v-model="friendFilter" placeholder="搜索名称 / 网址…" clearable size="default" style="width:200px;margin-left:auto">
+            <template #prefix><span style="font-size:13px">🔍</span></template>
+          </el-input>
           <el-button type="primary" @click="showFriendAdd">＋ 新增友链</el-button>
           <el-button @click="showAiModal">🤖 AI 识别</el-button>
           <el-button type="success" plain @click="saveFriends" :loading="friendsSaving">💾 保存全部</el-button>
           <el-button @click="loadFriends">⟳ 刷新</el-button>
         </div>
-        <el-empty v-if="friendsList.length===0" description="暂无友链，点击「＋ 新增友链」添加"></el-empty>
-        <div class="post-list">
-          <div v-for="(f,i) in friendsList" :key="i" class="friend-card">
+        <el-empty v-if="friendsLoading" :image-size="0" description="加载中…"></el-empty>
+        <el-empty v-else-if="friendsList.length===0" description="暂无友链，点击「＋ 新增友链」添加"></el-empty>
+        <el-empty v-else-if="filteredFriends.length===0" description="没有匹配的友链"></el-empty>
+        <div class="post-list" v-else>
+          <div v-for="row in filteredFriends" :key="row._i" class="friend-card">
             <div class="mv">
-              <el-button size="small" :disabled="i===0" @click="friendMove(i,-1)">↑</el-button>
-              <el-button size="small" :disabled="i===friendsList.length-1" @click="friendMove(i,1)">↓</el-button>
+              <el-button size="small" :disabled="row._i===0" @click="friendMove(row._i,-1)">↑</el-button>
+              <el-button size="small" :disabled="row._i===friendsList.length-1" @click="friendMove(row._i,1)">↓</el-button>
             </div>
-            <el-avatar :size="42" :src="f.avatar" shape="square"></el-avatar>
+            <el-avatar :size="42" :src="row.f.avatar" shape="square"></el-avatar>
             <div class="info">
-              <div class="t">{{ f.title }}</div>
-              <div class="m">{{ f.website }} · {{ f.description }}</div>
+              <div class="t">{{ row.f.title }}</div>
+              <div class="m">{{ row.f.website }} · {{ row.f.description }}</div>
             </div>
             <div class="acts">
-              <el-button size="small" @click="editFriend(i)">编辑</el-button>
-              <el-button size="small" type="danger" plain @click="delFriend(i)">删除</el-button>
+              <el-button size="small" @click="editFriend(row._i)">编辑</el-button>
+              <el-button size="small" type="danger" plain @click="delFriend(row._i)">删除</el-button>
             </div>
           </div>
         </div>
@@ -517,6 +677,66 @@
     </template>
   </el-dialog>
 
+  <!-- 偏好设置抽屉 -->
+  <el-drawer v-model="prefOpen" title="⚙️ 偏好设置" size="320px" :with-header="true">
+    <div class="pf-row">
+      <div><div class="pf-label">暗色模式</div><div class="pf-hint">跟随系统或手动指定</div></div>
+      <el-switch v-model="prefs.dark" />
+    </div>
+    <div class="pf-row">
+      <div><div class="pf-label">主题色</div><div class="pf-hint">影响按钮、链接与高亮</div></div>
+      <div class="swatches">
+        <button v-for="c in themeColors" :key="c" class="sw" :class="{on:prefs.theme===c}" :style="{background:c}" :title="c" @click="prefs.theme=c"></button>
+      </div>
+    </div>
+    <div class="pf-row">
+      <div><div class="pf-label">圆角</div><div class="pf-hint">界面圆角大小</div></div>
+      <el-radio-group v-model="prefs.radius" size="small">
+        <el-radio-button :value="0">直角</el-radio-button>
+        <el-radio-button :value="6">小</el-radio-button>
+        <el-radio-button :value="10">中</el-radio-button>
+        <el-radio-button :value="16">大</el-radio-button>
+      </el-radio-group>
+    </div>
+    <div class="pf-row">
+      <div><div class="pf-label">界面密度</div><div class="pf-hint">紧凑模式可一屏看更多内容</div></div>
+      <el-switch v-model="prefs.compact" />
+    </div>
+    <div class="pf-row">
+      <div><div class="pf-label">减少动画</div><div class="pf-hint">关闭过渡与动效</div></div>
+      <el-switch v-model="prefs.noAnim" />
+    </div>
+    <div class="pf-row">
+      <div><div class="pf-label">Vditor 编辑器暗色</div><div class="pf-hint">跟随后台暗色模式</div></div>
+      <el-switch v-model="prefs.editorDark" />
+    </div>
+    <template #footer>
+      <el-button style="width:100%" @click="resetPrefs">恢复默认设置</el-button>
+    </template>
+  </el-drawer>
+
+  <!-- 命令面板 -->
+  <div v-if="cmdOpen" class="cp-mask" @click.self="cmdOpen=false">
+    <div class="cp-box">
+      <div class="cp-input">
+        <span style="color:var(--text-sub)">🔍</span>
+        <input ref="cmdInput" v-model="cmdQuery" placeholder="搜索页面、文章、命令…" @keydown.down.prevent="cmdMove(1)" @keydown.up.prevent="cmdMove(-1)" @keydown.enter.prevent="cmdRun()" @keydown.esc="cmdOpen=false" />
+        <span class="ck" style="font-size:11px;color:var(--text-sub)">ESC</span>
+      </div>
+      <div class="cp-list" v-if="cmdResults.length">
+        <div v-for="(c,i) in cmdResults" :key="c.key" class="cp-item" :class="{sel:i===cmdIndex}" @mouseenter="cmdIndex=i" @click="cmdRun(c)">
+          <span class="ci">{{ c.icon }}</span>
+          <span class="cw">{{ c.label }}</span>
+          <span class="ck" v-if="c.kbd">{{ c.kbd }}</span>
+        </div>
+      </div>
+      <div class="cp-empty" v-else>没有匹配的结果</div>
+      <div class="cp-foot"><span>↑↓ 选择</span><span>↵ 执行</span><span>ESC 关闭</span></div>
+    </div>
+  </div>
+
+  <button class="pref-fab" title="偏好设置" @click="prefOpen=true">⚙️</button>
+
   <input type="file" ref="uploadInput" style="display:none" accept="image/*" @change="onUploadFile" />
   <input type="file" ref="importInput" accept=".md,.mdx,text/markdown" style="display:none" @change="onImport" />
 </div>
@@ -555,7 +775,7 @@ function parseFront(c) {
 }
 
 const { ElMessage, ElMessageBox } = ElementPlus;
-const { createApp, ref, reactive, computed, nextTick, onMounted } = Vue;
+const { createApp, ref, reactive, computed, nextTick, onMounted, onBeforeUnmount, watch } = Vue;
 
 const app = createApp({
   setup() {
@@ -567,6 +787,7 @@ const app = createApp({
     const postItems = ref([]);
     const postLoading = ref(false);
     const postFilter = ref('');
+    const postSort = ref('name');
     const editorOpen = ref(false);
     const editorState = reactive({type:'blog',path:'',sha:'',isNew:true,draftId:''});
     const editorTitle = ref('');
@@ -584,6 +805,8 @@ const app = createApp({
     const draftLoading = ref(false);
     const friendsList = ref([]);
     const friendsSaving = ref(false);
+    const friendsLoading = ref(false);
+    const friendFilter = ref('');
     const friendDialogVisible = ref(false);
     const friendEditIndex = ref(-1);
     const friendForm = reactive({title:'',website:'',avatar:'',description:'',rss:''});
@@ -601,16 +824,179 @@ const app = createApp({
     let mdEditor = null;
     let aboutEditor = null;
 
+    // ---------- 偏好设置（暗色/主题/圆角/密度/动画）----------
+    const PREF_KEY = 'br-admin-prefs-v1';
+    const themeColors = ['#5b8cff','#7b61ff','#00b894','#f76707','#e64980','#20c997','#845ef7','#1098ad'];
+    const defaultPrefs = {dark:false, theme:'#5b8cff', radius:10, compact:false, noAnim:false, editorDark:false};
+    const prefs = reactive(Object.assign({}, defaultPrefs));
+    const prefOpen = ref(false);
+    let prefsTimer = null;
+    function loadPrefs() {
+      try {
+        const raw = localStorage.getItem(PREF_KEY);
+        if (raw) Object.assign(prefs, JSON.parse(raw));
+      } catch {}
+      if (!('dark' in prefs) && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) prefs.dark = true;
+    }
+    function applyPrefs() {
+      const root = document.documentElement;
+      root.classList.toggle('dark', !!prefs.dark);
+      root.classList.toggle('no-anim', !!prefs.noAnim);
+      root.classList.toggle('compact', !!prefs.compact);
+      root.style.setProperty('--el-color-primary', prefs.theme);
+      root.style.setProperty('--brand', prefs.theme);
+      root.style.setProperty('--radius', prefs.radius + 'px');
+      if (!prefsTimer) {
+        prefsTimer = setTimeout(() => {
+          prefsTimer = null;
+          try { localStorage.setItem(PREF_KEY, JSON.stringify(prefs)); } catch {}
+        }, 300);
+      }
+    }
+    function resetPrefs() { Object.assign(prefs, defaultPrefs); ElMessage.success('已恢复默认设置'); }
+    function applyEditorTheme() {
+      const on = !!prefs.editorDark;
+      for (const ed of [mdEditor, aboutEditor]) {
+        if (!ed) continue;
+        try { ed.setTheme(on ? 'dark' : 'light'); } catch {}
+      }
+    }
+    watch(prefs, applyPrefs, {deep:true, immediate:true});
+    watch(() => [prefs.editorDark, prefs.dark], () => nextTick(applyEditorTheme));
+    loadPrefs(); applyPrefs();
+
+    // ---------- 命令面板（⌘K）----------
+    const cmdOpen = ref(false);
+    const cmdQuery = ref('');
+    const cmdIndex = ref(0);
+    const cmdInput = ref(null);
+    const cmdStatic = [
+      {key:'nav-blog', label:'页面：博客管理', icon:'📝', act:()=>switchView('blog')},
+      {key:'nav-docs', label:'页面：笔记管理', icon:'📚', act:()=>switchView('docs')},
+      {key:'nav-drafts', label:'页面：草稿箱', icon:'💾', act:()=>switchView('drafts')},
+      {key:'nav-friends', label:'页面：友链管理', icon:'🔗', act:()=>switchView('friends')},
+      {key:'nav-stats', label:'页面：站点统计', icon:'📊', act:()=>switchView('stats')},
+      {key:'nav-comments', label:'页面：评论管理', icon:'💬', act:()=>switchView('comments')},
+      {key:'nav-about', label:'页面：关于页', icon:'👤', act:()=>switchView('about')},
+      {key:'act-theme', label:'切换暗色模式', icon:'🌓', act:()=>{prefs.dark=!prefs.dark}},
+      {key:'act-prefs', label:'打开偏好设置', icon:'⚙️', act:()=>{prefOpen.value=true}},
+      {key:'act-refresh', label:'刷新当前页面数据', icon:'⟳', act:()=>refreshCurrent()},
+      {key:'act-lock', label:'锁定后台', icon:'🔒', kbd:'', act:()=>lockAdmin()},
+      {key:'act-logout', label:'退出登录', icon:'🚪', act:()=>logout()},
+    ];
+    function dynamicCmds() {
+      const out = [];
+      if (activeView.value==='blog'||activeView.value==='docs') {
+        out.push({key:'act-new', label:'新建'+(activeView.value==='blog'?'文章':'笔记'), icon:'＋', kbd:'⌘N', act:()=>openEditor(activeView.value,{})});
+        out.push({key:'act-import', label:'导入 .md 文件', icon:'📥', act:()=>importFile()});
+      }
+      if (activeView.value==='friends') {
+        out.push({key:'act-friend-add', label:'新增友链', icon:'＋', act:()=>showFriendAdd()});
+        out.push({key:'act-friend-ai', label:'AI 一键识别友链', icon:'🤖', act:()=>showAiModal()});
+        out.push({key:'act-friend-save', label:'保存全部友链', icon:'💾', act:()=>saveFriends()});
+      }
+      return out;
+    }
+    const cmdResults = computed(() => {
+      const q = cmdQuery.value.trim().toLowerCase();
+      const all = [...dynamicCmds(), ...cmdStatic];
+      const pool = (activeView.value==='blog'||activeView.value==='docs') ? [
+        ...all,
+        ...postItems.value.map(p=>({key:'post:'+p.path, label:(p.title||p.name||''), icon:'📄', hint:p.name, act:()=>openEditor(activeView.value,{path:p.path,title:p.title||''})})),
+      ] : all;
+      if (!q) return pool.slice(0,40);
+      return pool.filter(c => (c.label+' '+(c.hint||'')).toLowerCase().includes(q)).slice(0,40);
+    });
+    function openCmd(seed) {
+      cmdOpen.value = true;
+      cmdQuery.value = (seed==='key' ? '' : (seed||''));
+      cmdIndex.value = 0;
+      nextTick(()=>{ try{cmdInput.value&&cmdInput.value.focus()}catch(e){} });
+    }
+    function cmdMove(d) {
+      const n = cmdResults.value.length; if(!n) return;
+      cmdIndex.value = (cmdIndex.value + d + n) % n;
+    }
+    function cmdRun(c) {
+      const t = c || cmdResults.value[cmdIndex.value];
+      if (!t) return;
+      cmdOpen.value = false; cmdQuery.value = '';
+      try { t.act(); } catch(e){ ElMessage.error('执行失败: '+e.message); }
+    }
+    function refreshCurrent() {
+      const v = activeView.value;
+      if (v==='blog'||v==='docs') loadList(v);
+      else if (v==='drafts') loadDrafts();
+      else if (v==='friends') loadFriends();
+      else if (v==='stats') loadStats();
+      else if (v==='about') loadAbout();
+      else ElMessage.info('该页面无需刷新');
+    }
+    // 全局快捷键：⌘K 面板 / ⌘S 保存 / ⌘N 新建 / Esc 关闭
+    function onGlobalKey(e) {
+      const mod = e.metaKey || e.ctrlKey;
+      if (mod && e.key.toLowerCase()==='k') { e.preventDefault(); openCmd(''); return; }
+      if (e.key==='Escape') {
+        if (cmdOpen.value) { cmdOpen.value=false; return; }
+        if (prefOpen.value) { prefOpen.value=false; return; }
+      }
+      if (!authed.value) return;
+      if (mod && e.key.toLowerCase()==='s') {
+        if (editorOpen.value) { e.preventDefault(); doPublish(); }
+        return;
+      }
+      if (mod && e.key.toLowerCase()==='n') {
+        if (activeView.value==='blog'||activeView.value==='docs') { e.preventDefault(); openEditor(activeView.value,{}); }
+        return;
+      }
+    }
+    onMounted(()=>document.addEventListener('keydown', onGlobalKey));
+    onBeforeUnmount(()=>document.removeEventListener('keydown', onGlobalKey));
+
+    // 友链筛选：保留原始下标，保证筛选态下 排序/编辑/删除 仍作用于正确条目
+    const filteredFriends = computed(() => {
+      const q = friendFilter.value.trim().toLowerCase();
+      return friendsList.value
+        .map((f, i) => ({f, _i: i}))
+        .filter(r => !q || ((r.f.title||'')+' '+(r.f.website||'')+' '+(r.f.description||'')).toLowerCase().includes(q));
+    });
+
     const viewTitle = computed(() => {
       const map = {blog:'📝 博客管理',docs:'📚 笔记管理',about:'👤 关于页',friends:'🔗 友链管理',stats:'📊 站点统计',comments:'💬 评论管理',drafts:'💾 草稿箱'};
       return map[activeView.value] || '';
     });
-    const version = 'v2.0';
+    const version = 'v2.1';
+
+    // 问候语 / 日期
+    const greeting = computed(() => {
+      const h = new Date().getHours();
+      if (h < 5) return '夜深了';
+      if (h < 11) return '早上好';
+      if (h < 13) return '中午好';
+      if (h < 18) return '下午好';
+      return '晚上好';
+    });
+    const greetingIcon = computed(() => {
+      const h = new Date().getHours();
+      if (h < 5) return '🌙';
+      if (h < 11) return '🌅';
+      if (h < 13) return '☀️';
+      if (h < 18) return '🌤️';
+      return '🌆';
+    });
+    const todayText = computed(() => {
+      try {
+        return new Date().toLocaleDateString('zh-CN', {year:'numeric', month:'long', day:'numeric', weekday:'long'});
+      } catch { return ''; }
+    });
 
     const filteredPosts = computed(() => {
       const kw = postFilter.value.trim().toLowerCase();
-      if (!kw) return postItems.value;
-      return postItems.value.filter(it => (String(it.title||'')+' '+(it.name||'')).toLowerCase().includes(kw));
+      const list = kw
+        ? postItems.value.filter(it => (String(it.title||'')+' '+(it.name||'')).toLowerCase().includes(kw))
+        : postItems.value.slice();
+      const key = postSort.value;
+      return list.sort((a,b) => String(a[key]||'').localeCompare(String(b[key]||''), 'zh-CN', {numeric:true}));
     });
 
     const chartPoints = computed(() => (statsData.pageviewsSeries||[]));
@@ -790,7 +1176,7 @@ const app = createApp({
       try {
         const res=await api('/login',{method:'POST',body:{password:loginPass.value}});
         TOKEN=res.token; try{localStorage.setItem('blogadmin_token',TOKEN)}catch{}
-        authed.value=true; switchView('blog');
+        authed.value=true; switchView('blog'); loadDrafts(true);
       } catch(e){loginErr.value=e.message}
       finally{loginLoading.value=false}
     }
@@ -824,11 +1210,12 @@ const app = createApp({
     }
 
     async function delPost(p,s) {
+      if(!await confirmDanger('将永久删除文件：\n\n'+p+'\n\n此操作不可撤销，Vercel 会重新部署。')) return;
       try {
-        await ElMessageBox.confirm('确定删除该文件吗？\n'+p,'确认删除');
         await api('/post',{method:'DELETE',body:{path:p,sha:s}});
-        ElMessage.success('已删除'); loadList(activeView.value);
-      } catch(e){if(e!=='cancel') ElMessage.error(e.message||'取消删除')}
+        ElMessage.success('已删除 '+p.split('/').pop());
+        loadList(activeView.value);
+      } catch(e){ ElMessage.error('删除失败: '+(e.message||e)) }
     }
 
     function importFile() { importInput.value?.click(); }
@@ -893,8 +1280,9 @@ const app = createApp({
     }
 
     async function deletePost() {
-      try{await ElMessageBox.confirm('确定删除这篇'+(editorState.type==='docs'?'笔记':'博文')+'吗？','确认删除'); await api('/post',{method:'DELETE',body:{path:editorState.path,sha:editorState.sha}}); ElMessage.success('已删除'); closeEditor()}
-      catch(e){if(e!=='cancel')ElMessage.error(e.message||'取消删除')}
+      if(!await confirmDanger('将永久删除当前'+(editorState.type==='docs'?'笔记':'博文')+'：\n\n'+editorState.path+'\n\n此操作不可撤销。')) return;
+      try{await api('/post',{method:'DELETE',body:{path:editorState.path,sha:editorState.sha}}); ElMessage.success('已删除'); closeEditor()}
+      catch(e){ElMessage.error('删除失败: '+(e.message||e))}
     }
 
     function editorUpload() { uploadInput.value?.click(); }
@@ -930,16 +1318,32 @@ const app = createApp({
       finally{aboutSaving.value=false}
     }
 
-    async function loadDrafts() {
-      draftLoading.value=true;
+    async function loadDrafts(quiet) {
+      if(!quiet) draftLoading.value=true;
       try{const res=await api('/drafts'); draftItems.value=res.drafts||[]}
-      catch(e){ElMessage.error(e.message); draftItems.value=[]}
-      finally{draftLoading.value=false}
+      catch(e){ if(!quiet) ElMessage.error(e.message); draftItems.value=[]}
+      finally{ if(!quiet) draftLoading.value=false}
     }
     function openDraft(d) { editorState.draftId=d.id; openEditor(d.type==='docs'?'docs':'blog',{content:d.content||'',path:d.path||''}); }
     async function delDraft(id) {
-      try{await ElMessageBox.confirm('删除该草稿？','确认删除'); await api('/draft?id='+encodeURIComponent(id),{method:'DELETE'}); loadDrafts()}
-      catch(e){if(e!=='cancel')ElMessage.error(e.message||'取消删除')}
+      const d=draftItems.value.find(x=>x.id===id)||{};
+      if(!await confirmDanger('将删除草稿「'+(d.title||'未命名')+'」，删除后无法恢复。')) return;
+      try{await api('/draft?id='+encodeURIComponent(id),{method:'DELETE'}); ElMessage.success('草稿已删除'); loadDrafts()}
+      catch(e){ElMessage.error('删除失败: '+(e.message||e))}
+    }
+
+    // 统一危险操作确认：红色警示 + 明确对象 + 键盘回车即确认
+    async function confirmDanger(msg, title) {
+      try {
+        await ElMessageBox.confirm(msg, title || '⚠️ 请确认操作', {
+          confirmButtonText: '确认删除',
+          cancelButtonText: '再想想',
+          type: 'warning',
+          confirmButtonClass: 'el-button--danger',
+          closeOnClickModal: false,
+        });
+        return true;
+      } catch (e) { return false; }
     }
 
     function showFriendAdd() { friendEditIndex.value=-1; friendForm.title='';friendForm.website='';friendForm.avatar='';friendForm.description='';friendForm.rss=''; friendDialogVisible.value=true; }
@@ -950,9 +1354,17 @@ const app = createApp({
       if(friendEditIndex.value>=0) friendsList.value[friendEditIndex.value]=d; else friendsList.value.push(d);
       friendDialogVisible.value=false;
     }
-    function delFriend(i) { ElMessageBox.confirm('删除该友链？','确认删除').then(()=>{friendsList.value.splice(i,1)}).catch(()=>{}) }
+    function delFriend(i) {
+      const f=friendsList.value[i]||{};
+      confirmDanger('将从友链列表中移除「'+(f.title||'未命名')+'」。保存后才会生效，仍可重新添加。').then(ok=>{ if(ok) friendsList.value.splice(i,1); });
+    }
     function friendMove(i,dir) { const j=i+dir; if(j<0||j>=friendsList.value.length)return; const a=friendsList.value; [a[i],a[j]]=[a[j],a[i]]; friendsList.value=[...a]; }
-    async function loadFriends() { try{const res=await api('/friends'); friendsList.value=res.list||[]} catch(e){ElMessage.error(e.message)} }
+    async function loadFriends() {
+      friendsLoading.value=true;
+      try{const res=await api('/friends'); friendsList.value=res.list||[]}
+      catch(e){ElMessage.error('加载友链失败: '+e.message); friendsList.value=[]}
+      finally{friendsLoading.value=false}
+    }
 
     async function loadStats() {
       statsLoading.value=true;
@@ -1029,20 +1441,23 @@ const app = createApp({
 
     onMounted(async ()=>{
       if(TOKEN) {
-        try{await api('/status'); authed.value=true; switchView('blog'); return}
+        try{await api('/status'); authed.value=true; switchView('blog'); loadDrafts(true); return}
         catch{TOKEN=''; try{localStorage.removeItem('blogadmin_token')}catch{}}
       }
     });
 
     return {
       authed,loginPass,loginLoading,loginErr,doLogin,logout,lockAdmin,activeView,switchView,viewTitle,version,
-      postItems,postLoading,postFilter,filteredPosts,loadList,delPost,importInput,importFile,onImport,copyPath,
+      greeting,greetingIcon,todayText,
+      postItems,postLoading,postFilter,postSort,filteredPosts,loadList,delPost,importInput,importFile,onImport,copyPath,
       editorOpen,editorState,editorTitle,editorSlug,editorDate,editorTags,editorDesc,editorCover,editorSidebar,editorAiSummary,
       publishing,metaOpen,openEditor,closeEditor,doPublish,saveDraft,deletePost,editorUpload,uploadInput,onUploadFile,
       aboutSaving,loadAbout,saveAbout,draftItems,draftLoading,loadDrafts,openDraft,delDraft,
-      friendsList,friendsSaving,friendDialogVisible,friendEditIndex,friendForm,showFriendAdd,editFriend,saveFriend,delFriend,friendMove,loadFriends,saveFriends,
+      friendsList,friendsSaving,friendsLoading,friendFilter,filteredFriends,friendDialogVisible,friendEditIndex,friendForm,showFriendAdd,editFriend,saveFriend,delFriend,friendMove,loadFriends,saveFriends,
       aiDialogVisible,aiText,aiLoading,aiParsedFriends,aiSelected,aiAppMsg,aiAppType,showAiModal,doAiParse,removeAiItem,insertAiFriends,genAppMsg,copyText,
       statsData,statsLoading,loadStats,chartPoints,chartH,chartLabel,chartX,barWidth,
+      prefs,prefOpen,themeColors,resetPrefs,
+      cmdOpen,cmdQuery,cmdIndex,cmdInput,cmdResults,openCmd,cmdMove,cmdRun,refreshCurrent,
     };
   }
 });

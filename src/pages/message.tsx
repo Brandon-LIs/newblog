@@ -6,8 +6,7 @@ import {Icon} from '@iconify/react';
 import styles from './message.module.css';
 
 // 留言板：复用自建 Twikoo 后端（与文章评论区同一 env，但按页面 URL 独立成帖）
-// 用 twikoo.min.js（自带基础样式，351KB）；不用 .nocss.js + twikoo.css 组合（合计 810KB），
-// 页面样式由本组件的 message.module.css 覆写（选择器多一层 .board，特异性更高，不受注入顺序影响）
+// 评论区直接使用 Twikoo 自带样式（twikoo.min.js 已内含样式），不做额外覆写
 const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@2.0.9/dist/twikoo.min.js';
 const TWIKOO_ENV = 'https://co.oopss.top';
 // 固定线程标识：留言板只有一个公共留言池，不随 query/hash 变化
@@ -174,7 +173,7 @@ export default function Message(): JSX.Element {
             </div>
           )}
 
-          {/* Twikoo 挂载点：自定义样式全部限定在 .board 内，不影响文章评论区 */}
+          {/* Twikoo 挂载点：使用 Twikoo 自带样式 */}
           <div ref={boardRef} className={styles.twikoo} />
         </div>
       </main>

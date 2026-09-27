@@ -101,14 +101,39 @@ export default (function () {
       m.setAttribute('reset-on-close', '');
       document.body.appendChild(m);
     }
-    const observer = new MutationObserver(() => {
+
+    // 只观察导航栏容器本身。原实现监听 document.body + subtree，
+    // 全站每次 DOM 变动都会触发回调，属于搜索之外的额外开销。
+    let observer: MutationObserver | null = null;
+    const tryInsert = () => {
       const rightItems = document.querySelector('.navbar__items--right');
-      if (!rightItems) return;
+      if (!rightItems) { return false; }
       if (!rightItems.querySelector('.pf-trigger')) {
         insertTrigger(rightItems);
       }
-    });
-    observer.observe(document.body, {childList: true, subtree: true});
+      return true;
+    };
+
+    if (!tryInsert()) {
+      // 导航栏可能由 React 稍后渲染，轮询等待其出现（上限约 5s）
+      const deadline = Date.now() + 5000;
+      const timer = window.setInterval(() => {
+        if (tryInsert() || Date.now() > deadline) {
+          window.clearInterval(timer);
+          observer?.disconnect();
+          observer = null;
+        }
+      }, 100);
+      observer = new MutationObserver(() => {
+        if (tryInsert()) {
+          window.clearInterval(timer);
+          observer?.disconnect();
+          observer = null;
+        }
+      });
+      observer.observe(document.body, {childList: true});
+    }
+
     loadAssets();
   }
 

@@ -784,27 +784,151 @@ html[data-theme='light'] .blog-card {
   font-family: inherit;
 }
 
-/* Pagefind modal 主题变量适配（跟随站点明暗） */
-html[data-theme='dark'] pagefind-modal {
-  --pf-text: #e5e5e5;
-  --pf-text-secondary: #a0a0a0;
-  --pf-text-muted: #949494;
-  --pf-background: #1a1a1a;
-  --pf-border: #333;
-  --pf-border-focus: #555;
-  --pf-skeleton: #2a2a2a;
-  --pf-skeleton-shine: #333;
-  --pf-hover: #252525;
-  --pf-mark: #e5e5e5;
-  --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
-  --pf-outline-focus: #58a6ff;
+/* ---------- 自建搜索弹层 ---------- */
+.pf-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh 16px 16px;
+  background: rgba(15, 19, 28, 0.42);
+  backdrop-filter: blur(3px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.16s ease;
+}
+.pf-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.pf-panel {
+  width: 100%;
+  max-width: 620px;
+  max-height: 74vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--ifm-background-surface-color, #fff);
+  border: 1px solid var(--ifm-border-color);
+  border-radius: 14px;
+  box-shadow: 0 24px 64px rgba(15, 23, 42, 0.22);
+  overflow: hidden;
+  transform: translateY(-6px);
+  transition: transform 0.16s ease;
+}
+.pf-overlay.open .pf-panel {
+  transform: translateY(0);
+}
+.pf-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--ifm-border-color);
+  color: var(--ifm-color-emphasis-600);
+}
+.pf-head svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+.pf-input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--ifm-font-color-base);
+  font-size: 1rem;
+  font-family: inherit;
+}
+.pf-input::placeholder {
+  color: var(--ifm-color-emphasis-500);
+}
+.pf-input::-webkit-search-cancel-button {
+  display: none;
+}
+.pf-close {
+  border: 0;
+  background: transparent;
+  color: var(--ifm-color-emphasis-600);
+  font-size: 15px;
+  line-height: 1;
+  padding: 4px 6px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+.pf-close:hover {
+  background: var(--ifm-color-emphasis-100);
+  color: var(--ifm-font-color-base);
+}
+.pf-status {
+  padding: 0.5rem 1rem;
+  font-size: 0.78rem;
+  color: var(--ifm-color-emphasis-600);
+  border-bottom: 1px solid var(--ifm-border-color);
+}
+.pf-status:empty {
+  display: none;
+}
+.pf-list {
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+.pf-item a {
+  display: block;
+  padding: 0.6rem 0.7rem;
+  border-radius: 9px;
+  text-decoration: none;
+  color: inherit;
+}
+.pf-item.active a,
+.pf-item a:hover {
+  background: var(--ifm-color-primary-lightest);
+}
+.pf-item-title {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--ifm-font-color-base);
+  margin-bottom: 2px;
+}
+.pf-item-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  font-size: 0.8rem;
+  line-height: 1.6;
+  color: var(--ifm-color-emphasis-700);
+}
+.pf-item-excerpt mark {
+  background: color-mix(in srgb, var(--ifm-color-primary) 22%, transparent);
+  color: inherit;
+  border-radius: 3px;
+  padding: 0 1px;
+}
+.pf-foot {
+  display: flex;
+  gap: 14px;
+  padding: 0.5rem 1rem;
+  border-top: 1px solid var(--ifm-border-color);
+  font-size: 0.7rem;
+  color: var(--ifm-color-emphasis-600);
+}
+.pf-overlay.dark .pf-panel {
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
 }
 
-/* 小屏下 modal 更贴边 */
 @media (max-width: 640px) {
-  pagefind-modal {
-    --pf-modal-top: 4dvh;
+  .pf-overlay {
+    padding: 6vh 10px 10px;
+  }
+  .pf-panel {
+    max-height: 82vh;
   }
 }
-
-

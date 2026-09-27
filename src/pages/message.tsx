@@ -60,11 +60,20 @@ function normalizeWording(root: HTMLElement): void {
     '.tk-comments-count', '.tk-comments-title', '.tk-comments-no',
     '.tk-comments-actions', '.tk-sort-item', '.tk-comments-search',
   ];
+  // 这些容器内是图标/输入框/按钮，跳过以免破坏结构
+  const SKIP = 'svg, img, input, textarea, button, .OwO, .vemoji';
+
   for (const sel of targets) {
     root.querySelectorAll<HTMLElement>(sel).forEach((el) => {
-      // 只处理自身直接文本节点，避免破坏表情/按钮内的图标结构
-      const own = [...el.childNodes].filter((n) => n.nodeType === 3) as Text[];
-      own.forEach((node) => {
+      const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
+      const nodes: Text[] = [];
+      let n = walker.nextNode();
+      while (n) {
+        const parent = n.parentElement;
+        if (parent && !parent.closest(SKIP)) { nodes.push(n as Text); }
+        n = walker.nextNode();
+      }
+      nodes.forEach((node) => {
         let text = node.nodeValue || '';
         WORDING.forEach(([re, to]) => { text = text.replace(re, to); });
         if (text !== node.nodeValue) { node.nodeValue = text; }
@@ -140,13 +149,13 @@ export default function Message(): JSX.Element {
           <h1 className={styles.title}>{TITLE}</h1>
           <p className={styles.sub}>{DESCRIPTION}</p>
           <ul className={styles.hints}>
-            <li><Icon icon="ri:heart-3-line" width={15} height={15} /> 这里是公共留言池，随便聊</li>
-            <li><Icon icon="ri:link" width={15} height={15} /> 支持昵称、邮箱、站点与表情</li>
-            <li><Icon icon="ri:reply-line" width={15} height={15} /> 每条留言都可以回复</li>
+            <li><Icon icon="ri:heart-3-line" width={14} height={14} /> 公共留言池，随便聊</li>
+            <li><Icon icon="ri:user-smile-line" width={14} height={14} /> 支持昵称、邮箱、站点与表情</li>
+            <li><Icon icon="ri:reply-line" width={14} height={14} /> 每条留言都可回复</li>
           </ul>
         </header>
 
-        <div className={styles.board}>
+        <div className={styles.board} data-board-status={status}>
           {status === 'loading' && (
             <div className={styles.skeleton} aria-hidden>
               <div className={styles.skEditor} />

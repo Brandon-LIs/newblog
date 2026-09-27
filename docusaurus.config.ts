@@ -1,16 +1,39 @@
 import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
+import {execSync} from 'node:child_process';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
 const GITHUB_USER = 'Brandon-LIs';
+
+// 每次构建的版本号：优先取 git commit，其次用环境变量。
+// 用于把 Pagefind 产物放到 /pagefind/<BUILD_ID>/ 版本化目录，
+// 避免 CDN 长期缓存 /pagefind/* 导致搜索读到陈旧/残缺索引。
+function resolveBuildId(): string {
+  if (process.env.PAGEFIND_BUILD_ID) return process.env.PAGEFIND_BUILD_ID.trim();
+  try {
+    const sha = execSync('git rev-parse --short HEAD', {cwd: __dirname, stdio: ['ignore', 'pipe', 'ignore']})
+      .toString()
+      .trim();
+    if (sha) return sha;
+  } catch {
+    // 非 git 环境（如打包发布）走下面的兜底
+  }
+  return 'local';
+}
+
+const BUILD_ID = resolveBuildId();
+const PAGEFIND_BASE = `/pagefind/${BUILD_ID}/`;
 
 const config: Config = {
   title: "Brandon's Blog",
   tagline: '我们都有光明的未来',
 
   headTags: [
+    // Pagefind 索引版本化目录（前端 pagefindInit 读取，用于绕开 CDN 陈旧缓存）
+    { tagName: 'meta', attributes: { name: 'pf-base', content: PAGEFIND_BASE } },
+    { tagName: 'meta', attributes: { name: 'pf-build', content: BUILD_ID } },
     // 搜索引擎验证
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },

@@ -74,3 +74,35 @@ console.log(`✓ Pagefind 索引校验通过：${languages.length} 种语言 / $
 for (const [lang, info] of languages) {
   console.log(`  - ${lang}: ${info.page_count} 页, hash=${info.hash}`);
 }
+
+// 若已生成版本化目录，一并校验（version-pagefind.mjs 在本脚本之后运行，
+// 因此这里只在目录已存在时检查，避免误报）
+const html = readFileSync(join(SITE, 'index.html'), 'utf8');
+// 兼容压缩后无引号的属性
+const q = '["\']?';
+const bm =
+  html.match(new RegExp(`name=${q}pf-build${q}[^>]*content=${q}([^"'>\\s]+)${q}`, 'i')) ||
+  html.match(new RegExp(`content=${q}([^"'>\\s]+)${q}[^>]*name=${q}pf-build${q}`, 'i'));
+if (bm && bm[1]) {
+  const buildId = bm[1].trim();
+  const vdir = join(PF, buildId);
+  if (existsSync(vdir)) {
+    const vEntry = join(vdir, 'pagefind-entry.json');
+    if (!existsSync(vEntry)) {
+      console.error(`✗ 版本目录 /pagefind/${buildId}/ 缺少 pagefind-entry.json`);
+      process.exit(1);
+    }
+    const v = JSON.parse(readFileSync(vEntry, 'utf8'));
+    for (const [lang, info] of Object.entries(v.languages || {})) {
+      if (!existsSync(join(vdir, `pagefind.${info.hash}.pf_meta`))) {
+        console.error(`✗ 版本目录缺少 pagefind.${info.hash}.pf_meta（语言 ${lang}）`);
+        process.exit(1);
+      }
+    }
+    if (!existsSync(join(vdir, 'index'))) {
+      console.error('✗ 版本目录缺少 index/ 分片');
+      process.exit(1);
+    }
+    console.log(`✓ 版本目录 /pagefind/${buildId}/ 校验通过`);
+  }
+}

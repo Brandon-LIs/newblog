@@ -9,6 +9,7 @@ import riArrowRightLine from '@iconify-icons/ri/arrow-right-line';
 import riArrowRightSLine from '@iconify-icons/ri/arrow-right-s-line';
 import riBilibiliLine from '@iconify-icons/ri/bilibili-line';
 import riCalendarLine from '@iconify-icons/ri/calendar-line';
+import riAlarmWarningLine from '@iconify-icons/ri/alarm-warning-line';
 import riCloseLine from '@iconify-icons/ri/close-line';
 import riCheckLine from '@iconify-icons/ri/check-line';
 import riDoubleQuotesL from '@iconify-icons/ri/double-quotes-l';
@@ -17,15 +18,18 @@ import riEye2Line from '@iconify-icons/ri/eye-2-line';
 import riEyeLine from '@iconify-icons/ri/eye-line';
 import riFileCopyLine from '@iconify-icons/ri/file-copy-line';
 import riGithubLine from '@iconify-icons/ri/github-line';
+import riHeart3Line from '@iconify-icons/ri/heart-3-line';
 import riLink from '@iconify-icons/ri/link';
 import riLoader4Line from '@iconify-icons/ri/loader-4-line';
 import riMagicLine from '@iconify-icons/ri/magic-line';
+import riMessage3Line from '@iconify-icons/ri/message-3-line';
 import riMailLine from '@iconify-icons/ri/mail-line';
 import riMapPinUserLine from '@iconify-icons/ri/map-pin-user-line';
 import riPriceTag3Line from '@iconify-icons/ri/price-tag-3-line';
 import riQqLine from '@iconify-icons/ri/qq-line';
 import riQuillPenLine from '@iconify-icons/ri/quill-pen-line';
 import riRefreshLine from '@iconify-icons/ri/refresh-line';
+import riReplyLine from '@iconify-icons/ri/reply-line';
 import riRssLine from '@iconify-icons/ri/rss-line';
 import riScanLine from '@iconify-icons/ri/scan-line';
 import riTimeLine from '@iconify-icons/ri/time-line';
@@ -38,6 +42,7 @@ import riZhihuLine from '@iconify-icons/ri/zhihu-line';
 addCollection({
   prefix: 'ri',
   icons: {
+    'alarm-warning-line': riAlarmWarningLine,
     'alert-line': riAlertLine,
     'arrow-right-line': riArrowRightLine,
     'arrow-right-s-line': riArrowRightSLine,
@@ -51,15 +56,18 @@ addCollection({
     'eye-line': riEyeLine,
     'file-copy-line': riFileCopyLine,
     'github-line': riGithubLine,
+    'heart-3-line': riHeart3Line,
     link: riLink,
     'loader-4-line': riLoader4Line,
     'magic-line': riMagicLine,
+    'message-3-line': riMessage3Line,
     'mail-line': riMailLine,
     'map-pin-user-line': riMapPinUserLine,
     'price-tag-3-line': riPriceTag3Line,
     'qq-line': riQqLine,
     'quill-pen-line': riQuillPenLine,
     'refresh-line': riRefreshLine,
+    'reply-line': riReplyLine,
     'rss-line': riRssLine,
     'scan-line': riScanLine,
     'time-line': riTimeLine,

@@ -247,6 +247,12 @@ html.blog-post-page #__docusaurus {
 }
 
 .navbar__logo img {
+  /* 主题只设了 height:100%（即 .navbar__logo 的 2rem），未约束 width。
+     若 HTML 上带 width 属性而 CSS 不覆盖，元素会被撑成非正方形，
+     object-fit:cover 只裁剪不纠正比例，头像圆就会变成椭圆。
+     这里用 width:auto 让 CSS 说了算，高度按原图比例反推宽度。 */
+  width: auto;
+  height: 100%;
   border-radius: 50%;
   object-fit: cover;
 }

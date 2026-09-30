@@ -244,8 +244,8 @@ const config: Config = {
       logo: {
         alt: 'Brandon',
         src: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/img/icon.webp',
-        width: 60,
-        height: 60,
+        width: 32,
+        height: 32,
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},

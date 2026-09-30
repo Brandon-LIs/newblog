@@ -43,6 +43,8 @@ export default (function () {
   const BASE = resolveBase();
   const MAX_RESULTS = 12;
   const DEBOUNCE_MS = 180;
+  // 等待水合完成的最长时间，超时则强制插入按钮
+  const MAX_WAIT_MS = 4000;
 
   let api: PagefindApi | null = null;
   let loading: Promise<void> | null = null;
@@ -293,25 +295,67 @@ export default (function () {
 
   // ---------- 启动 ----------
   function init() {
-    // 导航栏由 React 渲染，水合阶段会协调并移除命令式插入的节点，
-    // 故在有界时间窗内低频复查；连续 2s 存在即视为水合完成。
-    const ensureTrigger = (): boolean => {
+    // 导航栏是服务端渲染的：React 水合前插入按钮会导致 SSR HTML 与客户端
+    // 首次渲染不一致，React 抛 #418（Hydration failed）。
+    // 因此必须等 Docusaurus 标记水合完成（data-has-hydrated="true"）后再插入。
+    // 兜底：window.load 之后仍未标记，或超过 MAX_WAIT_MS，也强制插入，
+    //       避免个别环境下按钮一直不出现。
+    const insertOnce = () => {
       const right = document.querySelector('.navbar__items--right');
-      if (!right) return false;
-      if (!right.querySelector('.pf-trigger')) insertTrigger(right);
+      if (!right || right.querySelector('.pf-trigger')) {
+        return !!right && !!right.querySelector('.pf-trigger');
+      }
+      insertTrigger(right);
       return true;
     };
 
-    const deadline = Date.now() + 10000;
-    let lastSeen = 0;
-    const ensure = () => {
-      if (ensureTrigger()) lastSeen = Date.now();
+    // 水合完成后仍可能被 React 重渲染清掉，做一次短期复查
+    let guard = 0;
+    const ensureAfterHydration = () => {
+      insertOnce();
+      let stable = 0;
+      guard = window.setInterval(() => {
+        if (insertOnce()) stable = Date.now();
+        if (Date.now() - stable > 2000 || Date.now() > deadline) {
+          window.clearInterval(guard);
+        }
+      }, 300);
     };
-    ensure();
-    const timer = window.setInterval(() => {
-      ensure();
-      if (Date.now() - lastSeen > 2000 || Date.now() > deadline) window.clearInterval(timer);
-    }, 300);
+
+    const deadline = Date.now() + MAX_WAIT_MS;
+    let done = false;
+    const whenReady = () => {
+      if (done) return;
+      done = true;
+      ensureAfterHydration();
+    };
+
+    // React 水合完成的可靠信号：React 会在自己管理的 DOM 节点上挂
+    // __reactFiber$ / __reactContainer$ 内部键。
+    // 注意：不能用 Docusaurus 的 data-has-hydrated —— 该版本渲染为 false
+    // 后不会再翻转，无法作为判据。
+    const isHydrated = (): boolean => {
+      const el = document.querySelector('.navbar__items--right');
+      if (!el) return false;
+      return Object.keys(el).some(
+        (k) => k.startsWith('__reactFiber$') || k.startsWith('__reactContainer$'),
+      );
+    };
+
+    if (isHydrated()) {
+      whenReady();
+    } else {
+      const poll = window.setInterval(() => {
+        if (isHydrated() || Date.now() > deadline) {
+          window.clearInterval(poll);
+          whenReady();
+        }
+      }, 100);
+      // load 事件通常已晚于水合，作为次级信号
+      window.addEventListener('load', () => {
+        if (isHydrated() || document.readyState === 'complete') whenReady();
+      });
+    }
 
     document.addEventListener('keydown', onGlobalKey);
   }

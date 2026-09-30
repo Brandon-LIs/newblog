@@ -48,7 +48,7 @@ const stats = [
   {key: 'site_uv', label: '本站总访客数', icon: 'ri:user-line', unit: '人'},
   {key: 'site_pv', label: '本站总访问量', icon: 'ri:eye-line', unit: '次'},
   {key: 'page_uv', label: '本文总访客量', icon: 'ri:user-smile-line', unit: '人'},
-  {key: 'page_pv', label: '本文总阅读量', icon: 'ri:eye-2-line', unit: '次'},
+  {key: 'page_pv', label: '本文总阅读量', icon: 'ri:eye-line', unit: '次'},
 ] as const;
 
 export default function Busuanzi({

@@ -64,7 +64,7 @@ const bszStats: Array<{id: string; label: string; icon: string}> = [
   {id: 'busuanzi_site_uv', label: '本站总访客数', icon: 'ri:user-line'},
   {id: 'busuanzi_site_pv', label: '本站总访问量', icon: 'ri:eye-line'},
   {id: 'busuanzi_page_uv', label: '本文总访客量', icon: 'ri:user-smile-line'},
-  {id: 'busuanzi_page_pv', label: '本文总阅读量', icon: 'ri:eye-2-line'},
+  {id: 'busuanzi_page_pv', label: '本文总阅读量', icon: 'ri:eye-line'},
 ];
 
 function FooterAnchor({link}: {link: FooterLink}) {
@@ -144,14 +144,6 @@ function BszStats() {
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                   <circle cx="12" cy="7" r="4" />
                   <path d="M8 14h8" />
-                </>
-              )}
-              {stat.icon === 'ri:eye-2-line' && (
-                <>
-                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
-                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
-                  <path d="M14.12 14.12a3 3 0 1 1-4.24-4.24" />
-                  <line x1="1" y1="1" x2="23" y2="23" />
                 </>
               )}
             </svg>
@@ -261,7 +253,7 @@ export default function Footer(): JSX.Element {
                 height="30"
                 loading="lazy"
                 onLoad={() => setBadgeLoaded(true)}
-                frameborder="0"
+                frameBorder="0"
                 scrolling="no"
                 style={{colorScheme: 'normal'} as React.CSSProperties}
                 title="Uptime Status"

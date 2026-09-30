@@ -14,7 +14,6 @@ import riCloseLine from '@iconify-icons/ri/close-line';
 import riCheckLine from '@iconify-icons/ri/check-line';
 import riDoubleQuotesL from '@iconify-icons/ri/double-quotes-l';
 import riErrorWarningLine from '@iconify-icons/ri/error-warning-line';
-import riEye2Line from '@iconify-icons/ri/eye-2-line';
 import riEyeLine from '@iconify-icons/ri/eye-line';
 import riFileCopyLine from '@iconify-icons/ri/file-copy-line';
 import riGithubLine from '@iconify-icons/ri/github-line';
@@ -52,7 +51,6 @@ addCollection({
     'check-line': riCheckLine,
     'double-quotes-l': riDoubleQuotesL,
     'error-warning-line': riErrorWarningLine,
-    'eye-2-line': riEye2Line,
     'eye-line': riEyeLine,
     'file-copy-line': riFileCopyLine,
     'github-line': riGithubLine,

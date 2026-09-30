@@ -39,12 +39,11 @@ const config: Config = {
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
     // 导航栏头像预加载
-    { tagName: 'link', attributes: { rel: 'preload', as: 'image', href: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.3/img/icon.jpg' } },
+    { tagName: 'link', attributes: { rel: 'preload', as: 'image', href: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/img/icon.webp', crossorigin: 'anonymous' } },
     // DNS 预解析 + 预连接外部资源
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
-    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://apii.oopss.top' } },
-    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://status.oopss.top' } },
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://status.oopss.top', crossorigin: 'anonymous' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://status.oopss.top' } },
@@ -244,7 +243,9 @@ const config: Config = {
       title: "Brandon's Blog",
       logo: {
         alt: 'Brandon',
-        src: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.3/img/icon.jpg',
+        src: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/img/icon.webp',
+        width: 60,
+        height: 60,
       },
       items: [
         {to: '/blog', label: '博客', position: 'left'},

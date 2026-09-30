@@ -102,3 +102,29 @@
 @keyframes blink {
   50% { opacity: 0; }
 }
+
+/* ---------- 入场动画（CSS 实现，替代 framer-motion，省下 ~40KB 关键路径 JS） ---------- */
+.fadeIn {
+  animation: heroFadeIn 0.7s ease-out both;
+  animation-delay: var(--fade-delay, 0s);
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* 尊重系统「减少动态效果」设置 */
+@media (prefers-reduced-motion: reduce) {
+  .fadeIn {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

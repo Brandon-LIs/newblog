@@ -1,4 +1,3 @@
-import {motion, useReducedMotion} from 'framer-motion';
 import {useEffect, useLayoutEffect, useRef, useState} from 'react';
 
 import {Icon} from '@iconify/react';
@@ -166,11 +165,16 @@ function Yiyan() {
 }
 
 export default function Hero() {
-  const reduceMotion = useReducedMotion();
+  // 入场动画改用 CSS（styles.module.css 的 .fadeIn），
+  // 避免 framer-motion 进入首页关键路径（约 40KB）。
+  // 是否播放仍由下方 cookie / prefers-reduced-motion 逻辑决定。
+  const reduceMotion =
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fade = (i: number) => ({
-    initial: {opacity: 0, y: reduceMotion ? 0 : 20},
-    animate: {opacity: 1, y: 0},
-    transition: {duration: 0.7, ease: 'easeOut' as const, delay: reduceMotion ? 0 : i * 0.1},
+    className: reduceMotion ? undefined : `${styles.fadeIn}`,
+    style: reduceMotion ? undefined : ({'--fade-delay': `${i * 0.1}s`} as React.CSSProperties),
   });
 
   const [typed, setTyped] = useState('');
@@ -217,20 +221,20 @@ export default function Hero() {
   return (
     <div className={styles.hero}>
       <div className={styles.inner}>
-        <motion.h1 {...fade(0)} className={styles.title}>
+        <h1 {...fade(0)} className={styles.title}>
           <span style={{whiteSpace: 'pre-wrap'}}>
             {typed}{!done && <span className={styles.cursor}>|</span>}
           </span>
-        </motion.h1>
-        <motion.p {...fade(1)} className={styles.subtitle}>
+        </h1>
+        <p {...fade(1)} className={styles.subtitle}>
           一名普普通通的高中生，在这里记录日常与生活。
-        </motion.p>
-        <motion.div {...fade(2)}>
+        </p>
+        <div {...fade(2)}>
           <Yiyan />
-        </motion.div>
-        <motion.div {...fade(3)}>
+        </div>
+        <div {...fade(3)}>
           <SocialLinks />
-        </motion.div>
+        </div>
       </div>
     </div>
   );

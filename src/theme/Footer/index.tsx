@@ -178,7 +178,7 @@ export default function Footer(): JSX.Element {
           <section className={styles.brand} aria-label="站点信息">
             <img
               className={styles.avatar}
-              src="https://jsd.onmicrosoft.cn/npm/br-blog@1.0.3/img/icon.jpg"
+              src="https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/img/icon.webp"
               alt={siteInfo.name}
               width={64}
               height={64}
@@ -263,7 +263,7 @@ export default function Footer(): JSX.Element {
                 onLoad={() => setBadgeLoaded(true)}
                 frameborder="0"
                 scrolling="no"
-                style={{'color-scheme': 'normal'}}
+                style={{colorScheme: 'normal'} as React.CSSProperties}
                 title="Uptime Status"
               />
             </span>

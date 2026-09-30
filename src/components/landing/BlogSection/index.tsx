@@ -15,6 +15,11 @@ export function BlogCard({post, index, cover}: {post: BlogPost; index: number; c
   } = post;
 
   const span = HEIGHT_SPANS[index % HEIGHT_SPANS.length];
+  // 卡片实际显示宽度约 393px，容器高度固定 140/220px。
+  // 封面原图动辄 5000px 宽，直接用会浪费数 MB；
+  // npm 包内每张封面都有 -sm(800w，给卡片) 与 -og(1200w，给 og:image/分享) 两档。
+  // 这里让浏览器按需选 -sm，并给出固有尺寸避免 CLS。
+  const coverSm = cover ? cover.replace(/-og\.webp$/, '-sm.webp') : undefined;
 
   return (
     <Link
@@ -24,10 +29,15 @@ export function BlogCard({post, index, cover}: {post: BlogPost; index: number; c
       {cover && (
         <div className="overflow-hidden" style={{height: span > 1 ? '220px' : '140px'}}>
           <img
-            src={cover}
+            src={coverSm || cover}
+            srcSet={coverSm ? `${coverSm} 800w` : undefined}
+            sizes="(max-width: 768px) 100vw, 400px"
             alt={title}
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
+            decoding="async"
+            width={800}
+            height={span > 1 ? 440 : 280}
           />
         </div>
       )}

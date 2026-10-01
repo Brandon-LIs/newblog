@@ -59,7 +59,7 @@ function SiteInfo({onClose}: {onClose: () => void}) {
             type="button"
             onClick={copy}
             title="复制本站信息"
-            className="inline-flex cursor-pointer items-center gap-1 rounded-md border border-border bg-transparent px-2 py-1 text-xs text-secondary transition-colors duration-200 hover:border-[var(--ifm-color-primary)] hover:text-primary">
+            className="inline-flex cursor-pointer items-center gap-1 whitespace-nowrap rounded-md border border-border bg-transparent px-2 py-1 text-xs text-secondary transition-colors duration-200 hover:border-[var(--ifm-color-primary)] hover:text-primary">
             <Icon icon={copied ? 'ri:check-line' : 'ri:file-copy-line'} width="14" height="14" />
             {copied ? '已复制' : '复制'}
           </button>

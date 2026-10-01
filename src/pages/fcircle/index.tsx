@@ -68,16 +68,19 @@ export default function FriendCircle(): JSX.Element {
   return (
     <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
       <div className="mx-auto max-w-6xl px-4 py-6">
-        <div className="mb-6 flex items-center justify-between">
-          <div>
+        {/* 窄屏下标题+描述+「N 篇」+按钮挤在一行会溢出：中文 min-content 只有一个字宽，
+            flex 收缩时「刷新」会被拆成上下两行、「N 篇」也会断开。
+            所以 <sm 改为上下堆叠，sm+ 才恢复左右并排（此时宽度充裕，不会再被压缩）。 */}
+        <div className="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <div className="min-w-0">
             <h1 className="text-2xl font-bold m-0">{TITLE}</h1>
             <p className="text-sm text-[var(--ifm-secondary-text-color)] m-0 mt-1">{DESCRIPTION}</p>
           </div>
-          <div className="flex items-center gap-3">
-            {count > 0 && <span className="text-xs text-[var(--ifm-secondary-text-color)]">{count} 篇</span>}
+          <div className="flex shrink-0 items-center gap-3">
+            {count > 0 && <span className="whitespace-nowrap text-xs text-[var(--ifm-secondary-text-color)]">{count} 篇</span>}
             <button
               onClick={handleRefresh} disabled={refreshing}
-              className="inline-flex cursor-pointer items-center gap-1 rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-3 py-1.5 text-xs font-medium text-[var(--ifm-color-emphasis-700)] transition-all hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
+              className="inline-flex shrink-0 cursor-pointer items-center gap-1 whitespace-nowrap rounded-full border border-solid border-[var(--ifm-color-emphasis-300)] bg-transparent px-3 py-1.5 text-xs font-medium text-[var(--ifm-color-emphasis-700)] transition-all hover:border-[var(--ifm-color-primary)] hover:text-[var(--ifm-color-primary)]">
               <Icon icon={refreshing ? 'ri:loader-4-line' : 'ri:refresh-line'} width="14" height="14" className={refreshing ? 'animate-spin' : ''} />
               {refreshing ? '刷新中' : '刷新'}
             </button>

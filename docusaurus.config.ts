@@ -38,8 +38,11 @@ const config: Config = {
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
-    // 导航栏头像预加载
-    { tagName: 'link', attributes: { rel: 'preload', as: 'image', href: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/img/icon.webp', crossorigin: 'anonymous' } },
+    // 图标：/favicon.ico 由浏览器默认兜底请求，务必提供，否则每页都会 404。
+    // 站内同源直出，不再绕 npm CDN 跨域取。
+    { tagName: 'link', attributes: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' } },
+    { tagName: 'link', attributes: { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' } },
+    { tagName: 'link', attributes: { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' } },
     // DNS 预解析 + 预连接外部资源
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
@@ -99,7 +102,7 @@ const config: Config = {
       }),
     },
   ],
-  favicon: 'https://jsd.onmicrosoft.cn/npm/br-blog@1.0.3/img/favicon.ico',
+  favicon: '/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
   future: {

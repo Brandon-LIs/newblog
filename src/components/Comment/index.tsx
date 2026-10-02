@@ -2,16 +2,8 @@ import React, {useEffect, useRef} from 'react';
 
 // Twikoo 评论（envId 为自建 Twikoo 后端），使用 Twikoo 默认样式
 // 走 jsDelivr 国内镜像（jsd.oopss.top 代理把 .js 当 text/plain+nosniff 返回，浏览器拒执行，故不用 volces）
-const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@2.0.9/dist/twikoo.min.js';
+const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@2.0.12/dist/twikoo.min.js';
 const TWIKOO_ENV = 'https://co.oopss.top';
-
-declare global {
-  interface Window {
-    twikoo?: {
-      init: (options: {envId: string; el: HTMLElement | string}) => Promise<void>;
-    };
-  }
-}
 
 export default function Comment(): JSX.Element | null {
   const containerRef = useRef<HTMLDivElement>(null);

@@ -7,26 +7,13 @@ import styles from './message.module.css';
 
 // 留言板：复用自建 Twikoo 后端（与文章评论区同一 env，但按页面 URL 独立成帖）
 // 评论区直接使用 Twikoo 自带样式（twikoo.min.js 已内含样式），不做额外覆写
-const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@2.0.9/dist/twikoo.min.js';
+const TWIKOO_SCRIPT = 'https://s4.zstatic.net/npm/twikoo@2.0.12/dist/twikoo.min.js';
 const TWIKOO_ENV = 'https://co.oopss.top';
 // 固定线程标识：留言板只有一个公共留言池，不随 query/hash 变化
 const TWIKOO_URL = 'https://blog.oopss.top/message';
 
 const TITLE = '留言板';
 const DESCRIPTION = '想说的话，都可以留在这里。';
-
-declare global {
-  interface Window {
-    twikoo?: {
-      init: (options: {
-        envId: string;
-        el: HTMLElement | string;
-        url?: string;
-        onCommentLoaded?: () => void;
-      }) => Promise<void>;
-    };
-  }
-}
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {

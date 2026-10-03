@@ -5,7 +5,9 @@ export default function NotFound(): JSX.Element {
   const location = useLocation();
 
   return (
-    <Layout title="404 | 页面未找到" description="页面不存在">
+    <Layout
+      title="404 | 页面未找到"
+      description="你要找的页面不存在或已被移动。可以从首页开始，或试试站内搜索；也可以浏览博客归档、友链文章与留言板找到想要的内容。">
       <main className="my-12">
         <div className="mx-auto max-w-2xl px-4 text-center">
           <div style={{fontSize: 72, fontWeight: 800, color: 'var(--ifm-color-primary)', lineHeight: 1}}>

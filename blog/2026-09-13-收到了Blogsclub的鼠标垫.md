@@ -5,6 +5,7 @@ authors: [brandon]
 date: 2026-09-13
 image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/covers/1789271159758-og.webp
 ai_summary: true
+description: Blogsclub「每月拾光」入选博主可以用 0.01 积分兑换鼠标垫，顺丰发货第三天到手，收到的是吉祥物卡通形象的大号鼠标垫。
 ---
 上周末看到Blogsclub入选“每月拾光”的博主可以0.01积分兑换一个Blogsclub鼠标垫，而我恰好入选了，于是就兑换了一个。
 

@@ -28,6 +28,11 @@ const PAGEFIND_BASE = `/pagefind/${BUILD_ID}/`;
 
 const config: Config = {
   title: "Brandon's Blog",
+  // 站内标题统一后缀由 siteConfig.title + siteConfig.titleDelimiter 决定（Docusaurus
+  // 没有 titleTemplate 选项）。因此描述性文案不能写进上面的 title —— 那会连带改掉
+  // 全站每一页的标题后缀（曾导致归档页标题变成
+  // 「历史博文 | Brandon's Blog | 一个高中生的个人博客，记录技术与生活」）。
+  // 首页的描述性标题由 src/pages/index.tsx 单独传给 Layout。
   tagline: '我们都有光明的未来',
 
   headTags: [
@@ -38,6 +43,9 @@ const config: Config = {
     { tagName: 'meta', attributes: { name: 'sogou_site_verification', content: 'XAWthKRnIS' } },
     { tagName: 'meta', attributes: { name: 'msvalidate.01', content: 'E4B3D7DAC6638D437E39343DD8E21EE9' } },
     { tagName: 'meta', attributes: { name: 'baidu-site-verification', content: 'codeva-XU1RSS0GsJ' } },
+    // 收录策略：默认即可被索引，但显式声明可附带 max-image-preview:large，
+    // 让搜索结果里文章封面与摘要的展示权限更宽松（缺失时只声明 index, follow）
+    { tagName: 'meta', attributes: { name: 'robots', content: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' } },
     // 图标：/favicon.ico 由浏览器默认兜底请求，务必提供，否则每页都会 404。
     // 站内同源直出，不再绕 npm CDN 跨域取。
     { tagName: 'link', attributes: { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' } },
@@ -162,6 +170,10 @@ const config: Config = {
 
   // 传递给前端组件的自定义配置
   customFields: {
+    // 首页 meta description。原来的「我们都有光明的未来」只有 9 字且不含可检索词，
+    // 搜索结果里既看不出站点讲什么，也带不来点击。tagline 仍保留给页面副标题用。
+    homeDescription:
+      "Brandon's Blog 记录学习、技术与生活：前端与计算机科学笔记、AI 与工程化实践、自托管小项目，以及游记与日常。",
     description: '我们都有光明的未来',
     bio: '一个高中生的个人博客',
   },
@@ -197,7 +209,10 @@ const config: Config = {
         path: 'blog',
         editUrl: `https://github.com/${GITHUB_USER}/newblog/edit/main/`,
         editLocalizedFiles: false,
-        blogDescription: '我们都有光明的未来',
+        // 列表页 meta description：原值「我们都有光明的未来」只有 9 字且不含任何
+        // 可检索词，搜索结果里既看不出站点在讲什么，也无法带来点击
+        blogDescription:
+          "Brandon's Blog 记录学习、技术与生活：前端与计算机科学笔记、AI 与工程化实践、自托管小项目，以及游记与日常。",
         blogSidebarCount: 10,
         blogSidebarTitle: '历史博文',
         postsPerPage: 10,

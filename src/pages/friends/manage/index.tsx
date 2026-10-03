@@ -4,6 +4,8 @@ import {Icon} from '@iconify/react';
 
 const TITLE = '友链管理';
 const DESCRIPTION = '管理您的友链信息';
+// 仅用于 meta description，不作为页面副标题展示
+const SEO_DESCRIPTION = "Brandon's Blog 的友链管理页：登录后可查看与自己相关的友链申请审核结果，并维护自己站点的名称、头像、简介与 RSS 地址。";
 const API_BASE = 'https://apis.oopss.top';
 
 export default function FriendManage(): JSX.Element {
@@ -109,7 +111,7 @@ export default function FriendManage(): JSX.Element {
 
   if (loading) {
     return (
-      <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
+      <Layout title={TITLE} description={SEO_DESCRIPTION} wrapperClassName="bg-background">
         <main className="my-6">
           <div className="mx-auto max-w-2xl px-4 text-center py-20">
             <Icon icon="ri:loader-4-line" className="animate-spin inline-block" width="32" height="32" />
@@ -122,7 +124,7 @@ export default function FriendManage(): JSX.Element {
 
   if (error) {
     return (
-      <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
+      <Layout title={TITLE} description={SEO_DESCRIPTION} wrapperClassName="bg-background">
         <main className="my-6">
           <div className="mx-auto max-w-2xl px-4 text-center py-20">
             <Icon icon="ri:error-warning-line" width="48" height="48" className="text-rose-400" />
@@ -135,7 +137,7 @@ export default function FriendManage(): JSX.Element {
   }
 
   return (
-    <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
+    <Layout title={TITLE} description={SEO_DESCRIPTION} wrapperClassName="bg-background">
       <main className="my-6">
         <div className="mx-auto max-w-2xl px-4">
           <div className="text-center mb-8">

@@ -14,6 +14,8 @@ const TWIKOO_URL = 'https://blog.oopss.top/message';
 
 const TITLE = '留言板';
 const DESCRIPTION = '想说的话，都可以留在这里。';
+// 仅用于 meta description，不作为页面副标题展示
+const SEO_DESCRIPTION = "Brandon's Blog 的留言板：想说的话都可以留在这里，支持匿名留言与回复，欢迎交流技术与生活。";
 
 function loadScript(src: string): Promise<void> {
   return new Promise((resolve, reject) => {
@@ -126,7 +128,7 @@ export default function Message(): JSX.Element {
   }, []);
 
   return (
-    <Layout title={TITLE} description={DESCRIPTION} wrapperClassName={styles.page}>
+    <Layout title={TITLE} description={SEO_DESCRIPTION} wrapperClassName={styles.page}>
       <main className={styles.wrap}>
         <header className={styles.header}>
           <div className={styles.headerIcon} aria-hidden>

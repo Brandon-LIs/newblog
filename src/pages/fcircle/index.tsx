@@ -6,6 +6,8 @@ import {Icon} from '@iconify/react';
 
 const TITLE = '友链文章';
 const DESCRIPTION = '来自好友们的最新博文，持续更新中。';
+// 仅用于 meta description，不作为页面副标题展示
+const SEO_DESCRIPTION = "Brandon's Blog 的友链文章：自动汇总好友博客的最新博文，按时间倒序持续更新，覆盖技术与生活等各类话题。";
 const API_URL = 'https://data.blog.oopss.top/friend-articles.json';
 const REFRESH_URL = 'https://apis.oopss.top/api/friends-refresh';
 const PAGE_SIZE = 20;
@@ -66,7 +68,7 @@ export default function FriendCircle(): JSX.Element {
   const hasMore = shown.length < articles.length;
 
   return (
-    <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
+    <Layout title={TITLE} description={SEO_DESCRIPTION} wrapperClassName="bg-background">
       <div className="mx-auto max-w-6xl px-4 py-6">
         {/* 窄屏下标题+描述+「N 篇」+按钮挤在一行会溢出：中文 min-content 只有一个字宽，
             flex 收缩时「刷新」会被拆成上下两行、「N 篇」也会断开。

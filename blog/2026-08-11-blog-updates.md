@@ -5,6 +5,7 @@ authors: [brandon]
 date: 2026-08-11
 image: https://jsd.onmicrosoft.cn/npm/br-blog@1.0.11/covers/08110001-og.webp
 ai_summary: true
+description: 友链自助申请系统、RSS 友链文章聚合、微信公众号发说说，以及说说页改版、图片灯箱与数据统计可视化。
 ---
 这段时间给博客折腾了不少新东西，从友链申请到自动化通知再到微信联动，越玩越上头。挑几个有意思的分享一下。
 

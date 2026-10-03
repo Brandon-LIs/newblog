@@ -8,6 +8,8 @@ import {AnimatePresence, motion} from 'framer-motion';
 
 const TITLE = '友链';
 const DESCRIPTION = '有很多良友，胜于有很多财富。';
+// 仅用于 meta description，不作为页面副标题展示
+const SEO_DESCRIPTION = "Brandon's Blog 的友情链接：收录认真写博客的好友，交换友链请走申请通道，审核通过后会自动回访确认。";
 const APPLY_FORM_URL = 'https://blog.oopss.top/friends/apply';
 const APPLY_EMAIL = 'bcihal@qq.com';
 const SITE_INFO = `title: 'Brandon's Blog'
@@ -192,7 +194,7 @@ export default function FriendLink(): JSX.Element {
   const [showSiteInfo, setShowSiteInfo] = useState(true);
 
   return (
-    <Layout title={TITLE} description={DESCRIPTION} wrapperClassName="bg-background">
+    <Layout title={TITLE} description={SEO_DESCRIPTION} wrapperClassName="bg-background">
       <motion.main ref={ref} className="my-4">
         <FriendHeader />
         <ApplyNotice />

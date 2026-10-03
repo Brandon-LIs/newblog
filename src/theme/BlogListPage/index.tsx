@@ -19,11 +19,23 @@ import MyLayout from '../MyLayout';
 
 function BlogListPageMetadata(props: Props): JSX.Element {
   const {metadata} = props;
-  const {blogDescription} = metadata;
+  const {blogDescription, blogTitle} = metadata;
+
+  // 标签页（/blog/tags/*）、作者页（/blog/authors/*）等自动生成的列表路由
+  // 不携带 blogDescription，直接透传会导致这些页面的 meta description 为空。
+  // 这里按页面类型兜底拼一个，避免搜索引擎抓到没有描述的页面。
+  const resolvedTitle = blogTitle ?? 'Blog';
+  const fallbackDescription =
+    resolvedTitle === 'Blog'
+      ? blogDescription
+      : `${resolvedTitle} - Brandon's Blog 记录学习、技术与生活：前端与计算机科学笔记、AI 与工程化实践、自托管小项目，以及游记与日常。`;
 
   return (
     <>
-      <PageMetadata title="Blog" description={blogDescription} />
+      <PageMetadata
+        title={resolvedTitle}
+        description={blogDescription ?? fallbackDescription}
+      />
       <SearchMetadata tag="blog_posts_list" />
     </>
   );

@@ -56,7 +56,9 @@ export default function Review(): JSX.Element {
   };
 
   return (
-    <Layout title="友链申请审核" description="审核友链申请">
+    <Layout
+      title="友链申请审核"
+      description="Brandon's Blog 的友链申请审核页：查询自己提交的友链申请当前状态与审核结果。">
       <main className="my-6">
         <div className="mx-auto max-w-2xl px-4">
           <div className="text-center mb-6">

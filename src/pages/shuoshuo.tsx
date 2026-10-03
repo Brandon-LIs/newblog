@@ -339,7 +339,7 @@ export default function Shuoshuo(): JSX.Element {
   const canMore = visibleCount < memos.length || hasMore;
 
   return (
-    <Layout title="说说" description="Brandon 的说说广场" wrapperClassName="bg-background">
+    <Layout title="说说" description="Brandon 的说说广场：随手记录的技术笔记、生活片段与灵感碎片，按时间线排列，支持评论与分享。" wrapperClassName="bg-background">
       <div className={styles.layout}>
         <div className={styles.sidebar}>
           <div className={styles.sidebarInner}>

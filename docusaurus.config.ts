@@ -55,6 +55,10 @@ const config: Config = {
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://status.oopss.top', crossorigin: 'anonymous' } },
+    // 评论系统的两个域名。preconnect 只做 DNS/TCP/TLS，不消耗正文带宽，
+    // 也不阻塞渲染；脚本本体仍由 Comment 组件在浏览器空闲时再拉取。
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://s4.zstatic.net' } },
+    { tagName: 'link', attributes: { rel: 'preconnect', href: 'https://co.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.onmicrosoft.cn' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://jsd.oopss.top' } },
     { tagName: 'link', attributes: { rel: 'dns-prefetch', href: 'https://status.oopss.top' } },

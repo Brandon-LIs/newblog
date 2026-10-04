@@ -53,6 +53,9 @@ function onIdle(cb: () => void, timeout = 2000): () => void {
 }
 
 export default function Comment(): JSX.Element {
+  // wrapperRef：有骨架占位、非零面积，交给 IntersectionObserver 观察
+  const wrapperRef = useRef<HTMLDivElement>(null);
+  // containerRef：Twikoo 的实际挂载点，必须保持干净（不能放骨架）
   const containerRef = useRef<HTMLDivElement>(null);
   const startedRef = useRef(false);
   const [phase, setPhase] = useState<Phase>('idle');
@@ -134,12 +137,14 @@ export default function Comment(): JSX.Element {
   }, []);
 
   useEffect(() => {
-    if (!containerRef.current) {
+    // 关键：观察 wrapperRef 而不是 containerRef。
+    // containerRef 是空 div，高度为 0，而 IntersectionObserver 会跳过零面积目标，
+    // 观察它永远不会触发。wrapperRef 内含 min-height:200px 的骨架，才有非零面积。
+    const target = wrapperRef.current;
+    if (!target) {
       return;
     }
 
-    // 骨架已有非零高度，这里能正常触发；rootMargin 提前 600px 开始准备，
-    // 等用户看到时脚本通常已就绪。
     if (!('IntersectionObserver' in window)) {
       void initTwikoo();
       return;
@@ -154,12 +159,15 @@ export default function Comment(): JSX.Element {
       },
       {rootMargin: '600px 0px'},
     );
-    observer.observe(containerRef.current);
+    observer.observe(target);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <div className="blog-comment" style={{margin: '2.5rem 0 1rem'}}>
+    <div
+      ref={wrapperRef}
+      className="blog-comment"
+      style={{margin: '2.5rem 0 1rem'}}>
       {/* 骨架：给挂载点非零面积（IntersectionObserver 需要）+ 占位避免 CLS。
           Twikoo 渲染出真实内容后由下面 useEffect 切走。 */}
       {(phase === 'idle' || phase === 'loading') && (
